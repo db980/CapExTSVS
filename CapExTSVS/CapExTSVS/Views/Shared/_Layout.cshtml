@@ -27,13 +27,24 @@
     <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
+
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <!-- Theme style -->
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="~/dist/img/baxy-logo-inner.png" alt="AdminLTELogo" height="60" width="60">
+        <div class="preloader flex-column justify-content-center align-items-center" style="background: linear-gradient(45deg,#000,transparent);">
+            <img class="animation__shake" src="https://dashboard.baxy.com/assets/images/logo-login-page.png" alt="AdminLTELogo" >
         </div>
 
         <!-- Navbar -->
@@ -174,10 +185,15 @@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" >
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="~/dist/img/baxy-logo-inner.png" alt="baxy Logo" class="  elevation-3" style="opacity: .8;width:231px">
+                <img src="~/dist/img/baxy-logo-inner.png" alt="baxy Logo" class="  elevation-3" style="width: 99%;" />
+
+               
+
+                
+
                
             </a>
 
@@ -226,6 +242,12 @@
                                     <a href="\Indent\CreateIndent" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create Indent</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="\Indent\ViewIndent" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Indent</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -305,6 +327,40 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/dist/js/pages/dashboard.js"></script>
 
+
+
+
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.js"></script>
+    <script src="~/plugins/jszip/jszip.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.js"></script>
+
+    <script>
+        $(function () {
+            //$("#example2").DataTable({
+            //    "responsive": true, "lengthChange": false, "autoWidth": false,
+            //    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            //}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
