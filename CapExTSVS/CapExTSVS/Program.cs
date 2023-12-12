@@ -1,10 +1,37 @@
+
+using LinqToDB;
+using Microsoft.EntityFrameworkCore;
+
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+//builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+//builder.Services.addl
+//IConfiguration configuration = new ConfigurationBuilder()
+//		.SetBasePath(Directory.GetCurrentDirectory())
+//		.AddJsonFile("appsettings.json")
+//		.Build();
+
+//IServiceCollection serviceCollection = builder.Services.AddDbContext<CapExTSDB>(options =>
+//	options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")))
+
+
+//object value = builder.Services.AddLinqToDbContext<AppDataConnection>(options =>
+// {
+//     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+//     // Additional options like mappings, interceptors, etc.
+// });
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -21,12 +48,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+//app.MapRazorPages();
 //app.MapRazorPages();
 
 
-//app.MapControllerRoute( //MapControllerRoute
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}"); ///{id?}
+app.MapControllerRoute( //MapControllerRoute
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"); ///{id?}
 
 app.Run();

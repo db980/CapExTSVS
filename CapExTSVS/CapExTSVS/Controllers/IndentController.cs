@@ -1,22 +1,49 @@
 ﻿using CapExTSVS.Models;
+using CapExTSVS.Models1;
+using DataModels;
+using LinqToDB.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace CapExTSVS.Controllers
 {
-    public class HomeController : Controller
+    public class IndentController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<IndentController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        
+		public IndentController(ILogger<IndentController> logger)
         {
             _logger = logger;
-        }
+           
 
-        public IActionResult Index()
+		}
+
+        public IActionResult ViewIndent()
         {
-            return View();
-        }
+
+			CapExTSDB capExTSDB=new CapExTSDB();
+
+           var da= capExTSDB.IndentMasters.Select(a => a).ToList();
+
+			// var da=_DBContext.IndentMasters.Select(a=>a).ToList(); 
+
+			DataConnection.DefaultSettings = new MySettings();
+			var CapExTSDB = new DataModels.CapExTSDB();
+
+			var q =
+				from c in CapExTSDB.IndentMasters
+				select c;
+
+			foreach (var c in q)
+				Console.WriteLine(c.Company);
+
+
+			return View();
+		}
+
+
+
 
        
         public IActionResult Privacy()
