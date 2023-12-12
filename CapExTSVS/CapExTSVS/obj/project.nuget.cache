@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pFTOTY4g9cajWtY3oHtn2VnP5mc+qyEgnOjXzpG5LoMO2p9R9ImHmdZ1C2PUSGP0SHN8Tex7Ko4Uva525YnrdA==",
+  "dgSpecHash": "Q/sxe9hI0h6IRcsXrDKtXAxWXESN6wkvJMxhvk4i5Y2+JZIsUh+LCQGCIu4YHha13Wfu6GHQhvHmjtg7iEU2Qw==",
   "success": true,
-  "projectFilePath": "D:\\gitproject\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
+  "projectFilePath": "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dell\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
