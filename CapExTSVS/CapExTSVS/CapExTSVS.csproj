@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="linq2db.SqlServer" Version="3.7.0" />-->
-    <PackageReference Include="linq2db.SqlServer" Version="3.7.0" />
+	  <PackageReference Include="linq2db" Version="4.1.0" />
+    <PackageReference Include="linq2db.SqlServer" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
 
-	
+
+	  
+
 
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0" />
@@ -24,6 +26,9 @@
 		<PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
+	 
+	  <PackageReference Include="Microsoft.SqlServer.Types" Version="160.1000.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,15 +36,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Models1\CopyMe - Copy.SqlServer.generated.cs">
-      <DependentUpon>CopyMe.SqlServer.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="Models1\CopyMe.SqlServer.generated.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CopyMe.SqlServer.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Models1\CopyMe - Copy.SqlServer.generated.cs">
+      <DependentUpon>CopyMe.SqlServer.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
 

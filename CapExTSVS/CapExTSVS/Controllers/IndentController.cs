@@ -10,36 +10,41 @@ namespace CapExTSVS.Controllers
     public class IndentController : Controller
     {
         private readonly ILogger<IndentController> _logger;
+        public CapExTSDB _dbcontext;
 
-        
-		public IndentController(ILogger<IndentController> logger)
+        public IndentController(ILogger<IndentController> logger)
         {
             _logger = logger;
-           
-
-		}
+            DataConnection.DefaultSettings = new MySettings();
+             _dbcontext = new DataModels.CapExTSDB();
+        }
 
         public IActionResult ViewIndent()
         {
 
-			CapExTSDB capExTSDB=new CapExTSDB();
-
-           var da= capExTSDB.IndentMasters.Select(a => a).ToList();
-
-			// var da=_DBContext.IndentMasters.Select(a=>a).ToList(); 
-
-			DataConnection.DefaultSettings = new MySettings();
-			var CapExTSDB = new DataModels.CapExTSDB();
-
-			var q =
-				from c in CapExTSDB.IndentMasters
-				select c;
-
-			foreach (var c in q)
-				Console.WriteLine(c.Company);
 
 
-			return View();
+
+
+            // var da=_DBContext.IndentMasters.Select(a=>a).ToList(); 
+
+
+
+
+            
+            
+            
+            
+
+            var q =
+                (from c in _dbcontext.IndentMasters
+                select c).ToList();
+
+            foreach (var c in q)
+                Console.WriteLine(c.Company);
+
+
+            return View();
 		}
 
 
