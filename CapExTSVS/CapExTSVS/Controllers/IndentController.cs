@@ -17,41 +17,51 @@ namespace CapExTSVS.Controllers
             _logger = logger;
             DataConnection.DefaultSettings = new MySettings();
              _dbcontext = new DataModels.CapExTSDB();
+           
         }
 
         public IActionResult ViewIndent()
         {
+            HttpContext.Session.SetString("usr", "E00001376");
+            //HttpContext.Session.GetString("usr");
 
 
 
+            //var da = _DBContext.IndentMasters.Select(a => a).ToList();
+            //var a = _dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").ToList();
 
 
-            // var da=_DBContext.IndentMasters.Select(a=>a).ToList(); 
+            if (_dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").SingleOrDefault().Column1 == "True")
+            {
 
+                var data =_dbcontext.IndentSelApprovalHistory(HttpContext.Session.GetString("usr"), "10091", "17").ToList() ; //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
+                ViewData["GridBind"]  = data;
+				
+			}
+            else
+            {
+                Response.Redirect("noentry.aspx");
+            }
 
-
-
-            
-            
-            
-            
-
-            var q =
-                (from c in _dbcontext.IndentMasters
-                select c).ToList();
-
-            foreach (var c in q)
-                Console.WriteLine(c.Company);
-
-
-            return View();
+            return  View();
 		}
 
 
 
 
-       
-        public IActionResult Privacy()
+        public IActionResult IndentApproval()
+        {
+            HttpContext.Session.SetString("usr", "E00001376");
+            
+            var data = _dbcontext.IndentSelPendingforApproval(HttpContext.Session.GetString("usr")).ToList(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
+            ViewData["GridBindIndentApproval"] = data;
+
+            return View();
+        }
+
+
+
+            public IActionResult Privacy()
         {
             return View();
         }

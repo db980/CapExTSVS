@@ -5,7 +5,7 @@
 // </auto-generated>
 //---------------------------------------------------------------------------------------------------
 
-#pragma warning disable 1572, 1591
+#pragma warning disable 1573, 1591
 
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace DataModels
 {
 	/// <summary>
 	/// Database       : CapExTS
-	/// Data Source    : DESKTOP-H2DSLGF
+	/// Data Source    : DESKTOP-GP9H7VT
 	/// Server Version : 15.00.2000
 	/// </summary>
 	public partial class CapExTSDB : LinqToDB.Data.DataConnection
@@ -80,19 +80,19 @@ namespace DataModels
 			InitMappingSchema();
 		}
 
-		//public CapExTSDB(LinqToDbConnectionOptions options)
-		//	: base(options)
-		//{
-		//	InitDataContext();
-		//	InitMappingSchema();
-		//}
+		public CapExTSDB(LinqToDBConnectionOptions options)
+			: base(options)
+		{
+			InitDataContext();
+			InitMappingSchema();
+		}
 
-		//public CapExTSDB(LinqToDbConnectionOptions<CapExTSDB> options)
-		//	: base(options)
-		//{
-		//	InitDataContext();
-		//	InitMappingSchema();
-		//}
+		public CapExTSDB(LinqToDBConnectionOptions<CapExTSDB> options)
+			: base(options)
+		{
+			InitDataContext();
+			InitMappingSchema();
+		}
 
 		partial void InitDataContext  ();
 		partial void InitMappingSchema();
@@ -691,9 +691,9 @@ namespace DataModels
 		#region Associations
 
 		/// <summary>
-		/// FK__CapexPayA__Capex__17036CC0
+		/// FK__CapexPayA__Capex__17036CC0 (dbo.CapexTypeMaster)
 		/// </summary>
-		[Association(ThisKey="CapexID", OtherKey="CTID", CanBeNull=false, Relationship=LinqToDB.Mapping.Relationship.ManyToOne, KeyName="FK__CapexPayA__Capex__17036CC0", BackReferenceName="CapexPayACapex17036Ccs")]
+		[Association(ThisKey="CapexID", OtherKey="CTID", CanBeNull=false)]
 		public CapexTypeMaster Capex { get; set; }
 
 		#endregion
@@ -724,9 +724,9 @@ namespace DataModels
 		#region Associations
 
 		/// <summary>
-		/// FK__CapexEMP___Capex__47A6A41B
+		/// FK__CapexEMP___Capex__47A6A41B (dbo.CapexTypeMaster)
 		/// </summary>
-		[Association(ThisKey="CapexID", OtherKey="CTID", CanBeNull=false, Relationship=LinqToDB.Mapping.Relationship.ManyToOne, KeyName="FK__CapexEMP___Capex__47A6A41B", BackReferenceName="CapexEMPCapex47A6A41B")]
+		[Association(ThisKey="CapexID", OtherKey="CTID", CanBeNull=false)]
 		public CapexTypeMaster Capex { get; set; }
 
 		#endregion
@@ -833,15 +833,15 @@ namespace DataModels
 		#region Associations
 
 		/// <summary>
-		/// FK__CapexEMP___Capex__47A6A41B_BackReference
+		/// FK__CapexEMP___Capex__47A6A41B_BackReference (dbo.CapexPayApprovalCat_EMP_Mapping)
 		/// </summary>
-		[Association(ThisKey="CTID", OtherKey="CapexID", CanBeNull=true, Relationship=LinqToDB.Mapping.Relationship.OneToMany, IsBackReference=true)]
+		[Association(ThisKey="CTID", OtherKey="CapexID", CanBeNull=true)]
 		public IEnumerable<CapexPayApprovalCatEmpMapping> CapexEMPCapex47A6A41B { get; set; }
 
 		/// <summary>
-		/// FK__CapexPayA__Capex__17036CC0_BackReference
+		/// FK__CapexPayA__Capex__17036CC0_BackReference (dbo.CapexPayApprovalCat)
 		/// </summary>
-		[Association(ThisKey="CTID", OtherKey="CapexID", CanBeNull=true, Relationship=LinqToDB.Mapping.Relationship.OneToMany, IsBackReference=true)]
+		[Association(ThisKey="CTID", OtherKey="CapexID", CanBeNull=true)]
 		public IEnumerable<CapexPayApprovalCat> CapexPayACapex17036Ccs { get; set; }
 
 		#endregion
@@ -1121,6 +1121,22 @@ namespace DataModels
 
 		public static IEnumerable<CapexAssigntocheckbugtResult> CapexAssigntocheckbugt(this CapExTSDB dataConnection, string @ReqNo, string @FinanceRepCode, string @userSession)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@ReqNo",          @ReqNo,          LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@FinanceRepCode", @FinanceRepCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@userSession",    @userSession,    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1128,10 +1144,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[capex_assigntocheckbugt]",
-				new DataParameter("@ReqNo",          @ReqNo,          LinqToDB.DataType.VarChar),
-				new DataParameter("@FinanceRepCode", @FinanceRepCode, LinqToDB.DataType.VarChar),
-				new DataParameter("@userSession",    @userSession,    LinqToDB.DataType.VarChar));
+				"[dbo].[capex_assigntocheckbugt]", parameters);
 		}
 
 		public partial class CapexAssigntocheckbugtResult
@@ -1162,10 +1175,53 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexAutomailPendingApprovalRecipients
+
+		public static IEnumerable<CapexAutomailPendingApprovalRecipientsResult> CapexAutomailPendingApprovalRecipients(this CapExTSDB dataConnection)
+		{
+			return dataConnection.QueryProc<CapexAutomailPendingApprovalRecipientsResult>("[dbo].[Capex_AutomailPendingApprovalRecipients]");
+		}
+
+		public partial class CapexAutomailPendingApprovalRecipientsResult
+		{
+			public string EmailTo  { get; set; }
+			public string CapexIDs { get; set; }
+		}
+
+		#endregion
+
+		#region CapexAutomailPendingCWIPEntryRecipients
+
+		public static IEnumerable<CapexAutomailPendingCWIPEntryRecipientsResult> CapexAutomailPendingCWIPEntryRecipients(this CapExTSDB dataConnection)
+		{
+			return dataConnection.QueryProc<CapexAutomailPendingCWIPEntryRecipientsResult>("[dbo].[Capex_AutomailPendingCWIPEntryRecipients]");
+		}
+
+		public partial class CapexAutomailPendingCWIPEntryRecipientsResult
+		{
+			public string EmailTo  { get; set; }
+			public string EmailCC  { get; set; }
+			public string CapexIDs { get; set; }
+		}
+
+		#endregion
+
 		#region CapexChechisValidApproverByApp
 
 		public static IEnumerable<CapexChechisValidApproverByAppResult> CapexChechisValidApproverByApp(this CapExTSDB dataConnection, string @RequestNo, string @empcode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@empcode",   @empcode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1173,9 +1229,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_ChechisValidApproverByApp]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@empcode",   @empcode,   LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_ChechisValidApproverByApp]", parameters);
 		}
 
 		public partial class CapexChechisValidApproverByAppResult
@@ -1189,6 +1243,18 @@ namespace DataModels
 
 		public static IEnumerable<CapexChechisValidforViewOnlyCapexByAppResult> CapexChechisValidforViewOnlyCapexByApp(this CapExTSDB dataConnection, string @RequestNo, string @empcode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@empcode",   @empcode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1196,9 +1262,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_ChechisValidforViewOnlyCapexByApp]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@empcode",   @empcode,   LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_ChechisValidforViewOnlyCapexByApp]", parameters);
 		}
 
 		public partial class CapexChechisValidforViewOnlyCapexByAppResult
@@ -1212,6 +1276,14 @@ namespace DataModels
 
 		public static IEnumerable<CapexChkRequesterRightResult> CapexChkRequesterRight(this CapExTSDB dataConnection, string @uid)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@uid", @uid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1219,8 +1291,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_chk_Requester_right]",
-				new DataParameter("@uid", @uid, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_chk_Requester_right]", parameters);
 		}
 
 		public partial class CapexChkRequesterRightResult
@@ -1248,8 +1319,15 @@ namespace DataModels
 
 		public static int CapexDelattchfile(this CapExTSDB dataConnection, string @fileid)
 		{
-			return dataConnection.ExecuteProc("[dbo].[capex_delattchfile]",
-				new DataParameter("@fileid", @fileid, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@fileid", @fileid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[capex_delattchfile]", parameters);
 		}
 
 		#endregion
@@ -1258,9 +1336,77 @@ namespace DataModels
 
 		public static int CapexDelDrawing(this CapExTSDB dataConnection, string @fileid, string @userid)
 		{
-			return dataConnection.ExecuteProc("[dbo].[Capex_delDrawing]",
-				new DataParameter("@fileid", @fileid, LinqToDB.DataType.VarChar),
-				new DataParameter("@userid", @userid, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@fileid", @fileid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@userid", @userid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[Capex_delDrawing]", parameters);
+		}
+
+		#endregion
+
+		#region CapexExportCapexRequestDetails
+
+		public static IEnumerable<CapexExportCapexRequestDetailsResult> CapexExportCapexRequestDetails(this CapExTSDB dataConnection, string @CreatedBy, string @RequestNo, string @Status, string @CWIPCODE, string @INTERNALORDERNO, string @location)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CreatedBy",       @CreatedBy,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@RequestNo",       @RequestNo,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",          @Status,          LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CWIPCODE",        @CWIPCODE,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@INTERNALORDERNO", @INTERNALORDERNO, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@location",        @location,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexExportCapexRequestDetailsResult>("[dbo].[Capex_ExportCapexRequestDetails]", parameters);
+		}
+
+		public partial class CapexExportCapexRequestDetailsResult
+		{
+			public int      RequestNo             { get; set; }
+			public string   Assettype             { get; set; }
+			public string   OldAssetCode          { get; set; }
+			public string   CapexType             { get; set; }
+			public string   PName                 { get; set; }
+			public string   PDescription          { get; set; }
+			public string   Purpose               { get; set; }
+			public string   EdateCompletion       { get; set; }
+			public string   PurchaseLocation      { get; set; }
+			public decimal? TotalValueInINR       { get; set; }
+			public decimal? SelectQuotationAmount { get; set; }
+			public string   ImportedIndigenous    { get; set; }
+			public string   VendorJustification   { get; set; }
+			public string   CurrentWith           { get; set; }
+			public string   Status                { get; set; }
+			public string   CreateDate            { get; set; }
+			public string   CreatedBy             { get; set; }
 		}
 
 		#endregion
@@ -1269,19 +1415,56 @@ namespace DataModels
 
 		public static int CapexFAddAttachment(this CapExTSDB dataConnection, string @filepth, string @FileCode, string @userid, string @FileType, decimal? @Amount, string @tnc, string @PaymentTerms, string @Delivery, string @Freight, string @InstalationCost, string @Remarks, DataTable @CapexQuotationItemLine)
 		{
-			return dataConnection.ExecuteProc("[dbo].[Capex_f_add_attachment]",
-				new DataParameter("@filepth",                @filepth,                LinqToDB.DataType.VarChar),
-				new DataParameter("@FileCode",               @FileCode,               LinqToDB.DataType.VarChar),
-				new DataParameter("@userid",                 @userid,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@FileType",               @FileType,               LinqToDB.DataType.VarChar),
+			var parameters = new []
+			{
+				new DataParameter("@filepth",                @filepth,                LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@FileCode",               @FileCode,               LinqToDB.DataType.VarChar)
+				{
+					Size = 350
+				},
+				new DataParameter("@userid",                 @userid,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@FileType",               @FileType,               LinqToDB.DataType.VarChar)
+				{
+					Size = 150
+				},
 				new DataParameter("@Amount",                 @Amount,                 LinqToDB.DataType.Decimal),
-				new DataParameter("@tnc",                    @tnc,                    LinqToDB.DataType.NVarChar),
-				new DataParameter("@PaymentTerms",           @PaymentTerms,           LinqToDB.DataType.VarChar),
-				new DataParameter("@Delivery",               @Delivery,               LinqToDB.DataType.VarChar),
-				new DataParameter("@Freight",                @Freight,                LinqToDB.DataType.VarChar),
-				new DataParameter("@InstalationCost",        @InstalationCost,        LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",                @Remarks,                LinqToDB.DataType.VarChar),
-				new DataParameter("@CapexQuotationItemLine", @CapexQuotationItemLine, LinqToDB.DataType.Structured){ DbType = "[dbo].[tblCapexQuotationItemLine]" });
+				new DataParameter("@tnc",                    @tnc,                    LinqToDB.DataType.NVarChar)
+				{
+					Size = -1
+				},
+				new DataParameter("@PaymentTerms",           @PaymentTerms,           LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Delivery",               @Delivery,               LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Freight",                @Freight,                LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@InstalationCost",        @InstalationCost,        LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Remarks",                @Remarks,                LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CapexQuotationItemLine", @CapexQuotationItemLine, LinqToDB.DataType.Structured)
+				{
+					DbType = "[dbo].[tblCapexQuotationItemLine]"
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[Capex_f_add_attachment]", parameters);
 		}
 
 		#endregion
@@ -1290,6 +1473,34 @@ namespace DataModels
 
 		public static IEnumerable<CapexFAddDrawingattachmentResult> CapexFAddDrawingattachment(this CapExTSDB dataConnection, string @filepth, string @Remarks, string @FileCode, string @AssignedTo, string @CreatedBY, string @DrawingCapexName)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@filepth",          @filepth,          LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Remarks",          @Remarks,          LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@FileCode",         @FileCode,         LinqToDB.DataType.VarChar)
+				{
+					Size = 350
+				},
+				new DataParameter("@AssignedTo",       @AssignedTo,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CreatedBY",        @CreatedBY,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@DrawingCapexName", @DrawingCapexName, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1297,13 +1508,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_f_add_drawingattachment]",
-				new DataParameter("@filepth",          @filepth,          LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",          @Remarks,          LinqToDB.DataType.VarChar),
-				new DataParameter("@FileCode",         @FileCode,         LinqToDB.DataType.VarChar),
-				new DataParameter("@AssignedTo",       @AssignedTo,       LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBY",        @CreatedBY,        LinqToDB.DataType.VarChar),
-				new DataParameter("@DrawingCapexName", @DrawingCapexName, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_f_add_drawingattachment]", parameters);
 		}
 
 		public partial class CapexFAddDrawingattachmentResult
@@ -1317,8 +1522,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexFSelAttachmentPostGridResult> CapexFSelAttachmentPostGrid(this CapExTSDB dataConnection, string @FileCode)
 		{
-			return dataConnection.QueryProc<CapexFSelAttachmentPostGridResult>("[dbo].[Capex_f_sel_attachment_post_grid]",
-				new DataParameter("@FileCode", @FileCode, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@FileCode", @FileCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 350
+				}
+			};
+
+			return dataConnection.QueryProc<CapexFSelAttachmentPostGridResult>("[dbo].[Capex_f_sel_attachment_post_grid]", parameters);
 		}
 
 		public partial class CapexFSelAttachmentPostGridResult
@@ -1337,6 +1549,14 @@ namespace DataModels
 
 		public static IEnumerable<CapexIsVisibleChatRequestPageResult> CapexIsVisibleChatRequestPage(this CapExTSDB dataConnection, string @RequestNo)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1344,13 +1564,127 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_isVisibleChatRequestPage]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_isVisibleChatRequestPage]", parameters);
 		}
 
 		public partial class CapexIsVisibleChatRequestPageResult
 		{
 			[Column("")] public string Column1 { get; set; }
+		}
+
+		#endregion
+
+		#region CapexPendingApprovalCapexDetails
+
+		public static IEnumerable<CapexPendingApprovalCapexDetailsResult> CapexPendingApprovalCapexDetails(this CapExTSDB dataConnection, string @CapexIDsList)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CapexIDsList", @CapexIDsList, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				}
+			};
+
+			return dataConnection.QueryProc<CapexPendingApprovalCapexDetailsResult>("[dbo].[Capex_PendingApprovalCapexDetails]", parameters);
+		}
+
+		public partial class CapexPendingApprovalCapexDetailsResult
+		{
+			[Column("Cap ID")                     ] public int      CapID                    { get; set; }
+			[Column("Cap Type")                   ] public string   CapType                  { get; set; }
+			                                        public string   Purpose                  { get; set; }
+			[Column("Item Name")                  ] public string   ItemName                 { get; set; }
+			[Column("Project Name")               ] public string   ProjectName              { get; set; }
+			[Column("Project Description")        ] public string   ProjectDescription       { get; set; }
+			[Column("Purchase Location")          ] public string   PurchaseLocation         { get; set; }
+			[Column("Total Value (INR)")          ] public decimal? TotalValue_INR_          { get; set; }
+			[Column("Requested By")               ] public string   RequestedBy              { get; set; }
+			[Column("Requested Date")             ] public string   RequestedDate            { get; set; }
+			[Column("Expected Date of Completion")] public string   ExpectedDateOfCompletion { get; set; }
+			[Column("Old Asset Code")             ] public string   OldAssetCode             { get; set; }
+			                                        public string   Status                   { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelApprovalHistory
+
+		public static IEnumerable<CapexSelApprovalHistoryResult> CapexSelApprovalHistory(this CapExTSDB dataConnection, string @ApprovedBy, string @RequestNo, string @Status)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@ApprovedBy", @ApprovedBy, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@RequestNo",  @RequestNo,  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",     @Status,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelApprovalHistoryResult>("[dbo].[Capex_Sel_ApprovalHistory]", parameters);
+		}
+
+		public partial class CapexSelApprovalHistoryResult
+		{
+			public int       RequestNo             { get; set; }
+			public int?      IndentID              { get; set; }
+			public string    Assettype             { get; set; }
+			public string    OldAssetCode          { get; set; }
+			public string    CapexType             { get; set; }
+			public string    PName                 { get; set; }
+			public string    PDescription          { get; set; }
+			public string    Purpose               { get; set; }
+			public string    EdateCompletion       { get; set; }
+			public char      PurchaseLocation      { get; set; }
+			public decimal?  TotalValueInINR       { get; set; }
+			public string    SelectQuote           { get; set; }
+			public string    ImportedIndigenous    { get; set; }
+			public string    VendorJustification   { get; set; }
+			public decimal?  SelectQuotationAmount { get; set; }
+			public string    CurrentWith           { get; set; }
+			public string    Status                { get; set; }
+			public string    CreateDate            { get; set; }
+			public string    CreatedBy             { get; set; }
+			public DateTime? UpdatedDate           { get; set; }
+			public string    UpdatedBy             { get; set; }
+			public string    ApprovedDate          { get; set; }
+			public string    CWIPCreatedDate       { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelBugtdetails
+
+		public static IEnumerable<CapexSelBugtdetailsResult> CapexSelBugtdetails(this CapExTSDB dataConnection, string @ReqNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@ReqNo", @ReqNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelBugtdetailsResult>("[dbo].[capex_sel_bugtdetails]", parameters);
+		}
+
+		public partial class CapexSelBugtdetailsResult
+		{
+			public string    bugtchkAssignto     { get; set; }
+			public DateTime? bugtchkAssignedDate { get; set; }
+			public string    bugtchkAssignBy     { get; set; }
+			public bool      isbugtchkStatus     { get; set; }
+			public string    bugtRStatus         { get; set; }
+			public string    bugtRStatusBy       { get; set; }
+			public DateTime? bugtRStatusDate     { get; set; }
+			public string    msg                 { get; set; }
 		}
 
 		#endregion
@@ -1379,10 +1713,100 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexSelFinance3Budgetchecker
+
+		public static IEnumerable<CapexSelFinance3BudgetcheckerResult> CapexSelFinance3Budgetchecker(this CapExTSDB dataConnection, string @empcode)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@empcode", @empcode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelFinance3BudgetcheckerResult>("[dbo].[Capex_sel_Finance3Budgetchecker]", parameters);
+		}
+
+		public partial class CapexSelFinance3BudgetcheckerResult
+		{
+			public string RecipientsCode { get; set; }
+			public string RecipientsName { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelIndentforList
+
+		public static IEnumerable<CapexSelIndentforListResult> CapexSelIndentforList(this CapExTSDB dataConnection, string @RequestNo, string @Company, string @BU, string @Status)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Company",   @Company,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@BU",        @BU,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",    @Status,    LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelIndentforListResult>("[dbo].[Capex_Sel_IndentforList]", parameters);
+		}
+
+		public partial class CapexSelIndentforListResult
+		{
+			                                                  public int       IndentID                          { get; set; }
+			                                                  public string    Company                           { get; set; }
+			                                                  public string    BU                                { get; set; }
+			[Column("Location of work")                     ] public string    LocationOfWork                    { get; set; }
+			[Column("Type of Indent")                       ] public string    TypeOfIndent                      { get; set; }
+			[Column("Type of Work Details")                 ] public string    TypeOfWorkDetails                 { get; set; }
+			                                                  public string    EnclosureBQQFile                  { get; set; }
+			                                                  public int       IsVisibleEnclosureBQQFile         { get; set; }
+			                                                  public string    EnclosureDrawingFile              { get; set; }
+			                                                  public int       IsVisibleEnclosureDrawingFile     { get; set; }
+			[Column("Rate Proposed")                        ] public decimal?  RateProposed                      { get; set; }
+			                                                  public string    BudgetType                        { get; set; }
+			                                                  public decimal?  RateProposeds                      { get; set; }
+			                                                  public string    TAT                               { get; set; }
+			[Column("Tentative Start Date")                 ] public string    TentativeStartDate                { get; set; }
+			[Column("Tentative Completion Date")            ] public string    TentativeCompletionDate           { get; set; }
+			[Column("Proposed Contractor Name")             ] public string    ProposedContractorName            { get; set; }
+			[Column("Vendor Existing/New for Same Location")] public string    VendorExisting_NewForSameLocation { get; set; }
+			[Column("Contractor Details")                   ] public string    ContractorDetails                 { get; set; }
+			                                                  public string    CapexStatus                       { get; set; }
+			                                                  public string    isprint                           { get; set; }
+			                                                  public string    OtherRemarks                      { get; set; }
+			                                                  public string    TaggedPurchaser                   { get; set; }
+			                                                  public DateTime  CreateDate                        { get; set; }
+			                                                  public DateTime? ApprovedDate                      { get; set; }
+			                                                  public DateTime? exposeDate                        { get; set; }
+		}
+
+		#endregion
+
 		#region CapexSelIsApprover
 
 		public static IEnumerable<CapexSelIsApproverResult> CapexSelIsApprover(this CapExTSDB dataConnection, string @empcode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@empcode", @empcode, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1390,13 +1814,178 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_sel_IsApprover]",
-				new DataParameter("@empcode", @empcode, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_sel_IsApprover]", parameters);
 		}
 
 		public partial class CapexSelIsApproverResult
 		{
 			[Column("")] public string Column1 { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelLimit
+
+		public static IEnumerable<CapexSelLimitResult> CapexSelLimit(this CapExTSDB dataConnection, string @Empid, string @EmpPurpose)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@Empid",      @Empid,      LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@EmpPurpose", @EmpPurpose, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelLimitResult>("[dbo].[Capex_sel_Limit]", parameters);
+		}
+
+		public partial class CapexSelLimitResult
+		{
+			public string PersonalID       { get; set; }
+			public string EmployeeName     { get; set; }
+			public string EmployeeSubgroup { get; set; }
+			public string Department       { get; set; }
+			public string KOSTL            { get; set; }
+			public string Limit            { get; set; }
+			public string Grid             { get; set; }
+			public string Location         { get; set; }
+			public string Locname          { get; set; }
+			public string MCTXT            { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelPendingforApproval
+
+		public static IEnumerable<CapexSelPendingforApprovalResult> CapexSelPendingforApproval(this CapExTSDB dataConnection, string @empid)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@empid", @empid, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelPendingforApprovalResult>("[dbo].[Capex_Sel_PendingforApproval]", parameters);
+		}
+
+		public partial class CapexSelPendingforApprovalResult
+		{
+			public int      RequestNo                 { get; set; }
+			public int?     IndentID                  { get; set; }
+			public string   Assettype                 { get; set; }
+			public string   OldAssetCode              { get; set; }
+			public string   CapexType                 { get; set; }
+			public string   PName                     { get; set; }
+			public string   PDescription              { get; set; }
+			public string   CapitalExpenseAsset       { get; set; }
+			public string   Purpose                   { get; set; }
+			public string   EdateCompletion           { get; set; }
+			public string   PurchaseLocation          { get; set; }
+			public decimal? SelectQuotationAmount     { get; set; }
+			public decimal? TotalValueInINR           { get; set; }
+			public string   SelectQuote               { get; set; }
+			public string   ImportedIndigenous        { get; set; }
+			public string   VendorJustification       { get; set; }
+			public string   StatusDesc                { get; set; }
+			public string   CreateDate                { get; set; }
+			public string   CreatedBy                 { get; set; }
+			public int?     Status                    { get; set; }
+			public string   CurrentWith               { get; set; }
+			public decimal  CfcAmount                 { get; set; }
+			public string   IRRPaybackPeriodValue     { get; set; }
+			public string   ProjectedCashOutflowValue { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelPendingforApprovalCount
+
+		public static IEnumerable<CapexSelPendingforApprovalCountResult> CapexSelPendingforApprovalCount(this CapExTSDB dataConnection, string @empid)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@empid", @empid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelPendingforApprovalCountResult>("[dbo].[Capex_Sel_PendingforApproval_Count]", parameters);
+		}
+
+		public partial class CapexSelPendingforApprovalCountResult
+		{
+			public string NFA            { get; set; }
+			public int?   PendingRequest { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelPendingforbugtApproval
+
+		public static IEnumerable<CapexSelPendingforbugtApprovalResult> CapexSelPendingforbugtApproval(this CapExTSDB dataConnection, string @empcode)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@empcode", @empcode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelPendingforbugtApprovalResult>("[dbo].[Capex_Sel_PendingforbugtApproval]", parameters);
+		}
+
+		public partial class CapexSelPendingforbugtApprovalResult
+		{
+			public int       RequestNo           { get; set; }
+			public string    Assettype           { get; set; }
+			public string    OldAssetCode        { get; set; }
+			public string    CapexType           { get; set; }
+			public string    PName               { get; set; }
+			public string    PDescription        { get; set; }
+			public string    CapitalExpenseAsset { get; set; }
+			public string    Purpose             { get; set; }
+			public DateTime? EdateCompletion     { get; set; }
+			public string    PurchaseLocation    { get; set; }
+			public decimal?  TotalValueInINR     { get; set; }
+			public string    SelectQuote         { get; set; }
+			public string    ImportedIndigenous  { get; set; }
+			public string    VendorJustification { get; set; }
+			public string    StatusDesc          { get; set; }
+			public DateTime  CreateDate          { get; set; }
+			public string    CreatedBy           { get; set; }
+			public int?      Status              { get; set; }
+			public string    CurrentWith         { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelRnDRequisition
+
+		public static IEnumerable<CapexSelRnDRequisitionResult> CapexSelRnDRequisition(this CapExTSDB dataConnection, string @PurchaseCode)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@PurchaseCode", @PurchaseCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRnDRequisitionResult>("[dbo].[Capex_sel_RnDRequisition]", parameters);
+		}
+
+		public partial class CapexSelRnDRequisitionResult
+		{
+			public string RequisitionCode { get; set; }
+			public string RequisitionName { get; set; }
 		}
 
 		#endregion
@@ -1410,12 +1999,268 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexSelApprovalCapexDetails
+
+		public static IEnumerable<CapexSelApprovalCapexDetailsResult> CapexSelApprovalCapexDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			var ms = dataConnection.MappingSchema;
+
+			return dataConnection.QueryProc(dataReader =>
+				new CapexSelApprovalCapexDetailsResult
+				{
+					RequestNo                    = Converter.ChangeTypeTo<int>      (dataReader.GetValue(0), ms),
+					Assettype                    = Converter.ChangeTypeTo<string>   (dataReader.GetValue(1), ms),
+					OldAssetCode                 = Converter.ChangeTypeTo<string>   (dataReader.GetValue(2), ms),
+					CapexTypeDesc                = Converter.ChangeTypeTo<string>   (dataReader.GetValue(3), ms),
+					CapexType                    = Converter.ChangeTypeTo<string>   (dataReader.GetValue(4), ms),
+					empcode                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(5), ms),
+					empname                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(6), ms),
+					Grid                         = Converter.ChangeTypeTo<string>   (dataReader.GetValue(7), ms),
+					ReqType                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(8), ms),
+					MaxLimit                     = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(9), ms),
+					PName                        = Converter.ChangeTypeTo<string>   (dataReader.GetValue(10), ms),
+					PDescription                 = Converter.ChangeTypeTo<string>   (dataReader.GetValue(11), ms),
+					Purpose                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(12), ms),
+					EdateCompletion              = Converter.ChangeTypeTo<string>   (dataReader.GetValue(13), ms),
+					PurchaseLocation             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(14), ms),
+					AmountPerUnit                = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(15), ms),
+					NoofUnits                    = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(16), ms),
+					TotalValueInINR              = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(17), ms),
+					MiscExpenses                 = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(18), ms),
+					SelectQuotationAmount        = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(19), ms),
+					SelectQuote                  = Converter.ChangeTypeTo<string>   (dataReader.GetValue(20), ms),
+					SelectQuoteID                = Converter.ChangeTypeTo<string>   (dataReader.GetValue(21), ms),
+					TnC                          = Converter.ChangeTypeTo<string>   (dataReader.GetValue(22), ms),
+					PaymentTerm                  = Converter.ChangeTypeTo<string>   (dataReader.GetValue(23), ms),
+					Delivery                     = Converter.ChangeTypeTo<string>   (dataReader.GetValue(24), ms),
+					Fright                       = Converter.ChangeTypeTo<string>   (dataReader.GetValue(25), ms),
+					InstallationCost             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(26), ms),
+					Remarks                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(27), ms),
+					ImportedIndigenous           = Converter.ChangeTypeTo<string>   (dataReader.GetValue(28), ms),
+					VendorJustification          = Converter.ChangeTypeTo<string>   (dataReader.GetValue(29), ms),
+					Status                       = Converter.ChangeTypeTo<int?>     (dataReader.GetValue(30), ms),
+					DEPARTMENT_Lvl_1             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(31), ms),
+					DEPARTMENT_Lvl_1_Date        = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(32), ms),
+					DEPARTMENT_Lvl_1_Remarks     = Converter.ChangeTypeTo<string>   (dataReader.GetValue(33), ms),
+					DEPARTMENT_Lvl_2             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(34), ms),
+					DEPARTMENT_Lvl_2_Date        = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(35), ms),
+					DEPARTMENT_Lvl_2_Remarks     = Converter.ChangeTypeTo<string>   (dataReader.GetValue(36), ms),
+					FINANCE_Lvl_3                = Converter.ChangeTypeTo<string>   (dataReader.GetValue(37), ms),
+					FINANCE_Lvl_3_Date           = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(38), ms),
+					FINANCE_Lvl_3_Remarks        = Converter.ChangeTypeTo<string>   (dataReader.GetValue(39), ms),
+					FINANCEF_Lvl_4               = Converter.ChangeTypeTo<string>   (dataReader.GetValue(40), ms),
+					FINANCEF_Lvl_4_Date          = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(41), ms),
+					FINANCEF_Lvl_4_Remarks       = Converter.ChangeTypeTo<string>   (dataReader.GetValue(42), ms),
+					FINANCE_Lvl_5                = Converter.ChangeTypeTo<string>   (dataReader.GetValue(43), ms),
+					FINANCE_Lvl_5_Date           = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(44), ms),
+					FINANCE_Lvl_5_Remarks        = Converter.ChangeTypeTo<string>   (dataReader.GetValue(45), ms),
+					MD_Lvl_6                     = Converter.ChangeTypeTo<string>   (dataReader.GetValue(46), ms),
+					MD_Lvl_6_Date                = Converter.ChangeTypeTo<DateTime?>(dataReader.GetValue(47), ms),
+					MD_Lvl_6_Remarks             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(48), ms),
+					CreateDate                   = Converter.ChangeTypeTo<DateTime> (dataReader.GetValue(49), ms),
+					CreatedBy                    = Converter.ChangeTypeTo<string>   (dataReader.GetValue(50), ms),
+					Column52                     = Converter.ChangeTypeTo<decimal?> (dataReader.GetValue(51), ms),
+					IndentID                     = Converter.ChangeTypeTo<int?>     (dataReader.GetValue(52), ms),
+					Benefit                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(53), ms),
+					IRRPaybackPeriodFileName     = Converter.ChangeTypeTo<string>   (dataReader.GetValue(54), ms),
+					IRRPaybackPeriod             = Converter.ChangeTypeTo<string>   (dataReader.GetValue(55), ms),
+					isIRRPaybackPeriod           = Converter.ChangeTypeTo<int>      (dataReader.GetValue(56), ms),
+					ProjectedCashOutflowFileName = Converter.ChangeTypeTo<string>   (dataReader.GetValue(57), ms),
+					ProjectedCashOutflow         = Converter.ChangeTypeTo<string>   (dataReader.GetValue(58), ms),
+					isProjectedCashOutflow       = Converter.ChangeTypeTo<int>      (dataReader.GetValue(59), ms),
+					ComCode                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(60), ms),
+					ComDesc                      = Converter.ChangeTypeTo<string>   (dataReader.GetValue(61), ms),
+					BU                           = Converter.ChangeTypeTo<string>   (dataReader.GetValue(62), ms),
+					RT                           = Converter.ChangeTypeTo<string>   (dataReader.GetValue(63), ms),
+					BT                           = Converter.ChangeTypeTo<string>   (dataReader.GetValue(64), ms),
+					CTDes                        = Converter.ChangeTypeTo<string>   (dataReader.GetValue(65), ms),
+					RequesterDate                = Converter.ChangeTypeTo<string>   (dataReader.GetValue(66), ms),
+					CfcAmount                    = Converter.ChangeTypeTo<decimal>  (dataReader.GetValue(67), ms),
+					IRRPaybackPeriodValue        = Converter.ChangeTypeTo<string>   (dataReader.GetValue(68), ms),
+					ProjectedCashOutflowValue    = Converter.ChangeTypeTo<string>   (dataReader.GetValue(69), ms),
+				},
+				"[dbo].[Capex_SelApprovalCapexDetails]", parameters);
+		}
+
+		public partial class CapexSelApprovalCapexDetailsResult
+		{
+			                         public int       RequestNo                    { get; set; }
+			                         public string    Assettype                    { get; set; }
+			                         public string    OldAssetCode                 { get; set; }
+			                         public string    CapexTypeDesc                { get; set; }
+			                         public string    CapexType                    { get; set; }
+			                         public string    empcode                      { get; set; }
+			                         public string    empname                      { get; set; }
+			                         public string    Grid                         { get; set; }
+			                         public string    ReqType                      { get; set; }
+			                         public decimal?  MaxLimit                     { get; set; }
+			                         public string    PName                        { get; set; }
+			                         public string    PDescription                 { get; set; }
+			                         public string    Purpose                      { get; set; }
+			                         public string    EdateCompletion              { get; set; }
+			                         public string    PurchaseLocation             { get; set; }
+			                         public decimal?  AmountPerUnit                { get; set; }
+			                         public decimal?  NoofUnits                    { get; set; }
+			                         public decimal?  TotalValueInINR              { get; set; }
+			                         public decimal?  MiscExpenses                 { get; set; }
+			                         public decimal?  SelectQuotationAmount        { get; set; }
+			                         public string    SelectQuote                  { get; set; }
+			                         public string    SelectQuoteID                { get; set; }
+			                         public string    TnC                          { get; set; }
+			                         public string    PaymentTerm                  { get; set; }
+			                         public string    Delivery                     { get; set; }
+			                         public string    Fright                       { get; set; }
+			                         public string    InstallationCost             { get; set; }
+			                         public string    Remarks                      { get; set; }
+			                         public string    ImportedIndigenous           { get; set; }
+			                         public string    VendorJustification          { get; set; }
+			                         public int?      Status                       { get; set; }
+			                         public string    DEPARTMENT_Lvl_1             { get; set; }
+			                         public DateTime? DEPARTMENT_Lvl_1_Date        { get; set; }
+			                         public string    DEPARTMENT_Lvl_1_Remarks     { get; set; }
+			                         public string    DEPARTMENT_Lvl_2             { get; set; }
+			                         public DateTime? DEPARTMENT_Lvl_2_Date        { get; set; }
+			                         public string    DEPARTMENT_Lvl_2_Remarks     { get; set; }
+			                         public string    FINANCE_Lvl_3                { get; set; }
+			                         public DateTime? FINANCE_Lvl_3_Date           { get; set; }
+			                         public string    FINANCE_Lvl_3_Remarks        { get; set; }
+			                         public string    FINANCEF_Lvl_4               { get; set; }
+			                         public DateTime? FINANCEF_Lvl_4_Date          { get; set; }
+			                         public string    FINANCEF_Lvl_4_Remarks       { get; set; }
+			                         public string    FINANCE_Lvl_5                { get; set; }
+			                         public DateTime? FINANCE_Lvl_5_Date           { get; set; }
+			                         public string    FINANCE_Lvl_5_Remarks        { get; set; }
+			                         public string    MD_Lvl_6                     { get; set; }
+			                         public DateTime? MD_Lvl_6_Date                { get; set; }
+			                         public string    MD_Lvl_6_Remarks             { get; set; }
+			                         public DateTime  CreateDate                   { get; set; }
+			                         public string    CreatedBy                    { get; set; }
+			[Column("MiscExpenses")] public decimal?  Column52                     { get; set; }
+			                         public int?      IndentID                     { get; set; }
+			                         public string    Benefit                      { get; set; }
+			                         public string    IRRPaybackPeriodFileName     { get; set; }
+			                         public string    IRRPaybackPeriod             { get; set; }
+			                         public int       isIRRPaybackPeriod           { get; set; }
+			                         public string    ProjectedCashOutflowFileName { get; set; }
+			                         public string    ProjectedCashOutflow         { get; set; }
+			                         public int       isProjectedCashOutflow       { get; set; }
+			                         public string    ComCode                      { get; set; }
+			                         public string    ComDesc                      { get; set; }
+			                         public string    BU                           { get; set; }
+			                         public string    RT                           { get; set; }
+			                         public string    BT                           { get; set; }
+			                         public string    CTDes                        { get; set; }
+			                         public string    RequesterDate                { get; set; }
+			                         public decimal   CfcAmount                    { get; set; }
+			                         public string    IRRPaybackPeriodValue        { get; set; }
+			                         public string    ProjectedCashOutflowValue    { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelApprovalCapexLineDetails
+
+		public static IEnumerable<CapexSelApprovalCapexLineDetailsResult> CapexSelApprovalCapexLineDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelApprovalCapexLineDetailsResult>("[dbo].[Capex_SelApprovalCapexLineDetails]", parameters);
+		}
+
+		public partial class CapexSelApprovalCapexLineDetailsResult
+		{
+			public string   LineItem                   { get; set; }
+			public string   ItemName                   { get; set; }
+			public decimal? Quantity                   { get; set; }
+			public decimal? PerUnit                    { get; set; }
+			public decimal? Amount                     { get; set; }
+			public decimal? Tax                        { get; set; }
+			public decimal? Total                      { get; set; }
+			public string   UOM                        { get; set; }
+			public string   CWIP                       { get; set; }
+			public string   CWIP_Description           { get; set; }
+			public string   CWIP_InsertedBy            { get; set; }
+			public string   CWIP_InsertedDate          { get; set; }
+			public string   InternalOrder              { get; set; }
+			public string   InternalOrder_Description  { get; set; }
+			public string   InternalOrder_InsertedBy   { get; set; }
+			public string   InternalOrder_InsertedDate { get; set; }
+			public string   CapexNature                { get; set; }
+			public string   LocationCode               { get; set; }
+			public string   CostCenter                 { get; set; }
+			public string   Remarks                    { get; set; }
+			public int?     Status                     { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelApprovalCapexLineDetailsForFinancePersonnel
+
+		public static IEnumerable<CapexSelApprovalCapexLineDetailsForFinancePersonnelResult> CapexSelApprovalCapexLineDetailsForFinancePersonnel(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelApprovalCapexLineDetailsForFinancePersonnelResult>("[dbo].[Capex_SelApprovalCapexLineDetails_ForFinancePersonnel]", parameters);
+		}
+
+		public partial class CapexSelApprovalCapexLineDetailsForFinancePersonnelResult
+		{
+			public string   LineItem                   { get; set; }
+			public string   ItemName                   { get; set; }
+			public decimal? Quantity                   { get; set; }
+			public decimal? PerUnit                    { get; set; }
+			public decimal? Amount                     { get; set; }
+			public decimal? Tax                        { get; set; }
+			public decimal? Total                      { get; set; }
+			public string   CWIP                       { get; set; }
+			public string   CWIP_Description           { get; set; }
+			public string   CWIP_InsertedBy            { get; set; }
+			public string   CWIP_InsertedDate          { get; set; }
+			public string   InternalOrder              { get; set; }
+			public string   InternalOrder_Description  { get; set; }
+			public string   InternalOrder_InsertedBy   { get; set; }
+			public string   InternalOrder_InsertedDate { get; set; }
+			public string   CapexNature                { get; set; }
+			public string   LocationCode               { get; set; }
+			public string   CostCenter                 { get; set; }
+			public int?     Status                     { get; set; }
+		}
+
+		#endregion
+
 		#region CapexSelApprovalCapexQuoteDetails
 
 		public static IEnumerable<CapexSelApprovalCapexQuoteDetailsResult> CapexSelApprovalCapexQuoteDetails(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<CapexSelApprovalCapexQuoteDetailsResult>("[dbo].[Capex_SelApprovalCapexQuoteDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelApprovalCapexQuoteDetailsResult>("[dbo].[Capex_SelApprovalCapexQuoteDetails]", parameters);
 		}
 
 		public partial class CapexSelApprovalCapexQuoteDetailsResult
@@ -1426,6 +2271,35 @@ namespace DataModels
 			public string   FileName        { get; set; }
 			public string   VendorName      { get; set; }
 			public decimal? QuotationAmount { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelAutoMailerDrawingRecipients
+
+		public static IEnumerable<CapexSelAutoMailerDrawingRecipientsResult> CapexSelAutoMailerDrawingRecipients(this CapExTSDB dataConnection, string @FileID)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@FileID", @FileID, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelAutoMailerDrawingRecipientsResult>("[dbo].[Capex_SelAutoMailerDrawingRecipients]", parameters);
+		}
+
+		public partial class CapexSelAutoMailerDrawingRecipientsResult
+		{
+			public string DrawingCapexName { get; set; }
+			public string Remarks          { get; set; }
+			public string SendBy           { get; set; }
+			public string SendDate         { get; set; }
+			public string SendTO           { get; set; }
+			public string SendCC           { get; set; }
+			public string SendBCC          { get; set; }
+			public string Subject          { get; set; }
 		}
 
 		#endregion
@@ -1444,10 +2318,444 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexSelCapexreportdata
+
+		public static IEnumerable<CapexSelCapexreportdataResult> CapexSelCapexreportdata(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexreportdataResult>("[dbo].[Capex_SelCapexreportdata]", parameters);
+		}
+
+		public partial class CapexSelCapexreportdataResult
+		{
+			public int      RequestNo                { get; set; }
+			public string   Assettype                { get; set; }
+			public string   OldAssetCode             { get; set; }
+			public string   CapexTypeDesc            { get; set; }
+			public string   PName                    { get; set; }
+			public string   PDescription             { get; set; }
+			public string   Purpose                  { get; set; }
+			public string   EdateCompletion          { get; set; }
+			public string   PurchaseLocation         { get; set; }
+			public decimal? TotalValueInINR          { get; set; }
+			public string   SelectQuote              { get; set; }
+			public string   SelectQuoteID            { get; set; }
+			public string   ImportedIndigenous       { get; set; }
+			public string   VendorJustification      { get; set; }
+			public string   DEPARTMENT_Lvl_1         { get; set; }
+			public string   DEPARTMENT_Lvl_1_Date    { get; set; }
+			public string   DEPARTMENT_Lvl_1_Remarks { get; set; }
+			public string   DEPARTMENT_Lvl_2         { get; set; }
+			public string   DEPARTMENT_Lvl_2_Date    { get; set; }
+			public string   DEPARTMENT_Lvl_2_Remarks { get; set; }
+			public string   FINANCE_Lvl_3            { get; set; }
+			public string   FINANCE_Lvl_3_Date       { get; set; }
+			public string   FINANCE_Lvl_3_Remarks    { get; set; }
+			public string   FINANCEF_Lvl_4           { get; set; }
+			public string   FINANCEF_Lvl_4_Date      { get; set; }
+			public string   FINANCEF_Lvl_4_Remarks   { get; set; }
+			public string   FINANCE_Lvl_5            { get; set; }
+			public string   FINANCE_Lvl_5_Date       { get; set; }
+			public string   FINANCE_Lvl_5_Remarks    { get; set; }
+			public string   MD_Lvl_6                 { get; set; }
+			public string   MD_Lvl_6_Date            { get; set; }
+			public string   MD_Lvl_6_Remarks         { get; set; }
+			public string   CreateDate               { get; set; }
+			public string   CreatedBy                { get; set; }
+			public string   Vendor_Code              { get; set; }
+			public string   Vendor_Name              { get; set; }
+			public string   LineItem                 { get; set; }
+			public string   ItemName                 { get; set; }
+			public int?     Quantity                 { get; set; }
+			public string   UOM                      { get; set; }
+			public int?     InitialRate              { get; set; }
+			public int?     FinalRate                { get; set; }
+			public int?     FinalAmount              { get; set; }
+			public int?     Tax                      { get; set; }
+			public int?     TaxAmount                { get; set; }
+			public int?     TotalWithTax             { get; set; }
+			public string   empcode                  { get; set; }
+			public string   empname                  { get; set; }
+			public string   Grid                     { get; set; }
+			public string   ReqType                  { get; set; }
+			public decimal? MaxLimit                 { get; set; }
+			public string   TnC                      { get; set; }
+			public string   PaymentTerm              { get; set; }
+			public decimal? Delivery                 { get; set; }
+			public decimal? Fright                   { get; set; }
+			public decimal? InstallationCost         { get; set; }
+			public string   Remarks                  { get; set; }
+			public string   Company                  { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelCapexreportdataBackup11Aug2023
+
+		public static IEnumerable<CapexSelCapexreportdataBackup11Aug2023Result> CapexSelCapexreportdataBackup11Aug2023(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexreportdataBackup11Aug2023Result>("[dbo].[Capex_SelCapexreportdata_backup_11Aug2023]", parameters);
+		}
+
+		public partial class CapexSelCapexreportdataBackup11Aug2023Result
+		{
+			public int      RequestNo                { get; set; }
+			public string   Assettype                { get; set; }
+			public string   OldAssetCode             { get; set; }
+			public string   CapexTypeDesc            { get; set; }
+			public string   PName                    { get; set; }
+			public string   PDescription             { get; set; }
+			public string   Purpose                  { get; set; }
+			public string   EdateCompletion          { get; set; }
+			public string   PurchaseLocation         { get; set; }
+			public decimal? TotalValueInINR          { get; set; }
+			public string   SelectQuote              { get; set; }
+			public string   SelectQuoteID            { get; set; }
+			public string   ImportedIndigenous       { get; set; }
+			public string   VendorJustification      { get; set; }
+			public string   DEPARTMENT_Lvl_1         { get; set; }
+			public string   DEPARTMENT_Lvl_1_Date    { get; set; }
+			public string   DEPARTMENT_Lvl_1_Remarks { get; set; }
+			public string   DEPARTMENT_Lvl_2         { get; set; }
+			public string   DEPARTMENT_Lvl_2_Date    { get; set; }
+			public string   DEPARTMENT_Lvl_2_Remarks { get; set; }
+			public string   FINANCE_Lvl_3            { get; set; }
+			public string   FINANCE_Lvl_3_Date       { get; set; }
+			public string   FINANCE_Lvl_3_Remarks    { get; set; }
+			public string   FINANCEF_Lvl_4           { get; set; }
+			public string   FINANCEF_Lvl_4_Date      { get; set; }
+			public string   FINANCEF_Lvl_4_Remarks   { get; set; }
+			public string   FINANCE_Lvl_5            { get; set; }
+			public string   FINANCE_Lvl_5_Date       { get; set; }
+			public string   FINANCE_Lvl_5_Remarks    { get; set; }
+			public string   MD_Lvl_6                 { get; set; }
+			public string   MD_Lvl_6_Date            { get; set; }
+			public string   MD_Lvl_6_Remarks         { get; set; }
+			public string   CreateDate               { get; set; }
+			public string   CreatedBy                { get; set; }
+			public string   Vendor_Code              { get; set; }
+			public string   Vendor_Name              { get; set; }
+			public string   LineItem                 { get; set; }
+			public string   ItemName                 { get; set; }
+			public int?     Quantity                 { get; set; }
+			public string   UOM                      { get; set; }
+			public int?     InitialRate              { get; set; }
+			public int?     FinalRate                { get; set; }
+			public int?     FinalAmount              { get; set; }
+			public decimal? Tax                      { get; set; }
+			public int?     TaxAmount                { get; set; }
+			public int?     TotalWithTax             { get; set; }
+			public string   empcode                  { get; set; }
+			public string   empname                  { get; set; }
+			public string   Grid                     { get; set; }
+			public string   ReqType                  { get; set; }
+			public decimal? MaxLimit                 { get; set; }
+			public string   TnC                      { get; set; }
+			public string   Company                  { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelCapexRequestDetails
+
+		public static IEnumerable<CapexSelCapexRequestDetailsResult> CapexSelCapexRequestDetails(this CapExTSDB dataConnection, string @CreatedBy, string @RequestNo, string @Status, string @CWIPCODE, string @INTERNALORDERNO, string @location, string @CompCode, string @BU)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CreatedBy",       @CreatedBy,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@RequestNo",       @RequestNo,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",          @Status,          LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CWIPCODE",        @CWIPCODE,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@INTERNALORDERNO", @INTERNALORDERNO, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@location",        @location,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CompCode",        @CompCode,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@BU",              @BU,              LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexRequestDetailsResult>("[dbo].[Capex_SelCapexRequestDetails]", parameters);
+		}
+
+		public partial class CapexSelCapexRequestDetailsResult
+		{
+			public int       RequestNo             { get; set; }
+			public int?      IndentID              { get; set; }
+			public string    Assettype             { get; set; }
+			public string    OldAssetCode          { get; set; }
+			public string    CapexType             { get; set; }
+			public string    PName                 { get; set; }
+			public string    PDescription          { get; set; }
+			public string    Purpose               { get; set; }
+			public string    EdateCompletion       { get; set; }
+			public char      PurchaseLocation      { get; set; }
+			public decimal?  TotalValueInINR       { get; set; }
+			public decimal?  SelectQuotationAmount { get; set; }
+			public string    SelectQuote           { get; set; }
+			public string    ImportedIndigenous    { get; set; }
+			public string    VendorJustification   { get; set; }
+			public string    CurrentWith           { get; set; }
+			public int?      StatusID              { get; set; }
+			public string    Status                { get; set; }
+			public string    CreateDate            { get; set; }
+			public string    CreatedBy             { get; set; }
+			public DateTime? UpdatedDate           { get; set; }
+			public string    UpdatedBy             { get; set; }
+			public string    isprint               { get; set; }
+			public string    ApprovedDate          { get; set; }
+			public string    CWIPCreatedDate       { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelCapexRequestDetailsVeiwOnly
+
+		public static IEnumerable<CapexSelCapexRequestDetailsVeiwOnlyResult> CapexSelCapexRequestDetailsVeiwOnly(this CapExTSDB dataConnection, string @CreatedBy, string @RequestNo, string @Status, string @CWIPCODE, string @INTERNALORDERNO, string @location)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CreatedBy",       @CreatedBy,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@RequestNo",       @RequestNo,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",          @Status,          LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CWIPCODE",        @CWIPCODE,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@INTERNALORDERNO", @INTERNALORDERNO, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@location",        @location,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexRequestDetailsVeiwOnlyResult>("[dbo].[Capex_SelCapexRequestDetails_VeiwOnly]", parameters);
+		}
+
+		public partial class CapexSelCapexRequestDetailsVeiwOnlyResult
+		{
+			public int       RequestNo             { get; set; }
+			public int?      IndentID              { get; set; }
+			public string    Assettype             { get; set; }
+			public string    OldAssetCode          { get; set; }
+			public string    CapexType             { get; set; }
+			public string    PName                 { get; set; }
+			public string    PDescription          { get; set; }
+			public string    Purpose               { get; set; }
+			public string    EdateCompletion       { get; set; }
+			public string    PurchaseLocation      { get; set; }
+			public decimal?  TotalValueInINR       { get; set; }
+			public string    SelectQuote           { get; set; }
+			public decimal?  SelectQuotationAmount { get; set; }
+			public string    ImportedIndigenous    { get; set; }
+			public string    VendorJustification   { get; set; }
+			public string    CurrentWith           { get; set; }
+			public int?      StatusID              { get; set; }
+			public string    Status                { get; set; }
+			public string    CreateDate            { get; set; }
+			public string    CreatedBy             { get; set; }
+			public DateTime? UpdatedDate           { get; set; }
+			public string    UpdatedBy             { get; set; }
+			public string    isprint               { get; set; }
+			public string    ApprovedDate          { get; set; }
+			public string    CWIPCreatedDate       { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelCapexViewOnlyDetailsForApp
+
+		public static IEnumerable<CapexSelCapexViewOnlyDetailsForAppResult> CapexSelCapexViewOnlyDetailsForApp(this CapExTSDB dataConnection, string @uid, string @otp, int? @CapexID, string @ProjectName, string @ProjectDesc)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@uid",         @uid,         LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@otp",         @otp,         LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CapexID",     @CapexID,     LinqToDB.DataType.Int32),
+				new DataParameter("@ProjectName", @ProjectName, LinqToDB.DataType.VarChar)
+				{
+					Size = 300
+				},
+				new DataParameter("@ProjectDesc", @ProjectDesc, LinqToDB.DataType.VarChar)
+				{
+					Size = 300
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexViewOnlyDetailsForAppResult>("[dbo].[Capex_SelCapexViewOnlyDetailsForApp]", parameters);
+		}
+
+		public partial class CapexSelCapexViewOnlyDetailsForAppResult
+		{
+			public int      CapID                    { get; set; }
+			public string   CapType                  { get; set; }
+			public string   ProjectName              { get; set; }
+			public string   ProjectDescription       { get; set; }
+			public string   PurchaseLocation         { get; set; }
+			public decimal? TotalValueINR            { get; set; }
+			public string   RequestedBy              { get; set; }
+			public string   RequestedDate            { get; set; }
+			public string   ExpectedDateofCompletion { get; set; }
+			public string   OldAssetCode             { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelCFREntryDetails
+
+		public static IEnumerable<CapexSelCFREntryDetailsResult> CapexSelCFREntryDetails(this CapExTSDB dataConnection, string @RequestNo, string @CWIPCODE, string @INTERNALORDERNO, string @sessionid, string @location, string @status)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo",       @RequestNo,       LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@CWIPCODE",        @CWIPCODE,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@INTERNALORDERNO", @INTERNALORDERNO, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@sessionid",       @sessionid,       LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@location",        @location,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@status",          @status,          LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			var ms = dataConnection.MappingSchema;
+
+			return dataConnection.QueryProc(dataReader =>
+				new CapexSelCFREntryDetailsResult
+				{
+					RequestNo           = Converter.ChangeTypeTo<int>     (dataReader.GetValue(0), ms),
+					Assettype           = Converter.ChangeTypeTo<string>  (dataReader.GetValue(1), ms),
+					OldAssetCode        = Converter.ChangeTypeTo<string>  (dataReader.GetValue(2), ms),
+					CapexType           = Converter.ChangeTypeTo<string>  (dataReader.GetValue(3), ms),
+					PName               = Converter.ChangeTypeTo<string>  (dataReader.GetValue(4), ms),
+					PDescription        = Converter.ChangeTypeTo<string>  (dataReader.GetValue(5), ms),
+					CapitalExpenseAsset = Converter.ChangeTypeTo<string>  (dataReader.GetValue(6), ms),
+					Purpose             = Converter.ChangeTypeTo<string>  (dataReader.GetValue(7), ms),
+					EdateCompletion     = Converter.ChangeTypeTo<string>  (dataReader.GetValue(8), ms),
+					PurchaseLocation    = Converter.ChangeTypeTo<string>  (dataReader.GetValue(9), ms),
+					TotalValueInINR     = Converter.ChangeTypeTo<decimal?>(dataReader.GetValue(10), ms),
+					SelectQuote         = Converter.ChangeTypeTo<string>  (dataReader.GetValue(11), ms),
+					ImportedIndigenous  = Converter.ChangeTypeTo<string>  (dataReader.GetValue(12), ms),
+					VendorJustification = Converter.ChangeTypeTo<string>  (dataReader.GetValue(13), ms),
+					Status              = Converter.ChangeTypeTo<int?>    (dataReader.GetValue(14), ms),
+					StatusDesc          = Converter.ChangeTypeTo<string>  (dataReader.GetValue(15), ms),
+					CreateDate          = Converter.ChangeTypeTo<string>  (dataReader.GetValue(16), ms),
+					CreatedBy           = Converter.ChangeTypeTo<string>  (dataReader.GetValue(17), ms),
+					Column19            = Converter.ChangeTypeTo<int?>    (dataReader.GetValue(18), ms),
+					ApprovedDate        = Converter.ChangeTypeTo<string>  (dataReader.GetValue(19), ms),
+					CWIPCreatedDate     = Converter.ChangeTypeTo<string>  (dataReader.GetValue(20), ms),
+				},
+				"[dbo].[Capex_SelCFREntryDetails]", parameters);
+		}
+
+		public partial class CapexSelCFREntryDetailsResult
+		{
+			                   public int      RequestNo           { get; set; }
+			                   public string   Assettype           { get; set; }
+			                   public string   OldAssetCode        { get; set; }
+			                   public string   CapexType           { get; set; }
+			                   public string   PName               { get; set; }
+			                   public string   PDescription        { get; set; }
+			                   public string   CapitalExpenseAsset { get; set; }
+			                   public string   Purpose             { get; set; }
+			                   public string   EdateCompletion     { get; set; }
+			                   public string   PurchaseLocation    { get; set; }
+			                   public decimal? TotalValueInINR     { get; set; }
+			                   public string   SelectQuote         { get; set; }
+			                   public string   ImportedIndigenous  { get; set; }
+			                   public string   VendorJustification { get; set; }
+			                   public int?     Status              { get; set; }
+			                   public string   StatusDesc          { get; set; }
+			                   public string   CreateDate          { get; set; }
+			                   public string   CreatedBy           { get; set; }
+			[Column("Status")] public int?     Column19            { get; set; }
+			                   public string   ApprovedDate        { get; set; }
+			                   public string   CWIPCreatedDate     { get; set; }
+		}
+
+		#endregion
+
 		#region CapexSelCurrentWithFieldName
 
 		public static IEnumerable<CapexSelCurrentWithFieldNameResult> CapexSelCurrentWithFieldName(this CapExTSDB dataConnection, string @reqNo)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@reqNo", @reqNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1455,13 +2763,69 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_SelCurrentWithFieldName]",
-				new DataParameter("@reqNo", @reqNo, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_SelCurrentWithFieldName]", parameters);
 		}
 
 		public partial class CapexSelCurrentWithFieldNameResult
 		{
 			[Column("")] public string Column1 { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelddl
+
+		public static IEnumerable<CapexSelddlResult> CapexSelddl(this CapExTSDB dataConnection, string @COM, string @FLAG)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@COM",  @COM,  LinqToDB.DataType.VarChar)
+				{
+					Size = 15
+				},
+				new DataParameter("@FLAG", @FLAG, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelddlResult>("[dbo].[Capex_Selddl]", parameters);
+		}
+
+		public partial class CapexSelddlResult
+		{
+			public string CODE { get; set; }
+			public string DES  { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelDrawingList
+
+		public static IEnumerable<CapexSelDrawingListResult> CapexSelDrawingList(this CapExTSDB dataConnection, string @Userid)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@Userid", @Userid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelDrawingListResult>("[dbo].[Capex_SelDrawingList]", parameters);
+		}
+
+		public partial class CapexSelDrawingListResult
+		{
+			public decimal fileid           { get; set; }
+			public string  filepth          { get; set; }
+			public string  pth              { get; set; }
+			public string  DrawingCapexName { get; set; }
+			public string  Remarks          { get; set; }
+			public string  AssignedTo       { get; set; }
+			public string  AssignedDate     { get; set; }
+			public string  UploadedBY       { get; set; }
+			public string  UploadedDate     { get; set; }
 		}
 
 		#endregion
@@ -1491,6 +2855,14 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelIsVisibleRnDTabResult> CapexSelIsVisibleRnDTab(this CapExTSDB dataConnection, string @userid)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@userid", @userid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1498,8 +2870,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_selIsVisibleRnDTab]",
-				new DataParameter("@userid", @userid, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_selIsVisibleRnDTab]", parameters);
 		}
 
 		public partial class CapexSelIsVisibleRnDTabResult
@@ -1513,9 +2884,19 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelReturnCapexDetailsResult> CapexSelReturnCapexDetails(this CapExTSDB dataConnection, string @RequestNo, string @EmpCode)
 		{
-			return dataConnection.QueryProc<CapexSelReturnCapexDetailsResult>("[dbo].[Capex_SelReturnCapexDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelReturnCapexDetailsResult>("[dbo].[Capex_SelReturnCapexDetails]", parameters);
 		}
 
 		public partial class CapexSelReturnCapexDetailsResult
@@ -1595,8 +2976,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelReturnCapexFilesResult> CapexSelReturnCapexFiles(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<CapexSelReturnCapexFilesResult>("[dbo].[Capex_SelReturnCapexFiles]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelReturnCapexFilesResult>("[dbo].[Capex_SelReturnCapexFiles]", parameters);
 		}
 
 		public partial class CapexSelReturnCapexFilesResult
@@ -1610,8 +2998,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelReturnCapexItemsResult> CapexSelReturnCapexItems(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<CapexSelReturnCapexItemsResult>("[dbo].[Capex_SelReturnCapexItems]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelReturnCapexItemsResult>("[dbo].[Capex_SelReturnCapexItems]", parameters);
 		}
 
 		public partial class CapexSelReturnCapexItemsResult
@@ -1630,8 +3025,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelRnDListResult> CapexSelRnDList(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<CapexSelRnDListResult>("[dbo].[Capex_SelRnDList]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRnDListResult>("[dbo].[Capex_SelRnDList]", parameters);
 		}
 
 		public partial class CapexSelRnDListResult
@@ -1647,6 +3049,18 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelValidateReturnReqResult> CapexSelValidateReturnReq(this CapExTSDB dataConnection, string @RequestNo, string @EmpCode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1654,9 +3068,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_SelValidateReturnReq]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_SelValidateReturnReq]", parameters);
 		}
 
 		public partial class CapexSelValidateReturnReqResult
@@ -1670,6 +3082,14 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelVendorAddressDetailsResult> CapexSelVendorAddressDetails(this CapExTSDB dataConnection, string @VendorCode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1677,8 +3097,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capex_SelVendorAddressDetails]",
-				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.VarChar));
+				"[dbo].[Capex_SelVendorAddressDetails]", parameters);
 		}
 
 		public partial class CapexSelVendorAddressDetailsResult
@@ -1692,6 +3111,22 @@ namespace DataModels
 
 		public static IEnumerable<CapexSubmitcheckbugtstatusResult> CapexSubmitcheckbugtstatus(this CapExTSDB dataConnection, string @ReqNo, string @resultstatus, string @userSession)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@ReqNo",        @ReqNo,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@resultstatus", @resultstatus, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@userSession",  @userSession,  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1699,10 +3134,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[capex_submitcheckbugtstatus]",
-				new DataParameter("@ReqNo",        @ReqNo,        LinqToDB.DataType.VarChar),
-				new DataParameter("@resultstatus", @resultstatus, LinqToDB.DataType.VarChar),
-				new DataParameter("@userSession",  @userSession,  LinqToDB.DataType.VarChar));
+				"[dbo].[capex_submitcheckbugtstatus]", parameters);
 		}
 
 		public partial class CapexSubmitcheckbugtstatusResult
@@ -1716,6 +3148,38 @@ namespace DataModels
 
 		public static IEnumerable<CapexCapitalCRFOrderEntryInsertResult> CapexCapitalCRFOrderEntryInsert(this CapExTSDB dataConnection, string @CapexID, string @LineItem, string @CWIP, string @CWIP_Description, string @InternalOrder, string @InternalOrder_Description, string @CreatedBy)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@CapexID",                   @CapexID,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@LineItem",                  @LineItem,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CWIP",                      @CWIP,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CWIP_Description",          @CWIP_Description,          LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@InternalOrder",             @InternalOrder,             LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@InternalOrder_Description", @InternalOrder_Description, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1723,14 +3187,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexCapitalCRFOrderEntry_Insert]",
-				new DataParameter("@CapexID",                   @CapexID,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@LineItem",                  @LineItem,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@CWIP",                      @CWIP,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@CWIP_Description",          @CWIP_Description,          LinqToDB.DataType.VarChar),
-				new DataParameter("@InternalOrder",             @InternalOrder,             LinqToDB.DataType.VarChar),
-				new DataParameter("@InternalOrder_Description", @InternalOrder_Description, LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar));
+				"[dbo].[CapexCapitalCRFOrderEntry_Insert]", parameters);
 		}
 
 		public partial class CapexCapitalCRFOrderEntryInsertResult
@@ -1744,18 +3201,73 @@ namespace DataModels
 
 		public static int CapexDelUserRight(this CapExTSDB dataConnection, string @userid, int? @rightid, string @EMPCode)
 		{
-			return dataConnection.ExecuteProc("[dbo].[CapexDelUserRight]",
-				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar),
+			var parameters = new []
+			{
+				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
 				new DataParameter("@rightid", @rightid, LinqToDB.DataType.Int32),
-				new DataParameter("@EMPCode", @EMPCode, LinqToDB.DataType.VarChar));
+				new DataParameter("@EMPCode", @EMPCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.ExecuteProc("[dbo].[CapexDelUserRight]", parameters);
+		}
+
+		#endregion
+
+		#region CapexEmailGetCapexDetails
+
+		public static IEnumerable<CapexEmailGetCapexDetailsResult> CapexEmailGetCapexDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexEmailGetCapexDetailsResult>("[dbo].[CapexEmailGetCapexDetails]", parameters);
+		}
+
+		public partial class CapexEmailGetCapexDetailsResult
+		{
+			[Column("NFA ID")                         ] public int      NFAID                        { get; set; }
+			[Column("NFA Type")                       ] public string   NFAType                      { get; set; }
+			[Column("Work/Item Name")                 ] public string   Work_ItemName                { get; set; }
+			[Column("Work/Item Description")          ] public string   Work_ItemDescription         { get; set; }
+			                                            public string   Purpose                      { get; set; }
+			[Column("Expected Completion Date")       ] public string   ExpectedCompletionDate       { get; set; }
+			[Column("Selected Quotation Amount (INR)")] public decimal? SelectedQuotationAmount_INR_ { get; set; }
+			[Column("Max Quotated Amount (INR)")      ] public decimal? MaxQuotatedAmount_INR_       { get; set; }
+			                                            public string   ImportedIndigenous           { get; set; }
+			                                            public string   VendorJustification          { get; set; }
+			                                            public string   CurrentWith                  { get; set; }
+			                                            public string   CurrentWithEmpId             { get; set; }
+			                                            public string   Status                       { get; set; }
+			                                            public string   CreateDate                   { get; set; }
+			                                            public string   CreatedBy                    { get; set; }
 		}
 
 		#endregion
 
 		#region CapexfChkUserRight
 
-		public static IEnumerable<CapexfChkUserRightResult> CapexfChkUserRight(this CapExTSDB dataConnection, string @uid, decimal? @funcid)
+		public static IEnumerable<CapexfChkUserRightResult> CapexfChkUserRight(this CapExTSDB dataConnection, string @uid, string @funcid)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@uid",    @uid,    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@funcid", @funcid, LinqToDB.DataType.VarChar)
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1763,9 +3275,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Capexf_chk_user_right]",
-				new DataParameter("@uid",    @uid,    LinqToDB.DataType.VarChar),
-				new DataParameter("@funcid", @funcid, LinqToDB.DataType.Decimal));
+				"[dbo].[Capexf_chk_user_right]", parameters);
 		}
 
 		public partial class CapexfChkUserRightResult
@@ -1775,10 +3285,53 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexFunSelApprovalMaterixNameByReq
+
+		public static IEnumerable<CapexFunSelApprovalMaterixNameByReqResult> CapexFunSelApprovalMaterixNameByReq(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexFunSelApprovalMaterixNameByReqResult>("[dbo].[CapexFun_SelApprovalMaterixNameByReq]", parameters);
+		}
+
+		public partial class CapexFunSelApprovalMaterixNameByReqResult
+		{
+			                          public string _             { get; set; }
+			                          public string Level_1       { get; set; }
+			                          public string Level_2       { get; set; }
+			                          public string Level_3       { get; set; }
+			                          public string Level_4       { get; set; }
+			                          public string Level_5       { get; set; }
+			                          public string Level_6       { get; set; }
+			[Column("Reject/Return")] public string Reject_Return { get; set; }
+		}
+
+		#endregion
+
 		#region CapexGetApprovalChannel
 
 		public static IEnumerable<CapexGetApprovalChannelResult> CapexGetApprovalChannel(this CapExTSDB dataConnection, decimal? @GTotal, int? @CapexID, string @userid, string @forEMPmaxLimit)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@GTotal",         @GTotal,         LinqToDB.DataType.Decimal),
+				new DataParameter("@CapexID",        @CapexID,        LinqToDB.DataType.Int32),
+				new DataParameter("@userid",         @userid,         LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@forEMPmaxLimit", @forEMPmaxLimit, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1786,11 +3339,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexGetApprovalChannel]",
-				new DataParameter("@GTotal",         @GTotal,         LinqToDB.DataType.Decimal),
-				new DataParameter("@CapexID",        @CapexID,        LinqToDB.DataType.Int32),
-				new DataParameter("@userid",         @userid,         LinqToDB.DataType.VarChar),
-				new DataParameter("@forEMPmaxLimit", @forEMPmaxLimit, LinqToDB.DataType.VarChar));
+				"[dbo].[CapexGetApprovalChannel]", parameters);
 		}
 
 		public partial class CapexGetApprovalChannelResult
@@ -1804,6 +3353,16 @@ namespace DataModels
 
 		public static IEnumerable<CapexGetApprovalChannelTestResult> CapexGetApprovalChannelTest(this CapExTSDB dataConnection, decimal? @GTotal, int? @CapexID, string @userid)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@GTotal",  @GTotal,  LinqToDB.DataType.Decimal),
+				new DataParameter("@CapexID", @CapexID, LinqToDB.DataType.Int32),
+				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1811,10 +3370,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexGetApprovalChannel_test]",
-				new DataParameter("@GTotal",  @GTotal,  LinqToDB.DataType.Decimal),
-				new DataParameter("@CapexID", @CapexID, LinqToDB.DataType.Int32),
-				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar));
+				"[dbo].[CapexGetApprovalChannel_test]", parameters);
 		}
 
 		public partial class CapexGetApprovalChannelTestResult
@@ -1828,6 +3384,20 @@ namespace DataModels
 
 		public static IEnumerable<CapexGetApprovalChannelTestingResult> CapexGetApprovalChannelTesting(this CapExTSDB dataConnection, decimal? @GTotal, int? @CapexID, string @userid, string @forEMPmaxLimit)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@GTotal",         @GTotal,         LinqToDB.DataType.Decimal),
+				new DataParameter("@CapexID",        @CapexID,        LinqToDB.DataType.Int32),
+				new DataParameter("@userid",         @userid,         LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@forEMPmaxLimit", @forEMPmaxLimit, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1835,11 +3405,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexGetApprovalChannelTesting]",
-				new DataParameter("@GTotal",         @GTotal,         LinqToDB.DataType.Decimal),
-				new DataParameter("@CapexID",        @CapexID,        LinqToDB.DataType.Int32),
-				new DataParameter("@userid",         @userid,         LinqToDB.DataType.VarChar),
-				new DataParameter("@forEMPmaxLimit", @forEMPmaxLimit, LinqToDB.DataType.VarChar));
+				"[dbo].[CapexGetApprovalChannelTesting]", parameters);
 		}
 
 		public partial class CapexGetApprovalChannelTestingResult
@@ -1853,6 +3419,19 @@ namespace DataModels
 
 		public static IEnumerable<CapexSaveUserRightResult> CapexSaveUserRight(this CapExTSDB dataConnection, string @userid, int? @rightid, string @modby)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@rightid", @rightid, LinqToDB.DataType.Int32),
+				new DataParameter("@modby",   @modby,   LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1860,10 +3439,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexSaveUserRight]",
-				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar),
-				new DataParameter("@rightid", @rightid, LinqToDB.DataType.Int32),
-				new DataParameter("@modby",   @modby,   LinqToDB.DataType.VarChar));
+				"[dbo].[CapexSaveUserRight]", parameters);
 		}
 
 		public partial class CapexSaveUserRightResult
@@ -1877,18 +3453,62 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelCapexTypeResult> CapexSelCapexType(this CapExTSDB dataConnection, string @uid, string @comp, string @bu, string @reqtype, string @budget)
 		{
-			return dataConnection.QueryProc<CapexSelCapexTypeResult>("[dbo].[CapexSel_CapexType]",
-				new DataParameter("@uid",     @uid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@comp",    @comp,    LinqToDB.DataType.VarChar),
-				new DataParameter("@bu",      @bu,      LinqToDB.DataType.VarChar),
-				new DataParameter("@reqtype", @reqtype, LinqToDB.DataType.VarChar),
-				new DataParameter("@budget",  @budget,  LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@uid",     @uid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@comp",    @comp,    LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@bu",      @bu,      LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@reqtype", @reqtype, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@budget",  @budget,  LinqToDB.DataType.VarChar)
+				{
+					Size = 15
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelCapexTypeResult>("[dbo].[CapexSel_CapexType]", parameters);
 		}
 
 		public partial class CapexSelCapexTypeResult
 		{
 			public int    CTID      { get; set; }
 			public string CapexType { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelEmployeeMaster
+
+		public static IEnumerable<CapexSelEmployeeMasterResult> CapexSelEmployeeMaster(this CapExTSDB dataConnection, string @EmployeeTxt)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@EmployeeTxt", @EmployeeTxt, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelEmployeeMasterResult>("[dbo].[CapexSel_EmployeeMaster]", parameters);
+		}
+
+		public partial class CapexSelEmployeeMasterResult
+		{
+			public string PersonalID       { get; set; }
+			public string EmployeeName     { get; set; }
+			public string EmployeeSubgroup { get; set; }
+			public string Department       { get; set; }
 		}
 
 		#endregion
@@ -1936,8 +3556,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelStatusasUseResult> CapexSelStatusasUse(this CapExTSDB dataConnection, string @flag)
 		{
-			return dataConnection.QueryProc<CapexSelStatusasUseResult>("[dbo].[CapexSel_StatusasUse]",
-				new DataParameter("@flag", @flag, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@flag", @flag, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelStatusasUseResult>("[dbo].[CapexSel_StatusasUse]", parameters);
 		}
 
 		public partial class CapexSelStatusasUseResult
@@ -1952,8 +3579,15 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelfinanceInputlistResult> CapexSelfinanceInputlist(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<CapexSelfinanceInputlistResult>("[dbo].[CapexSelfinanceInputlist]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelfinanceInputlistResult>("[dbo].[CapexSelfinanceInputlist]", parameters);
 		}
 
 		public partial class CapexSelfinanceInputlistResult
@@ -1968,6 +3602,14 @@ namespace DataModels
 
 		public static IEnumerable<CapexSelPlantAddressResult> CapexSelPlantAddress(this CapExTSDB dataConnection, string @plantcode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@plantcode", @plantcode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1975,8 +3617,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexSelPlantAddress]",
-				new DataParameter("@plantcode", @plantcode, LinqToDB.DataType.VarChar));
+				"[dbo].[CapexSelPlantAddress]", parameters);
 		}
 
 		public partial class CapexSelPlantAddressResult
@@ -1986,10 +3627,175 @@ namespace DataModels
 
 		#endregion
 
+		#region CapexSelRequestApproverAutomailerrecipients
+
+		public static IEnumerable<CapexSelRequestApproverAutomailerrecipientsResult> CapexSelRequestApproverAutomailerrecipients(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRequestApproverAutomailerrecipientsResult>("[dbo].[CapexSelRequestApproverAutomailerrecipients]", parameters);
+		}
+
+		public partial class CapexSelRequestApproverAutomailerrecipientsResult
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelRequestApproverAutomailerrecipientsBakup12Jan23
+
+		public static IEnumerable<CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result> CapexSelRequestApproverAutomailerrecipientsBakup12Jan23(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result>("[dbo].[CapexSelRequestApproverAutomailerrecipients_Bakup12_jan_23]", parameters);
+		}
+
+		public partial class CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelRequestApproverAutomailerrecipientsBakup12Jan23
+
+		public static IEnumerable<CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result0> CapexSelRequestApproverAutomailerrecipientsBakup12Jan24(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result0>("[dbo].[CapexSelRequestApproverAutomailerrecipients_Bakup12_jan-23]", parameters);
+		}
+
+		public partial class CapexSelRequestApproverAutomailerrecipientsBakup12Jan23Result0
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelRequestApproverAutomailerrecipientsOld
+
+		public static IEnumerable<CapexSelRequestApproverAutomailerrecipientsOldResult> CapexSelRequestApproverAutomailerrecipientsOld(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelRequestApproverAutomailerrecipientsOldResult>("[dbo].[CapexSelRequestApproverAutomailerrecipients_old]", parameters);
+		}
+
+		public partial class CapexSelRequestApproverAutomailerrecipientsOldResult
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
+		#region CapexSelUserRights
+
+		public static IEnumerable<CapexSelUserRightsResult> CapexSelUserRights(this CapExTSDB dataConnection, string @userid, string @right)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@userid", @userid, LinqToDB.DataType.VarChar)
+				{
+					Size = 15
+				},
+				new DataParameter("@right",  @right,  LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<CapexSelUserRightsResult>("[dbo].[CapexSelUserRights]", parameters);
+		}
+
+		public partial class CapexSelUserRightsResult
+		{
+			public string EmployeeId   { get; set; }
+			public string EmployeeName { get; set; }
+			public int    RightId      { get; set; }
+			public string RightName    { get; set; }
+		}
+
+		#endregion
+
 		#region CapexUpdateApprovalDetails
 
 		public static IEnumerable<CapexUpdateApprovalDetailsResult> CapexUpdateApprovalDetails(this CapExTSDB dataConnection, string @RequestNo, string @Empid, string @Remarks, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -1997,11 +3803,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUpdateApprovalDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar),
-				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUpdateApprovalDetails]", parameters);
 		}
 
 		public partial class CapexUpdateApprovalDetailsResult
@@ -2015,6 +3817,26 @@ namespace DataModels
 
 		public static IEnumerable<CapexUpdateApprovalDetailsOldResult> CapexUpdateApprovalDetailsOld(this CapExTSDB dataConnection, string @RequestNo, string @Empid, string @Remarks, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2022,11 +3844,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUpdateApprovalDetails_old]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar),
-				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUpdateApprovalDetails_old]", parameters);
 		}
 
 		public partial class CapexUpdateApprovalDetailsOldResult
@@ -2040,6 +3858,26 @@ namespace DataModels
 
 		public static IEnumerable<CapexUpdateApprovalDetailsTestResult> CapexUpdateApprovalDetailsTest(this CapExTSDB dataConnection, string @RequestNo, string @Empid, string @Remarks, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2047,11 +3885,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUpdateApprovalDetails_test]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar),
-				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUpdateApprovalDetails_test]", parameters);
 		}
 
 		public partial class CapexUpdateApprovalDetailsTestResult
@@ -2065,6 +3899,18 @@ namespace DataModels
 
 		public static IEnumerable<CapexUpdateInterOrderEntryResult> CapexUpdateInterOrderEntry(this CapExTSDB dataConnection, string @RequestNo, string @SessionID)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@SessionID", @SessionID, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2072,9 +3918,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUpdateInterOrderEntry]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@SessionID", @SessionID, LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUpdateInterOrderEntry]", parameters);
 		}
 
 		public partial class CapexUpdateInterOrderEntryResult
@@ -2088,6 +3932,72 @@ namespace DataModels
 
 		public static IEnumerable<CapexUSPCapexmasterResult> CapexUSPCapexmaster(this CapExTSDB dataConnection, string @Assettype, string @OldAssetCode, string @Budgeted, string @PName, string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime? @EdateCompletion, string @PurchaseLocation, DataTable @dtLineItem, decimal? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous, string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@Assettype",           @Assettype,           LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@OldAssetCode",        @OldAssetCode,        LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Budgeted",            @Budgeted,            LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@PName",               @PName,               LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@PDescription",        @PDescription,        LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CapitalExpenseAsset", @CapitalExpenseAsset, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Purpose",             @Purpose,             LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@EdateCompletion",     @EdateCompletion,     LinqToDB.DataType.DateTime),
+				new DataParameter("@PurchaseLocation",    @PurchaseLocation,    LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@dtLineItem",          @dtLineItem,          LinqToDB.DataType.Structured)
+				{
+					DbType = "[dbo].[CapexdtLineItem]"
+				},
+				new DataParameter("@TotalValueInINR",     @TotalValueInINR,     LinqToDB.DataType.Decimal),
+				new DataParameter("@SelectQuote",         @SelectQuote,         LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@ImportedIndigenous",  @ImportedIndigenous,  LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@VendorJustification", @VendorJustification, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",           @CreatedBy,           LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@FileGuidValue",       @FileGuidValue,       LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@flag",                @flag,                LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2095,24 +4005,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUSPCapexmaster]",
-				new DataParameter("@Assettype",           @Assettype,           LinqToDB.DataType.VarChar),
-				new DataParameter("@OldAssetCode",        @OldAssetCode,        LinqToDB.DataType.VarChar),
-				new DataParameter("@Budgeted",            @Budgeted,            LinqToDB.DataType.VarChar),
-				new DataParameter("@PName",               @PName,               LinqToDB.DataType.VarChar),
-				new DataParameter("@PDescription",        @PDescription,        LinqToDB.DataType.VarChar),
-				new DataParameter("@CapitalExpenseAsset", @CapitalExpenseAsset, LinqToDB.DataType.VarChar),
-				new DataParameter("@Purpose",             @Purpose,             LinqToDB.DataType.VarChar),
-				new DataParameter("@EdateCompletion",     @EdateCompletion,     LinqToDB.DataType.DateTime),
-				new DataParameter("@PurchaseLocation",    @PurchaseLocation,    LinqToDB.DataType.VarChar),
-				new DataParameter("@dtLineItem",          @dtLineItem,          LinqToDB.DataType.Structured){ DbType = "[dbo].[CapexdtLineItem]" },
-				new DataParameter("@TotalValueInINR",     @TotalValueInINR,     LinqToDB.DataType.Decimal),
-				new DataParameter("@SelectQuote",         @SelectQuote,         LinqToDB.DataType.VarChar),
-				new DataParameter("@ImportedIndigenous",  @ImportedIndigenous,  LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorJustification", @VendorJustification, LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",           @CreatedBy,           LinqToDB.DataType.VarChar),
-				new DataParameter("@FileGuidValue",       @FileGuidValue,       LinqToDB.DataType.VarChar),
-				new DataParameter("@flag",                @flag,                LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUSPCapexmaster]", parameters);
 		}
 
 		public partial class CapexUSPCapexmasterResult
@@ -2126,6 +4019,101 @@ namespace DataModels
 
 		public static IEnumerable<CapexUSPCapexmasterDraftResult> CapexUSPCapexmasterDraft(this CapExTSDB dataConnection, string @Assettype, string @OldAssetCode, string @Budgeted, string @PName, string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime? @EdateCompletion, string @PurchaseLocation, DataTable @dtLineItem, decimal? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous, string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag, string @DrawingList, string @IndentID, string @Benefit, string @IRRPaybackPeriod, string @ProjectedCashOutflow, string @IRRPaybackPeriodValue, string @ProjectedCashOutflowValue, decimal? @CFCAmount)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@Assettype",                 @Assettype,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@OldAssetCode",              @OldAssetCode,              LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Budgeted",                  @Budgeted,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@PName",                     @PName,                     LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@PDescription",              @PDescription,              LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CapitalExpenseAsset",       @CapitalExpenseAsset,       LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Purpose",                   @Purpose,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@EdateCompletion",           @EdateCompletion,           LinqToDB.DataType.DateTime),
+				new DataParameter("@PurchaseLocation",          @PurchaseLocation,          LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@dtLineItem",                @dtLineItem,                LinqToDB.DataType.Structured)
+				{
+					DbType = "[dbo].[CapexdtLineItemListV2]"
+				},
+				new DataParameter("@TotalValueInINR",           @TotalValueInINR,           LinqToDB.DataType.Decimal),
+				new DataParameter("@SelectQuote",               @SelectQuote,               LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@ImportedIndigenous",        @ImportedIndigenous,        LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@VendorJustification",       @VendorJustification,       LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@FileGuidValue",             @FileGuidValue,             LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@flag",                      @flag,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@DrawingList",               @DrawingList,               LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IndentID",                  @IndentID,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Benefit",                   @Benefit,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IRRPaybackPeriod",          @IRRPaybackPeriod,          LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@ProjectedCashOutflow",      @ProjectedCashOutflow,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IRRPaybackPeriodValue",     @IRRPaybackPeriodValue,     LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@ProjectedCashOutflowValue", @ProjectedCashOutflowValue, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CFCAmount",                 @CFCAmount,                 LinqToDB.DataType.Decimal)
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2133,32 +4121,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUSPCapexmaster_draft]",
-				new DataParameter("@Assettype",                 @Assettype,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@OldAssetCode",              @OldAssetCode,              LinqToDB.DataType.VarChar),
-				new DataParameter("@Budgeted",                  @Budgeted,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@PName",                     @PName,                     LinqToDB.DataType.VarChar),
-				new DataParameter("@PDescription",              @PDescription,              LinqToDB.DataType.VarChar),
-				new DataParameter("@CapitalExpenseAsset",       @CapitalExpenseAsset,       LinqToDB.DataType.VarChar),
-				new DataParameter("@Purpose",                   @Purpose,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@EdateCompletion",           @EdateCompletion,           LinqToDB.DataType.DateTime),
-				new DataParameter("@PurchaseLocation",          @PurchaseLocation,          LinqToDB.DataType.VarChar),
-				new DataParameter("@dtLineItem",                @dtLineItem,                LinqToDB.DataType.Structured){ DbType = "[dbo].[CapexdtLineItemListV2]" },
-				new DataParameter("@TotalValueInINR",           @TotalValueInINR,           LinqToDB.DataType.Decimal),
-				new DataParameter("@SelectQuote",               @SelectQuote,               LinqToDB.DataType.VarChar),
-				new DataParameter("@ImportedIndigenous",        @ImportedIndigenous,        LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorJustification",       @VendorJustification,       LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@FileGuidValue",             @FileGuidValue,             LinqToDB.DataType.VarChar),
-				new DataParameter("@flag",                      @flag,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@DrawingList",               @DrawingList,               LinqToDB.DataType.VarChar),
-				new DataParameter("@IndentID",                  @IndentID,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@Benefit",                   @Benefit,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@IRRPaybackPeriod",          @IRRPaybackPeriod,          LinqToDB.DataType.VarChar),
-				new DataParameter("@ProjectedCashOutflow",      @ProjectedCashOutflow,      LinqToDB.DataType.VarChar),
-				new DataParameter("@IRRPaybackPeriodValue",     @IRRPaybackPeriodValue,     LinqToDB.DataType.VarChar),
-				new DataParameter("@ProjectedCashOutflowValue", @ProjectedCashOutflowValue, LinqToDB.DataType.VarChar),
-				new DataParameter("@CFCAmount",                 @CFCAmount,                 LinqToDB.DataType.Decimal));
+				"[dbo].[CapexUSPCapexmaster_draft]", parameters);
 		}
 
 		public partial class CapexUSPCapexmasterDraftResult
@@ -2172,6 +4135,101 @@ namespace DataModels
 
 		public static IEnumerable<CapexUSPCapexmasterModifiedResult> CapexUSPCapexmasterModified(this CapExTSDB dataConnection, string @Assettype, string @OldAssetCode, string @Budgeted, string @PName, string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime? @EdateCompletion, string @PurchaseLocation, DataTable @dtLineItem, decimal? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous, string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag, string @DrawingList, string @IndentID, string @Benefit, string @IRRPaybackPeriod, string @ProjectedCashOutflow, string @IRRPaybackPeriodValue, string @ProjectedCashOutflowValue, decimal? @CFCAmount)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@Assettype",                 @Assettype,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@OldAssetCode",              @OldAssetCode,              LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Budgeted",                  @Budgeted,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@PName",                     @PName,                     LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@PDescription",              @PDescription,              LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CapitalExpenseAsset",       @CapitalExpenseAsset,       LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Purpose",                   @Purpose,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@EdateCompletion",           @EdateCompletion,           LinqToDB.DataType.DateTime),
+				new DataParameter("@PurchaseLocation",          @PurchaseLocation,          LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@dtLineItem",                @dtLineItem,                LinqToDB.DataType.Structured)
+				{
+					DbType = "[dbo].[CapexdtLineItemListV2]"
+				},
+				new DataParameter("@TotalValueInINR",           @TotalValueInINR,           LinqToDB.DataType.Decimal),
+				new DataParameter("@SelectQuote",               @SelectQuote,               LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@ImportedIndigenous",        @ImportedIndigenous,        LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@VendorJustification",       @VendorJustification,       LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@FileGuidValue",             @FileGuidValue,             LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@flag",                      @flag,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@DrawingList",               @DrawingList,               LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IndentID",                  @IndentID,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Benefit",                   @Benefit,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IRRPaybackPeriod",          @IRRPaybackPeriod,          LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@ProjectedCashOutflow",      @ProjectedCashOutflow,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@IRRPaybackPeriodValue",     @IRRPaybackPeriodValue,     LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@ProjectedCashOutflowValue", @ProjectedCashOutflowValue, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CFCAmount",                 @CFCAmount,                 LinqToDB.DataType.Decimal)
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2179,32 +4237,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUSPCapexmaster_Modified]",
-				new DataParameter("@Assettype",                 @Assettype,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@OldAssetCode",              @OldAssetCode,              LinqToDB.DataType.VarChar),
-				new DataParameter("@Budgeted",                  @Budgeted,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@PName",                     @PName,                     LinqToDB.DataType.VarChar),
-				new DataParameter("@PDescription",              @PDescription,              LinqToDB.DataType.VarChar),
-				new DataParameter("@CapitalExpenseAsset",       @CapitalExpenseAsset,       LinqToDB.DataType.VarChar),
-				new DataParameter("@Purpose",                   @Purpose,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@EdateCompletion",           @EdateCompletion,           LinqToDB.DataType.DateTime),
-				new DataParameter("@PurchaseLocation",          @PurchaseLocation,          LinqToDB.DataType.VarChar),
-				new DataParameter("@dtLineItem",                @dtLineItem,                LinqToDB.DataType.Structured){ DbType = "[dbo].[CapexdtLineItemListV2]" },
-				new DataParameter("@TotalValueInINR",           @TotalValueInINR,           LinqToDB.DataType.Decimal),
-				new DataParameter("@SelectQuote",               @SelectQuote,               LinqToDB.DataType.VarChar),
-				new DataParameter("@ImportedIndigenous",        @ImportedIndigenous,        LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorJustification",       @VendorJustification,       LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",                 @CreatedBy,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@FileGuidValue",             @FileGuidValue,             LinqToDB.DataType.VarChar),
-				new DataParameter("@flag",                      @flag,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@DrawingList",               @DrawingList,               LinqToDB.DataType.VarChar),
-				new DataParameter("@IndentID",                  @IndentID,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@Benefit",                   @Benefit,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@IRRPaybackPeriod",          @IRRPaybackPeriod,          LinqToDB.DataType.VarChar),
-				new DataParameter("@ProjectedCashOutflow",      @ProjectedCashOutflow,      LinqToDB.DataType.VarChar),
-				new DataParameter("@IRRPaybackPeriodValue",     @IRRPaybackPeriodValue,     LinqToDB.DataType.VarChar),
-				new DataParameter("@ProjectedCashOutflowValue", @ProjectedCashOutflowValue, LinqToDB.DataType.VarChar),
-				new DataParameter("@CFCAmount",                 @CFCAmount,                 LinqToDB.DataType.Decimal));
+				"[dbo].[CapexUSPCapexmaster_Modified]", parameters);
 		}
 
 		public partial class CapexUSPCapexmasterModifiedResult
@@ -2218,6 +4251,90 @@ namespace DataModels
 
 		public static IEnumerable<CapexUSPCapexmasterModifiedTestResult> CapexUSPCapexmasterModifiedTest(this CapExTSDB dataConnection, string @Assettype, string @OldAssetCode, string @Budgeted, string @PName, string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime? @EdateCompletion, string @PurchaseLocation, DataTable @dtLineItem, decimal? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous, string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag, string @DrawingList, decimal? @MiscExpenses, string @Grid, string @ReqType, decimal? @MaxLimit, string @empPurposecode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@Assettype",           @Assettype,           LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@OldAssetCode",        @OldAssetCode,        LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Budgeted",            @Budgeted,            LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@PName",               @PName,               LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@PDescription",        @PDescription,        LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CapitalExpenseAsset", @CapitalExpenseAsset, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Purpose",             @Purpose,             LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@EdateCompletion",     @EdateCompletion,     LinqToDB.DataType.DateTime),
+				new DataParameter("@PurchaseLocation",    @PurchaseLocation,    LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@dtLineItem",          @dtLineItem,          LinqToDB.DataType.Structured)
+				{
+					DbType = "[dbo].[CapexdtLineItemList]"
+				},
+				new DataParameter("@TotalValueInINR",     @TotalValueInINR,     LinqToDB.DataType.Decimal),
+				new DataParameter("@SelectQuote",         @SelectQuote,         LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@ImportedIndigenous",  @ImportedIndigenous,  LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@VendorJustification", @VendorJustification, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",           @CreatedBy,           LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@FileGuidValue",       @FileGuidValue,       LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@flag",                @flag,                LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@DrawingList",         @DrawingList,         LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@MiscExpenses",        @MiscExpenses,        LinqToDB.DataType.Decimal),
+				new DataParameter("@Grid",                @Grid,                LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@ReqType",             @ReqType,             LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@MaxLimit",            @MaxLimit,            LinqToDB.DataType.Decimal),
+				new DataParameter("@empPurposecode",      @empPurposecode,      LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2225,35 +4342,41 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[CapexUSPCapexmaster_Modified_Test]",
-				new DataParameter("@Assettype",           @Assettype,           LinqToDB.DataType.VarChar),
-				new DataParameter("@OldAssetCode",        @OldAssetCode,        LinqToDB.DataType.VarChar),
-				new DataParameter("@Budgeted",            @Budgeted,            LinqToDB.DataType.VarChar),
-				new DataParameter("@PName",               @PName,               LinqToDB.DataType.VarChar),
-				new DataParameter("@PDescription",        @PDescription,        LinqToDB.DataType.VarChar),
-				new DataParameter("@CapitalExpenseAsset", @CapitalExpenseAsset, LinqToDB.DataType.VarChar),
-				new DataParameter("@Purpose",             @Purpose,             LinqToDB.DataType.VarChar),
-				new DataParameter("@EdateCompletion",     @EdateCompletion,     LinqToDB.DataType.DateTime),
-				new DataParameter("@PurchaseLocation",    @PurchaseLocation,    LinqToDB.DataType.VarChar),
-				new DataParameter("@dtLineItem",          @dtLineItem,          LinqToDB.DataType.Structured){ DbType = "[dbo].[CapexdtLineItemList]" },
-				new DataParameter("@TotalValueInINR",     @TotalValueInINR,     LinqToDB.DataType.Decimal),
-				new DataParameter("@SelectQuote",         @SelectQuote,         LinqToDB.DataType.VarChar),
-				new DataParameter("@ImportedIndigenous",  @ImportedIndigenous,  LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorJustification", @VendorJustification, LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",           @CreatedBy,           LinqToDB.DataType.VarChar),
-				new DataParameter("@FileGuidValue",       @FileGuidValue,       LinqToDB.DataType.VarChar),
-				new DataParameter("@flag",                @flag,                LinqToDB.DataType.VarChar),
-				new DataParameter("@DrawingList",         @DrawingList,         LinqToDB.DataType.VarChar),
-				new DataParameter("@MiscExpenses",        @MiscExpenses,        LinqToDB.DataType.Decimal),
-				new DataParameter("@Grid",                @Grid,                LinqToDB.DataType.VarChar),
-				new DataParameter("@ReqType",             @ReqType,             LinqToDB.DataType.VarChar),
-				new DataParameter("@MaxLimit",            @MaxLimit,            LinqToDB.DataType.Decimal),
-				new DataParameter("@empPurposecode",      @empPurposecode,      LinqToDB.DataType.VarChar));
+				"[dbo].[CapexUSPCapexmaster_Modified_Test]", parameters);
 		}
 
 		public partial class CapexUSPCapexmasterModifiedTestResult
 		{
 			[Column("")] public string Column1 { get; set; }
+		}
+
+		#endregion
+
+		#region CapexViewEmployee
+
+		public static IEnumerable<CapexViewEmployeeResult> CapexViewEmployee(this CapExTSDB dataConnection, string @discode, string @disname)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@discode", @discode, LinqToDB.DataType.VarChar)
+				{
+					Size = 75
+				},
+				new DataParameter("@disname", @disname, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<CapexViewEmployeeResult>("[dbo].[CapexViewEmployee]", parameters);
+		}
+
+		public partial class CapexViewEmployeeResult
+		{
+			public string EmployeeCode     { get; set; }
+			public string EmployeeName     { get; set; }
+			public string Department       { get; set; }
+			public string EmployeeSubgroup { get; set; }
 		}
 
 		#endregion
@@ -2273,6 +4396,69 @@ namespace DataModels
 			public string    LocationCode               { get; set; }
 			public string    InternalOrder              { get; set; }
 			public DateTime? InternalOrder_InsertedDate { get; set; }
+		}
+
+		#endregion
+
+		#region CustCoa
+
+		public static IEnumerable<CustCOAResult> CustCoa(this CapExTSDB dataConnection)
+		{
+			return dataConnection.QueryProc<CustCOAResult>("[dbo].[cust_COA]");
+		}
+
+		public partial class CustCOAResult
+		{
+			public string CapexType             { get; set; }
+			public int    CapexID               { get; set; }
+			public string EMPCode               { get; set; }
+			public string EMP_Name              { get; set; }
+			public string DEPARTMENT_Lvl_1      { get; set; }
+			public string DEPARTMENT_Lvl_1_Name { get; set; }
+			public string DEPARTMENT_Lvl_2      { get; set; }
+			public string DEPARTMENT_Lvl_2_Name { get; set; }
+			public string FINANCE_Lvl_3         { get; set; }
+			public string FINANCE_Lvl_3_Name    { get; set; }
+			public string FINANCEF_Lvl_4        { get; set; }
+			public string FINANCEF_Lvl_4_Name   { get; set; }
+			public string FINANCE_Lvl_5         { get; set; }
+			public string FINANCE_Lvl_5_Name    { get; set; }
+			public string MD_Lvl_6              { get; set; }
+			public string MD_Lvl_6_Name         { get; set; }
+			public string AccountPerson         { get; set; }
+			public string AccountPerson_Name    { get; set; }
+		}
+
+		#endregion
+
+		#region CustOldPendingCapex
+
+		public static IEnumerable<CustOldPendingCapexResult> CustOldPendingCapex(this CapExTSDB dataConnection)
+		{
+			return dataConnection.QueryProc<CustOldPendingCapexResult>("[dbo].[cust_oldPendingCapex]");
+		}
+
+		public partial class CustOldPendingCapexResult
+		{
+			public int      RequestNo           { get; set; }
+			public string   Assettype           { get; set; }
+			public string   OldAssetCode        { get; set; }
+			public string   CapexType           { get; set; }
+			public string   PName               { get; set; }
+			public string   PDescription        { get; set; }
+			public string   Purpose             { get; set; }
+			public string   EdateCompletion     { get; set; }
+			public char     PurchaseLocation    { get; set; }
+			public decimal? TotalValueInINR     { get; set; }
+			public string   SelectQuote         { get; set; }
+			public string   ImportedIndigenous  { get; set; }
+			public string   VendorJustification { get; set; }
+			public string   CurrentWith         { get; set; }
+			public int?     StatusID            { get; set; }
+			public string   Status              { get; set; }
+			public string   CreateDate          { get; set; }
+			public string   RequestedBY         { get; set; }
+			public string   RequestorStatus     { get; set; }
 		}
 
 		#endregion
@@ -2337,12 +4523,220 @@ namespace DataModels
 
 		#endregion
 
+		#region GetConversationEmailText
+
+		public static IEnumerable<GetConversationEmailTextResult> GetConversationEmailText(this CapExTSDB dataConnection, string @CapexID)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CapexID", @CapexID, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
+			return dataConnection.QueryProc<GetConversationEmailTextResult>("[dbo].[get_ConversationEmailText]", parameters);
+		}
+
+		public partial class GetConversationEmailTextResult
+		{
+			public int    RequestNo { get; set; }
+			public string SMSBody   { get; set; }
+			public string ToEmail   { get; set; }
+		}
+
+		#endregion
+
+		#region GetConversationDetails
+
+		public static IEnumerable<GetConversationDetailsResult> GetConversationDetails(this CapExTSDB dataConnection, string @CapexID)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@CapexID", @CapexID, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<GetConversationDetailsResult>("[dbo].[getConversationDetails]", parameters);
+		}
+
+		public partial class GetConversationDetailsResult
+		{
+			public string    Remarks    { get; set; }
+			public string    FileName   { get; set; }
+			public string    PostedBy   { get; set; }
+			public DateTime? PostedDate { get; set; }
+			public int       isFileName { get; set; }
+		}
+
+		#endregion
+
+		#region IndentSelApprovalHistory
+
+		public static IEnumerable<IndentSelApprovalHistoryResult> IndentSelApprovalHistory(this CapExTSDB dataConnection, string @ApprovedBy, string @RequestNo, string @Status)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@ApprovedBy", @ApprovedBy, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@RequestNo",  @RequestNo,  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Status",     @Status,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<IndentSelApprovalHistoryResult>("[dbo].[Indent_Sel_ApprovalHistory]", parameters);
+		}
+
+		public partial class IndentSelApprovalHistoryResult
+		{
+			                                   public int      IndentID                      { get; set; }
+			                                   public string   Company                       { get; set; }
+			[Column("BU/Project/Plan")       ] public string   BU_Project_Plan               { get; set; }
+			                                   public string   IndentType                    { get; set; }
+			                                   public string   LocatioWork                   { get; set; }
+			                                   public string   TypeofWorkDetails             { get; set; }
+			                                   public string   EnclosureBQQFile              { get; set; }
+			                                   public int      IsVisibleEnclosureBQQFile     { get; set; }
+			                                   public string   EnclosureDrawingFile          { get; set; }
+			                                   public int      IsVisibleEnclosureDrawingFile { get; set; }
+			[Column("Proposed Rate/budget")  ] public decimal? ProposedRate_budget           { get; set; }
+			                                   public string   BudgetType                    { get; set; }
+			                                   public decimal? RateProposed                  { get; set; }
+			                                   public string   TAT                           { get; set; }
+			                                   public string   TentativeStartDate            { get; set; }
+			                                   public string   TentativeCompletionDate       { get; set; }
+			                                   public string   ProposedContractorName        { get; set; }
+			                                   public string   VendorExistingLocation        { get; set; }
+			                                   public string   ContractorDetailsAddressGST   { get; set; }
+			[Column("Approver 1")            ] public string   Approver1                     { get; set; }
+			[Column("Approver 1 Remarks")    ] public string   Approver1Remarks              { get; set; }
+			[Column("Approver 1 Approved On")] public string   Approver1ApprovedOn           { get; set; }
+			[Column("Approver 2")            ] public string   Approver2                     { get; set; }
+			[Column("Approver 2 Remarks")    ] public string   Approver2Remarks              { get; set; }
+			[Column("Approver 2 Approved On")] public string   Approver2ApprovedOn           { get; set; }
+			                                   public string   CreateDate                    { get; set; }
+			                                   public string   CreatedBy                     { get; set; }
+			                                   public string   OtherRemarks                  { get; set; }
+			                                   public int?     Status                        { get; set; }
+			                                   public string   StatusDesc                    { get; set; }
+			                                   public string   CurrentWith                   { get; set; }
+			                                   public int      isIndentShortClose            { get; set; }
+			                                   public string   TaggedPurchaser               { get; set; }
+		}
+
+		#endregion
+
+		#region IndentSelIndentforDetailsViewById
+
+		public static IEnumerable<IndentSelIndentforDetailsViewByIdResult> IndentSelIndentforDetailsViewById(this CapExTSDB dataConnection, int? @IndentNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@IndentNo", @IndentNo, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<IndentSelIndentforDetailsViewByIdResult>("[dbo].[Indent_Sel_IndentforDetailsViewById]", parameters);
+		}
+
+		public partial class IndentSelIndentforDetailsViewByIdResult
+		{
+			                                                  public int      IndentID                          { get; set; }
+			                                                  public string   Company                           { get; set; }
+			                                                  public string   BU                                { get; set; }
+			[Column("Location of work")                     ] public string   LocationOfWork                    { get; set; }
+			[Column("Type of Indent")                       ] public string   TypeOfIndent                      { get; set; }
+			[Column("Type of Work Details")                 ] public string   TypeOfWorkDetails                 { get; set; }
+			[Column("Rate Proposed")                        ] public decimal? RateProposed                      { get; set; }
+			                                                  public string   BudgetType                        { get; set; }
+			                                                  public string   TAT                               { get; set; }
+			[Column("Tentative Start Date")                 ] public string   TentativeStartDate                { get; set; }
+			[Column("Tentative Completion Date")            ] public string   TentativeCompletionDate           { get; set; }
+			[Column("Proposed Contractor Name")             ] public string   ProposedContractorName            { get; set; }
+			[Column("Vendor Existing/New for Same Location")] public string   VendorExisting_NewForSameLocation { get; set; }
+			[Column("Contractor Details")                   ] public string   ContractorDetails                 { get; set; }
+			                                                  public string   Approver1                         { get; set; }
+			                                                  public string   Approver1_Remarks                 { get; set; }
+			                                                  public string   Approver1_Approved_On             { get; set; }
+			                                                  public string   Approver2                         { get; set; }
+			                                                  public string   Approver2_Remarks                 { get; set; }
+			                                                  public string   Approver2_Approved_On             { get; set; }
+			                                                  public string   CreateDate                        { get; set; }
+			                                                  public string   CapexType                         { get; set; }
+			                                                  public string   Remarks                           { get; set; }
+			                                                  public string   RequestedBy                       { get; set; }
+		}
+
+		#endregion
+
+		#region IndentSelPendingforApproval
+
+		public static IEnumerable<IndentSelPendingforApprovalResult> IndentSelPendingforApproval(this CapExTSDB dataConnection, string @empid)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@empid", @empid, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<IndentSelPendingforApprovalResult>("[dbo].[Indent_Sel_PendingforApproval]", parameters);
+		}
+
+		public partial class IndentSelPendingforApprovalResult
+		{
+			public int      IndentID                      { get; set; }
+			public string   Company                       { get; set; }
+			public string   BU                            { get; set; }
+			public string   IndentType                    { get; set; }
+			public string   LocatioWork                   { get; set; }
+			public string   TypeofWorkDetails             { get; set; }
+			public string   EnclosureBQQFile              { get; set; }
+			public int      IsVisibleEnclosureBQQFile     { get; set; }
+			public string   EnclosureDrawingFile          { get; set; }
+			public int      IsVisibleEnclosureDrawingFile { get; set; }
+			public decimal? RateProposed                  { get; set; }
+			public string   TAT                           { get; set; }
+			public string   BudgetType                    { get; set; }
+			public string   TentativeStartDate            { get; set; }
+			public string   TentativeCompletionDate       { get; set; }
+			public string   ProposedContractorName        { get; set; }
+			public string   VendorExistingLocation        { get; set; }
+			public string   ContractorDetailsAddressGST   { get; set; }
+			public string   CreateDate                    { get; set; }
+			public string   CreatedBy                     { get; set; }
+			public int?     Status                        { get; set; }
+			public string   StatusDesc                    { get; set; }
+			public string   OtherRemarks                  { get; set; }
+			public string   CapexType                     { get; set; }
+			public string   CurrentWith                   { get; set; }
+			public string   TaggedPurchaser               { get; set; }
+		}
+
+		#endregion
+
 		#region IndentSelPendingforApprovalCount
 
 		public static IEnumerable<IndentSelPendingforApprovalCountResult> IndentSelPendingforApprovalCount(this CapExTSDB dataConnection, string @empid)
 		{
-			return dataConnection.QueryProc<IndentSelPendingforApprovalCountResult>("[dbo].[Indent_Sel_PendingforApproval_Count]",
-				new DataParameter("@empid", @empid, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@empid", @empid, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<IndentSelPendingforApprovalCountResult>("[dbo].[Indent_Sel_PendingforApproval_Count]", parameters);
 		}
 
 		public partial class IndentSelPendingforApprovalCountResult
@@ -2353,10 +4747,69 @@ namespace DataModels
 
 		#endregion
 
+		#region IndentSelIndentreportdata
+
+		public static IEnumerable<IndentSelIndentreportdataResult> IndentSelIndentreportdata(this CapExTSDB dataConnection, string @IndentNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@IndentNo", @IndentNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<IndentSelIndentreportdataResult>("[dbo].[Indent_SelIndentreportdata]", parameters);
+		}
+
+		public partial class IndentSelIndentreportdataResult
+		{
+			public int      IndentID                    { get; set; }
+			public string   Company                     { get; set; }
+			public string   BU                          { get; set; }
+			public string   IndentType                  { get; set; }
+			public string   LocatioWork                 { get; set; }
+			public string   TypeofWorkDetails           { get; set; }
+			public decimal? RateProposed                { get; set; }
+			public string   BudgetType                  { get; set; }
+			public string   TAT                         { get; set; }
+			public string   TentativeStartDate          { get; set; }
+			public string   TentativeCompletionDate     { get; set; }
+			public string   ProposedContractorName      { get; set; }
+			public string   VendorExistingLocation      { get; set; }
+			public string   ContractorDetailsAddressGST { get; set; }
+			public string   Approver1                   { get; set; }
+			public string   Approver1_Remarks           { get; set; }
+			public string   Approver1_Approved_On       { get; set; }
+			public string   Approver2                   { get; set; }
+			public string   Approver2_Remarks           { get; set; }
+			public string   Approver2_Approved_On       { get; set; }
+			public string   CreateDate                  { get; set; }
+			public int?     Status                      { get; set; }
+			public string   StatusDesc                  { get; set; }
+			public string   CapexType                   { get; set; }
+			public string   Remarks                     { get; set; }
+			public string   RequestedBy                 { get; set; }
+		}
+
+		#endregion
+
 		#region IndentSelValidateReturnReq
 
 		public static IEnumerable<IndentSelValidateReturnReqResult> IndentSelValidateReturnReq(this CapExTSDB dataConnection, string @RequestNo, string @EmpCode)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2364,9 +4817,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[Indent_SelValidateReturnReq]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@EmpCode",   @EmpCode,   LinqToDB.DataType.VarChar));
+				"[dbo].[Indent_SelValidateReturnReq]", parameters);
 		}
 
 		public partial class IndentSelValidateReturnReqResult
@@ -2376,10 +4827,118 @@ namespace DataModels
 
 		#endregion
 
+		#region IndentEmailGetCapexDetails
+
+		public static IEnumerable<IndentEmailGetCapexDetailsResult> IndentEmailGetCapexDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<IndentEmailGetCapexDetailsResult>("[dbo].[IndentEmailGetCapexDetails]", parameters);
+		}
+
+		public partial class IndentEmailGetCapexDetailsResult
+		{
+			[Column("Indent ID")                            ] public int      IndentID                          { get; set; }
+			                                                  public string   Company                           { get; set; }
+			[Column("BU/Project/Plant")                     ] public string   BU_Project_Plant                  { get; set; }
+			[Column("Location of work")                     ] public string   LocationOfWork                    { get; set; }
+			[Column("Type of Work Details")                 ] public string   TypeOfWorkDetails                 { get; set; }
+			[Column("Budget Type")                          ] public string   BudgetType                        { get; set; }
+			                                                  public decimal? RateProposed                      { get; set; }
+			                                                  public int?     TAT                               { get; set; }
+			[Column("Tentative Start Date")                 ] public string   TentativeStartDate                { get; set; }
+			[Column("Tentative Completion Date")            ] public string   TentativeCompletionDate           { get; set; }
+			[Column("Proposed Contractor Name")             ] public string   ProposedContractorName            { get; set; }
+			[Column("Vendor Existing/New for Same Location")] public string   VendorExisting_NewForSameLocation { get; set; }
+			[Column("Contractor Details")                   ] public string   ContractorDetails                 { get; set; }
+			[Column("Other Remarks")                        ] public string   OtherRemarks                      { get; set; }
+			[Column("Requested On")                         ] public string   RequestedOn                       { get; set; }
+			[Column("Requested By")                         ] public string   RequestedBy                       { get; set; }
+			                                                  public string   Status                            { get; set; }
+			[Column("Current With")                         ] public string   CurrentWith                       { get; set; }
+			                                                  public string   Remarks                           { get; set; }
+		}
+
+		#endregion
+
 		#region IndentMasterInsert
 
 		public static IEnumerable<IndentMasterInsertResult> IndentMasterInsert(this CapExTSDB dataConnection, string @IndentID, string @Company, string @BU, string @LocatioWork, string @TypeofWorkDetails, string @EnclosureBQQFile, string @EnclosureDrawingFile, decimal? @RateProposed, string @BudgetType, DateTime? @TentativeStartDate, DateTime? @TentativeCompletionDate, string @ProposedContractorName, string @VendorExistingLocation, string @ContractorDetailsAddressGST, string @Userid, string @CapexType, string @Remarks, string @TagPurchaser, int? @Tat)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@IndentID",                    @IndentID,                    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Company",                     @Company,                     LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@BU",                          @BU,                          LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@LocatioWork",                 @LocatioWork,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 250
+				},
+				new DataParameter("@TypeofWorkDetails",           @TypeofWorkDetails,           LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@EnclosureBQQFile",            @EnclosureBQQFile,            LinqToDB.DataType.VarChar)
+				{
+					Size = 150
+				},
+				new DataParameter("@EnclosureDrawingFile",        @EnclosureDrawingFile,        LinqToDB.DataType.VarChar)
+				{
+					Size = 150
+				},
+				new DataParameter("@RateProposed",                @RateProposed,                LinqToDB.DataType.Decimal),
+				new DataParameter("@BudgetType",                  @BudgetType,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@TentativeStartDate",          @TentativeStartDate,          LinqToDB.DataType.DateTime),
+				new DataParameter("@TentativeCompletionDate",     @TentativeCompletionDate,     LinqToDB.DataType.DateTime),
+				new DataParameter("@ProposedContractorName",      @ProposedContractorName,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@VendorExistingLocation",      @VendorExistingLocation,      LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@ContractorDetailsAddressGST", @ContractorDetailsAddressGST, LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@Userid",                      @Userid,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@CapexType",                   @CapexType,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Remarks",                     @Remarks,                     LinqToDB.DataType.NVarChar)
+				{
+					Size = 1000
+				},
+				new DataParameter("@TagPurchaser",                @TagPurchaser,                LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@Tat",                         @Tat,                         LinqToDB.DataType.Int32)
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2387,26 +4946,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[IndentMaster_Insert]",
-				new DataParameter("@IndentID",                    @IndentID,                    LinqToDB.DataType.VarChar),
-				new DataParameter("@Company",                     @Company,                     LinqToDB.DataType.VarChar),
-				new DataParameter("@BU",                          @BU,                          LinqToDB.DataType.VarChar),
-				new DataParameter("@LocatioWork",                 @LocatioWork,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@TypeofWorkDetails",           @TypeofWorkDetails,           LinqToDB.DataType.VarChar),
-				new DataParameter("@EnclosureBQQFile",            @EnclosureBQQFile,            LinqToDB.DataType.VarChar),
-				new DataParameter("@EnclosureDrawingFile",        @EnclosureDrawingFile,        LinqToDB.DataType.VarChar),
-				new DataParameter("@RateProposed",                @RateProposed,                LinqToDB.DataType.Decimal),
-				new DataParameter("@BudgetType",                  @BudgetType,                  LinqToDB.DataType.VarChar),
-				new DataParameter("@TentativeStartDate",          @TentativeStartDate,          LinqToDB.DataType.DateTime),
-				new DataParameter("@TentativeCompletionDate",     @TentativeCompletionDate,     LinqToDB.DataType.DateTime),
-				new DataParameter("@ProposedContractorName",      @ProposedContractorName,      LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorExistingLocation",      @VendorExistingLocation,      LinqToDB.DataType.VarChar),
-				new DataParameter("@ContractorDetailsAddressGST", @ContractorDetailsAddressGST, LinqToDB.DataType.VarChar),
-				new DataParameter("@Userid",                      @Userid,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@CapexType",                   @CapexType,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",                     @Remarks,                     LinqToDB.DataType.NVarChar),
-				new DataParameter("@TagPurchaser",                @TagPurchaser,                LinqToDB.DataType.NVarChar),
-				new DataParameter("@Tat",                         @Tat,                         LinqToDB.DataType.Int32));
+				"[dbo].[IndentMaster_Insert]", parameters);
 		}
 
 		public partial class IndentMasterInsertResult
@@ -2431,10 +4971,59 @@ namespace DataModels
 
 		#endregion
 
+		#region IndentSelRequestApproverAutomailerrecipients
+
+		public static IEnumerable<IndentSelRequestApproverAutomailerrecipientsResult> IndentSelRequestApproverAutomailerrecipients(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<IndentSelRequestApproverAutomailerrecipientsResult>("[dbo].[IndentSelRequestApproverAutomailerrecipients]", parameters);
+		}
+
+		public partial class IndentSelRequestApproverAutomailerrecipientsResult
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
 		#region IndentUpdateApprovalDetails
 
 		public static IEnumerable<IndentUpdateApprovalDetailsResult> IndentUpdateApprovalDetails(this CapExTSDB dataConnection, string @RequestNo, string @Empid, string @Remarks, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2442,11 +5031,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[IndentUpdateApprovalDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar),
-				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar));
+				"[dbo].[IndentUpdateApprovalDetails]", parameters);
 		}
 
 		public partial class IndentUpdateApprovalDetailsResult
@@ -2460,10 +5045,23 @@ namespace DataModels
 
 		public static IEnumerable<IndentViewResult> IndentView(this CapExTSDB dataConnection, string @discode, string @disname, string @userid)
 		{
-			return dataConnection.QueryProc<IndentViewResult>("[dbo].[IndentView]",
-				new DataParameter("@discode", @discode, LinqToDB.DataType.VarChar),
-				new DataParameter("@disname", @disname, LinqToDB.DataType.VarChar),
-				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@discode", @discode, LinqToDB.DataType.VarChar)
+				{
+					Size = 75
+				},
+				new DataParameter("@disname", @disname, LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@userid",  @userid,  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<IndentViewResult>("[dbo].[IndentView]", parameters);
 		}
 
 		public partial class IndentViewResult
@@ -2491,6 +5089,23 @@ namespace DataModels
 
 		public static IEnumerable<SaveConversationPostResult> SaveConversationPost(this CapExTSDB dataConnection, string @filepth, int? @CapexID, string @Remarks, string @PostedBy)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@filepth",  @filepth,  LinqToDB.DataType.NVarChar)
+				{
+					Size = -1
+				},
+				new DataParameter("@CapexID",  @CapexID,  LinqToDB.DataType.Int32),
+				new DataParameter("@Remarks",  @Remarks,  LinqToDB.DataType.NVarChar)
+				{
+					Size = -1
+				},
+				new DataParameter("@PostedBy", @PostedBy, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2498,11 +5113,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[save_conversationPost]",
-				new DataParameter("@filepth",  @filepth,  LinqToDB.DataType.NVarChar),
-				new DataParameter("@CapexID",  @CapexID,  LinqToDB.DataType.Int32),
-				new DataParameter("@Remarks",  @Remarks,  LinqToDB.DataType.NVarChar),
-				new DataParameter("@PostedBy", @PostedBy, LinqToDB.DataType.VarChar));
+				"[dbo].[save_conversationPost]", parameters);
 		}
 
 		public partial class SaveConversationPostResult
@@ -2516,8 +5127,15 @@ namespace DataModels
 
 		public static IEnumerable<SelActiveVendorListResult> SelActiveVendorList(this CapExTSDB dataConnection, string @CompanyCode)
 		{
-			return dataConnection.QueryProc<SelActiveVendorListResult>("[dbo].[Sel_ActiveVendorList]",
-				new DataParameter("@CompanyCode", @CompanyCode, LinqToDB.DataType.NVarChar));
+			var parameters = new []
+			{
+				new DataParameter("@CompanyCode", @CompanyCode, LinqToDB.DataType.NVarChar)
+				{
+					Size = 100
+				}
+			};
+
+			return dataConnection.QueryProc<SelActiveVendorListResult>("[dbo].[Sel_ActiveVendorList]", parameters);
 		}
 
 		public partial class SelActiveVendorListResult
@@ -2532,6 +5150,14 @@ namespace DataModels
 
 		public static IEnumerable<SelCurrentWithFieldNameResult> SelCurrentWithFieldName(this CapExTSDB dataConnection, string @reqNo)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@reqNo", @reqNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2539,8 +5165,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[SelCurrentWithFieldName]",
-				new DataParameter("@reqNo", @reqNo, LinqToDB.DataType.VarChar));
+				"[dbo].[SelCurrentWithFieldName]", parameters);
 		}
 
 		public partial class SelCurrentWithFieldNameResult
@@ -2554,16 +5179,47 @@ namespace DataModels
 
 		public static IEnumerable<UspCapexCapexTypeMappingResult> UspCapexCapexTypeMapping(this CapExTSDB dataConnection, string @Types, string @CapexTypeId, string @CapexType, string @CapexTypeDesc, string @CompanyCode, string @BU, string @RequestType, string @BudgetType, string @CreatedBy)
 		{
-			return dataConnection.QueryProc<UspCapexCapexTypeMappingResult>("[dbo].[USP_Capex_CapexTypeMapping]",
-				new DataParameter("@Types",         @Types,         LinqToDB.DataType.NVarChar),
-				new DataParameter("@CapexTypeId",   @CapexTypeId,   LinqToDB.DataType.VarChar),
-				new DataParameter("@CapexType",     @CapexType,     LinqToDB.DataType.NVarChar),
-				new DataParameter("@CapexTypeDesc", @CapexTypeDesc, LinqToDB.DataType.NVarChar),
-				new DataParameter("@CompanyCode",   @CompanyCode,   LinqToDB.DataType.VarChar),
-				new DataParameter("@BU",            @BU,            LinqToDB.DataType.VarChar),
-				new DataParameter("@RequestType",   @RequestType,   LinqToDB.DataType.VarChar),
-				new DataParameter("@BudgetType",    @BudgetType,    LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",     @CreatedBy,     LinqToDB.DataType.NVarChar));
+			var parameters = new []
+			{
+				new DataParameter("@Types",         @Types,         LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@CapexTypeId",   @CapexTypeId,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CapexType",     @CapexType,     LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@CapexTypeDesc", @CapexTypeDesc, LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CompanyCode",   @CompanyCode,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@BU",            @BU,            LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@RequestType",   @RequestType,   LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@BudgetType",    @BudgetType,    LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@CreatedBy",     @CreatedBy,     LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexCapexTypeMappingResult>("[dbo].[USP_Capex_CapexTypeMapping]", parameters);
 		}
 
 		public partial class UspCapexCapexTypeMappingResult
@@ -2579,10 +5235,60 @@ namespace DataModels
 
 		#endregion
 
+		#region UspCapexReturnRejectRemarks
+
+		public static IEnumerable<UspCapexReturnRejectRemarksResult> UspCapexReturnRejectRemarks(this CapExTSDB dataConnection, string @Types, int? @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@Types",     @Types,     LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<UspCapexReturnRejectRemarksResult>("[dbo].[USP_Capex_ReturnRejectRemarks]", parameters);
+		}
+
+		public partial class UspCapexReturnRejectRemarksResult
+		{
+			                         public string RemarkType  { get; set; }
+			                         public string Remark      { get; set; }
+			[Column("Created By")  ] public string CreatedBy   { get; set; }
+			[Column("Created Date")] public string CreatedDate { get; set; }
+		}
+
+		#endregion
+
 		#region UspCapexSaveCompanyBu
 
 		public static IEnumerable<UspCapexSaveCompanyBuResult> UspCapexSaveCompanyBu(this CapExTSDB dataConnection, string @IndentId, string @CompCode, string @CompDes, string @Bu, string @Status)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@IndentId", @IndentId, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CompCode", @CompCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CompDes",  @CompDes,  LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@Bu",       @Bu,       LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@Status",   @Status,   LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2590,12 +5296,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[USP_Capex_SaveCompanyBu]",
-				new DataParameter("@IndentId", @IndentId, LinqToDB.DataType.VarChar),
-				new DataParameter("@CompCode", @CompCode, LinqToDB.DataType.VarChar),
-				new DataParameter("@CompDes",  @CompDes,  LinqToDB.DataType.VarChar),
-				new DataParameter("@Bu",       @Bu,       LinqToDB.DataType.VarChar),
-				new DataParameter("@Status",   @Status,   LinqToDB.DataType.VarChar));
+				"[dbo].[USP_Capex_SaveCompanyBu]", parameters);
 		}
 
 		public partial class UspCapexSaveCompanyBuResult
@@ -2605,14 +5306,81 @@ namespace DataModels
 
 		#endregion
 
+		#region UspCapexSelIndentMappingRights
+
+		public static IEnumerable<UspCapexSelIndentMappingRightsResult> UspCapexSelIndentMappingRights(this CapExTSDB dataConnection, string @Types, string @ID, string @Comp_Code, string @EMPCode, string @BU, string @Approver1, string @Approver2)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@Types",     @Types,     LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@ID",        @ID,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Comp_Code", @Comp_Code, LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@EMPCode",   @EMPCode,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@BU",        @BU,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Approver1", @Approver1, LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Approver2", @Approver2, LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexSelIndentMappingRightsResult>("[dbo].[USP_Capex_Sel_IndentMappingRights]", parameters);
+		}
+
+		public partial class UspCapexSelIndentMappingRightsResult
+		{
+			public int    IndID     { get; set; }
+			public string Comp_code { get; set; }
+			public string BU        { get; set; }
+			public string EMPCode   { get; set; }
+			public string EmpName   { get; set; }
+			public string RM_Lvl    { get; set; }
+			public string Approver1 { get; set; }
+			public string BU_Lvl    { get; set; }
+			public string Approver2 { get; set; }
+		}
+
+		#endregion
+
 		#region UspCapexSelComBUMaster
 
 		public static IEnumerable<CapexComBUMaster> UspCapexSelComBUMaster(this CapExTSDB dataConnection, string @UserId, string @Company, string @Project)
 		{
-			return dataConnection.QueryProc<CapexComBUMaster>("[dbo].[USP_Capex_SelComBUMaster]",
-				new DataParameter("@UserId",  @UserId,  LinqToDB.DataType.VarChar),
-				new DataParameter("@Company", @Company, LinqToDB.DataType.VarChar),
-				new DataParameter("@Project", @Project, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@UserId",  @UserId,  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Company", @Company, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Project", @Project, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<CapexComBUMaster>("[dbo].[USP_Capex_SelComBUMaster]", parameters);
 		}
 
 		#endregion
@@ -2621,8 +5389,15 @@ namespace DataModels
 
 		public static IEnumerable<UspCapexSelComProjectResult> UspCapexSelComProject(this CapExTSDB dataConnection, string @Company)
 		{
-			return dataConnection.QueryProc<UspCapexSelComProjectResult>("[dbo].[USP_Capex_SelComProject]",
-				new DataParameter("@Company", @Company, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@Company", @Company, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexSelComProjectResult>("[dbo].[USP_Capex_SelComProject]", parameters);
 		}
 
 		public partial class UspCapexSelComProjectResult
@@ -2637,8 +5412,15 @@ namespace DataModels
 
 		public static IEnumerable<UspCapexSelFirmNameResult> UspCapexSelFirmName(this CapExTSDB dataConnection, string @UserId)
 		{
-			return dataConnection.QueryProc<UspCapexSelFirmNameResult>("[dbo].[USP_Capex_SelFirmName]",
-				new DataParameter("@UserId", @UserId, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@UserId", @UserId, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexSelFirmNameResult>("[dbo].[USP_Capex_SelFirmName]", parameters);
 		}
 
 		public partial class UspCapexSelFirmNameResult
@@ -2653,8 +5435,15 @@ namespace DataModels
 
 		public static IEnumerable<VendorMaster> UspCapexSelVendorDtl(this CapExTSDB dataConnection, string @VendorCode)
 		{
-			return dataConnection.QueryProc<VendorMaster>("[dbo].[USP_Capex_SelVendorDtl]",
-				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<VendorMaster>("[dbo].[USP_Capex_SelVendorDtl]", parameters);
 		}
 
 		#endregion
@@ -2663,25 +5452,83 @@ namespace DataModels
 
 		public static IEnumerable<UspCapexSelVendorMasterResult> UspCapexSelVendorMaster(this CapExTSDB dataConnection, string @Types, string @ID, string @ComapnyCode, string @VendorCode, string @FirmName, string @FirmContactNumber, string @Address, string @FirmEmailId, string @City, string @District, string @State, string @Pincode, string @ContactPersonName, string @PersonContactContactNumber, string @ContactPersonEmailIdAdd, string @Gst, string @Remarks, string @CreatedBy)
 		{
-			return dataConnection.QueryProc<UspCapexSelVendorMasterResult>("[dbo].[USP_Capex_SelVendorMaster]",
-				new DataParameter("@Types",                      @Types,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@ID",                         @ID,                         LinqToDB.DataType.VarChar),
-				new DataParameter("@ComapnyCode",                @ComapnyCode,                LinqToDB.DataType.VarChar),
-				new DataParameter("@VendorCode",                 @VendorCode,                 LinqToDB.DataType.VarChar),
-				new DataParameter("@FirmName",                   @FirmName,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@FirmContactNumber",          @FirmContactNumber,          LinqToDB.DataType.VarChar),
-				new DataParameter("@Address",                    @Address,                    LinqToDB.DataType.VarChar),
-				new DataParameter("@FirmEmailId",                @FirmEmailId,                LinqToDB.DataType.VarChar),
-				new DataParameter("@City",                       @City,                       LinqToDB.DataType.VarChar),
-				new DataParameter("@District",                   @District,                   LinqToDB.DataType.VarChar),
-				new DataParameter("@State",                      @State,                      LinqToDB.DataType.VarChar),
-				new DataParameter("@Pincode",                    @Pincode,                    LinqToDB.DataType.VarChar),
-				new DataParameter("@ContactPersonName",          @ContactPersonName,          LinqToDB.DataType.VarChar),
-				new DataParameter("@PersonContactContactNumber", @PersonContactContactNumber, LinqToDB.DataType.VarChar),
-				new DataParameter("@ContactPersonEmailIdAdd",    @ContactPersonEmailIdAdd,    LinqToDB.DataType.VarChar),
-				new DataParameter("@Gst",                        @Gst,                        LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",                    @Remarks,                    LinqToDB.DataType.VarChar),
-				new DataParameter("@CreatedBy",                  @CreatedBy,                  LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@Types",                      @Types,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@ID",                         @ID,                         LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@ComapnyCode",                @ComapnyCode,                LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@VendorCode",                 @VendorCode,                 LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@FirmName",                   @FirmName,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@FirmContactNumber",          @FirmContactNumber,          LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Address",                    @Address,                    LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@FirmEmailId",                @FirmEmailId,                LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@City",                       @City,                       LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@District",                   @District,                   LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@State",                      @State,                      LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@Pincode",                    @Pincode,                    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@ContactPersonName",          @ContactPersonName,          LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@PersonContactContactNumber", @PersonContactContactNumber, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@ContactPersonEmailIdAdd",    @ContactPersonEmailIdAdd,    LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@Gst",                        @Gst,                        LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@Remarks",                    @Remarks,                    LinqToDB.DataType.VarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@CreatedBy",                  @CreatedBy,                  LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexSelVendorMasterResult>("[dbo].[USP_Capex_SelVendorMaster]", parameters);
 		}
 
 		public partial class UspCapexSelVendorMasterResult
@@ -2701,23 +5548,72 @@ namespace DataModels
 
 		public static IEnumerable<UspCapexPayApprovalCatEmpMappingResult> UspCapexPayApprovalCatEmpMapping(this CapExTSDB dataConnection, string @Types, string @CapexId, string @ID, string @CPACID, string @EmpCode, string @AmountFrom, string @AmountTO, string @Department_lvl_1, string @Department_lvl_2, string @Finance_lvl_3, string @Finance_lvl_4, string @Finance_lvl_5, string @MD_Lvl_6, string @Remarks, bool? @IsActive, string @CreatedBy)
 		{
-			return dataConnection.QueryProc<UspCapexPayApprovalCatEmpMappingResult>("[dbo].[USP_CapexPayApprovalCat_EMP_Mapping]",
-				new DataParameter("@Types",            @Types,            LinqToDB.DataType.NVarChar),
-				new DataParameter("@CapexId",          @CapexId,          LinqToDB.DataType.VarChar),
-				new DataParameter("@ID",               @ID,               LinqToDB.DataType.VarChar),
-				new DataParameter("@CPACID",           @CPACID,           LinqToDB.DataType.VarChar),
-				new DataParameter("@EmpCode",          @EmpCode,          LinqToDB.DataType.VarChar),
-				new DataParameter("@AmountFrom",       @AmountFrom,       LinqToDB.DataType.VarChar),
-				new DataParameter("@AmountTO",         @AmountTO,         LinqToDB.DataType.VarChar),
-				new DataParameter("@Department_lvl_1", @Department_lvl_1, LinqToDB.DataType.VarChar),
-				new DataParameter("@Department_lvl_2", @Department_lvl_2, LinqToDB.DataType.VarChar),
-				new DataParameter("@Finance_lvl_3",    @Finance_lvl_3,    LinqToDB.DataType.VarChar),
-				new DataParameter("@Finance_lvl_4",    @Finance_lvl_4,    LinqToDB.DataType.VarChar),
-				new DataParameter("@Finance_lvl_5",    @Finance_lvl_5,    LinqToDB.DataType.VarChar),
-				new DataParameter("@MD_Lvl_6",         @MD_Lvl_6,         LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",          @Remarks,          LinqToDB.DataType.VarChar),
+			var parameters = new []
+			{
+				new DataParameter("@Types",            @Types,            LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@CapexId",          @CapexId,          LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@ID",               @ID,               LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CPACID",           @CPACID,           LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@EmpCode",          @EmpCode,          LinqToDB.DataType.VarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@AmountFrom",       @AmountFrom,       LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@AmountTO",         @AmountTO,         LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@Department_lvl_1", @Department_lvl_1, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Department_lvl_2", @Department_lvl_2, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Finance_lvl_3",    @Finance_lvl_3,    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Finance_lvl_4",    @Finance_lvl_4,    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Finance_lvl_5",    @Finance_lvl_5,    LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@MD_Lvl_6",         @MD_Lvl_6,         LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Remarks",          @Remarks,          LinqToDB.DataType.VarChar)
+				{
+					Size = 200
+				},
 				new DataParameter("@IsActive",         @IsActive,         LinqToDB.DataType.Boolean),
-				new DataParameter("@CreatedBy",        @CreatedBy,        LinqToDB.DataType.VarChar));
+				new DataParameter("@CreatedBy",        @CreatedBy,        LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<UspCapexPayApprovalCatEmpMappingResult>("[dbo].[USP_CapexPayApprovalCat_EMP_Mapping]", parameters);
 		}
 
 		public partial class UspCapexPayApprovalCatEmpMappingResult
@@ -2741,8 +5637,15 @@ namespace DataModels
 
 		public static IEnumerable<UspDASHBOARDResult> UspDashboard(this CapExTSDB dataConnection, string @UserId)
 		{
-			return dataConnection.QueryProc<UspDASHBOARDResult>("[dbo].[USP_DASHBOARD]",
-				new DataParameter("@UserId", @UserId, LinqToDB.DataType.NVarChar));
+			var parameters = new []
+			{
+				new DataParameter("@UserId", @UserId, LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<UspDASHBOARDResult>("[dbo].[USP_DASHBOARD]", parameters);
 		}
 
 		public partial class UspDASHBOARDResult
@@ -2759,11 +5662,27 @@ namespace DataModels
 
 		public static IEnumerable<UspEmployeeCompanyMappingResult> UspEmployeeCompanyMapping(this CapExTSDB dataConnection, string @Types, string @UserId, string @CompanyIds, string @CreatedBy)
 		{
-			return dataConnection.QueryProc<UspEmployeeCompanyMappingResult>("[dbo].[USP_EmployeeCompanyMapping]",
-				new DataParameter("@Types",      @Types,      LinqToDB.DataType.NVarChar),
-				new DataParameter("@UserId",     @UserId,     LinqToDB.DataType.NVarChar),
-				new DataParameter("@CompanyIds", @CompanyIds, LinqToDB.DataType.NVarChar),
-				new DataParameter("@CreatedBy",  @CreatedBy,  LinqToDB.DataType.NVarChar));
+			var parameters = new []
+			{
+				new DataParameter("@Types",      @Types,      LinqToDB.DataType.NVarChar)
+				{
+					Size = 200
+				},
+				new DataParameter("@UserId",     @UserId,     LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@CompanyIds", @CompanyIds, LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@CreatedBy",  @CreatedBy,  LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<UspEmployeeCompanyMappingResult>("[dbo].[USP_EmployeeCompanyMapping]", parameters);
 		}
 
 		public partial class UspEmployeeCompanyMappingResult
@@ -2779,6 +5698,26 @@ namespace DataModels
 
 		public static IEnumerable<UspSaveIndentMappingRightResult> UspSaveIndentMappingRight(this CapExTSDB dataConnection, string @CompanyCode, string @EmployeeCode, string @Approver1, string @Approver2)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@CompanyCode",  @CompanyCode,  LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@EmployeeCode", @EmployeeCode, LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Approver1",    @Approver1,    LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@Approver2",    @Approver2,    LinqToDB.DataType.NVarChar)
+				{
+					Size = 20
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2786,11 +5725,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[USP_Save_IndentMapping_Right]",
-				new DataParameter("@CompanyCode",  @CompanyCode,  LinqToDB.DataType.NVarChar),
-				new DataParameter("@EmployeeCode", @EmployeeCode, LinqToDB.DataType.NVarChar),
-				new DataParameter("@Approver1",    @Approver1,    LinqToDB.DataType.NVarChar),
-				new DataParameter("@Approver2",    @Approver2,    LinqToDB.DataType.NVarChar));
+				"[dbo].[USP_Save_IndentMapping_Right]", parameters);
 		}
 
 		public partial class UspSaveIndentMappingRightResult
@@ -2804,10 +5739,23 @@ namespace DataModels
 
 		public static IEnumerable<UspVendorQuotationResult> UspVendorQuotation(this CapExTSDB dataConnection, string @Types, string @RequestNo, string @VendorCode)
 		{
-			return dataConnection.QueryProc<UspVendorQuotationResult>("[dbo].[USP_VendorQuotation]",
-				new DataParameter("@Types",      @Types,      LinqToDB.DataType.NVarChar),
-				new DataParameter("@RequestNo",  @RequestNo,  LinqToDB.DataType.NVarChar),
-				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.NVarChar));
+			var parameters = new []
+			{
+				new DataParameter("@Types",      @Types,      LinqToDB.DataType.NVarChar)
+				{
+					Size = 100
+				},
+				new DataParameter("@RequestNo",  @RequestNo,  LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				},
+				new DataParameter("@VendorCode", @VendorCode, LinqToDB.DataType.NVarChar)
+				{
+					Size = 50
+				}
+			};
+
+			return dataConnection.QueryProc<UspVendorQuotationResult>("[dbo].[USP_VendorQuotation]", parameters);
 		}
 
 		public partial class UspVendorQuotationResult
@@ -2827,12 +5775,104 @@ namespace DataModels
 
 		#endregion
 
+		#region WebApiCapexSelApprovalCapexDetails
+
+		public static IEnumerable<WebApiCapexSelApprovalCapexDetailsResult> WebApiCapexSelApprovalCapexDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelApprovalCapexDetailsResult>("[dbo].[WebApi_Capex_SelApprovalCapexDetails]", parameters);
+		}
+
+		public partial class WebApiCapexSelApprovalCapexDetailsResult
+		{
+			public int      RequestNo           { get; set; }
+			public string   Assettype           { get; set; }
+			public string   OldAssetCode        { get; set; }
+			public string   CapexTypeDesc       { get; set; }
+			public string   CapexType           { get; set; }
+			public string   empcode             { get; set; }
+			public string   empname             { get; set; }
+			public string   Grid                { get; set; }
+			public string   ReqType             { get; set; }
+			public decimal? MaxLimit            { get; set; }
+			public string   PName               { get; set; }
+			public string   PDescription        { get; set; }
+			public string   Purpose             { get; set; }
+			public string   EdateCompletion     { get; set; }
+			public decimal? TotalValueInINR     { get; set; }
+			public decimal? MiscExpenses        { get; set; }
+			public string   SelectQuote         { get; set; }
+			public string   SelectQuoteID       { get; set; }
+			public string   ImportedIndigenous  { get; set; }
+			public string   VendorJustification { get; set; }
+			public int?     Status              { get; set; }
+			public DateTime CreateDate          { get; set; }
+			public string   CreatedBy           { get; set; }
+			public string   RequesterDate       { get; set; }
+		}
+
+		#endregion
+
+		#region WebApiCapexSelApprovalCapexLineDetails
+
+		public static IEnumerable<WebApiCapexSelApprovalCapexLineDetailsResult> WebApiCapexSelApprovalCapexLineDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelApprovalCapexLineDetailsResult>("[dbo].[WebApi_Capex_SelApprovalCapexLineDetails]", parameters);
+		}
+
+		public partial class WebApiCapexSelApprovalCapexLineDetailsResult
+		{
+			public string   LineItem                   { get; set; }
+			public string   ItemName                   { get; set; }
+			public decimal? Quantity                   { get; set; }
+			public decimal? PerUnit                    { get; set; }
+			public decimal? Amount                     { get; set; }
+			public decimal? Tax                        { get; set; }
+			public decimal? Total                      { get; set; }
+			public string   CWIP                       { get; set; }
+			public string   CWIP_Description           { get; set; }
+			public string   CWIP_InsertedBy            { get; set; }
+			public string   CWIP_InsertedDate          { get; set; }
+			public string   InternalOrder              { get; set; }
+			public string   InternalOrder_Description  { get; set; }
+			public string   InternalOrder_InsertedBy   { get; set; }
+			public string   InternalOrder_InsertedDate { get; set; }
+			public string   CapexNature                { get; set; }
+			public string   LocationCode               { get; set; }
+			public string   CostCenter                 { get; set; }
+			public int?     Status                     { get; set; }
+		}
+
+		#endregion
+
 		#region WebApiCapexSelApprovalCapexQuoteDetails
 
 		public static IEnumerable<WebApiCapexSelApprovalCapexQuoteDetailsResult> WebApiCapexSelApprovalCapexQuoteDetails(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<WebApiCapexSelApprovalCapexQuoteDetailsResult>("[dbo].[WebApi_Capex_SelApprovalCapexQuoteDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelApprovalCapexQuoteDetailsResult>("[dbo].[WebApi_Capex_SelApprovalCapexQuoteDetails]", parameters);
 		}
 
 		public partial class WebApiCapexSelApprovalCapexQuoteDetailsResult
@@ -2845,12 +5885,59 @@ namespace DataModels
 
 		#endregion
 
+		#region WebApiCapexSelCapexViewOnlyDetailsForApp
+
+		public static IEnumerable<WebApiCapexSelCapexViewOnlyDetailsForAppResult> WebApiCapexSelCapexViewOnlyDetailsForApp(this CapExTSDB dataConnection, string @uid, int? @CapexID, string @ProjectName, string @ProjectDesc)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@uid",         @uid,         LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@CapexID",     @CapexID,     LinqToDB.DataType.Int32),
+				new DataParameter("@ProjectName", @ProjectName, LinqToDB.DataType.VarChar)
+				{
+					Size = 300
+				},
+				new DataParameter("@ProjectDesc", @ProjectDesc, LinqToDB.DataType.VarChar)
+				{
+					Size = 300
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelCapexViewOnlyDetailsForAppResult>("[dbo].[WebApi_Capex_SelCapexViewOnlyDetailsForApp]", parameters);
+		}
+
+		public partial class WebApiCapexSelCapexViewOnlyDetailsForAppResult
+		{
+			public int      CapID                    { get; set; }
+			public string   CapType                  { get; set; }
+			public string   ProjectName              { get; set; }
+			public string   ProjectDescription       { get; set; }
+			public string   PurchaseLocation         { get; set; }
+			public decimal? TotalValueINR            { get; set; }
+			public string   RequestedBy              { get; set; }
+			public string   RequestedDate            { get; set; }
+			public string   ExpectedDateofCompletion { get; set; }
+			public string   OldAssetCode             { get; set; }
+		}
+
+		#endregion
+
 		#region WebApiCapexSelRnDList
 
 		public static IEnumerable<WebApiCapexSelRnDListResult> WebApiCapexSelRnDList(this CapExTSDB dataConnection, string @RequestNo)
 		{
-			return dataConnection.QueryProc<WebApiCapexSelRnDListResult>("[dbo].[WebApi_Capex_SelRnDList]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar));
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelRnDListResult>("[dbo].[WebApi_Capex_SelRnDList]", parameters);
 		}
 
 		public partial class WebApiCapexSelRnDListResult
@@ -2862,10 +5949,151 @@ namespace DataModels
 
 		#endregion
 
+		#region WebApiCapexEmailGetCapexDetails
+
+		public static IEnumerable<WebApiCapexEmailGetCapexDetailsResult> WebApiCapexEmailGetCapexDetails(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexEmailGetCapexDetailsResult>("[dbo].[WebApi_CapexEmailGetCapexDetails]", parameters);
+		}
+
+		public partial class WebApiCapexEmailGetCapexDetailsResult
+		{
+			[Column("Cap ID")                     ] public int      CapID                    { get; set; }
+			[Column("Cap Type")                   ] public string   CapType                  { get; set; }
+			                                        public string   Purpose                  { get; set; }
+			[Column("Item Name")                  ] public string   ItemName                 { get; set; }
+			[Column("Project Name")               ] public string   ProjectName              { get; set; }
+			[Column("Project Description")        ] public string   ProjectDescription       { get; set; }
+			[Column("Purchase Location")          ] public string   PurchaseLocation         { get; set; }
+			[Column("Total Value (INR)")          ] public decimal? TotalValue_INR_          { get; set; }
+			[Column("Current With")               ] public string   CurrentWith              { get; set; }
+			[Column("Requested Date")             ] public string   RequestedDate            { get; set; }
+			[Column("Expected Date of Completion")] public string   ExpectedDateOfCompletion { get; set; }
+			[Column("Old Asset Code")             ] public string   OldAssetCode             { get; set; }
+			                                        public string   Status                   { get; set; }
+		}
+
+		#endregion
+
+		#region WebApiCapexFunSelApprovalMaterixNameByReq
+
+		public static IEnumerable<WebApiCapexFunSelApprovalMaterixNameByReqResult> WebApiCapexFunSelApprovalMaterixNameByReq(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexFunSelApprovalMaterixNameByReqResult>("[dbo].[WebApi_CapexFun_SelApprovalMaterixNameByReq]", parameters);
+		}
+
+		public partial class WebApiCapexFunSelApprovalMaterixNameByReqResult
+		{
+			                          public string _             { get; set; }
+			                          public string Level_1       { get; set; }
+			                          public string Level_2       { get; set; }
+			                          public string Level_3       { get; set; }
+			                          public string Level_4       { get; set; }
+			                          public string Level_5       { get; set; }
+			                          public string Level_6       { get; set; }
+			[Column("Reject/Return")] public string Reject_Return { get; set; }
+		}
+
+		#endregion
+
+		#region WebApiCapexFunSelApprovalMaterixNameByReqBkp12sept2022
+
+		public static IEnumerable<WebApiCapexFunSelApprovalMaterixNameByReqBkp12sept2022Result> WebApiCapexFunSelApprovalMaterixNameByReqBkp12sept2022(this CapExTSDB dataConnection, string @RequestNo)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexFunSelApprovalMaterixNameByReqBkp12sept2022Result>("[dbo].[WebApi_CapexFun_SelApprovalMaterixNameByReq_bkp12sept2022]", parameters);
+		}
+
+		public partial class WebApiCapexFunSelApprovalMaterixNameByReqBkp12sept2022Result
+		{
+			public string _             { get; set; }
+			public string Level_1       { get; set; }
+			public string Level_2       { get; set; }
+			public string Level_3       { get; set; }
+			public string Level_4       { get; set; }
+			public string Level_5       { get; set; }
+			public string Level_6       { get; set; }
+			public string Reject_Return { get; set; }
+		}
+
+		#endregion
+
+		#region WebApiCapexSelRequestApproverAutomailerrecipients
+
+		public static IEnumerable<WebApiCapexSelRequestApproverAutomailerrecipientsResult> WebApiCapexSelRequestApproverAutomailerrecipients(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 20
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				}
+			};
+
+			return dataConnection.QueryProc<WebApiCapexSelRequestApproverAutomailerrecipientsResult>("[dbo].[WebApi_CapexSelRequestApproverAutomailerrecipients]", parameters);
+		}
+
+		public partial class WebApiCapexSelRequestApproverAutomailerrecipientsResult
+		{
+			public string Subject { get; set; }
+			public string TO      { get; set; }
+			public string CC      { get; set; }
+			public string BCC     { get; set; }
+		}
+
+		#endregion
+
 		#region WebApiCapexUpdateApprovalDetails
 
 		public static IEnumerable<WebApiCapexUpdateApprovalDetailsResult> WebApiCapexUpdateApprovalDetails(this CapExTSDB dataConnection, string @RequestNo, string @Empid, string @Remarks, string @flag)
 		{
+			var parameters = new []
+			{
+				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar)
+				{
+					Size = 10
+				},
+				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar)
+				{
+					Size = 500
+				},
+				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				}
+			};
+
 			var ms = dataConnection.MappingSchema;
 
 			return dataConnection.QueryProc(dataReader =>
@@ -2873,11 +6101,7 @@ namespace DataModels
 				{
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
-				"[dbo].[WebApi_CapexUpdateApprovalDetails]",
-				new DataParameter("@RequestNo", @RequestNo, LinqToDB.DataType.VarChar),
-				new DataParameter("@Empid",     @Empid,     LinqToDB.DataType.VarChar),
-				new DataParameter("@Remarks",   @Remarks,   LinqToDB.DataType.NVarChar),
-				new DataParameter("@flag",      @flag,      LinqToDB.DataType.VarChar));
+				"[dbo].[WebApi_CapexUpdateApprovalDetails]", parameters);
 		}
 
 		public partial class WebApiCapexUpdateApprovalDetailsResult
@@ -2892,7 +6116,7 @@ namespace DataModels
 	{
 		#region CapexFunSelCurrentWith
 
-		[Sql.Function(Name="dbo.Capex_fun_SelCurrentWith", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Capex_fun_SelCurrentWith]", ServerSideOnly=true)]
 		public static string CapexFunSelCurrentWith(string @ReqNO)
 		{
 			throw new InvalidOperationException();
@@ -2902,7 +6126,7 @@ namespace DataModels
 
 		#region CapexFunSelCurrentWithFieldName
 
-		[Sql.Function(Name="dbo.Capex_fun_SelCurrentWithFieldName", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Capex_fun_SelCurrentWithFieldName]", ServerSideOnly=true)]
 		public static string CapexFunSelCurrentWithFieldName(string @ReqNO)
 		{
 			throw new InvalidOperationException();
@@ -2912,7 +6136,7 @@ namespace DataModels
 
 		#region CapexFunSelEmail
 
-		[Sql.Function(Name="dbo.Capex_fun_SelEmail", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Capex_fun_SelEmail]", ServerSideOnly=true)]
 		public static string CapexFunSelEmail(string @EmpCode)
 		{
 			throw new InvalidOperationException();
@@ -2922,7 +6146,7 @@ namespace DataModels
 
 		#region CapexFunSelEmpName
 
-		[Sql.Function(Name="dbo.Capex_fun_SelEmpName", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Capex_fun_SelEmpName]", ServerSideOnly=true)]
 		public static string CapexFunSelEmpName(string @EmpCode)
 		{
 			throw new InvalidOperationException();
@@ -2932,7 +6156,7 @@ namespace DataModels
 
 		#region CapexIsPrintPdf
 
-		[Sql.Function(Name="dbo.Capex_isPrintPdf", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Capex_isPrintPdf]", ServerSideOnly=true)]
 		public static string CapexIsPrintPdf(string @CapexID)
 		{
 			throw new InvalidOperationException();
@@ -2942,7 +6166,7 @@ namespace DataModels
 
 		#region IndentFunSelCurrentWith
 
-		[Sql.Function(Name="dbo.Indent_fun_SelCurrentWith", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Indent_fun_SelCurrentWith]", ServerSideOnly=true)]
 		public static string IndentFunSelCurrentWith(string @ReqNO)
 		{
 			throw new InvalidOperationException();
@@ -2952,7 +6176,7 @@ namespace DataModels
 
 		#region IndentFunSelCurrentWithFieldName
 
-		[Sql.Function(Name="dbo.Indent_fun_SelCurrentWithFieldName", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Indent_fun_SelCurrentWithFieldName]", ServerSideOnly=true)]
 		public static string IndentFunSelCurrentWithFieldName(string @ReqNO)
 		{
 			throw new InvalidOperationException();
@@ -2962,7 +6186,7 @@ namespace DataModels
 
 		#region IndentIsPrintPdf
 
-		[Sql.Function(Name="dbo.Indent_isPrintPdf", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[Indent_isPrintPdf]", ServerSideOnly=true)]
 		public static string IndentIsPrintPdf(string @IndentID)
 		{
 			throw new InvalidOperationException();
@@ -2972,7 +6196,7 @@ namespace DataModels
 
 		#region RemoveDups
 
-		[Sql.Function(Name="dbo.RemoveDups", ServerSideOnly=true)]
+		[Sql.Function(Name="[dbo].[RemoveDups]", ServerSideOnly=true)]
 		public static string RemoveDups(string @S, string @T)
 		{
 			throw new InvalidOperationException();
