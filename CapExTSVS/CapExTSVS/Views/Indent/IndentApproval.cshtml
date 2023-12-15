@@ -54,7 +54,7 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body" style=" overflow:auto;">
-                                        <table class="table  table-bordered table-striped table-responsive" >
+                                        <table id="exampl" class="table  table-bordered table-striped table-responsive" >
                                             <thead>
                                                 <tr>
                                                     <th>Action</th>
@@ -143,14 +143,11 @@
 </div>
 
 
-@section Scripts {
+
 <script>
-    $(function () {
-        //$("#example2").DataTable({
-        //    "responsive": true, "lengthChange": false, "autoWidth": false,
-        //    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        //}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
+   
+           
+            $('#exampl').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
@@ -159,8 +156,8 @@
             "autoWidth": false,
             "responsive": true,
         });
-    });
+   
 </script>
 
-}
+
 

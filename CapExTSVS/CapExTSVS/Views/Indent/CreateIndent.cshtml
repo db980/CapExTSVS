@@ -41,7 +41,7 @@
                             <div class="col-sm-10">
                                 
 
-                                <select Value="@Model?.Company" name="Company" class="form-control dropdown"  placeholder="Enter Company Value">
+                                <select Value="@Model?.Company" name="Company" class="form-control dropdown" placeholder="Enter Company Value" onchange="location.href='@Url.Action("validateUserAuth", "indent")'" >
                                     <option Selected="True" Value="0">Select</option>
 
                                     @foreach (var da in ViewData["com"] as IList<CapexSelddlResult>)
@@ -268,3 +268,8 @@
     </section>
     <!-- /.content -->
 </div>
+
+
+<script>
+    $('.alert').alert();
+</script>

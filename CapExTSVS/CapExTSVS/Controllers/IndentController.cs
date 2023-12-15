@@ -36,6 +36,7 @@ namespace CapExTSVS.Controllers
             //var a = _dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").ToList();
 
 
+            
             if (_dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").SingleOrDefault().Column1 == "True")
             {
 
@@ -54,9 +55,15 @@ namespace CapExTSVS.Controllers
 
 
 
+        public IActionResult validateUserAuth()
+        {
+           return View();
+        }
+
+
 
         public void LoadDropDown()
-        {
+       {
            
             // com List
             var dt = _dbcontext.CapexSelddl("", "com");

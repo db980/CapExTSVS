@@ -39,8 +39,8 @@ namespace CapExTSVS.Models1
 						Name = "CapExTS",
 						ProviderName = ProviderName.SqlServer,
 						ConnectionString =
-							@"Server=DESKTOP-GP9H7VT;Database=CapExTS;Trusted_Connection=True;Enlist=False;TrustServerCertificate=true"
-					};
+                            @"Server=DESKTOP-H2DSLGF;Database=CapExTS;Trusted_Connection=True;Enlist=False;TrustServerCertificate=true"
+                    };
 			}
 		}
 	}
