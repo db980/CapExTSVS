@@ -189,7 +189,9 @@ namespace DataModels
 				@Delimiter);
 		}
 
-		public partial class SplitResult
+      
+
+        public partial class SplitResult
 		{
 			public long   nameIndex { get; set; }
 			public string items     { get; set; }

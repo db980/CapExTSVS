@@ -1,5 +1,5 @@
-﻿
-
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+@model CapExTSVS.Models1.IndentCreate
 @{
     ViewData["Title"] = "Home Page";
    Layout = "~/Views/Shared/_Layout.cshtml";
@@ -34,18 +34,30 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Select Company <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Company Name">
+                                
+
+                                <select Value="@Model?.Company" name="Company" class="form-control dropdown"  placeholder="Enter Company Value">
+                                    <option Selected="True" Value="0">Select</option>
+
+                                    @foreach (var da in ViewData["com"] as IList<CapexSelddlResult>)
+                                        {
+                                    <option Value="@da.CODE">@da.DES</option>
+                                  
+                                        }
+
+                                </select>
+                                ddlcom
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Select BU/Project/Plant <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Enter BU/Project/Plant">
+                                <input type="text" class="form-control" Value="@Model?.BU" name="BU" id="BU" placeholder="Enter BU/Project/Plant" required>
                             </div>
                         </div>
                     
@@ -57,7 +69,7 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Select Exp Type <span style="color:red"> *</span></label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Exp Type">
+                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Exp Type" required>
                                     </div>
                                 </div>
                           
@@ -67,7 +79,7 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Location of work <span style="color:red"> *</span></label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Location of work ">
+                                <input type="text" class="form-control" name="LocationWork" Value="@Model?.LocatioWork" id="inputEmail3" placeholder="Enter Location of work " required>
                                     </div>
                                 </div>
                            
@@ -77,7 +89,15 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Select Exp Type <span style="color:red"> *</span></label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Exp Type ">
+                              
+                                <select class="form-control dropdown" Value="" id="inputEmail3" placeholder="Enter Exp Type ">
+                                    <option Selected="True" Value="0">Select</option>
+                                    <option Value="10">Capex</option>
+                                    <option Value="11">Opex</option>
+
+
+                                </select>
+
                                     </div>
                                 </div>
                          
@@ -86,7 +106,7 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Type of Work/Work Details <span style="color:red"> *</span></label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Work/Work Details">
+                                <input type="text" class="form-control" name="TypeofWorkDetails" Value="@Model?.TypeofWorkDetails" id="inputEmail3" placeholder="Enter Work/Work Details" required>
                                     </div>
                                 </div>
                           
@@ -96,7 +116,7 @@
                                   
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">Enclosure BQQ	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Enclosure BQQ">
+                                <input type="text" class="form-control" name="EnclosureBQQFile" Value="@Model?.EnclosureBQQFile" id="inputEmail3" placeholder="Enter Enclosure BQQ">
                                     </div>
                                 </div>
                           
@@ -106,7 +126,7 @@
                                    
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">Enclosure Drawing/Technical Specification</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Enclosure Drawing/Technical Specification">
+                                <input type="text" class="form-control" id="inputEmail3" name="EnclosureDrawingFile" Value="@Model?.EnclosureDrawingFile" placeholder="Enter Enclosure Drawing/Technical Specification">
                                     </div>
                                 </div>
                           
@@ -116,8 +136,23 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Select Budget  <span style="color:red"> *</span>	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Budget">
-                                    </div>
+                             
+
+
+
+                                <select class="form-control dropdown" id="inputEmail3" name="BudgetType" Value="@Model?.BudgetType" placeholder="Enter Budget">
+                                    <option Selected="True" Value="0">Select</option>
+                                    <option Value="Budgeted">Budgeted</option>
+                                    <option Value="NonBudgeted">NonBudgeted</option>
+                                   
+
+                                </select>
+
+
+                          
+                            
+                            
+                            </div>
                                 </div>
                             
                        
@@ -125,7 +160,16 @@
                                    
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">TAT (Turn Around Time)	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter TAT (Turn Around Time)">
+                               
+
+                                <select  class="form-control dropdown" id="inputEmail3" name="Tat" Value="@Model?.Tat">
+                                    <option Selected="True" Value="0">Select</option>
+                                    <option Value="30">30</option>
+                                    <option Value="45">45</option>
+                                    <option Value="60">60</option>
+                              
+                                </select>
+                               
                                     </div>
                                 </div>
                            
@@ -137,17 +181,31 @@
                                 Tentative Start Date <span style="color:red"> *</span>
                                     </label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enetr Tentative Start Date">
+                                <input type="date" class="form-control" name="TentativeStartDate" Value="@Model?.TentativeStartDate" id="inputEmail3" placeholder="Enetr Tentative Start Date" required >
                                     </div>
                                 </div>
+
+
+                        <div class="form-group row">
+
+                            <label class="col-sm-2 col-form-label" for="exampleCheck2">
+                                Tentative Completion Date * <span style="color:red"> *</span>
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="TentativeCompletionDate" Value="@Model?.TentativeCompletionDate" id="inputEmail3" placeholder=" Enter Tentative Completion Date *" required >
+                            </div>
+                        </div>
+
+
+                               
                            
 
                        
                                 <div class="form-group row">
                                     
-                                    <label class="col-sm-2 col-form-label" for="exampleCheck2">Proposed Contractor Name (New/Existing)	</label>
+                                    <label class="col-sm-2 col-form-label" for="exampleCheck2">Proposed Contractor Value (New/Existing)	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Proposed Contractor Name (New/Existing)">
+                                <input type="text" class="form-control" namde="ProposedContractorName" Value="@Model?.ProposedContractorName" placeholder="Enter Proposed Contractor Value (New/Existing)">
                                     </div>
                                 </div>
                            
@@ -157,7 +215,7 @@
                                    
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">Vendor Existing/New for Same Location	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Vendor Existing/New for Same Location ">
+                                <input type="text" class="form-control" id="inputEmail3"  name="VendorExistingLocation" placeholder="Enter Vendor Existing/New for Same Location " >
                                     </div>
                                 </div>
                           
@@ -167,7 +225,7 @@
                                     
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">Contractor Details (if New), Address, GST No. etc.	</label>
                                     <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Contractor Details (if New), Address, GST No. etc.">
+                                <input type="text" class="form-control" id="inputEmail3" name="ContractorDetailsAddressGST" Value="@Model?.ContractorDetailsAddressGST" placeholder="Enter Contractor Details (if New), Address, GST No. etc." >
                                     </div>
                                 </div>
                            
@@ -177,10 +235,25 @@
                                     
                                     <label class="col-sm-2 col-form-label" for="exampleCheck2">Other Remarks	</label>
                                       <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Remarks">
+                                <input type="text" class="form-control" id="inputEmail3" name="Remarks" Value="@Model?.Remarks" placeholder="Enter Remarks">
                             </div>
                                 </div>
-                          
+
+
+                        <div class="form-group row">
+
+                            <label class="col-sm-12 col-form-label" for="exampleCheck2">
+                                Tag Purchaser (Once Indent will be approved then we will inform tagged purchaser by email.)
+                                Note: Use Ctrl to select multiple tag purchaser.
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Enter Remarks">
+                            </div>
+                        </div>
+
+
+                       
+
 
                     </div>
                     <!-- /.card-body -->

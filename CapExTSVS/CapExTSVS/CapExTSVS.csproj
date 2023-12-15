@@ -39,7 +39,7 @@
     <Compile Update="Models1\CopyMe.SqlServer.generated.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CopyMe.SqlServer.tt</DependentUpon>
+      <DependentUpon>CopyMe.SqlServer.tt.text</DependentUpon>
     </Compile>
     <Compile Update="Models1\CopyMe - Copy.SqlServer.generated.cs">
       <DependentUpon>CopyMe.SqlServer.tt</DependentUpon>
@@ -49,10 +49,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Models1\CopyMe.SqlServer.tt">
+    <None Update="Models1\CopyMe.SqlServer.tt.text">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CopyMe.SqlServer.generated.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Master\" />
+    <Folder Include="Views\NFA\" />
   </ItemGroup>
 
 </Project>
