@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using static DataModels.CapExTSDBStoredProcedures;
 using static LinqToDB.Common.Configuration;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -54,13 +55,37 @@ namespace CapExTSVS.Controllers
         }
 
 
-
-        public IActionResult validateUserAuth()
+        [HttpGet]
+        public IList<CapexSelddlResult>  validateUserAuth(string d)
         {
-           return View();
+            //return View();
+           var dt = _dbcontext.CapexSelddl(d, "bu");
+            
+            return dt.ToList();
         }
 
 
+        private void fillddlbu()
+        {
+           // DataTable dt = _dbcontext.CapexSelddl(ddlcom.SelectedValue, "bu");
+            //ddlbu.Items.Clear();
+            //if (dt != null && dt.Rows.Count > 0)
+            //{
+            //    ddlbu.DataSource = dt;
+            //    ddlbu.DataTextField = "Des";
+            //    ddlbu.DataValueField = "Code";
+            //    ddlbu.DataBind();
+            //}
+            //ddlbu.Items.Insert(0, new ListItem("Select", "0"));
+            //ddlbu.SelectedValue = "0";
+        }
+
+
+
+        public  IActionResult IndDashboard()
+        {
+            return View();
+        }
 
         public void LoadDropDown()
        {

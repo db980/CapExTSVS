@@ -41,7 +41,7 @@
                             <div class="col-sm-10">
                                 
 
-                                <select Value="@Model?.Company" name="Company" class="form-control dropdown" placeholder="Enter Company Value" onchange="location.href='@Url.Action("validateUserAuth", "indent")'" >
+                                <select Value="@Model?.Company" name="Company" class="form-control dropdown"placeholder="Enter Company Value" onchange="Dropdownchange(this.value)">
                                     <option Selected="True" Value="0">Select</option>
 
                                     @foreach (var da in ViewData["com"] as IList<CapexSelddlResult>)
@@ -51,13 +51,23 @@
                                         }
 
                                 </select>
-                                ddlcom
+                               
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Select BU/Project/Plant <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" Value="@Model?.BU" name="BU" id="BU" placeholder="Enter BU/Project/Plant" required>
+                          
+                                <select class="form-control" Value="@Model?.BU" name="BU" id="BU" placeholder="Enter BU/Project/Plant">
+                                    <option Selected="True" Value="0">Select</option>
+
+                                   @* @foreach (var da in ViewData["com"] as IList<CapexSelddlResult>)
+                                    {
+                                        <option Value="@da.CODE">@da.DES</option>
+
+                                    }*@
+
+                                </select>
                             </div>
                         </div>
                     
@@ -258,7 +268,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Sign in</button>
+                        <button type="submit" class="btn btn-info">Submit</button>
                         <button type="submit" class="btn btn-default float-right">Cancel</button>
                     </div>
                     <!-- /.card-footer -->
@@ -271,5 +281,31 @@
 
 
 <script>
-    $('.alert').alert();
+  
+
+    function Dropdownchange(value) {
+  
+        $.ajax({
+            type: "GET",
+            url: "\ValidateUserAuth?d=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BU");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.code).text(key.code));
+                    console.log(value);
+                });
+
+            }
+        })
+
+       
+
+      
+    }
 </script>

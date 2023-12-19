@@ -1,0 +1,146 @@
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">View Indent</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">View Indent </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Horizontal Form</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <!-- /.card -->
+                                <br />
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">View Indent</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style=" overflow:auto;">
+                                        <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                                            <thead>
+                                                <tr >
+                                                    <th scope="col">Details</th>
+                                                    <th scope="col">NFA Requisition No</th>
+                                                    <th scope="col">Indent ID</th>
+                                                    <th scope="col">Asset Type</th>
+                                                    <th scope="col">Old Asset Code</th>
+                                                    <th scope="col">NFA Type</th>
+                                                    <th scope="col">Project Name</th>
+                                                    <th scope="col">Project Description</th>
+                                                    <th scope="col">Purpose</th>
+                                                    <th scope="col">Expected Date</th>
+                                                    <th scope="col">Purchase Location</th>
+                                                    <th align="center" scope="col">Selected Quotation Amount (INR)</th>
+                                                    <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                                    <th scope="col">Imported / Indigenous</th>
+                                                    <th scope="col">Current With</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Requested By</th>
+                                                    <th scope="col">Requested Date</th>
+                                                    <th scope="col">Approved Date</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+
+                                               @* @foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
+                                                {*@
+                                                    <tr>
+
+                                                        <td>data.IndentID</td>
+                                                        <td> </td>
+                                                        <td>data.Company</td>
+                                                        <td>data.BU_Project_Plan</td>
+                                                        <td>data.LocatioWork</td>
+                                                        <td>data.TypeofWorkDetails</td>
+                                                        <td>data.EnclosureBQQFile</td>
+                                                        <td>data.EnclosureDrawingFile</td>
+                                                        <td>data.BudgetType</td>
+                                                        <td>data.RateProposed</td>
+                                                        <td>data.TAT</td>
+                                                        <td>data.TentativeStartDate</td>
+                                                        <td>data.TentativeCompletionDate</td>
+                                                        <td>data.ProposedContractorName</td>
+                                                        <td>data.VendorExistingLocation</td>
+                                                        <td>data.ContractorDetailsAddressGST</td>
+                                                        <td>data.OtherRemarks</td>
+                                                        <td>data.CurrentWith</td>
+                                                        <td>data.StatusDesc</td>
+                                                       
+                                                    </tr>
+                                             @*   }
+*@
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+
+
+
+
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script>
+
+    $('#exampla').dataTable({
+
+    });
+</script>
+
+
+
+

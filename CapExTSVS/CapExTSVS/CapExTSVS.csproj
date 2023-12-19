@@ -57,7 +57,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Master\" />
-    <Folder Include="Views\NFA\" />
+    <Folder Include="Views\Master\" />
   </ItemGroup>
 
 </Project>

@@ -62,7 +62,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center" style="background: linear-gradient(45deg,#000,transparent);">
-          @*  <img class="animation__shake" src="https://dashboard.baxy.com/assets/images/logo-login-page.png" alt="AdminLTELogo" >*@
+            <img class="animation__shake" src="https://dashboard.baxy.com/assets/images/logo-login-page.png" alt="Baxy" >
         </div>
 
         <!-- Navbar -->
@@ -206,7 +206,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4" >
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="~/dist/img/baxy-logo-inner1.png" alt=" Logo" class="  elevation-3" style="width: 99%;" />
+                <img src="~/dist/img/baxy-logo-inner.png" alt=" Logo" class="  elevation-3" style="width: 99%;" />
 
                
 
@@ -280,7 +280,47 @@
 
 
                 </nav>
-                <!-- /.sidebar-menu -->
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                NFA
+                                <i class="fas fa-angle-left right"></i>
+                                @*<span class="badge badge-info right">6</span>*@
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="\NFA\CapexApproval" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Capex Approval</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="\NFA\CapexApprovalHistory" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Capex Approval History</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="\NFA\NFADraftRequest" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>NFA Draft\Request</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                    </nav>
+
+                    <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
