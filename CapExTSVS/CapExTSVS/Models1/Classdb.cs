@@ -15,42 +15,49 @@ namespace CapExTSVS.Models1
 	public class MySettings : ILinqToDBSettings
 	{
 
-		public IEnumerable<IDataProviderSettings> DataProviders
+       
+
+        public MySettings(object value)
+        {
+            MySettings.configdata();
+        }
+
+        public IEnumerable<IDataProviderSettings> DataProviders
 			=> Enumerable.Empty<IDataProviderSettings>();
 
 		public string DefaultConfiguration => "SqlServer";
 		public string DefaultDataProvider => "SqlServer";
 
-		IConfigurationRoot configuration = new ConfigurationBuilder()
-		   .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-		   .AddJsonFile("appsettings.json").Build();
-		//public static IConfiguration Configuration { get; private set; }
-
-
-		//string conStr1 = new  ConfigurationBuilder().Build().GetSection("ConnectionStrings:DefaultConnection").Value;
-
-
-		//public static string conStr1 { get; }
-
-		//    var configurationBuilder = new ConfigurationBuilder();
-		//    string path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-		//    configurationBuilder.AddJsonFile(path, false);
-		//    conStr1 = configurationBuilder.Build().GetSection("ConnectionStrings:ConStr1").Value;
-
-
-		public IEnumerable<IConnectionStringSettings> ConnectionStrings
+        public static string Configuration2 { get; set; }
+   
+        public IEnumerable<IConnectionStringSettings> ConnectionStrings
 		{
-			get
+
+           
+
+             get
 			{
-				yield return
-					new ConnectionStringSettings
-					{
-						Name = "CapExTS",
-						ProviderName = ProviderName.SqlServer,
-						ConnectionString = configuration.ToString()
-                            //@"Server=DESKTOP-H2DSLGF;Database=CapExTS;Trusted_Connection=True;Enlist=False;TrustServerCertificate=true"
+                yield return
+                    new ConnectionStringSettings
+                    {
+                        Name = "baxy_",//
+                        ProviderName = ProviderName.SqlServer,
+                        ConnectionString = Configuration2.ToString()
+                        //@"Server=DESKTOP-H2DSLGF;Database=CapExTS;Trusted_Connection=True;Enlist=False;TrustServerCertificate=true"
                     };
 			}
 		}
-	}
+
+        public static  void configdata()
+        {
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory()) // <== compile failing here
+                .AddJsonFile("appsettings.json");
+
+            var Configuration = builder.Build();
+             Configuration2 = Configuration.GetConnectionString("DefaultConnection");
+            //Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
+        }
+    }
 }

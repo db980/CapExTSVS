@@ -14,7 +14,7 @@ namespace CapExTSVS.Controllers
         public NFAController(ILogger<NFAController> logger)
         {
             _logger = logger;
-            DataConnection.DefaultSettings = new MySettings();
+            DataConnection.DefaultSettings = new MySettings(null);
             _dbcontext = new DataModels.CapExTSDB();
 
         }

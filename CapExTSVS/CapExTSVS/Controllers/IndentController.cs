@@ -21,7 +21,7 @@ namespace CapExTSVS.Controllers
         public IndentController(ILogger<IndentController> logger)
         {
             _logger = logger;
-            DataConnection.DefaultSettings = new MySettings();
+            DataConnection.DefaultSettings = new MySettings(null);
             _dbcontext = new DataModels.CapExTSDB();
 
         }

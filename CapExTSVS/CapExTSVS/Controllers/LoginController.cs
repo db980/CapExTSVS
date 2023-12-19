@@ -15,7 +15,7 @@ namespace CapExTSVS.Controllers
         public LoginController(ILogger<LoginController> logger)
         {
             _logger = logger;
-            DataConnection.DefaultSettings = new MySettings();
+            DataConnection.DefaultSettings = new MySettings(null);
             _dbcontext = new DataModels.CapExTSDB();
 
         }
