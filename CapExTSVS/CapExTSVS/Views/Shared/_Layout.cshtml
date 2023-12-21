@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -38,7 +41,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
     <!-- Theme style -->
 *@
-
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -222,8 +225,9 @@
                     <div class="image">
                         <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
+                   </br>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block" style="color:red">  EID:- @Accessor.HttpContext.Session.GetString("usr")    </a>
                     </div>
                 </div>
 
@@ -314,6 +318,15 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="\NFA\CapexmainRequest" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Capex Request</p>
+                                </a>
+                            </li>
+
+                            
+
                         </ul>
                     </li>
 
@@ -402,7 +415,8 @@
     <script src="~/plugins/datatables-buttons/js/buttons.print.js"></script>
     <script src="~/plugins/datatables-buttons/js/buttons.colVis.js"></script>*@
 
-   
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

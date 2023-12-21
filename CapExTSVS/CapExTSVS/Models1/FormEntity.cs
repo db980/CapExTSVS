@@ -55,4 +55,16 @@
 
 
     }
-}
+
+
+
+    public class Logindata
+    {
+        public string EID { get; set; }
+        public string Password { get; set; }
+
+    }
+
+
+
+ }

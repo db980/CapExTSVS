@@ -36,13 +36,14 @@ namespace CapExTSVS.Controllers
             //var da = _DBContext.IndentMasters.Select(a => a).ToList();
             //var a = _dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").ToList();
 
+            var da = _dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").SingleOrDefault().Column1;
 
-            
-            if (_dbcontext.CapexfChkUserRight(HttpContext.Session.GetString("usr").ToString(), "6").SingleOrDefault().Column1 == "True")
+
+            if (da == "True")
             {
 
                 var data = _dbcontext.IndentSelApprovalHistory(HttpContext.Session.GetString("usr"), "10091", "17").ToList(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
-                ViewData["GridBind"] = data;
+                ViewBag.user = data;
               
 
             }

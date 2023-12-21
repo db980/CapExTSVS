@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //builder.Services.AddRazorPages();
-
+builder.Services.AddHttpContextAccessor();
 // Add distributed memory cache for session
 builder.Services.AddDistributedMemoryCache();
 
@@ -67,6 +67,7 @@ app.UseAuthorization();
 
 //app.MapRazorPages();
 //app.MapRazorPages();
+
 
 
 app.MapControllerRoute( //MapControllerRoute

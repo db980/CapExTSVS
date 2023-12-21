@@ -43,7 +43,7 @@ namespace CapExTSVS.Models1
                         Name = "baxy_",//
                         ProviderName = ProviderName.SqlServer,
                         ConnectionString = Configuration2.ToString()
-                        //@"Server=DESKTOP-H2DSLGF;Database=CapExTS;Trusted_Connection=True;Enlist=False;TrustServerCertificate=true"
+                        
                     };
 			}
 		}

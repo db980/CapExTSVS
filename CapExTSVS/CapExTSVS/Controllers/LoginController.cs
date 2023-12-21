@@ -2,6 +2,8 @@
 using DataModels;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Mvc;
+using toastr.Net;
+using toastr.Net.OptionEnums;
 
 namespace CapExTSVS.Controllers
 {
@@ -22,7 +24,42 @@ namespace CapExTSVS.Controllers
         public IActionResult Index()
         {
             
+
             return View();
         }
+
+
+        public ActionResult Login(Logindata login)
+        {
+
+            var data = _dbcontext.UserMasterTemps.Where(a=>a.EmpCode==login.EID && a.Password==login.Password).ToList(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
+
+
+            if(data.Any())
+            {
+
+                HttpContext.Session.SetString("usr", data.SingleOrDefault().EmpCode);
+             
+
+                return RedirectToAction("inddashboard", "indent");
+            }
+            else
+            {
+                ViewBag.Message = Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
+
+            }
+
+
+
+
+
+
+            return View("index");
+        }
+
+
+
+
+
     }
 }

@@ -28,6 +28,10 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
+        public IActionResult CapexmainRequest()
+        {
+            return View();
+        }
 
         public IActionResult CapexApproval()
         {

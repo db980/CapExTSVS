@@ -1,0 +1,372 @@
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">View Indent</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">View Indent </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Horizontal Form</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <!-- /.card -->
+                                <br />
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">View Indent</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style=" overflow:auto;">
+
+
+
+                                        <form action="/submit-nfa-requisition" method="post">
+
+
+                                            <div class="form-group row">
+
+                                                <div class="col-md-12">
+                                                 <label  class="form-label" for="nfa_id">Incent ID:</label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control" type="text"   id="nfa_id" name="nfa_id" required>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                <label class="form-label" for="type">Asset Type *</label>
+                                                <div class="col-sm-12">
+                                                    <label>
+                                                        <input type="radio" name="editList" value="" />Select
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="editList" value="new" />new
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="editList" value="expansion" />Expansion
+                                                    </label>
+                                                  
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="company">Select Company:</label>
+                                                    <div class="col-sm-10">
+                                                        <select id="company" class=" form-control dropdown" name="company" required>
+                                                            <option value="">Select</option>
+                                                            <option value="swetarstates_private">SWETARSTATES PRIVATE</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                            </div>
+
+
+                                            <div class="form-group row">
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="department">Select BUI Department:</label>
+                                                    <div class="col-sm-12">
+                                                        <select id="department" class=" form-control dropdown" name="department" required>
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="exp_type">Select Exp Type:</label>
+                                                    <div class="col-sm-10">
+
+                                                        <select id="exp_type" class=" form-control dropdown" name="exp_type" required>
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                <label class="form-label" for="budget">Select Budget:</label>
+                                                <div class="col-sm-12">
+
+                                                    <select id="budget" class=" form-control dropdown" name="budget" required>
+                                                        <option value="">Select</option>
+                                                    </select>
+                                                    </div>
+                                                
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                    <label class="form-label" for="nfa_type">NFA Type:</label>
+                                                    <div class="col-sm-10">
+
+                                                        <input class="form-control" type="text" id="nfa_type" name="nfa_type" required>
+
+                                                    </div>
+                                            </div>
+                                          
+                                            </div>
+
+                                           
+
+                                            <div class="form-group row">
+
+                                                <div class="col-md-6">
+                                                <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="date" id="exced_daw_of_corelation" name="exced_daw_of_corelation">
+
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+
+                                            @*<div class="card-header">
+                                                <h3 class="card-title">Fill Item Lines:</h3>
+                                            </div>*@
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="file_lines"></label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="file" id="file_lines" name="file_lines" required>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="uom">UOM:</label>
+                                                <div class="col-sm-10">
+
+                                                    <input class="form-control" type="text" id="uom" name="uom" required>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="quotation">Select Quotation:</label>
+                                                <div class="col-sm-10">
+
+                                                    <select id="quotation" class=" form-control dropdown" name="quotation" required>
+                                                        <option value="">Select</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
+                                                <div class="col-sm-10">
+
+                                                    <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" required>
+                                                        <option value="">Select</option>
+                                                        <option value="imported">Imported</option>
+                                                        <option value="indigenous">Indigenous</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="justification">Justification:</label>
+                                                <div class="col-sm-10">
+
+
+                                                    <textarea id="justification" name="justification" required></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="benett">Benett:</label>
+                                                <div class="col-sm-10">
+
+
+                                                    <input class="form-control" type="text" id="benett" name="benett" required>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="rr_payback_pernod_file">RR Payback Pernod File:</label>
+                                                <div class="col-sm-10">
+
+
+
+
+                                                    <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" required>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="rri_fza_ck_period_value">RRIFzack Period Value:</label>
+                                                <div class="col-sm-10">
+
+
+                                                    <input class="form-control" type="text" id="rri_fza_ck_period_value" name="rri_fza_ck_period_value">
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="projected_cash_outflow_fis">Projected Cash Outflow Fis:</label>
+                                                <div class="col-sm-10">
+
+
+
+                                                    <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                 <label class="form-label" for="projected_cash_outflow_value">Projected Cash Outflow Value:</label>
+                                                <div class="col-sm-10">
+
+
+
+
+                                                    <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <!-- /.card-footer -->
+                                        </form>
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+
+
+
+
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script>
+
+    $('#exampla').dataTable({
+
+    });
+</script>
+
+
+
+
