@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 }
@@ -53,7 +53,7 @@
                                         <h3 class="card-title">View Indent</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body" style=" overflow:auto;">
+                                    <div class="card-body">
 
 
 
@@ -63,28 +63,28 @@
                                             <div class="form-group row">
 
                                                 <div class="col-md-12">
-                                                 <label  class="form-label" for="nfa_id">Incent ID:</label>
-                                                <div class="col-sm-6">
-                                                    <input class="form-control" type="text"   id="nfa_id" name="nfa_id" required>
-                                                </div>
+                                                    <label class="form-label" for="nfa_id">Incent ID:</label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" type="text" id="nfa_id" name="nfa_id" required>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                <label class="form-label" for="type">Asset Type *</label>
-                                                <div class="col-sm-12">
-                                                    <label>
-                                                        <input type="radio" name="editList" value="" />Select
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="editList" value="new" />new
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="editList" value="expansion" />Expansion
-                                                    </label>
-                                                  
-                                                </div>
+                                                    <label class="form-label" for="type">Asset Type *</label>
+                                                    <div class="col-sm-12">
+                                                        <label>
+                                                            <input type="radio" name="editList" value="" />Select
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="editList" value="new" />new
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="editList" value="expansion" />Expansion
+                                                        </label>
+
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="company">Select Company:</label>
@@ -96,7 +96,7 @@
                                                     </div>
                                                 </div>
 
-                                                
+
 
                                             </div>
 
@@ -122,173 +122,408 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                <label class="form-label" for="budget">Select Budget:</label>
-                                                <div class="col-sm-12">
+                                                    <label class="form-label" for="budget">Select Budget:</label>
+                                                    <div class="col-sm-12">
 
-                                                    <select id="budget" class=" form-control dropdown" name="budget" required>
-                                                        <option value="">Select</option>
-                                                    </select>
+                                                        <select id="budget" class=" form-control dropdown" name="budget" required>
+                                                            <option value="">Select</option>
+                                                        </select>
                                                     </div>
-                                                
-                                            </div>
+
+                                                </div>
 
 
-                                            <div class="col-md-6">
+                                                <div class="col-md-6">
                                                     <label class="form-label" for="nfa_type">NFA Type:</label>
                                                     <div class="col-sm-10">
 
                                                         <input class="form-control" type="text" id="nfa_type" name="nfa_type" required>
 
                                                     </div>
-                                            </div>
-                                          
+                                                </div>
+
                                             </div>
 
-                                           
+
 
                                             <div class="form-group row">
 
-                                                <div class="col-md-6">
-                                                <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" type="date" id="exced_daw_of_corelation" name="exced_daw_of_corelation">
 
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="exced_daw_of_corelation">Purpose </label>
+                                                    <div class="col-sm-10">
+                                                        <textarea class="form-control" type="text" id="exced_daw_of_corelation" name="exced_daw_of_corelation">
+                                                    </textarea>
+
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" name="exced_daw_of_corelation">
+
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <hr />
 
-                                            @*<div class="card-header">
+                                            <div class="card-header">
                                                 <h3 class="card-title">Fill Item Lines:</h3>
-                                            </div>*@
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="file_lines"></label>
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" type="file" id="file_lines" name="file_lines" required>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="uom">UOM:</label>
-                                                <div class="col-sm-10">
-
-                                                    <input class="form-control" type="text" id="uom" name="uom" required>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="quotation">Select Quotation:</label>
-                                                <div class="col-sm-10">
-
-                                                    <select id="quotation" class=" form-control dropdown" name="quotation" required>
-                                                        <option value="">Select</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
-                                                <div class="col-sm-10">
-
-                                                    <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" required>
-                                                        <option value="">Select</option>
-                                                        <option value="imported">Imported</option>
-                                                        <option value="indigenous">Indigenous</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="justification">Justification:</label>
-                                                <div class="col-sm-10">
-
-
-                                                    <textarea id="justification" name="justification" required></textarea>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="benett">Benett:</label>
-                                                <div class="col-sm-10">
-
-
-                                                    <input class="form-control" type="text" id="benett" name="benett" required>
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="rr_payback_pernod_file">RR Payback Pernod File:</label>
-                                                <div class="col-sm-10">
-
-
-
-
-                                                    <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" required>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="rri_fza_ck_period_value">RRIFzack Period Value:</label>
-                                                <div class="col-sm-10">
-
-
-                                                    <input class="form-control" type="text" id="rri_fza_ck_period_value" name="rri_fza_ck_period_value">
-
-                                                </div>
                                             </div>
 
 
-                                            <div class="form-group row">
 
-                                                 <label class="form-label" for="projected_cash_outflow_fis">Projected Cash Outflow Fis:</label>
-                                                <div class="col-sm-10">
-
-
-
-                                                    <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
-
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-
-                                                 <label class="form-label" for="projected_cash_outflow_value">Projected Cash Outflow Value:</label>
-                                                <div class="col-sm-10">
-
-
-
-
-                                                    <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
-
-
-                                                </div>
+                                            <div class="clearfix" style="margin-top :15px;">
                                             </div>
 
 
 
 
+                                            <div class="card">
+                                                <div class="card-body " style="background-color: #f5faff;">
+                                                    <div id="div_manual" class="row">
+                                                        <div class="col-sm-4 inline">
+                                                            <label for="inputEmail3"
+                                                                   class="control-label pull-left">Description</label>
+                                                            <!-- <button type="button" formControlName="btnsearch"
+                                                               value="Search" id="btnsearch" class=" "
+                                                               style="float:right">Search</button> -->
+                                                            <input formControlName="txtdescription" type="text"
+                                                                   id="txtdescription" class="form-control inputtext ">
+                                                        </div>
+
+                                                        <div class="col-sm-1">
+                                                            <label for="inputEmail3"
+                                                                   class="control-label pull-left">UOM</label>&nbsp;
+                                                            <select formControlName="ddluom"
+                                                                    id="ddluom" class="form-control">
+                                                                <option value="Nos" [selected]="true">Nos</option>
+                                                                <option value="Pcs">Pcs</option>
+                                                                <option value="Lot">Lot</option>
+                                                                <option value="KG">KG</option>
+                                                                <option value="Roll">Roll</option>
+                                                                <option value="Mtr">Mtr</option>
+                                                                <option value="Bundle">Bundle</option>
+                                                                <option value="length">length</option>
+                                                                <option value="Dozen">Dozen</option>
+                                                                <option value="Pkt">Pkt</option>
+                                                                <option value="Box">Box</option>
+                                                                <option value="Set">Set</option>
+                                                                <option value="Day">Day</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-1">
+                                                            <label for="inputEmail3"
+                                                                   class="control-label pull-left">Qty</label>&nbsp;
+                                                            <input formControlName="txtqty" type="number"
+                                                                   id="txtqty" class="form-control inputtext">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label for="inputEmail3" class="control-label pull-left">
+                                                                Tax Rate
+                                                            </label>&nbsp;
+                                                            <input formControlName="txtlistprice" type="number"
+                                                                   id="txtlistprice" class="form-control inputtext">
+                                                        </div>
+
+                                                        <div class="col-sm-2 " style="float:right">
+                                                            <div class="clearfix" style="margin-top: 10px;"></div>
+                                                            <button type="button"
+                                                                    value="ADD" id="btn_add"
+                                                                    class="btn btn-primary pull-Right" (click)="Add_items()">
+                                                                ADD
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="clearfix" style="margin-top :15px;">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    <div class="table-responsive">
+                                                        <div class=" card card-body card-warning table_wid">
+                                                            <div>
+                                                                <table id="example" class="table table-striped border-style table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Action</th>
+                                                                            <th scope="col">SrNo</th>
+                                                                            <th scope="col">Description</th>
+
+                                                                            <th scope="col">UOM</th>
+                                                                            <th scope="col">Qty</th>
+                                                                            <th scope="col">Tax Rate</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr style="background-color:0;" *ngFor="let person of pOExpenseItems;let a=index">
+                                                                            <td>
+                                                                                <button type="button"
+                                                                                        class="badge bg-danger btn btn-sm" (click)="onDel(person.id)">
+                                                                                    <a class="fa fa-trash"></a>
+                                                                                </button>
+                                                                                <!-- poId -->
+                                                                            </td>
+                                                                            <td style="width:100px;">
+                                                                                <span id="GridView1_lblRowNumber_0">{{a+1}}</span>
+                                                                            </td>
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'desc')" (mouseleave)="mouseLeave(false,person.id,'desc')">
+                                                                                <P id="label_desc{{person.id}}">  {{person.description}} </P>
+                                                                                <textarea calss="form-control" id="desc{{person.id}}" (dblclick)="Tabledatachange(person.id,'desc')" style="display: none;" value="{{person.description}}"> </textarea>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <P id="label_uom{{person.id}}"> {{person.uom}} </P>
+                                                                                <input type="text" calss="form-control" id="uom{{person.id}}" style="display: none;" value="{{person.uom}}">
+                                                                            </td>
+
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'qty')" (mouseleave)="mouseLeave(false,person.id,'qty')">
+                                                                                <P id="label_qty{{person.id}}"> {{person.qty}}  </P>
+                                                                                <input type="number" calss="form-control" id="qty{{person.id}}" (dblclick)="Tabledatachange(person.id,'qty')" style="display: none;" value="{{person.qty}}">
+                                                                            </td>
+
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'listPrice')" (mouseleave)="mouseLeave(false,person.id,'listPrice')">
+                                                                                <P id="label_listPrice{{person.id}}">  {{person.listPrice}} </P>
+                                                                                <input type="number" calss="form-control" id="listPrice{{person.id}}" (dblclick)="Tabledatachange(person.id,'listPrice')" style="display: none;" value="{{person.listPrice}}">
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+                                            <hr />
+
+
+                                            <div class="card-header">
+                                                <h3 class="card-title">Select Quotation</h3>
+                                            </div>
+
+                                            <br />
+                                            <div class="form-group row">
+
+                                                <div class="col-md-6">
+
+
+                                                    <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
+                                                    <div class="col-sm-10">
+
+                                                        <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" required>
+                                                            <option value="">Select</option>
+                                                            <option value="imported">Imported</option>
+                                                            <option value="indigenous">Indigenous</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="justification">Justification:</label>
+                                                    <div class="col-sm-10">
+
+
+                                                        <textarea class="form-control" id="justification" name="justification" required></textarea>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="benett">Benefit:</label>
+                                                    <div class="col-sm-10">
+
+
+                                                        <input class="form-control" type="text" id="benett" name="benett" required>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="rr_payback_pernod_file">IRR/Payback Period File:</label>
+                                                    <div class="col-sm-10">
+
+
+
+
+                                                        <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" required>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+
+
+                                            </div>
+
+
+
+
+
+                                            <div class="form-group row">
+
+                                                <div class="col-md-6">
+
+
+                                                    <label class="form-label" for="rri_fza_ck_period_value">IRR/Payback Period Value:</label>
+                                                    <div class="col-sm-10">
+
+
+                                                        <input class="form-control" type="text" id="rri_fza_ck_period_value" name="rri_fza_ck_period_value">
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <div class="col-md-6">
+
+                                                    <label class="form-label" for="projected_cash_outflow_fis">Projectet Cash Outflow File:</label>
+                                                    <div class="col-sm-10">
+
+
+
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+                                            <div class="form-group row">
+
+
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="projected_cash_outflow_value">Projectet Cash Outflow Value:</label>
+                                                    <div class="col-sm-10">
+
+
+
+
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+
+                                            <hr />
+
+                                            <div class="card-header">
+                                                <h3 class="card-title">Approval Matrix</h3>
+                                            </div>
+
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12 ">
+                                                    <div class="table-responsive">
+                                                        <div class=" card card-body card-warning table_wid">
+                                                            <div>
+                                                                <table id="example" class="table table-striped border-style table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Action</th>
+                                                                            <th scope="col">SrNo</th>
+                                                                            <th scope="col">Description</th>
+
+                                                                            <th scope="col">UOM</th>
+                                                                            <th scope="col">Qty</th>
+                                                                            <th scope="col">Tax Rate</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr style="background-color:0;" *ngFor="let person of pOExpenseItems;let a=index">
+                                                                            <td>
+                                                                                <button type="button"
+                                                                                        class="badge bg-danger btn btn-sm" (click)="onDel(person.id)">
+                                                                                    <a class="fa fa-trash"></a>
+                                                                                </button>
+                                                                                <!-- poId -->
+                                                                            </td>
+                                                                            <td style="width:100px;">
+                                                                                <span id="GridView1_lblRowNumber_0">{{a+1}}</span>
+                                                                            </td>
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'desc')" (mouseleave)="mouseLeave(false,person.id,'desc')">
+                                                                                <P id="label_desc{{person.id}}">  {{person.description}} </P>
+                                                                                <textarea calss="form-control" id="desc{{person.id}}" (dblclick)="Tabledatachange(person.id,'desc')" style="display: none;" value="{{person.description}}"> </textarea>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <P id="label_uom{{person.id}}"> {{person.uom}} </P>
+                                                                                <input type="text" calss="form-control" id="uom{{person.id}}" style="display: none;" value="{{person.uom}}">
+                                                                            </td>
+
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'qty')" (mouseleave)="mouseLeave(false,person.id,'qty')">
+                                                                                <P id="label_qty{{person.id}}"> {{person.qty}}  </P>
+                                                                                <input type="number" calss="form-control" id="qty{{person.id}}" (dblclick)="Tabledatachange(person.id,'qty')" style="display: none;" value="{{person.qty}}">
+                                                                            </td>
+
+                                                                            <td (mouseenter)="mouseEnter(true,person.id,'listPrice')" (mouseleave)="mouseLeave(false,person.id,'listPrice')">
+                                                                                <P id="label_listPrice{{person.id}}">  {{person.listPrice}} </P>
+                                                                                <input type="number" calss="form-control" id="listPrice{{person.id}}" (dblclick)="Tabledatachange(person.id,'listPrice')" style="display: none;" value="{{person.listPrice}}">
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <hr />
 
 
 
@@ -305,23 +540,13 @@
 
 
 
+                                            </br>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-info">Submit</button>
+                                                <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                            </div>
 
 
 

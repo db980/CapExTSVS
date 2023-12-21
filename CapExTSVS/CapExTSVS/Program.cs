@@ -72,6 +72,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute( //MapControllerRoute
     name: "default",
-    pattern: "{controller=Login}/{action=index}/{id?}"); ///{id?}
-
+   
+   pattern: "{controller=NFA}/{action=CapexmainRequest}/{id?}");
 app.Run();
+// pattern: "{controller=Login}/{action=index}/{id?}"); ///{id?}
