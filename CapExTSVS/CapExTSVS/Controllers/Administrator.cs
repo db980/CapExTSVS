@@ -30,6 +30,39 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
+
+        public IActionResult CapexTypeMapping()
+        {
+            return View();
+        }
+
+
+        public IActionResult EmployeeCompanyMapping()
+        {
+            return View();
+        }
+
+         public IActionResult IndentMapping()
+        {
+            return View();
+        }
+
+        public IActionResult NfaMapping()
+        {
+            return View();
+        }
+
+       public IActionResult VendorMapping()
+        {
+            return View();
+        }
+
+
+
+
+
+        
+            
         public IActionResult CapexmainRequest()
         {
             return View();
