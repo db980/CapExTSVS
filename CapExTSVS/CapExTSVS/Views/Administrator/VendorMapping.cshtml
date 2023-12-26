@@ -1,0 +1,275 @@
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+     
+
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!-- <h1 class="m-0">Create /Request Indent</h1> -->
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"> Vender Mapping</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">View Vender Mapping</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor Code  </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">EMP Name </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Firm Name  </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Contact No </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Address  </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Email Id </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">City  </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">District </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">State  </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Pincode </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Person Name   </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Person Con.Number </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Person email Address   </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">GST </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Remarks   </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CapexType" readonly>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Submit</button>
+                            <button type="submit" class="btn btn-default float-right">Cancel</button>
+                        </div>
+                        <!-- /.card-footer -->
+                </form>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    <!-- Table Forms -->
+
+    <br />
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"> View User Rights</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                    <div class="card-body">
+
+
+                        <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                            <thead>
+                                <tr>
+
+                                    <th>Vendor Code</th>
+                                    <th>Comapny Code</th>
+                                    <th>Firm Name</th>
+                                    <th>Contact No</th>
+                                    <th>Address</th>
+                                    <th>Email Id</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Pincode</th>
+                                    <th>Person Name</th>
+                                    <th>Person Con.Number</th>
+                                    <th>Person email Address</th>
+                                    <th>GST</th>
+                                    <th>Remarks</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+
+                                    <td>Vendor Code</td>
+                                    <td>Comapny Code</td>
+                                    <td>Firm Name</td>
+                                    <td>Contact No</td>
+                                    <td>Address</td>
+                                    <td>Email Id</td>
+                                    <td>City</td>
+                                    <td>State</td>
+                                    <td>Pincode</td>
+                                    <td>Person Name</td>
+                                    <td>Person Con.Number</td>
+                                    <td>Person email Address</td>
+                                    <td>GST</td>
+                                    <td>Remarks</td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- End Table Forms -->
+    <!-- /.content -->
+</div>
+
+
+@*<script>
+
+    $('#exampla').dataTable({
+
+    });
+</script>
+*@
+
+
+
