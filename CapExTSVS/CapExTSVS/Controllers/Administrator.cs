@@ -4,6 +4,10 @@ using LinqToDB.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Text.RegularExpressions;
+using toastr.Net.OptionEnums;
+using toastr.Net;
+using static DataModels.CapExTSDBStoredProcedures;
+using System.Threading;
 
 namespace CapExTSVS.Controllers
 {
@@ -54,15 +58,68 @@ namespace CapExTSVS.Controllers
 
        public IActionResult VendorMapping()
         {
+            ViewData["GridData"] = bindgrdVendordata();
+
+            var scriptOption = "<script>";
+
+            scriptOption += "Swal.fire({\r\n  title: \"Good job!\",\r\n  text: \"You clicked the button!\",\r\n  icon: \"success\"\r\n});";
+            scriptOption += "</script>";
+
+            //ViewBag.Message2 = scriptOption;
+
+            bindddlComCode();
             return View();
+        }
+
+
+        //public IActionResult VendorMapping(string id)
+        //{
+        //    //string ID = "";
+        //    //if (ViewState["Id"] != null && !ViewState["Id"].Equals("-1"))
+        //    //{
+        //    //    ID = ViewState["Id"].ToString();
+        //    //}
+        //    //lblMSG.Text = uf.SaveUpdateVendorMasterDtl("INSERT_UPDATE_VENDOR_MASTER", ID, lblVendorCode.Text.Trim(), ddlComCode.SelectedValue.ToString(), txtFirmName.Text.Trim(),
+        //    //                       txtContactNo.Text.Trim(), txtAddress.Text.Trim(), txtEmial.Text.Trim(), txtCity.Text.Trim(), txtDistrict.Text.Trim(), txtState.Text.Trim(),
+        //    //                       txtPincode.Text.Trim(), txtpName.Text.Trim(), txtPCNumber.Text.Trim(), txtPEmailAdd.Text.Trim(), txtGst.Text.Trim(),
+        //    //                        txtRemarks.Text.Trim(), Session["usr"].ToString());
+
+        //    return View();
+        //}
+
+
+
+
+        protected IList<UspCapexSelVendorMasterResult> bindgrdVendordata()
+        {
+            var dt = _dbcontext.UspCapexSelVendorMaster("GET_VENDOR_MASTER", "", "", "", "", "", "", "", "", "", "", "", "","", "", "", "", "").ToList();
+
+           //"<script>alert('hello world')</script>"; Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
+
+
+            return dt;
+            //grdVendordata.DataSource = dt;
+            //grdVendordata.DataBind();
         }
 
 
 
 
-
-        
+        protected void bindddlComCode()
+        {
             
+            //ddlComCode.Items.Clear();
+            //ddlComCode.DataSource = uf.Capex_Selddl("", "com");
+            //ddlComCode.DataValueField = "CODE";
+            //ddlComCode.DataTextField = "DES";
+            //ddlComCode.DataBind();
+            //ddlComCode.Items.Insert(0, new ListItem("SELECT", "0"));
+            //ddlComCode.Items.Insert(1, new ListItem("All", "All"));
+
+        }
+
+
+
         public IActionResult CapexmainRequest()
         {
             return View();

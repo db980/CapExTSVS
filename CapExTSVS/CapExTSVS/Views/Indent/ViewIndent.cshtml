@@ -53,8 +53,8 @@
                                         <h3 class="card-title">View Indent</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body" style=" overflow:auto;">
-                                        <table id="exampla" class="table  table-bordered table-striped table-responsive" >
+                                    <div class="card-body" >
+                                        <table id="exampla" class="table  table-bordered table-striped " >
                                             <thead>
                                                 <tr>
                                                     <th>Indent No</th>
@@ -150,13 +150,16 @@
     <!-- /.content -->
 </div>
 
-
+@*
 <script>
 
-    $('#exampla').dataTable({
-
+    $('#exampla').DataTable({
+        searching: true,
+        paging: true,
+        dom: 'lftipr'//'Bfrtip',
+        
     });
-</script>
+</script>*@
 
 
 

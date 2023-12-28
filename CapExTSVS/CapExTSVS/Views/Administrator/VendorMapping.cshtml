@@ -204,21 +204,15 @@
                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                             <thead>
                                 <tr>
-
+                                    <th>ID</th>
                                     <th>Vendor Code</th>
                                     <th>Comapny Code</th>
                                     <th>Firm Name</th>
                                     <th>Contact No</th>
-                                    <th>Address</th>
+                                    
                                     <th>Email Id</th>
                                     <th>City</th>
-                                    <th>State</th>
-                                    <th>Pincode</th>
-                                    <th>Person Name</th>
-                                    <th>Person Con.Number</th>
-                                    <th>Person email Address</th>
-                                    <th>GST</th>
-                                    <th>Remarks</th>
+                                    
 
                                 </tr>
 
@@ -226,25 +220,28 @@
                             <tbody>
 
 
-                                <tr>
 
-                                    <td>Vendor Code</td>
-                                    <td>Comapny Code</td>
-                                    <td>Firm Name</td>
-                                    <td>Contact No</td>
-                                    <td>Address</td>
-                                    <td>Email Id</td>
-                                    <td>City</td>
-                                    <td>State</td>
-                                    <td>Pincode</td>
-                                    <td>Person Name</td>
-                                    <td>Person Con.Number</td>
-                                    <td>Person email Address</td>
-                                    <td>GST</td>
-                                    <td>Remarks</td>
+
+                                @foreach (var data in ViewData["GridData"] as IList<UspCapexSelVendorMasterResult>)
+                                {
+
+                                <tr>
+                                    <td>@data.Id</td>
+                                        <td>@data.Vendor_Code</td>
+                                        <td>@data.CompanyCode</td>
+                                        <td>@data.Firm_Name</td>
+                                        <td>@data.Firm_Contact_Number</td>
+                                        
+                                        <td>@data.Firm_Email_Address</td>
+                                        <td>@data.City</td>
+                                        
+
+
+
+
 
                                 </tr>
-
+                                }
 
                             </tbody>
 
@@ -262,14 +259,24 @@
     <!-- /.content -->
 </div>
 
+@*@Html.Raw(ViewBag.Message)*@
 
-@*<script>
 
-    $('#exampla').dataTable({
+<script>
 
+
+    $('#texamplabl').DataTable({
+        searching: true,
+        paging: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
     });
+
+   
 </script>
-*@
+
 
 
 
