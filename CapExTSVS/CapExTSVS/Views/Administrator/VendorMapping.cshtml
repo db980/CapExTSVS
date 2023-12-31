@@ -1,12 +1,24 @@
 ﻿@using static DataModels.CapExTSDBStoredProcedures;
 
+@model CapExTSVS.Models1.VendorMastercustom;
 
 @{
     ViewData["Title"] = "Home Page";
-   Layout = "~/Views/Shared/_Layout.cshtml";
-     
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 
 }
+
+
+@*<style>
+
+    div:where(.swal2-icon) .swal2-icon-content {
+        display: flex;
+        align-items: center;
+        /* font-size: 3.75em; */
+        font-size: larger;
+    }
+</style>*@
 
 
 <div class="content-wrapper">
@@ -43,14 +55,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor Code  </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.VendorCode : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">EMP Name </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.FirmName : "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -60,14 +72,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Firm Name  </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.FirmName : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">Contact No </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.ContactPersonContactNumber : "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -79,14 +91,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Address  </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.Address : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">Email Id </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control"  value="@(Model != null ? Model.FirmEmailAddress: "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -96,14 +108,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">City  </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.City : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">District </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.District : "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -113,14 +125,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">State  </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.State : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">Pincode </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.PinCode : "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -131,14 +143,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Person Name   </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.ContactPersonName : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">Person Con.Number </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.ContactPersonContactNumber : "") " name="CapexType" required>
 
                                 </div>
                             </div>
@@ -148,14 +160,14 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Person email Address   </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.ContactPersonEmailAddress : "") " name="CapexType">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">GST </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType"  required>
+                                    <input type="text" class="form-control" name="CapexType" value="@(Model != null ? Model.Gst : "") " required>
 
                                 </div>
                             </div>
@@ -166,7 +178,7 @@
                             <div class="col-md-6">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Remarks   </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="CapexType" >
+                                    <input type="text" class="form-control" value="@(Model != null ? Model.Remarks : "") " name="CapexType">
 
                                 </div>
                             </div>
@@ -175,7 +187,14 @@
                         <br />
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Submit</button>
+                            @if (ViewBag.flag==0)
+                            {
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-info">Update</button>
+                            }
                             <button type="submit" class="btn btn-default float-right">Cancel</button>
                         </div>
                         <!-- /.card-footer -->
@@ -203,16 +222,18 @@
 
                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                             <thead>
+
                                 <tr>
+                                    <th>Action</th>
                                     <th>ID</th>
                                     <th>Vendor Code</th>
                                     <th>Comapny Code</th>
                                     <th>Firm Name</th>
                                     <th>Contact No</th>
-                                    
+
                                     <th>Email Id</th>
                                     <th>City</th>
-                                    
+
 
                                 </tr>
 
@@ -225,22 +246,28 @@
                                 @foreach (var data in ViewData["GridData"] as IList<UspCapexSelVendorMasterResult>)
                                 {
 
-                                <tr>
-                                    <td>@data.Id</td>
+                                    <tr>
+
+                                        <td>
+                                            <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/Edit/@data.Id"></a></button><br>
+                                            <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br >
+                                            <button disabled=""  class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file" href="/viewPo/3594"></a></button>
+                                        </td>
+                                        <td>@data.Id</td>
                                         <td>@data.Vendor_Code</td>
                                         <td>@data.CompanyCode</td>
                                         <td>@data.Firm_Name</td>
                                         <td>@data.Firm_Contact_Number</td>
-                                        
+
                                         <td>@data.Firm_Email_Address</td>
                                         <td>@data.City</td>
-                                        
 
 
 
 
 
-                                </tr>
+
+                                    </tr>
                                 }
 
                             </tbody>
@@ -274,7 +301,7 @@
         ]
     });
 
-   
+
 </script>
 
 

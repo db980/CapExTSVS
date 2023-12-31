@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using toastr.Net.OptionEnums;
@@ -46,5 +47,21 @@ namespace toastr.Net
 
             return scriptOption;
         }
+
+
+
+        public static string PopupConformation()
+        {
+            var scriptOption = "<script>";
+
+            scriptOption += "Swal.fire({\r\n  title: \"Are you sure?\",\r\n  text: \"You won't be able to revert this!\",\r\n  icon: \"warning\",\r\n  showCancelButton: true,\r\n  confirmButtonColor: \"#3085d6\",\r\n  cancelButtonColor: \"#d33\",\r\n  confirmButtonText: \"Yes, delete it!\"\r\n}).then((result) => {\r\n  if (result.isConfirmed) {\r\n    Swal.fire({\r\n      title: \"Deleted!\",\r\n      text: \"Your file has been deleted.\",\r\n      icon: \"success\"\r\n    });\r\n  }\r\n});";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+            
+        }
+
     }
 }

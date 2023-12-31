@@ -8,15 +8,20 @@ using toastr.Net.OptionEnums;
 using toastr.Net;
 using static DataModels.CapExTSDBStoredProcedures;
 using System.Threading;
+using Microsoft.Extensions.FileSystemGlobbing;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace CapExTSVS.Controllers
 {
     public class Administrator : Controller
     {
+        
 
         private readonly ILogger<Administrator> _logger;
         public CapExTSDB _dbcontext;
-
+        public static string flag;
         public Administrator(ILogger<Administrator> logger)
         {
             _logger = logger;
@@ -58,18 +63,62 @@ namespace CapExTSVS.Controllers
 
        public IActionResult VendorMapping()
         {
+
+            ViewBag.flag=flag;
             ViewData["GridData"] = bindgrdVendordata();
 
-            var scriptOption = "<script>";
+            //var scriptOption = "<script>";
 
-            scriptOption += "Swal.fire({\r\n  title: \"Good job!\",\r\n  text: \"You clicked the button!\",\r\n  icon: \"success\"\r\n});";
-            scriptOption += "</script>";
+            //scriptOption += "Swal.fire({\r\n  title: \"Good job!\",\r\n  text: \"You clicked the button!\",\r\n  icon: \"success\"\r\n});";
+            //scriptOption += "</script>";
 
             //ViewBag.Message2 = scriptOption;
 
+
+            ViewBag.Message2 = Notification.PopupConformation();
             bindddlComCode();
             return View();
         }
+
+
+
+        public IActionResult Edit(int id)
+        {
+            ViewData["GridData"] = bindgrdVendordata();
+            VendorMastercustom model = new VendorMastercustom();
+           var model12 = bindgrdVendordata().Where(a => a.Id == id).SingleOrDefault();
+
+            var model1= _dbcontext.UspCapexSelVendorDtl(model12.Vendor_Code).SingleOrDefault(); 
+
+          
+
+
+
+            model.Id = model1.Id;
+            model.VendorCode = model1.VendorCode;
+            model.CompanyCode = model1.CompanyCode;
+            model.FirmName = model1.FirmName;
+            model.FirmContactNumber = model1.FirmContactNumber;
+            model.FirmEmailAddress = model1.FirmEmailAddress;
+            model.Address = model1.Address;
+            model.City = model1.City;
+            model.District = model1.District;
+            model.State = model1.State;
+            model.PinCode = model1.PinCode;
+            model.ContactPersonName = model1.ContactPersonName;
+            model.ContactPersonContactNumber = model1.ContactPersonContactNumber;
+            model.ContactPersonEmailAddress = model1.ContactPersonEmailAddress;
+            model.Gst = model1.Gst;
+            model.Remarks = model1.Remarks;
+            model.Status = model1.Status;
+            model.CreateDate = model1.CreateDate;
+            model.CreatedBy = model1.CreatedBy;
+            model.UpdatedBy = model1.UpdatedBy;
+            model.UpdatedDate = model.UpdatedDate;
+
+            return View("VendorMapping", model);
+        }   
+
 
 
         //public IActionResult VendorMapping(string id)
