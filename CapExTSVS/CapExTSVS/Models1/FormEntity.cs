@@ -81,6 +81,13 @@ namespace CapExTSVS.Models1
         public string Flag { get; set; }
         
     }
+    public static class user
+    {
+        public static string id { get; set; }
+        public static string Name { get; set; }
+
+    }
+
 
 
 

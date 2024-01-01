@@ -39,7 +39,10 @@ namespace CapExTSVS.Controllers
             {
 
                 HttpContext.Session.SetString("usr", data.SingleOrDefault().EmpCode);
-             
+
+                user.id = data.SingleOrDefault().EmpCode;
+                //user.Name = data.SingleOrDefault().name;
+
 
                 return RedirectToAction("inddashboard", "indent");
             }

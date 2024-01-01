@@ -21,7 +21,7 @@ namespace CapExTSVS.Controllers
 
         private readonly ILogger<Administrator> _logger;
         public CapExTSDB _dbcontext;
-        public static string flag;
+        public static int flag=0;
         public Administrator(ILogger<Administrator> logger)
         {
             _logger = logger;
@@ -80,10 +80,49 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
-
-
-        public IActionResult Edit(int id)
+        public IActionResult VendorMappingData( VendorMastercustom vendorMastercustom)
         {
+
+            if(flag==0)
+            {
+
+                string ID = "";
+                if (vendorMastercustom.Id != null )
+                {
+                    
+
+                    var output = _dbcontext.UspCapexSelVendorMaster("INSERT_UPDATE_VENDOR_MASTER", ID, vendorMastercustom.VendorCode, vendorMastercustom.CompanyCode, vendorMastercustom.FirmName,
+                                    vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
+                                    vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
+                                     vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
+
+                }
+
+            }
+            else if(flag==1)
+            {
+                string ID = "";
+                if (vendorMastercustom.Id != null)
+                {
+                    ID = vendorMastercustom.Id.ToString();
+
+                    var output = _dbcontext.UspCapexSelVendorMaster("INSERT_UPDATE_VENDOR_MASTER", ID, vendorMastercustom.VendorCode, vendorMastercustom.CompanyCode, vendorMastercustom.FirmName,
+                                    vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
+                                    vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
+                                     vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
+
+                }
+
+
+            }
+            return View();
+        }
+
+
+
+            public IActionResult Edit(int id)
+        {
+            flag = 1;
             ViewData["GridData"] = bindgrdVendordata();
             VendorMastercustom model = new VendorMastercustom();
            var model12 = bindgrdVendordata().Where(a => a.Id == id).SingleOrDefault();
@@ -118,6 +157,9 @@ namespace CapExTSVS.Controllers
 
             return View("VendorMapping", model);
         }   
+
+
+
 
 
 
