@@ -12,6 +12,7 @@ using Microsoft.Extensions.FileSystemGlobbing;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using LinqToDB;
 
 namespace CapExTSVS.Controllers
 {
@@ -76,7 +77,8 @@ namespace CapExTSVS.Controllers
 
 
             ViewBag.Message2 = Notification.PopupConformation();
-            bindddlComCode();
+            
+            bindddlCompany();
             return View();
         }
 
@@ -86,7 +88,7 @@ namespace CapExTSVS.Controllers
             if(flag==0)
             {
 
-                string ID = "";
+                string ID = "''";
                 if (vendorMastercustom.Id != null )
                 {
                     
@@ -110,12 +112,12 @@ namespace CapExTSVS.Controllers
                                     vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
                                     vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
                                      vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
-
+                    //_dbcontext.ExecuteProc() ;
                 }
 
 
             }
-            return View();
+            return RedirectToAction("VendorMapping");
         }
 
 
@@ -127,10 +129,10 @@ namespace CapExTSVS.Controllers
             VendorMastercustom model = new VendorMastercustom();
            var model12 = bindgrdVendordata().Where(a => a.Id == id).SingleOrDefault();
 
-            var model1= _dbcontext.UspCapexSelVendorDtl(model12.Vendor_Code).SingleOrDefault(); 
+            var model1= _dbcontext.UspCapexSelVendorDtl(model12.Vendor_Code).SingleOrDefault();
 
-          
 
+            bindddlCompany();
 
 
             model.Id = model1.Id;
@@ -194,20 +196,19 @@ namespace CapExTSVS.Controllers
         }
 
 
-
-
-        protected void bindddlComCode()
+        protected void bindddlCompany()
         {
+          
+
+            var dt = _dbcontext.CapexSelddl("", "com");
+            ViewData["com"] = dt.ToList();
+
             
-            //ddlComCode.Items.Clear();
-            //ddlComCode.DataSource = uf.Capex_Selddl("", "com");
-            //ddlComCode.DataValueField = "CODE";
-            //ddlComCode.DataTextField = "DES";
-            //ddlComCode.DataBind();
-            //ddlComCode.Items.Insert(0, new ListItem("SELECT", "0"));
-            //ddlComCode.Items.Insert(1, new ListItem("All", "All"));
+
 
         }
+
+       
 
 
 

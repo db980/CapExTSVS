@@ -62,7 +62,21 @@
                             <div class="col-md-6">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">EMP Name </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="@(Model != null ? Model.FirmName : "") " name="FirmName" required>
+
+
+
+                                    <select Value="@Model?.CompanyCode" name="CompanyCode" class="form-control dropdown" placeholder="Enter Company Value" onchange="Dropdownchange(this.value)">
+                                        
+                                        @foreach (var da in ViewData["com"] as IList<CapexSelddlResult>)
+                                        {
+                                            <option Value="@da.CODE">@da.DES</option>
+
+                                        }
+
+                                    </select>
+
+
+                                   @* <input type="text" class="form-control" value="@(Model != null ? Model.FirmName : "") " name="FirmName" required>*@
 
                                 </div>
                             </div>
