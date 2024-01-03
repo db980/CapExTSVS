@@ -63,5 +63,75 @@ namespace toastr.Net
             
         }
 
+
+        public static string PopupSave()
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += "Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"success\",\r\n  title: \"Data  Saved SuccessFully\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});;";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
+
+        public static string PopupError()
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += " Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"error\",\r\n  title: \"Failed\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
+
+        public static string PopupUpdate()
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += " Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"success\",\r\n  title: \"Data Update Successfully\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
+
+
+        public static string PopupNotFound(String Notification)
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += " Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"info\",\r\n  title: \""+ Notification + "\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }

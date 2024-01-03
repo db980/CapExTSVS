@@ -1,4 +1,6 @@
-﻿@using static DataModels.CapExTSDBStoredProcedures;
+﻿@using DataModels;
+@using static DataModels.CapExTSDBStoredProcedures;
+@model CapExTSVS.Models1.CapexComBUMasterCustom;
 
 
 @{
@@ -36,14 +38,14 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form action="/Administrator/AddCompanyBuSaved" method="post" class="form-horizontal">
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Indent Id  </label>
                             <div class="col-sm-10">
 
 
-                                <input type="text" class="form-control" name="CapexType" readonly>
+                                <input type="text" value="@(Model != null ? Model.IndID : "") " class="form-control" name="IndID" readonly>
 
 
                             </div>
@@ -54,7 +56,7 @@
                             <div class="col-sm-10">
 
 
-                                <input type="text" class="form-control" name="CapexType" >
+                                <input type="text" value="@(Model != null ? Model.CompCode : "") " class="form-control" name="CompCode">
 
 
                             </div>
@@ -63,7 +65,7 @@
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Company Description </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description" required>
+                                <input type="text" class="form-control" value="@(Model != null ? Model.Des : "") " name="Des" placeholder="Enter Company Description" required>
 
                             </div>
                         </div>
@@ -76,7 +78,7 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Project <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Project" required>
+                                <input type="text" class="form-control" value="@(Model != null ? Model.BU : "") " name="BU" placeholder="Enter Project" required>
                             </div>
                         </div>
 
@@ -94,7 +96,14 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Submit</button>
+                        @if (ViewBag.flag == 0)
+                        {
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-info">Update</button>
+                        }
                         <button type="submit" class="btn btn-default float-right">Cancel</button>
                     </div>
                     <!-- /.card-footer -->
@@ -135,18 +144,30 @@
                             </thead>
                             <tbody>
 
-
-                                <tr>
-
-                                    <td>data.IndentID</td>
-                                    <td>EMP009</td>
-                                    <td> </td>
-                                    <td>Company Description</td>
-                                    <td>data.BU_Project_Plan</td>
+                                @if (ViewData["ComaBUgrid"] != null)
+                                {
 
 
-                                </tr>
 
+                                    @foreach (var da in ViewData["ComaBUgrid"] as IList<CapexComBUMaster>)
+                                    {
+                                      
+                                        <tr>
+                                            <td>
+                                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/fillComaBUEdit/@da.IndID"></a></button><br>
+                                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file" href="/viewPo/3594"></a></button>
+                                            </td>
+                                            <td>@da.IndID</td>
+                                            <td>@da.CompCode</td>
+
+                                            <td>@da.Des</td>
+                                            <td>@da.BU</td>
+
+
+                                        </tr>
+                                    }
+                                }
 
                             </tbody>
 

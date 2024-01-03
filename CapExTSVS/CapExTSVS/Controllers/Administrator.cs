@@ -13,12 +13,228 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using LinqToDB;
+using static LinqToDB.Common.Configuration;
+using static Azure.Core.HttpHeader;
 
 namespace CapExTSVS.Controllers
 {
     public class Administrator : Controller
     {
-        
+        /// <summary>
+        /// Use Controler Controls
+        /// </summary>
+        /// 
+
+
+        /// <summary>
+        /// vendor Master
+        /// </summary>
+        /// 
+        #region"Vendor Master Module"
+        public IActionResult VendorMapping()
+        {
+
+            ViewBag.flag = flag;
+            ViewData["GridData"] = bindgrdVendordata();
+
+
+
+
+
+
+
+            return View();
+        }
+
+        public IActionResult VendorMappingData(VendorMastercustom vendorMastercustom)
+        {
+
+            if (flag == 0)
+            {
+
+                string ID = "";
+                if (vendorMastercustom.Id != null)
+                {
+
+                    var output = UspCapexSelVendorMaster(vendorMastercustom, ID);
+                    ViewBag.Message2 = Notification.PopupSave();
+                    ViewData["GridData"] = bindgrdVendordata();
+
+                }
+
+            }
+            else if (flag == 1)
+            {
+                string ID = "";
+                if (vendorMastercustom.Id != null)
+                {
+                    ID = vendorMastercustom.Id.ToString();
+
+                    var output = UspCapexSelVendorMaster(vendorMastercustom, ID);
+                    ViewBag.Message2 = Notification.PopupUpdate();
+                    ViewData["GridData"] = bindgrdVendordata();
+
+                    flag = 0;
+                }
+
+
+            }
+            return View("VendorMapping");
+        }
+
+
+        #endregion"Vendor Master Module"
+
+        /// <summary>
+        /// End vendor Master
+        /// </summary>
+        /// 
+
+        /// <summary>
+        /// User Rights
+        /// </summary>
+        ///
+
+        #region"user Rights"
+
+
+        public IActionResult UserRights()
+        {
+           CapexSelUserRightsResult da= new CapexSelUserRightsResult();
+          
+            ViewData["UserRightGrid"] = da as IQueryable<CapexSelUserRightsResult>;
+            UserRightsBind();
+            return View();
+        }
+
+        public IActionResult UserRightsSearch(string Data)
+        {
+            UserRightsBind();
+            
+            var data =_dbcontext.CapexSelEmployeeMaster(Data).SingleOrDefault();
+            if(data !=null)
+            {
+                userRights UserRights = new userRights();
+                //userRights.Rights
+                //userRights.id = data.PersonalID;
+                UserRights.Username = data.EmployeeName;
+                UserRights.UserCode = data.PersonalID;
+
+
+
+                //_dbcontext.CapexSaveUserRight
+                fillgrid(UserRights);
+                View("UserRights", UserRights);
+
+                //     lblMSG.Text = uf.saveuserright(lblEmpCode.Text.Trim(), ddlRights.SelectedValue.ToString(), Session["usr"].ToString());
+                //fillgrid();
+            }
+            else
+            {
+                ViewBag.Message2= Notification.PopupNotFound("Employee Not Found");
+            }
+
+           
+            return View("UserRights");
+        }
+
+
+
+        public IActionResult UserRightsSave(userRights Data)
+        {
+            UserRightsBind();
+
+
+            var da = _dbcontext.CapexSaveUserRight(Data.UserCode, Data.Rights,user.id.ToString());
+            ViewBag.Message2 = Notification.PopupSave();
+            fillgrid(Data);
+            
+            return View("UserRights", Data);
+        }
+
+
+        private void fillgrid(userRights Data)
+        {
+
+            ViewData["UserRightGrid"] = _dbcontext.CapexSelUserRights(Data.UserCode, Data.Rights.ToString()).AsQueryable() ;
+            //ViewData["UserRightGrid"] = _dbcontext.CapexSelEmployeeMaster(Data.UserCode).AsQueryable();
+            
+        }
+
+
+
+
+        public void UserRightsBind()
+        {
+
+            
+            ViewData["UserRights"]= _dbcontext.CapexSelRightsList().ToList();
+
+        }
+
+
+
+
+
+        #endregion
+
+
+        /// <summary>
+        /// End vendor Master
+        /// </summary>
+        /// 
+
+
+
+        /// <summary>
+        /// Company BU
+        /// </summary>
+        /// 
+        public IActionResult AddCompanyBu()
+        {
+
+            FillComaBUgrid();
+            return View();
+        }
+        public void FillComaBUgrid()
+        {
+            flag = 0;
+            ViewData["ComaBUgrid"] =  _dbcontext.UspCapexSelComBUMaster("", "", "").ToList();
+           
+        }
+
+        public IActionResult fillComaBUEdit( string IndID)
+        {
+           
+            var a = (from name in ViewData["ComaBUgrid"] as IList<CapexComBUMasterCustom>
+                    where name.IndID == Convert.ToInt32( IndID)
+                    select name).SingleOrDefault();
+
+            return View("AddCompanyBu", a);
+        }
+
+         public IActionResult AddCompanyBuSaved(CapexComBUMasterCustom data)
+        {
+            return View("AddCompanyBu");
+        }
+
+            
+
+        protected void fillBUComapny()
+        {
+            //DataTable dtn = new DataTable();
+            //ddlCompany.Items.Clear();
+            //ddlCompany.DataSource = uf.Capex_Selddl("", "com");
+            //ddlCompany.DataValueField = "CODE";
+            //ddlCompany.DataTextField = "DES";
+            //ddlCompany.DataBind();
+            //ddlCompany.Items.Insert(0, new ListItem("SELECT", "0"));
+        }
+
+        /// <summary>
+        /// END Company BU
+        /// </summary>
+        /// 
 
         private readonly ILogger<Administrator> _logger;
         public CapExTSDB _dbcontext;
@@ -30,15 +246,7 @@ namespace CapExTSVS.Controllers
             _dbcontext = new DataModels.CapExTSDB();
 
         }
-        public IActionResult AddCompanyBu()
-        {
-            return View();
-        }
-
-        public IActionResult UserRights()
-        {
-            return View();
-        }
+   
 
 
         public IActionResult CapexTypeMapping()
@@ -62,67 +270,10 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
-       public IActionResult VendorMapping()
-        {
-
-            ViewBag.flag=flag;
-            ViewData["GridData"] = bindgrdVendordata();
-
-            //var scriptOption = "<script>";
-
-            //scriptOption += "Swal.fire({\r\n  title: \"Good job!\",\r\n  text: \"You clicked the button!\",\r\n  icon: \"success\"\r\n});";
-            //scriptOption += "</script>";
-
-            //ViewBag.Message2 = scriptOption;
+      
 
 
-            ViewBag.Message2 = Notification.PopupConformation();
-            
-            bindddlCompany();
-            return View();
-        }
-
-        public IActionResult VendorMappingData( VendorMastercustom vendorMastercustom)
-        {
-
-            if(flag==0)
-            {
-
-                string ID = "''";
-                if (vendorMastercustom.Id != null )
-                {
-                    
-
-                    var output = _dbcontext.UspCapexSelVendorMaster("INSERT_UPDATE_VENDOR_MASTER", ID, vendorMastercustom.VendorCode, vendorMastercustom.CompanyCode, vendorMastercustom.FirmName,
-                                    vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
-                                    vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
-                                     vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
-
-                }
-
-            }
-            else if(flag==1)
-            {
-                string ID = "";
-                if (vendorMastercustom.Id != null)
-                {
-                    ID = vendorMastercustom.Id.ToString();
-
-                    var output = _dbcontext.UspCapexSelVendorMaster("INSERT_UPDATE_VENDOR_MASTER", ID, vendorMastercustom.VendorCode, vendorMastercustom.CompanyCode, vendorMastercustom.FirmName,
-                                    vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
-                                    vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
-                                     vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
-                    //_dbcontext.ExecuteProc() ;
-                }
-
-
-            }
-            return RedirectToAction("VendorMapping");
-        }
-
-
-
-            public IActionResult Edit(int id)
+          public IActionResult Edit(int id)
         {
             flag = 1;
             ViewData["GridData"] = bindgrdVendordata();
@@ -162,56 +313,6 @@ namespace CapExTSVS.Controllers
 
 
 
-
-
-
-        //public IActionResult VendorMapping(string id)
-        //{
-        //    //string ID = "";
-        //    //if (ViewState["Id"] != null && !ViewState["Id"].Equals("-1"))
-        //    //{
-        //    //    ID = ViewState["Id"].ToString();
-        //    //}
-        //    //lblMSG.Text = uf.SaveUpdateVendorMasterDtl("INSERT_UPDATE_VENDOR_MASTER", ID, lblVendorCode.Text.Trim(), ddlComCode.SelectedValue.ToString(), txtFirmName.Text.Trim(),
-        //    //                       txtContactNo.Text.Trim(), txtAddress.Text.Trim(), txtEmial.Text.Trim(), txtCity.Text.Trim(), txtDistrict.Text.Trim(), txtState.Text.Trim(),
-        //    //                       txtPincode.Text.Trim(), txtpName.Text.Trim(), txtPCNumber.Text.Trim(), txtPEmailAdd.Text.Trim(), txtGst.Text.Trim(),
-        //    //                        txtRemarks.Text.Trim(), Session["usr"].ToString());
-
-        //    return View();
-        //}
-
-
-
-
-        protected IList<UspCapexSelVendorMasterResult> bindgrdVendordata()
-        {
-            var dt = _dbcontext.UspCapexSelVendorMaster("GET_VENDOR_MASTER", "", "", "", "", "", "", "", "", "", "", "", "","", "", "", "", "").ToList();
-
-           //"<script>alert('hello world')</script>"; Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
-
-
-            return dt;
-            //grdVendordata.DataSource = dt;
-            //grdVendordata.DataBind();
-        }
-
-
-        protected void bindddlCompany()
-        {
-          
-
-            var dt = _dbcontext.CapexSelddl("", "com");
-            ViewData["com"] = dt.ToList();
-
-            
-
-
-        }
-
-       
-
-
-
         public IActionResult CapexmainRequest()
         {
             return View();
@@ -220,206 +321,62 @@ namespace CapExTSVS.Controllers
         public IActionResult CapexApproval()
         {
 
-
-            //var CFCAmount = 0m;
-            //if (ddlbu.SelectedValue == "Engineering" && ddlexp.SelectedValue == "Capex" && ddlbudget.SelectedValue == "CFC")
-            //{
-            //    if (txt_CFCAmount.Text.Trim() == "")
-            //    {
-            //        showmsg("Please Enter CFC Amount.");
-            //        txt_CFCAmount.Focus();
-            //        return;
-            //    }
-            //    CFCAmount = Convert.ToDecimal(txt_CFCAmount.Text);
-            //    if (CFCAmount <= 0)
-            //    {
-            //        showmsg("Please Enter valid CFC Amount.");
-            //        txt_CFCAmount.Focus();
-            //        return;
-            //    }
-            //}
-
-
-            //if (txt_purpose.Text.Trim() == "")
-            //{
-            //    showmsg("Please Enter purpose");
-            //    txt_purpose.Focus();
-            //    return;
-            //}
-
-            //if (txt_compdate.Text.Trim() == "" || Convert.ToDateTime(txt_compdate.Text.Trim()) < Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy")))
-            //{
-            //    showmsg("Please Enter Valid Expected Date of Completion");
-            //    txt_compdate.Focus();
-            //    return;
-            //}
-
-
-            //if (dglocal.Items.Count == 0)
-            //{
-            //    showmsg("Please Add Line Items");
-            //    dglocal.Focus();
-            //    return;
-            //}
-            //if (drp_ImportedIndigenous.SelectedValue.ToString() == "")
-            //{
-            //    showmsg("Please Select Imported/ Indigenous");
-            //    drp_ImportedIndigenous.Focus();
-            //    return;
-
-            //}
-
-            //if (grddata.Rows.Count == 0 && txt_jst.Text.Trim() == "")
-            //{
-            //    showmsg("Please Enter Justification, due to quote not attached");
-            //    txt_jst.Focus();
-            //    return;
-            //}
-
-
-            //DataTable fat = new DataTable();
-
-            //if (grddata.Rows.Count > 0)
-            //{
-            //    fat.Columns.Add("FileId");
-            //    fat.Columns.Add("FileType");
-            //    foreach (GridViewRow item in grddata.Rows)
-            //    {
-            //        DataRow row;
-            //        row = fat.NewRow();
-            //        row["FileId"] = item.Cells[1].Text;
-            //        row["FileType"] = item.Cells[3].Text;
-            //        fat.Rows.Add(row);
-            //    }
-
-
-            //    if (rbtnSelectQuote.SelectedValue.ToString() == "")
-            //    {
-            //        showmsg("Please select Quotation");
-            //        rbtnSelectQuote.Focus();
-            //        return;
-            //    }
-            //    else if (grddata.Rows.Count < 3 && txt_jst.Text.Trim() == "")
-            //    {
-            //        showmsg("Please Enter Justification, due to Attached Quotation is less than 3 vendors");
-            //        txt_jst.Focus();
-            //        return;
-            //    }
-
-            //}
-
-
-            //DataTable fated = new DataTable();
-            //if (grddata.Rows.Count > 0)
-            //{
-            //    decimal gt = Convert.ToDecimal(ViewState["MaxTotalNFAValue"].ToString());
-            //    string[] digits = Regex.Split(rbtnSelectQuote.SelectedItem.ToString(), @"[^0-9\.]+");
-            //    List<decimal> numbers = new List<decimal>();
-            //    int i = 0;
-            //    foreach (GridViewRow item in grddata.Rows)
-            //    {
-            //        if (item.Cells[4].Text.Trim() != "&nbsp;")
-            //        {
-            //            decimal gt2 = Convert.ToDecimal(item.Cells[5].Text);
-            //            numbers.Add(gt2);
-            //        }
-
-            //    }
-
-            //    //if ((Convert.ToDecimal(digits[3]) < gt) && txt_jst.Text.Trim() == "")
-            //    //{
-            //    //    showmsg("Please Enter Justification, due to selected Quation Amount less than Capex Amount");
-            //    //    txt_jst.Focus();
-            //    //    return;
-            //    //}
-
-            //    if ((Convert.ToDecimal(digits[3]) > gt) && txt_jst.Text.Trim() == "")
-            //    {
-            //        showmsg("Please Enter Justification, due to selected Quation Amount Higher than Capex Amount");
-            //        txt_jst.Focus();
-            //        return;
-            //    }
-
-            //    decimal mi = numbers.Max();
-            //    decimal mx = numbers.Min();
-            //    decimal dtn = Convert.ToDecimal(digits[3]);
-            //    if (Convert.ToDecimal(digits[3]) > numbers.Max() && txt_jst.Text.Trim() == "")
-            //    {
-            //        showmsg("Please Enter Justification, due to Higher Quation Amount Selected");
-            //        txt_jst.Focus();
-            //        return;
-            //    }
-
-            //    if (Convert.ToDecimal(digits[3]) >= mi && txt_jst.Text.Trim() == "")
-            //    {
-            //        showmsg("Please Enter Justification, due to Lowest Quation Available.");
-            //        txt_jst.Focus();
-            //        return;
-            //    }
-            //}
-
-
-            //try
-            //{
-            //    DataTable tdnew = (DataTable)ViewState["CapexItemLine"];
-
-            //    if (tdnew.Columns.Contains("ID") == false)
-            //    {
-            //        DataColumn dc = new DataColumn("ID");
-            //        dc.AutoIncrement = true;
-            //        dc.AutoIncrementSeed = 1;
-            //        dc.AutoIncrementStep = 1;
-            //        tdnew.Columns.Add(dc);
-            //        dc.SetOrdinal(0);
-            //    }
-
-            //    for (int i = 0; i <= tdnew.Rows.Count - 1; i++)
-            //    {
-            //        tdnew.Rows[i]["ID"] = i + 1;
-            //    }
-            //    string pass = "";
-            //    string grd = "";
-            //    string lim = "0";
-
-            //    DataTable tdnewVen = (DataTable)ViewState["CapexQuotationItemLine"];
-            //    string IRRPaybackV = uploadfile(upldIRRPayback);
-            //    string CashOutflowV = uploadfile(upldCashOutflow);
-
-            //    if (IRRPaybackV == "")
-            //        IRRPaybackV = hlIRRPayback.ToolTip.Trim().ToString();
-
-            //    if (CashOutflowV == "")
-            //        CashOutflowV = hlICashOutflow.ToolTip.Trim().ToString();
-
-            //    string outs = ba.Capex_insert_draft(drp_Atype.SelectedValue.ToString(), txt_Acode.Text.Trim(), drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "", txt_purpose.Text.Trim(), txt_compdate.Text.Trim(), "", tdnew, ViewState["MaxTotalNFAValue"].ToString(), rbtnSelectQuote.SelectedValue.ToString(), drp_ImportedIndigenous.SelectedValue.ToString(), txt_jst.Text.Trim(), Session["usr"].ToString(), ViewState["GuidValue"].ToString(), ViewState["ReqID"].ToString(), pass, "", grd, "rbtnRequisitionType", lim, "txtEmployeeName", txtIndentID.Text.Trim(), txtBenefit.Text.Trim(), IRRPaybackV, CashOutflowV, txtPaybackPeriodValue.Text.Trim(), txtProjectedCashOutflowValue.Text.Trim(), CFCAmount);
-
-            //    if (outs.Contains("Successfully") == true)
-            //    {
-            //        string[] digits = Regex.Split(outs.ToString(), @"[^0-9\.]+");
-            //        ViewState["ReqID"] = digits[1].ToString();
-            //        var message = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize("" + outs + "");
-            //        var script = string.Format("alert({0});window.location ='CapexmainRequest.aspx';", message);
-            //        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "", script, true);
-            //    }
-            //    else
-            //    {
-            //        showmsg(outs);
-            //        return;
-            //    }
-            //}
-            //catch
-            //{
-
-            //}
-
-
-
-
-
-
             return View();
         }
 
-        
+
+
+
+
+        /// <summary>
+        /// Use End Controler Controls
+        /// </summary>
+
+
+
+
+        /// <summary>
+        /// Create Custom Function Dropdown Data
+        /// </summary>
+
+
+        protected void bindddlCompany()
+        {
+
+
+            var dt = _dbcontext.CapexSelddl("", "com");
+            ViewData["com"] = dt.ToList();
+
+
+
+
+        }
+
+
+        protected IList<UspCapexSelVendorMasterResult> bindgrdVendordata()
+        {
+            bindddlCompany();
+            var dt = _dbcontext.UspCapexSelVendorMaster("GET_VENDOR_MASTER", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "").ToList();
+
+            return dt;
+          
+        }
+
+
+
+
+        protected dynamic UspCapexSelVendorMaster(VendorMastercustom vendorMastercustom,string ID)
+        {
+                    var output = _dbcontext.UspCapexSelVendorMaster("INSERT_UPDATE_VENDOR_MASTER", ID, vendorMastercustom.CompanyCode, vendorMastercustom.VendorCode, vendorMastercustom.FirmName,
+                                   vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.Address, vendorMastercustom.FirmEmailAddress, vendorMastercustom.City, vendorMastercustom.District, vendorMastercustom.State,
+                                   vendorMastercustom.PinCode, vendorMastercustom.ContactPersonName, vendorMastercustom.ContactPersonContactNumber, vendorMastercustom.ContactPersonEmailAddress, vendorMastercustom.Gst,
+                                    vendorMastercustom.Remarks, user.id.ToString());//Session["usr"].ToString());
+            return output;
+
+        }
+
+
+       
+
     }
 }

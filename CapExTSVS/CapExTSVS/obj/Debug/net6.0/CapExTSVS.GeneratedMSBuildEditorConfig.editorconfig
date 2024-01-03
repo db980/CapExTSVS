@@ -9,121 +9,121 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CapExTSVS
 build_property.RootNamespace = CapExTSVS
-build_property.ProjectDir = D:\gitproject\CapExTSVS\CapExTSVS\
+build_property.ProjectDir = D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\gitproject\CapExTSVS\CapExTSVS
+build_property.MSBuildProjectDirectory = D:\testing_@\Self\Running\CapExTSVS\CapExTSVS
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Pages/Indent/CreateIndent.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/CreateIndent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XENyZWF0ZUluZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Pages/Indent/IndDashboard.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/IndDashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XEluZERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Pages/Indent/ViewIndent.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/ViewIndent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XFZpZXdJbmRlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Pages/index.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/AddCompanyBu.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/AddCompanyBu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxBZGRDb21wYW55QnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/CapexTypeMapping.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/CapexTypeMapping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxDYXBleFR5cGVNYXBwaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/EmployeeCompanyMapping.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/EmployeeCompanyMapping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxFbXBsb3llZUNvbXBhbnlNYXBwaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/IndentMapping.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/IndentMapping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxJbmRlbnRNYXBwaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/NfaMapping.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/NfaMapping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxOZmFNYXBwaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/UserRights.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/UserRights.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxVc2VyUmlnaHRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Administrator/VendorMapping.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/VendorMapping.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxWZW5kb3JNYXBwaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Indent/CreateIndent.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Indent/CreateIndent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZW50XENyZWF0ZUluZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Indent/IndDashboard.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Indent/IndDashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZW50XEluZERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Indent/IndentApproval.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Indent/IndentApproval.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZW50XEluZGVudEFwcHJvdmFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Indent/ViewIndent.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Indent/ViewIndent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZW50XFZpZXdJbmRlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Login/index.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Login/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5caW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/NFA/CapexApproval.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/NFA/CapexApproval.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkZBXENhcGV4QXBwcm92YWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/NFA/CapexApprovalHistory.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/NFA/CapexApprovalHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkZBXENhcGV4QXBwcm92YWxIaXN0b3J5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/NFA/CapexmainRequest.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/NFA/CapexmainRequest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkZBXENhcGV4bWFpblJlcXVlc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/NFA/NFADraftRequest.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/NFA/NFADraftRequest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTkZBXE5GQURyYWZ0UmVxdWVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Report/IndentMasterReport.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Report/IndentMasterReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEluZGVudE1hc3RlclJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Report/NfaReport.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Report/NfaReport.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XE5mYVJlcG9ydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Shared/Error.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/_ViewImports.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/_ViewStart.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Shared/_Layout.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8tktskzge9
 
-[D:/gitproject/CapExTSVS/CapExTSVS/Views/Shared/_Login.cshtml]
+[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Shared/_Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-t965v8rtva

@@ -89,6 +89,17 @@ namespace CapExTSVS.Models1
     }
 
 
+    public  class userRights
+    {
+        public  string id { get; set; }
+        public  string Username { get; set; }
+        public  string UserCode { get; set; }
+
+        public  int Rights { get; set; }
+
+    }
+
+
 
 
     public partial class VendorMastercustom
@@ -116,6 +127,13 @@ namespace CapExTSVS.Models1
         [Column("Updated_Date"), Nullable] public DateTime? UpdatedDate { get; set; } // datetime
     }
 
-
+    public partial class CapexComBUMasterCustom
+    {
+        [Column(), Identity] public int IndID { get; set; } // int
+        [Column("Comp_code"), PrimaryKey(1), NotNull] public string CompCode { get; set; } // varchar(10)
+        [Column(), Nullable] public string Des { get; set; } // varchar(100)
+        [Column(), PrimaryKey(2), NotNull] public string BU { get; set; } // varchar(100)
+        [Column(), Nullable] public bool? Status { get; set; } // bit
+    }
 
 }
