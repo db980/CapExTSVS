@@ -28,6 +28,11 @@ namespace CapExTSVS.Controllers
 
         public IActionResult NfaReport()
         {
+
+            
+            var dtn = _dbcontext.CapexSelCapexRequestDetails("All", "", "","", "","", "", "");
+           
+
             return View();
         }
 

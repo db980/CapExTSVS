@@ -196,40 +196,53 @@ namespace CapExTSVS.Controllers
             FillComaBUgrid();
             return View();
         }
+
+
+        //public IActionResult AddCompanyBu(CapexComBUMasterCustom data)
+        //{
+        //    return View();
+        //}
         public void FillComaBUgrid()
         {
-            flag = 0;
+            //flag = 0;
             ViewData["ComaBUgrid"] =  _dbcontext.UspCapexSelComBUMaster("", "", "").ToList();
            
         }
 
-        public IActionResult fillComaBUEdit( string IndID)
-        {
-           
-            var a = (from name in ViewData["ComaBUgrid"] as IList<CapexComBUMasterCustom>
-                    where name.IndID == Convert.ToInt32( IndID)
-                    select name).SingleOrDefault();
 
-            return View("AddCompanyBu", a);
+        
+        public IActionResult FillBUEdit( string id)
+        {
+            flag = 1;
+            CapexComBUMasterCustom bUMaster = new CapexComBUMasterCustom();
+            //userRights.Rights
+            //userRights.id = data.PersonalID;
+
+
+            var a = _dbcontext.UspCapexSelComBUMaster("", "", "").Where(a => a.IndID == Convert.ToInt32(id)).SingleOrDefault();
+
+            bUMaster.Des = a.Des;
+            bUMaster.CompCode = a.CompCode;
+            bUMaster.BU = a.BU;
+            bUMaster.IndID = a.IndID;
+            ViewData["ComaBUgrid"] = _dbcontext.UspCapexSelComBUMaster("", "", "").ToList();
+            return View("AddCompanyBu", bUMaster);
         }
 
-         public IActionResult AddCompanyBuSaved(CapexComBUMasterCustom data)
+
+   
+
+
+        public IActionResult AddCompanyBuSaved(CapexComBUMasterCustom data)
         {
+            
+            var da=_dbcontext.UspCapexSaveCompanyBu(data.IndID.ToString(), data.CompCode,data.Des, data.BU,data.Status.ToString());
+            FillComaBUgrid();
             return View("AddCompanyBu");
         }
 
             
 
-        protected void fillBUComapny()
-        {
-            //DataTable dtn = new DataTable();
-            //ddlCompany.Items.Clear();
-            //ddlCompany.DataSource = uf.Capex_Selddl("", "com");
-            //ddlCompany.DataValueField = "CODE";
-            //ddlCompany.DataTextField = "DES";
-            //ddlCompany.DataBind();
-            //ddlCompany.Items.Insert(0, new ListItem("SELECT", "0"));
-        }
 
         /// <summary>
         /// END Company BU
