@@ -1,5 +1,5 @@
 ﻿@using static DataModels.CapExTSDBStoredProcedures;
-
+@model CapExTSVS.Models1.UspEmployeeCompanyMappingResultcomm;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,6 +9,50 @@
 }
 
 
+<style>
+    .multiselect {
+        width: 100%;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #mySelectOptions {
+        display: none;
+        border: 0.5px #7c7c7c solid;
+        background-color: #ffffff;
+        max-height: 150px;
+        overflow-y: scroll;
+    }
+
+        #mySelectOptions label {
+            display: block;
+            font-weight: normal;
+            display: block;
+            white-space: nowrap;
+            min-height: 1.2em;
+            background-color: #ffffff00;
+            padding: 0 2.25rem 0 .75rem;
+            /* padding: .375rem 2.25rem .375rem .75rem; */
+        }
+
+            #mySelectOptions label:hover {
+                background-color: #1e90ff;
+            }
+</style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -39,6 +83,111 @@
                 <!-- form start -->
 
 
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Add Company /BU</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form action="/Administrator/AddCompanyMapping" method="post" class="form-horizontal">
+                                <div class="card-body">
+
+                                    <div class="form-group row">
+                                        
+
+
+
+
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Code </label>
+
+                                        <div class="col-sm-10">
+
+
+
+                                            <input type="text"  class="form-control" name="EmpCode">
+
+
+
+                                        </div>
+                                   
+                                   </div>
+
+
+
+
+                                    <div class="form-group row">
+                                        
+
+
+
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Search Company  </label>
+
+                                        <div class="col-sm-10">
+
+
+
+
+                                            <div id="myMultiselect" class="multiselect">
+                                                <div id="mySelectLabel" name="CompanyIds" class="selectBox" onclick="toggleCheckboxArea()">
+                                                    <select name="CompanyIds" class="form-select">
+                                                        <option>somevalue</option>
+                                                    </select>
+                                                    <div class="overSelect"></div>
+                                                </div>
+                                                
+                                                <div id="mySelectOptions" >
+                                                    
+                                                    @if (ViewData["companymappingdropdown"] != null)
+                                                    {
+                                                        @foreach (var da in ViewData["companymappingdropdown"] as IList<CapexSelddlResult>)
+                                                        {
+
+                                                            <label for="one"><input type="checkbox" id="@da.CODE" onchange="checkboxStatusChange()" value="@da.CODE" /> @da.DES</label>
+
+                                                        }
+
+                                                    }
+
+                                                    
+
+                                                  
+                                                  @*    <label for="two"><input type="checkbox" id="two" onchange="checkboxStatusChange()" value="two" /> Second checkbox</label>
+                                                    <label for="three"><input type="checkbox" id="three" onchange="checkboxStatusChange()" value="three" /> Third checkbox</label>
+                                                    <label for="four"><input type="checkbox" id="four" onchange="checkboxStatusChange()" value="four" /> Third checkbox</label>
+                                                    <label for="five"><input type="checkbox" id="five" onchange="checkboxStatusChange()" value="five" /> First checkbox</label>
+                                                    <label for="six"><input type="checkbox" id="six" onchange="checkboxStatusChange()" value="six" /> Second checkbox</label>
+                                                    <label for="seven"><input type="checkbox" id="seven" onchange="checkboxStatusChange()" value="seven" /> Third checkbox</label>
+                                                    <label for="eight"><input type="checkbox" id="eight" onchange="checkboxStatusChange()" value="eight" /> First checkbox</label>
+                                                    <label for="nine"><input type="checkbox" id="nine" onchange="checkboxStatusChange()" value="nine" /> Second checkbox</label>
+                                                    <label for="ten"><input type="checkbox" id="ten" onchange="checkboxStatusChange()" value="ten" /> Third checkbox</label>
+                                                *@
+                                          </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-info">Submit</button>
+                                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                </div>
+                                <!-- /.card-footer -->
+                            </form>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+</br>
+
 
                 <section class="content">
                     <div class="container-fluid">
@@ -48,6 +197,8 @@
                                 <!-- /.card -->
                                 <br />
 
+
+                             
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">View Indent</h3>
@@ -57,74 +208,32 @@
                                         <table id="exampla" class="table  table-bordered table-striped table-responsive" >
                                             <thead>
                                                 <tr>
-                                                    <th>Indent No</th>
                                                     <th>Action</th>
-                                                    <th>Company</th>
-                                                    <th>BU/Project/Plant</th>
-                                                    <th>Location of work</th>
-                                                    <th>Type of Work Details</th>
-                                                    <th>Enclosure BQQ</th>
-                                                    <th>Enclosure Drawing</th>
-                                                    <th>Budget Type</th>
-                                                    <th>Proposed Rate/budget</th>
-                                                    <th>Tat</th>
-                                                    <th>Tentative Start Date</th>
-                                                    <th>Tentative Completion Date</th>
-                                                    <th>Proposed Contractor Name</th>
-                                                    <th>Vendor Existing/New for Same Location</th>
-                                                    <th>Contractor Details</th>
-                                                    <th>Other Remarks</th>
-                                                    <th>Current With</th>
-                                                    <th>Status</th>
-                                                    <th>Tagged Purchaser</th>
-                                                    <th>Approver 1</th>
-                                                    <th>Approver 1 Remarks</th>
-                                                    <th>Approver 1 Approved On</th>
-                                                    <th>Approver 2</th>
-                                                    <th>Approver 2 Remarks</th>
-                                                    <th>Approver 2 Approved On</th>
-                                                    <th>Requested By</th>
-                                                    <th>Requested Date</th>
+                                                    <th>ID</th>
+                                                    <th>Emp Code</th>
+                                                    <th>Company ID</th>
+                                                    
                                                 </tr>
 
                                             </thead>
                                             <tbody>
 
-                                                @foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
+                                                @if (ViewData["BindGridCompanyMapping"] != null)
                                                 {
-                                                <tr>
-                                                       
-                                                        <td>@data.IndentID</td>
-                                                        <td> </td>
-                                                        <td>@data.Company</td>
-                                                        <td>@data.BU_Project_Plan</td>
-                                                        <td>@data.LocatioWork</td>
-                                                        <td>@data.TypeofWorkDetails</td>
-                                                        <td>@data.EnclosureBQQFile</td>
-                                                        <td>@data.EnclosureDrawingFile</td>
-                                                        <td>@data.BudgetType</td>
-                                                        <td>@data.RateProposed</td>
-                                                        <td>@data.TAT</td>
-                                                        <td>@data.TentativeStartDate</td>
-                                                        <td>@data.TentativeCompletionDate</td>
-                                                        <td>@data.ProposedContractorName</td>
-                                                        <td>@data.VendorExistingLocation</td>
-                                                        <td>@data.ContractorDetailsAddressGST</td>
-                                                        <td>@data.OtherRemarks</td>
-                                                        <td>@data.CurrentWith</td>
-                                                        <td>@data.StatusDesc</td>
-                                                        <td>@data.TaggedPurchaser</td>
-                                                        <td>@data.Approver1</td>
-                                                        <td>@data.Approver1Remarks</td>
-                                                        <td>@data.Approver1ApprovedOn</td>
-                                                        <td>@data.Approver2</td>
-                                                        <td>@data.Approver2Remarks</td>
-                                                        <td>@data.Approver2ApprovedOn</td>
-                                                        <td>@data.CreatedBy</td>
-                                                        <td>@data.CreateDate</td>
-                                                </tr>
+                                                    @foreach (var data in ViewData["BindGridCompanyMapping"] as IList<UspEmployeeCompanyMappingResult>)
+                                                    {
+                                                        <tr>
+
+                                                            <td></td>
+                                                            <td>@data.Id </td>
+                                                            <td>@data.EmpCode</td>
+                                                            <td>@data.CompanyIds</td>
+
+
+                                                        </tr>
+                                                    }
                                                 }
-                                                
+
                                             </tbody>
                                            
                                         </table>
@@ -153,9 +262,107 @@
 
 <script>
 
-    $('#exampla').dataTable({
+    //$('#exampla').dataTable({
 
-    });
+    //});
+
+
+   
+
+
+
+    window.onload = (event) => {
+        initMultiselect();
+    };
+
+  
+   
+
+    function initMultiselect() {
+        checkboxStatusChange();
+
+        document.addEventListener("click", function (evt) {
+            var flyoutElement = document.getElementById('myMultiselect'),
+                targetElement = evt.target; // clicked element
+
+            do {
+                if (targetElement == flyoutElement) {
+                    // This is a click inside. Do nothing, just return.
+                    //console.log('click inside');
+                    return;
+                }
+
+                // Go up the DOM
+                targetElement = targetElement.parentNode;
+            } while (targetElement);
+
+            // This is a click outside.
+            toggleCheckboxArea(true);
+            //console.log('click outside');
+        });
+    }
+
+    function checkboxStatusChange() {
+        var multiselect = document.getElementById("mySelectLabel");
+        var multiselectOption = multiselect.getElementsByTagName('option')[0];
+
+        var values = [];
+        var checkboxes = document.getElementById("mySelectOptions");
+        var checkedCheckboxes = checkboxes.querySelectorAll('input[type=checkbox]:checked');
+
+        for (const item of checkedCheckboxes) {
+            var checkboxValue = item.getAttribute('value');
+            values.push(checkboxValue);
+        }
+
+        var dropdownValue = "Nothing is selected";
+        if (values.length > 0) {
+            dropdownValue = values.join(', ');
+        }
+
+        multiselectOption.innerText = dropdownValue;
+    }
+
+    function toggleCheckboxArea(onlyHide = false) {
+        var checkboxes = document.getElementById("mySelectOptions");
+        var displayValue = checkboxes.style.display;
+
+        if (displayValue != "block") {
+            if (onlyHide == false) {
+                checkboxes.style.display = "block";
+            }
+        } else {
+            checkboxes.style.display = "none";
+        }
+    }
+
+
+
+    //$.ajax({
+    //    type: "GET",
+    //    url: "\companymappingdropdown",
+    //    success: function (data) {
+    //        console.log(data)
+    //        var $el = $("#mySelectOptions");
+    //        $el.empty(); // remove old options
+    //        //$el.append($("<option></option>")
+    //        //    .attr("value", '').text('Please Select'));
+
+    //        $.each(data, function (value, key) {
+
+    //               $e1.innerHTML '<label for="one"><input type="checkbox" id="' + value.code + '" onchange="checkboxStatusChange()" value="' + value.code + '" /> ' + value.code + '</label>'
+    //            //$el.append($('<label for= "one" > <input type= "checkbox" id = "one" onchange = "checkboxStatusChange()" value = "one" /> First checkbox < /label>')
+    //            //    .attr("value", value.CODE).text(key.DES));
+    //           // console.log($el)
+    //            //$el.append('<label for="one"><input type="checkbox" id="one" onchange="checkboxStatusChange()" value="one" /> First checkbox</label>');
+    //                $("#mySelectOptions").appendChild(tempWrapper.firstChild);
+    //            //var newChild = ' <label for="one"><input type="checkbox" id="one" onchange="checkboxStatusChange()" value="one" /> First checkbox</label>';
+    //            //$el.insertAdjacentHTML('beforeend', newChild);
+
+    //        });
+
+    //    }
+    //})
 </script>
 
 

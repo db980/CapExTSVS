@@ -1,4 +1,5 @@
 ﻿@using static DataModels.CapExTSDBStoredProcedures;
+@model CapExTSVS.Models1.UspCapexCapexTypeMappingResultComm;
 
 
 @{
@@ -46,7 +47,7 @@
                             <div class="col-sm-10">
 
 
-                                <input type="text" class="form-control" name="CapexType">
+                                <input type="text" value="@(Model != null ? Model.CTID : "") " class="form-control" name="CTID">
 
 
                             </div>
@@ -55,7 +56,7 @@
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Capex Code </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Company Description">
+                                <input type="text" value="@(Model != null ? Model.Comp_code : "") " class="form-control" name="Comp_code" placeholder="Enter Company Description">
 
                             </div>
                         </div>
@@ -68,7 +69,7 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Project <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Project">
+                                <input type="text" value="@(Model != null ? Model.BU : "") " class="form-control" name="BU" placeholder="Enter Project">
                             </div>
                         </div>
                         <br />
@@ -77,7 +78,7 @@
                             <div class="col-sm-10">
 
 
-                                <input type="text" class="form-control" name="CapexType">
+                                <input type="text" value="@(Model != null ? Model.CapexType : "") " class="form-control" name="CapexType">
 
 
                             </div>
@@ -90,7 +91,7 @@
                             <div class="col-sm-10">
 
 
-                                <input type="text" class="form-control" name="CapexType">
+                                <input type="text" value="@(Model != null ? Model.Des : "") " class="form-control" name="Des">
 
 
                             </div>
@@ -104,8 +105,16 @@
                             <div class="col-sm-10">
 
 
-                                <select class="form-control dropdown" id="inputEmail3" name="BudgetType" Value="@Model?.BudgetType" placeholder="Enter Budget">
+                                <select class="form-control dropdown"  id="inputEmail3" name="Comp_code" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
                                     <option Selected="True" Value="0">Select</option>
+                                    @if (ViewData["CapexbindddlCompany"]!=null)
+                                    {
+                                            @foreach (var da in ViewData["CapexbindddlCompany"] as IList<CapexSelddlResult>)
+                                            {
+                                                <option Value="@da.CODE">@da.DES</option>
+
+                                            }
+                                    }
                                     @*<option Value="Budgeted">Capex</option>
                                     <option Value="NonBudgeted">Opex</option>*@
 
@@ -123,9 +132,14 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Project/Bu  </label>
                             <div class="col-sm-10">
 
-
-                                <select class="form-control dropdown" id="inputEmail3" name="BudgetType" Value="@Model?.BudgetType" placeholder="Enter Budget">
+                                
+                                <select class="form-control dropdown"  name="BU" id="BU" placeholder="Enter Budget">
                                     <option Selected="True" Value="0">Select</option>
+                                   @* @foreach (var da in ViewData["CapexBindddlProject"] as IList<UspCapexSelComProjectResult>)
+                                    {
+                                        <option Value="@da.IndID">@da.BU</option>
+                                        
+                                    }*@
                                     @*<option Value="Budgeted">Capex</option>
                                     <option Value="NonBudgeted">Opex</option>*@
 
@@ -140,11 +154,11 @@
 
                         <br />
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Request Type </label>
+                            <label for="inputEmail3"  class="col-sm-2 col-form-label">Request Type </label>
                             <div class="col-sm-10">
 
 
-                                <select class="form-control dropdown" id="inputEmail3" name="BudgetType" Value="@Model?.BudgetType" placeholder="Enter Budget">
+                                <select class="form-control dropdown" id="inputEmail3" value="@(Model != null ? Model.ReqType : "") " name="ReqType" placeholder="Enter Budget">
                                     <option Selected="True" Value="0">Select</option>
                                     <option Value="Budgeted">Capex</option>
                                     <option Value="NonBudgeted">Opex</option>
@@ -164,8 +178,8 @@
                             <div class="col-sm-10">
 
 
-                                <select class="form-control dropdown" id="inputEmail3" name="BudgetType" Value="@Model?.BudgetType" placeholder="Enter Budget">
-                                    <option Selected="True" Value="0">Select</option>
+                                <select class="form-control dropdown"  id="inputEmail3" name="BudgetType"  placeholder="Enter Budget">
+                                    <option  selected value="@(Model != null ? Model.BudgetType : "") ">Select</option>
                                     <option Value="Budgeted">Budgeted</option>
                                     <option Value="NonBudgeted">NonBudgeted</option>
 
@@ -226,7 +240,7 @@
                                     <th>Description </th>
 
 
-                                    <th>Company</th>
+                                    @*<th>Company</th>*@
                                     <th>Project/Bu</th>
                                     <th>Request Type </th>
 
@@ -237,24 +251,34 @@
                             <tbody>
 
 
-                                <tr>
-
-                                    <th>Action</th>
-                                    <th>Capex  ID</th>
-                                    <th>Capex Code</th>
-
-                                    <th>Capex Type</th>
-                                    <th>Description </th>
+                                @if (ViewData["CapexbindddlGrid"] != null)
+                                {
+                                    @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
+                                    {
 
 
-                                    <th>Company</th>
-                                    <th>Project/Bu</th>
-                                    <th>Request Type </th>
+                                        <tr>
 
-                                    <th>Budget Type </th>
+                                            <td>
+                                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
+                                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file" ></a></button>
+                                            </td>
+                                            <td>@da.CTID </td>
+                                            <td>@da.Comp_code </td>
+                                            
+                                            <td>@da.CapexType </td>
+                                            <td>@da.Des </td>
+                                               
+                                            @*<td>@da.com daCompany</td>*@
+                                            <td>@da.BU </td>
+                                            <td>@da.ReqType </td>
+                                                
+                                            <td>@da.BudgetType  </td>
 
-                                </tr>
-
+                                        </tr>
+                                    }
+                                }
 
                             </tbody>
 
@@ -278,7 +302,37 @@
     $('#exampla').dataTable({
 
     });
+
+    function Dropdownchange(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\companymappingdropdown\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BU");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.indID).text(key.bu));
+                   
+                    
+                });
+         
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
 </script>
+
+
 
 
 

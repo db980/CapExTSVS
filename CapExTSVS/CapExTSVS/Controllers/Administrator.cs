@@ -190,6 +190,8 @@ namespace CapExTSVS.Controllers
         /// Company BU
         /// </summary>
         /// 
+        #region"End Company/ BU"
+
         public IActionResult AddCompanyBu()
         {
 
@@ -241,13 +243,169 @@ namespace CapExTSVS.Controllers
             return View("AddCompanyBu");
         }
 
-            
+
+        #endregion"End Company/ BU"
 
 
         /// <summary>
         /// END Company BU
         /// </summary>
         /// 
+
+
+        /// <summary>
+        /// Capex Type Mapping
+        /// </summary>
+        /// 
+
+        #region"Capex Type Mapping"
+
+
+        public IActionResult CapexTypeMapping()
+        {
+            CapexbindddlCompany();
+            CapexbindddlGrid();
+
+
+            return View();
+        }
+
+
+
+        protected void CapexbindddlGrid()
+        {
+            ViewData["CapexbindddlGrid"]  = _dbcontext.UspCapexCapexTypeMapping("GET_CAPEXTYPE_BY_COMPANY_NAME", "", "", "", "", "", "", "", "").ToList();
+
+            // _dbcontext.UspCapexCapexTypeMapping("", "com").ToList();
+
+        }
+
+        protected void CapexbindddlCompany()
+        {
+
+             ViewData["CapexbindddlCompany"]  = _dbcontext.CapexSelddl("", "com").ToList();
+           
+        }
+
+     
+        public IActionResult CapexEditCompany(string id)
+        {
+            CapexbindddlGrid();
+            CapexbindddlCompany();
+            UspCapexCapexTypeMappingResultComm data = new UspCapexCapexTypeMappingResultComm();
+
+            var a = _dbcontext.UspCapexCapexTypeMapping("GET_CAPEXTYPE_BY_COMPANY_NAME", "", "", "", "", "", "", "", "").Where(a=>a.CTID== Convert.ToInt32( id)).SingleOrDefault();
+
+            data.CTID = a.CTID;
+            data.CapexType = a.CapexType;
+            data.Comp_code = a.Comp_code;
+            data.Des = a.Des;
+            data.BU = a.BU;
+            data.ReqType = a.ReqType;
+            data.BudgetType = a.BudgetType;
+
+
+            return View("CapexTypeMapping",data);
+        }
+
+  
+
+         public void CapexSaveCompany(UspCapexCapexTypeMappingResultComm data)
+        {
+
+            var data1 = _dbcontext.UspCapexCapexTypeMapping("INSERT_UPDATE", data.CTID.ToString(), data.CapexType, data.Des,
+                                                data.Comp_code.ToString(),data.BU,
+                                               data.ReqType,data.BudgetType, user.id);
+
+
+        }
+
+
+        [HttpGet]
+        public  IList<UspCapexSelComProjectResult> CapexBindddlProject(string id)
+        {
+           
+           var dt = _dbcontext.UspCapexSelComProject(id).ToList();
+
+           
+
+            return dt.ToList();
+        }
+
+
+        #endregion"End Capex Type Mapping"
+
+
+
+
+        /// <summary>
+        /// End Capex Type Mapping
+        /// </summary>
+        /// 
+
+        #region"Company Mapping"
+
+
+        public IActionResult EmployeeCompanyMapping()
+        {
+
+            BindGridCompanyMapping();
+
+            companymappingdropdown();
+            return View();
+        }
+        
+        public void companymappingdropdown()
+        {
+            ViewData["companymappingdropdown"] =_dbcontext.CapexSelddl("", "com").ToList();
+
+            //return da;
+        }
+
+            public IActionResult SearchCompanyMapping(string data)
+        {
+            //BindGridCompanyMapping(data);
+
+            return View("EmployeeCompanyMapping");
+        }
+
+        public IActionResult AddCompanyMapping(UspEmployeeCompanyMappingResultcomm data)
+        {
+
+           var da = _dbcontext.UspEmployeeCompanyMapping("INSERT_UPDATE", data.EmpCode, data.CompanyIds, user.id);
+            BindGridCompanyMapping();
+            return View("EmployeeCompanyMapping");
+        }
+
+         public void  BindGridCompanyMapping()
+        {
+
+            ViewData["BindGridCompanyMapping"]  = _dbcontext.UspEmployeeCompanyMapping("GET_MAPPING_BY_EMP_CODE", "", "", "").ToList();
+
+        }
+
+
+
+
+        #endregion"Company Mapping"
+
+
+        /// <summary>
+        /// Company Mapping
+        /// </summary>
+        /// 
+
+
+
+        /// <summary>
+        /// End Company Mapping
+        /// </summary>
+        /// 
+
+
+
+
+
 
         private readonly ILogger<Administrator> _logger;
         public CapExTSDB _dbcontext;
@@ -262,16 +420,10 @@ namespace CapExTSVS.Controllers
    
 
 
-        public IActionResult CapexTypeMapping()
-        {
-            return View();
-        }
+     
 
 
-        public IActionResult EmployeeCompanyMapping()
-        {
-            return View();
-        }
+      
 
          public IActionResult IndentMapping()
         {

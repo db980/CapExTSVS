@@ -136,4 +136,24 @@ namespace CapExTSVS.Models1
         [Column(), Nullable] public bool? Status { get; set; } // bit
     }
 
+
+    public partial class UspCapexCapexTypeMappingResultComm
+    {
+        public int CTID { get; set; }
+        public string CapexType { get; set; }
+        public string Comp_code { get; set; }
+        public string Des { get; set; }
+        public string BU { get; set; }
+        public string ReqType { get; set; }
+        public string BudgetType { get; set; }
+    }
+
+
+    public partial class UspEmployeeCompanyMappingResultcomm
+    {
+        public int Id { get; set; }
+        public string EmpCode { get; set; }
+        public string CompanyIds { get; set; }
+    }
+
 }
