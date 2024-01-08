@@ -30,14 +30,19 @@ namespace CapExTSVS.Controllers
         {
 
             
-            var dtn = _dbcontext.CapexSelCapexRequestDetails("All", "", "","", "","", "", "");
-           
+            //var dtn = _dbcontext.CapexSelCapexRequestDetails("All", "", "","", "","", "", "");
+            ViewData["NFADraftRequestGrid"] = _dbcontext.CapexSelCapexRequestDetails("All", "", "0", "", "", "", "", "").ToList();
+
 
             return View();
         }
 
         public IActionResult IndentMasterReport()
         {
+
+            ViewData["IndentMasterReportGrid"] = _dbcontext.CapexSelIndentforList("", "","", "").ToList();
+
+
             return View();
         }
 

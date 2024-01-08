@@ -16,22 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\testing_@\Self\Running\CapExTSVS\CapExTSVS
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/CreateIndent.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XENyZWF0ZUluZGVudC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/IndDashboard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XEluZERhc2hib2FyZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/Indent/ViewIndent.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZW50XFZpZXdJbmRlbnQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Pages/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/testing_@/Self/Running/CapExTSVS/CapExTSVS/Views/Administrator/AddCompanyBu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYXRvclxBZGRDb21wYW55QnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

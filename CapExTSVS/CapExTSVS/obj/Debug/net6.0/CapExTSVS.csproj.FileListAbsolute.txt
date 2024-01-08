@@ -139,7 +139,6 @@ D:\gitproject\CapExTSVS\CapExTSVS\obj\Debug\net6.0\refint\CapExTSVS.dll
 D:\gitproject\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.pdb
 D:\gitproject\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.genruntimeconfig.cache
 D:\gitproject\CapExTSVS\CapExTSVS\obj\Debug\net6.0\ref\CapExTSVS.dll
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\App.config
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\appsettings.Development.json
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\appsettings.json
@@ -148,6 +147,8 @@ D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.exe
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.dll.config
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.deps.json
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.runtimeconfig.json
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.pdb
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\Azure.Core.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\Azure.Identity.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\Humanizer.dll
@@ -246,5 +247,4 @@ D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\refint\CapExTSVS.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.pdb
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.genruntimeconfig.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\CapExTSVS.pdb
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\ref\CapExTSVS.dll

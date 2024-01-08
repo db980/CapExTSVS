@@ -379,7 +379,8 @@ namespace CapExTSVS.Controllers
 
          public void  BindGridCompanyMapping()
         {
-
+            ViewData["BindGridCompanyMapping"] = "";
+            companymappingdropdown();
             ViewData["BindGridCompanyMapping"]  = _dbcontext.UspEmployeeCompanyMapping("GET_MAPPING_BY_EMP_CODE", "", "", "").ToList();
 
         }
@@ -427,10 +428,44 @@ namespace CapExTSVS.Controllers
 
          public IActionResult IndentMapping()
         {
+            CapexbindddlCompany();
+
+            ViewData["IndentMappingGrid"] = _dbcontext.CapexSelEmployeeMaster("").ToList();
+            
             return View();
         }
 
-        public IActionResult NfaMapping()
+
+        public IActionResult IndentSavingMapping(UspCapexSelIndentMappingRightsResultComm data)
+        {
+             //_dbcontext.UspCapexSelIndentMappingRights
+                return View("IndentMapping");
+        }
+
+        public IActionResult IndentEditDataMapping(string id)
+        {
+            UspCapexSelIndentMappingRightsResultComm data = new UspCapexSelIndentMappingRightsResultComm();
+            var da= _dbcontext.UspCapexSelIndentMappingRights("GET_INDENT_MAPPING_BY_EMPID_COMCODE", "","", id, "", "", "").SingleOrDefault();
+
+
+            _dbcontext.CapexSelUserRights("","");
+           
+        //    data.IndID = da.IndID;
+        //data.Comp_code= da.Comp_code
+        //data.BU = da.BU 
+        //data.EMPCode = da.EMPCode 
+        //data.EmpName = da.EmpName 
+        //data.RM_Lvl = da.RM_Lvl 
+        //data.Approver1 = da.Approver1 
+        //data.BU_Lvl = da.BU_Lvl 
+        //data.Approver2 = da.Approver2 
+
+            return View("IndentEditDataMapping");
+        }
+
+
+
+            public IActionResult NfaMapping()
         {
             return View();
         }

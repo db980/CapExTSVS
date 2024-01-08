@@ -67,17 +67,39 @@
 
                             <label class="col-sm-2 col-form-label" for="exampleCheck2">Company <span style="color:red"> *</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="CapexType" placeholder="Enter Project">
+
+                              
+
+                                <select class="form-control dropdown" id="inputEmail3" name="Comp_code" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
+                                    <option Selected="True" Value="0">Select</option>
+                                    @if (ViewData["CapexbindddlCompany"] != null)
+                                    {
+                                        @foreach (var da in ViewData["CapexbindddlCompany"] as IList<CapexSelddlResult>)
+                                        {
+                                            <option Value="@da.CODE">@da.DES</option>
+
+                                        }
+                                    }
+                                    @*<option Value="Budgeted">Capex</option>
+                                    <option Value="NonBudgeted">Opex</option>*@
+
+
+                                </select>
+
+
+
                             </div>
                         </div>
                         <br />
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">BU  </label>
                             <div class="col-sm-10">
-
-
-                                <input type="text" class="form-control" name="CapexType">
-
+                              
+                                <select class="form-control dropdown" id="BU"  name="Comp_code" placeholder="Enter Budget" >
+                                    <option Selected="True" Value="0">Select</option>
+                                    </select>
+                              @*  <input type="text" class="form-control" name="CapexType">
+*@
 
                             </div>
                         </div>
@@ -149,7 +171,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form action="/Administrator/IndentSavingMapping" method="post" class="form-horizontal">
                     <div class="card-body">
 
 
@@ -157,42 +179,42 @@
                             <thead>
                                 <tr>
                                     <th>Action</th>
-                                    <th>Capex  ID</th>
-                                    <th>Capex Code</th>
+                                    <th>Personal ID</th>
+                                    <th>Employee Name</th>
 
-                                    <th>Capex Type</th>
-                                    <th>Description </th>
+                                    <th>Employee Subgroup</th>
+                                    <th>Department</th>
+                                 
 
-
-                                    <th>Company</th>
-                                    <th>Project/Bu</th>
-                                    <th>Request Type </th>
-
-                                    <th>Budget Type </th>
                                 </tr>
 
                             </thead>
                             <tbody>
 
-
-                                <tr>
-
-                                    <th>Action</th>
-                                    <th>Capex  ID</th>
-                                    <th>Capex Code</th>
-
-                                    <th>Capex Type</th>
-                                    <th>Description </th>
+                                @if (ViewData["IndentMappingGrid"] != null)
+                                {
+                                    @foreach (var data in ViewData["IndentMappingGrid"] as IList<CapexSelEmployeeMasterResult>)
+                                    {
+                                        <tr>
 
 
-                                    <th>Company</th>
-                                    <th>Project/Bu</th>
-                                    <th>Request Type </th>
+                                            <td>
+                                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/IndentEditDataMapping/@data.PersonalID.ToString()"></a></button><br>
+                                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
+                                            </td>
+                                            <td>@data.PersonalID</td>
+                                            <td>@data.EmployeeName</td>
 
-                                    <th>Budget Type </th>
+                                            <td>@data.EmployeeSubgroup</td>
+                                            <td>@data.Department </td>
 
-                                </tr>
 
+                                            
+
+                                        </tr>
+                                    }
+                                }
 
                             </tbody>
 
@@ -215,6 +237,35 @@
     $('#exampla').dataTable({
 
     });
+
+
+    function Dropdownchange(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlProject\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BU");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.indID).text(key.bu));
+
+
+                });
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
 </script>
 
 

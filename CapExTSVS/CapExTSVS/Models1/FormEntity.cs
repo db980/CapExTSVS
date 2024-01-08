@@ -156,4 +156,17 @@ namespace CapExTSVS.Models1
         public string CompanyIds { get; set; }
     }
 
+
+    public partial class UspCapexSelIndentMappingRightsResultComm
+    {
+        public int IndID { get; set; }
+        public string Comp_code { get; set; }
+        public string BU { get; set; }
+        public string EMPCode { get; set; }
+        public string EmpName { get; set; }
+        public string RM_Lvl { get; set; }
+        public string Approver1 { get; set; }
+        public string BU_Lvl { get; set; }
+        public string Approver2 { get; set; }
+    }
 }
