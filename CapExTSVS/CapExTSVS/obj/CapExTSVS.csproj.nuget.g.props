@@ -164,6 +164,7 @@
     <Import Project="$(NuGetPackageRoot)linq2db.sqlserver\4.1.0\build\linq2db.SqlServer.props" Condition="Exists('$(NuGetPackageRoot)linq2db.sqlserver\4.1.0\build\linq2db.SqlServer.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\dell\.nuget\packages\microsoft.codeanalysis.analyzers\3.0.0</PkgMicrosoft_CodeAnalysis_Analyzers>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\dell\.nuget\packages\microsoft.entityframeworkcore.tools\7.0.0</PkgMicrosoft_EntityFrameworkCore_Tools>
     <Pkglinq2db_SqlServer Condition=" '$(Pkglinq2db_SqlServer)' == '' ">C:\Users\dell\.nuget\packages\linq2db.sqlserver\4.1.0</Pkglinq2db_SqlServer>
   </PropertyGroup>

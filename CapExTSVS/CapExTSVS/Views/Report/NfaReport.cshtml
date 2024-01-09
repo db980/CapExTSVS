@@ -79,8 +79,17 @@
                                     {
                                         <tr>
                                             <td scope="col">@data.RequestNo</td>
-                                            <td scope="col"><button  class="badge bg-info btn btn-sm" name="3594"><a class="fa fa-file"></a></button><br></td>
-                                            <td scope="col">Export</td>
+                                            <td scope="col"><button class="badge bg-info btn btn-sm"  name="3594"><a href="\Report\NfaReportGrid\@data.IndentID.ToString()" class="fa fa-file"></a></button>
+
+
+                                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">  <a onclick="DropdownchangeReport(@data.RequestNo)" class="fa fa-file"></a></button>
+
+                                                <br></td>
+                                            <td scope="col">
+                                                <button type="button" class="btn btn-info btn-lg">  <a href="\Report\NfaReportExport\@data.RequestNo.ToString()" class="fa fa-file"></a></button>
+
+
+                                            </td>
                                             <td scope="col">@data.IndentID</td>
                                             <td scope="col">@data.Assettype</td>
                                             <td scope="col">@data.OldAssetCode</td>
@@ -114,6 +123,28 @@
         </div><!-- /.container-fluid -->
     </section>
 
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <!-- End Table Forms -->
     <!-- /.content -->
 </div>
@@ -123,6 +154,60 @@
     $('#exampla').dataTable({
 
     });
+
+    function DropdownchangeReport(value) {
+
+        $.ajax({
+        type: "GET",
+            url: "\NfaReportView?d=" + value,
+        success: function (data) {
+            //console.log(data)
+            //var $el = $("#BU");
+            //$el.empty(); // remove old options
+            //$el.append($("<option></option>")
+            //    .attr("value", '').text('Please Select'));
+
+            //$.each(data, function (value, key) {
+            //    $el.append($("<option></option>")
+            //        .attr("value", value.code).text(key.code));
+            //    console.log(value);
+            //});
+
+        }
+    })
+
+    }
+    
+
+    function DropdownchangeReportExport(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\NfaReportExport?d=" + value,
+            success: function (data) {
+                //console.log(data)
+                //var $el = $("#BU");
+                //$el.empty(); // remove old options
+                //$el.append($("<option></option>")
+                //    .attr("value", '').text('Please Select'));
+
+                //$.each(data, function (value, key) {
+                //    $el.append($("<option></option>")
+                //        .attr("value", value.code).text(key.code));
+                //    console.log(value);
+                //});
+
+                var blob = new Blob([data]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "Sample.pdf";
+                link.click();
+
+            }
+        })
+
+    }
+
 </script>
 
 

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
 	  <PackageReference Include="linq2db" Version="4.1.0" />
     <PackageReference Include="linq2db.SqlServer" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.25" />
@@ -29,6 +30,21 @@
 
 	 
 	  <PackageReference Include="Microsoft.SqlServer.Types" Version="160.1000.6" />
+
+	 
+	  <PackageReference Include="morelinq" Version="4.1.0" />
+
+	 
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+	 
+	  <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.10" />
+
+	 
+	  <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+
+	 
+	  <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,12 +62,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="RDLC\CapexTSDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CapexTSDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Models1\CopyMe.SqlServer.tt.text">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CopyMe.SqlServer.generated.cs</LastGenOutput>
+    </None>
+    <None Update="RDLC\CapexTSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CapexTSDataSet.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

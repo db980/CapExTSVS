@@ -1,3 +1,7 @@
+using Microsoft.Reporting.NETCore;
+using Newtonsoft.Json;
+using System.Xml.Linq;
+
 namespace CapExTSVS.Models
 {
     public class ErrorViewModel
@@ -6,4 +10,9 @@ namespace CapExTSVS.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
+
+    //     find string
+   
+
 }
