@@ -9,7 +9,6 @@
 }
 
 
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -89,6 +88,11 @@
                                                 <button type="button" class="btn btn-info btn-lg">  <a href="\Report\NfaReportExport\@data.RequestNo.ToString()" class="fa fa-file"></a></button>
 
 
+
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal1" data-bs-target="#myModal1">
+                                                    Open modal
+                                                </button>
+
                                             </td>
                                             <td scope="col">@data.IndentID</td>
                                             <td scope="col">@data.Assettype</td>
@@ -126,17 +130,361 @@
 
 
 
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade " id="myModal" role="dialog">
+        <div class="modal-dialog " style="margin: 250px;">
 
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+        width: 235%;
+        ">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                  
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+
+
+
+
+
+
+                    <center><h1>NFA Requisition</h1></center>
+
+                    <table>
+                        <tr>
+                            <th>Requisition No.</th>
+                            <td>100111</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Type</th>
+                            <td>New</td>
+                        </tr>
+                        <tr>
+                            <th>Company</th>
+                            <td>SWETA ESTATES PRIVATE LIMITED</td>
+                        </tr>
+                        <tr>
+                            <th>BU</th>
+                            <td>BATCHING PLANT</td>
+                        </tr>
+                        <tr>
+                            <th>Exp Type</th>
+                            <td>Opex</td>
+                        </tr>
+                        <tr>
+                            <th>Budget Type</th>
+                            <td>NonBudgeted</td>
+                        </tr>
+                        <tr>
+                            <th>NFA Type</th>
+                            <td>SEPL/BATCHING PLANT/Opex/NonBudgeted</td>
+                        </tr>
+                        <tr>
+                            <th>Work/Item Name</th>
+                            <td>test team</td>
+                        </tr>
+                        <tr>
+                            <th>Work/Item Name Description</th>
+                            <td>Purposetest</td>
+                        </tr>
+                        <tr>
+                            <th>Expected Date of Completion</th>
+                            <td>19-Oct-2023</td>
+                        </tr>
+                        <tr>
+                            <th>Requested By</th>
+                            <td> </td>
+                        </tr>
+                    </table>
+
+
+                    <div class="card container">
+                        <div class="card-body" style=" overflow:auto;">
+                            <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;">
+                                        <th align="center" scope="col">Action</th>
+                                        <th align="center" scope="col">NFA Requisition No</th>
+                                        <th scope="col">Indent ID</th>
+                                        <th align="center" scope="col">Asset Type</th>
+                                        <th align="center" scope="col">Old Asset Code</th>
+                                        <th align="center" scope="col">NFA Type</th>
+                                        <th align="center" scope="col">Project Name</th>
+                                        <th align="center" scope="col">Project Description</th>
+                                        <th align="center" scope="col">Purpose</th>
+                                        <th align="center" scope="col">Expected Date</th>
+                                        <th align="center" scope="col">Selected Quotation Amount (INR)</th>
+                                        <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                        <th align="center" scope="col">Imported / Indigenous</th>
+                                        <th align="center" scope="col">Status</th>
+                                        <th align="center" scope="col">Requested By</th>
+                                        <th align="center" scope="col">Requested Date</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    @*  foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
+                                    {*@
+                                    <tr>
+
+                                        <td>data.IndentID</td>
+                                        <td> </td>
+                                        <td>data.Company</td>
+                                        <td>data.BU_Project_Plan</td>
+                                        <td>data.LocatioWork</td>
+                                        <td>data.TypeofWorkDetails</td>
+                                        <td>data.EnclosureBQQFile</td>
+                                        <td>data.EnclosureDrawingFile</td>
+                                        <td>data.BudgetType</td>
+                                        <td>data.RateProposed</td>
+                                        <td>data.TAT</td>
+                                        <td>data.TentativeStartDate</td>
+                                        <td>data.TentativeCompletionDate</td>
+                                        <td>data.ProposedContractorName</td>
+                                        <td>data.VendorExistingLocation</td>
+                                        <td>data.ContractorDetailsAddressGST</td>
+
+                                    </tr>
+                                    @*   }*@
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div>Max Quotation Amount (₹)</div>
+
+
+                    <div class="card container">
+
+
+
+                        <div class="card-body" style=" overflow:auto;">
+                            <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;">
+                                        <th align="center" scope="col">Action</th>
+                                        <th align="center" scope="col">NFA Requisition No</th>
+                                        <th scope="col">Indent ID</th>
+                                        <th align="center" scope="col">Asset Type</th>
+                                        <th align="center" scope="col">Old Asset Code</th>
+                                        <th align="center" scope="col">NFA Type</th>
+                                        <th align="center" scope="col">Project Name</th>
+                                        <th align="center" scope="col">Project Description</th>
+                                        <th align="center" scope="col">Purpose</th>
+                                        <th align="center" scope="col">Expected Date</th>
+                                        <th align="center" scope="col">Selected Quotation Amount (INR)</th>
+                                        <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                        <th align="center" scope="col">Imported / Indigenous</th>
+                                        <th align="center" scope="col">Status</th>
+                                        <th align="center" scope="col">Requested By</th>
+                                        <th align="center" scope="col">Requested Date</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    @*  foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
+                                    {*@
+                                    <tr>
+
+                                        <td>data.IndentID</td>
+                                        <td> </td>
+                                        <td>data.Company</td>
+                                        <td>data.BU_Project_Plan</td>
+                                        <td>data.LocatioWork</td>
+                                        <td>data.TypeofWorkDetails</td>
+                                        <td>data.EnclosureBQQFile</td>
+                                        <td>data.EnclosureDrawingFile</td>
+                                        <td>data.BudgetType</td>
+                                        <td>data.RateProposed</td>
+                                        <td>data.TAT</td>
+                                        <td>data.TentativeStartDate</td>
+                                        <td>data.TentativeCompletionDate</td>
+                                        <td>data.ProposedContractorName</td>
+                                        <td>data.VendorExistingLocation</td>
+                                        <td>data.ContractorDetailsAddressGST</td>
+
+                                    </tr>
+                                    @*   }*@
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- form start -->
+
+
+
+
+                    <table>
+
+
+                        <tr>
+                            <td style="width:24%">
+                                Selected Quotation
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="rbtnSelectQuote" runat="server"></asp:Label>
+                            </td>
+                            <td style="width:24%">
+                                Payment Terms
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="lblPaymentTerms" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                T&C With Selected Quotation
+                            </td>
+                            <td>
+                                <asp:Label ID="lblTnC" runat="server"></asp:Label>
+                            </td>
+                            <td style="width:24%">
+                                Delivery
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="lblDelivery" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Imported / Indigenous
+                            </td>
+                            <td>
+                                <asp:Label ID="drp_ImportedIndigenous" runat="server">
+                                </asp:Label>
+
+                            </td>
+
+                            <td style="width:24%">
+                                Freight
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="lblFreightt" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Justification
+                            </td>
+                            <td>
+                                <asp:Label ID="txt_jst" runat="server"></asp:Label>
+                            </td>
+
+                            <td style="width:24%">
+                                Installation Cost
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="lblInstallationCost" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                Benefit
+                            </td>
+                            <td>
+                                <asp:Label ID="txtBenefit" runat="server" TextMode="MultiLine" Rows="2" Columns="50"></asp:Label>
+                            </td>
+
+                            <td style="width:24%">
+                                Remarks
+                            </td>
+                            <td style="width:24%">
+                                <asp:Label ID="lblRemarks" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                IRR/Payback Period
+                            </td>
+                            <td>
+
+                                <asp:HyperLink ID="hlIRRPayback" runat="server" Visible="false" Target="_blank"></asp:HyperLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Projected Cash Outflow
+                            </td>
+
+
+
+                    </table>
+
+
+
+
+                    <div style="color:red">Approval Matrix</div>
+
+                    <div class="card container">
+                        <div class="card-body" style=" overflow:auto;">
+                            <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;">
+                                        <th align="center" scope="col">Action</th>
+                                        <th align="center" scope="col">NFA Requisition No</th>
+                                        <th scope="col">Indent ID</th>
+                                        <th align="center" scope="col">Asset Type</th>
+                                        <th align="center" scope="col">Old Asset Code</th>
+                                        <th align="center" scope="col">NFA Type</th>
+                                        <th align="center" scope="col">Project Name</th>
+                                        <th align="center" scope="col">Project Description</th>
+                                        <th align="center" scope="col">Purpose</th>
+                                        <th align="center" scope="col">Expected Date</th>
+                                        <th align="center" scope="col">Selected Quotation Amount (INR)</th>
+                                        <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                        <th align="center" scope="col">Imported / Indigenous</th>
+                                        <th align="center" scope="col">Status</th>
+                                        <th align="center" scope="col">Requested By</th>
+                                        <th align="center" scope="col">Requested Date</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    @*  foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
+                                    {*@
+                                    <tr>
+
+                                        <td>data.IndentID</td>
+                                        <td> </td>
+                                        <td>data.Company</td>
+                                        <td>data.BU_Project_Plan</td>
+                                        <td>data.LocatioWork</td>
+                                        <td>data.TypeofWorkDetails</td>
+                                        <td>data.EnclosureBQQFile</td>
+                                        <td>data.EnclosureDrawingFile</td>
+                                        <td>data.BudgetType</td>
+                                        <td>data.RateProposed</td>
+                                        <td>data.TAT</td>
+                                        <td>data.TentativeStartDate</td>
+                                        <td>data.TentativeCompletionDate</td>
+                                        <td>data.ProposedContractorName</td>
+                                        <td>data.VendorExistingLocation</td>
+                                        <td>data.ContractorDetailsAddressGST</td>
+
+                                    </tr>
+                                    @*   }*@
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -147,6 +495,39 @@
     </div>
     <!-- End Table Forms -->
     <!-- /.content -->
+
+
+
+
+    <div class="modal1" id="myModal1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+            <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-        - Modal footer -->
+      <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div          >
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 </div>
 
 <script>

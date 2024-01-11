@@ -1,0 +1,899 @@
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+
+@model CapExTSVS.Models1.VendorMastercustom;
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+@*<style>
+
+    div:where(.swal2-icon) .swal2-icon-content {
+        display: flex;
+        align-items: center;
+        /* font-size: 3.75em; */
+        font-size: larger;
+    }
+</style>*@
+
+
+
+    <style>
+        @@import url(https://fonts.googleapis.com/css?family=Montserrat);
+        /* css class for the registration form generated errors */
+
+        .profilepress-reg-status {
+            border-radius: 6px;
+            font-size: 17px;
+            line-height: 1.471;
+            padding: 10px 19px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            font-weight: normal;
+            display: block;
+            text-align: center;
+            vertical-align: middle;
+            margin: 5px 0;
+        }
+        /*form styles*/
+
+        #msform {
+            width: 400px;
+            margin: 50px auto 550px;
+            text-align: left;
+            position: relative;
+        }
+
+            #msform fieldset {
+                background: white;
+                border: 0 none;
+                border-radius: 3px;
+                box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+                padding: 20px 30px;
+                box-sizing: border-box;
+                width: 200%;
+                margin: 0 10%;
+                margin-left: -30%;
+                /*stacking fieldsets above each other*/
+                position: absolute;
+            }
+                /*Hide all except first fieldset*/
+
+                #msform fieldset:not(:first-of-type) {
+                    display: none;
+                }
+            /*inputs*/
+
+            #msform input,
+            #msform textarea {
+                padding: 15px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                margin-bottom: 10px;
+                width: 100%;
+                box-sizing: border-box;
+                font-family: montserrat;
+                color: #2C3E50;
+                font-size: 13px;
+            }
+            /*buttons*/
+
+            #msform .action-button {
+                width: 100px;
+                background: #27AE60;
+                font-weight: bold;
+                color: white;
+                border: 0 none;
+                border-radius: 1px;
+                cursor: pointer;
+                padding: 10px 5px;
+                margin: 10px 5px;
+            }
+
+                #msform .action-button:hover,
+                #msform .action-button:focus {
+                    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+                }
+        /*headings*/
+
+        .fs-title {
+            font-size: 15px;
+            text-transform: uppercase;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+
+        .fs-subtitle {
+            font-weight: normal;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        /*progressbar*/
+
+        #progressbar {
+            margin-bottom: 30px;
+            overflow: hidden;
+            /*CSS counters to number the steps*/
+            counter-reset: step;
+        }
+
+            #progressbar li {
+                list-style-type: none;
+                color: #616161;
+                text-transform: uppercase;
+                font-size: 9px;
+                width: 33.33%;
+                float: left;
+                position: relative;
+            }
+
+                #progressbar li:before {
+                    content: counter(step);
+                    counter-increment: step;
+                    width: 20px;
+                    line-height: 20px;
+                    display: block;
+                    font-size: 15px;
+                    color: #333;
+                    background: white;
+                    border-radius: 3px;
+                    margin: 0 auto 5px auto;
+                }
+
+                #progressbar li:first-child:after {
+                    /*connector not needed before the first step*/
+                    content: none;
+                }
+                /*marking active/completed steps green*/
+                /*The number of the step and the connector before it = green*/
+
+                #progressbar li.active:before,
+                #progressbar li.active:after {
+                    background: #27AE60;
+                    color: white;
+                }
+    </style>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!-- <h1 class="m-0">Create /Request Indent</h1> -->
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"> Vender Mapping</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">View Vender Mapping</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+
+                <div class="col-12 col-sm-12">
+                    <div class="card card-primary card-outline card-tabs">
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Personal Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Emergency Contact Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Emergency Contact Two</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Bank Details</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link " id="custom-tabs-three-settings1-tab" data-toggle="pill" href="#custom-tabs-three-settings1" role="tab" aria-controls="custom-tabs-three-settings1" aria-selected="false">Document Uploading</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-three-tabContent">
+                                <div class="tab-pane fade" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                              
+
+                                    <fieldset>
+                                        <h1 class=" panel panel-heading page-success text-danger">Personal Details</h1>
+                                        <h3 class="text-success text-center">(STEP 1)</h3>
+
+                                        <div class="row ">
+                                            <div class="col-md-12">
+                                                <asp:label>Name</asp:label>
+                                                <div class="form-group">
+
+                                                    <input name="step1_txt_name" type="text" id="step1_txt_name" class="form-control" placeholder="Enter Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Date Of Birth</asp:label>
+                                                    <input name="step1_txt_dob" id="step1_txt_dob" class="form-control" type="Date" placeholder="Enter Name">
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group col-md-3">
+
+                                                    <input id="step1_rdo_gender" type="radio" name="MeasurementSystem" value="step1_rdo_gender"><label for="step1_rdo_gender">Male</label>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <input id="step1_rdo_Female" type="radio" name="MeasurementSystem" value="step1_rdo_Female"><label for="step1_rdo_Female">Female</label>
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Father Name</asp:label>
+                                                    <input name="step1_txt_father" id="step1_txt_father" class="form-control" type="text" placeholder="Enter Father Name">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Mother Name</asp:label>
+                                                    <input name="step1_txt_mother" id="step1_txt_mother" class="form-control" type="text" placeholder="Enter Mother Name">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label> Home Address</asp:label>
+                                                    <textarea name="step1_txt_address" rows="2" cols="20" id="step1_txt_address" class="form-control" type="text" placeholder="Enter Home Address" style="height:100px;"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Post Code</asp:label>
+                                                    <input name="step1_text_postcode" id="step1_text_postcode" class="form-control" type="number" placeholder="Enter Post Code">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label> Home Telephone</asp:label>
+                                                    <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" class="form-control" placeholder="Enter Home Telephone">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Mobile Number</asp:label>
+                                                    <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" class="form-control" type="Number" placeholder="Enter Mobile Number">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+
+
+                                    </fieldset>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+
+                                    <fieldset>
+                                        <h1 class=" panel panel-heading page-success text-danger">Emergency Contact Details</h1>
+                                        <h3 class="text-success text-center">(STEP 2)</h3>
+
+                                        <div class="row ">
+                                            <div class="col-md-12">
+                                                <asp:label>Name</asp:label>
+                                                <div class="form-group">
+
+                                                    <input name="step_2_text_name" type="text" id="step_2_text_name" class="form-control" placeholder="Enter Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Relationship To Employee</asp:label>
+                                                    <input name="step_2_txt_relationship" type="text" id="step_2_txt_relationship" class="form-control" placeholder="Enter Relationship To Employee">
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Post Code</asp:label>
+                                                    <input name="step_2_txt_Postcode" id="step_2_txt_Postcode" class="form-control" type="number" placeholder="Enter Post Code">
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Contact Address If Different From Above</asp:label>
+                                                    <textarea name="step_2_address" rows="2" cols="20" id="step_2_address" class="form-control" type="text" placeholder="EnterContact Address If Different From Above" style="height:100px;"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>  Telephone</asp:label>
+                                                    <input name="step_2_txt_tel" type="number" id="step_2_txt_tel" class="form-control" placeholder="Enter  Telephone">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Work Mobile Number</asp:label>
+                                                    <input name="step_2_txt_mobile" id="step_2_txt_mobile" class="form-control" type="Number" placeholder="Enter Working Mobile Number">
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <asp:label>Personal Number</asp:label>
+                                                    <input name="step_2_txt_personalnumber" id="step_2_txt_personalnumber" class="form-control" type="Number" placeholder="Enter Personal Number">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="button" name="previous" class="previous action-button" value="Previous">
+                                        <input type="button" name="next" class="next action-button" value="Next">
+                                    </fieldset>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                                
+                                    <fieldset>
+                <h1 class=" panel panel-heading page-success text-danger">Emergency Contact Two</h1>
+                <h3 class="text-success text-center">(STEP 3)</h3>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <asp:label>Name</asp:label>
+                        <div class="form-group">
+
+                            <input name="step_3_txt_name" type="text" id="step_3_txt_name" class="form-control" placeholder="Enter Name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <asp:label>Relationship </asp:label>
+                            <input name="step_3_txt_relationship" type="text" id="step_3_txt_relationship" class="form-control" placeholder="Enter Relationship ">
+
+                        </div>
+                    </div>
+
+
+                  <div class="col-md-6">
+                        <div class="form-group">
+                            <asp:label>  Telephone</asp:label>
+                            <input name="step_3_txt_tel" type="number" id="step_3_txt_tel" class="form-control" placeholder="Enter  Telephone">
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+           
+
+
+
+
+
+
+                <div class="row">
+                    
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <asp:label>Work Mobile Number</asp:label>
+                            <input name="step_3_txt_workmobile" id="step_3_txt_workmobile" class="form-control" type="Number" placeholder="Enter Working Mobile Number">
+
+                        </div>
+                    </div>
+
+
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <asp:label>Personal Number</asp:label>
+                            <input name="step_3_txt_personalnumber" id="step_3_txt_personalnumber" class="form-control" type="Number" placeholder="Enter Personal Number">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                 <div class="col-md-12">
+                        <div class="form-group">
+                            <asp:label>Are There Any Medical Condition We Should Know About In The Case Of An Emergency  </asp:label>
+                            <select name="step_3_drop_medicalcondition" id="step_3_drop_medicalcondition">
+	<option value="--Select--">--Select--</option>
+	<option value="Yes">Yes</option>
+	<option value="No">No</option>
+
+</select>
+                            
+
+                        </div>
+                    </div>
+
+                <textarea name="step_3_txt_medicalcondition" rows="2" cols="20" id="step_3_txt_medicalcondition" class="form-control" placeholder="Enter Are There Any Medical Condition We Should Know About In The Case Of An Emergency" style="height:50px;"></textarea>
+
+
+
+
+                 <input type="button" name="previous" class="previous action-button" value="Previous">
+                <input type="button" name="next" class="next action-button" value="Next">
+
+
+               
+            </fieldset>
+            
+                                
+                                
+                                </div>
+                                <div class="tab-pane fade active show" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
+                                <fieldset>
+                <h1 class=" panel panel-heading page-success text-danger">Bank Details</h1>
+                <h3 class="text-success text-center">(STEP 4)</h3>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <asp:label>Bank Name</asp:label>
+                        <div class="form-group">
+
+                            <input name="step_4_txt_bankname" type="text" id="step_4_txt_bankname" class="form-control" placeholder="Enter Bank Name">
+                        </div>
+                    </div>
+
+                     <div class="col-md-12">
+                        <asp:label>Account Number</asp:label>
+                        <div class="form-group">
+
+                            <input name="step_4_txt_accountnumber" type="text" id="step_4_txt_accountnumber" class="form-control" placeholder="Enter Account Number">
+                        </div>
+                    </div>
+
+                     <div class="col-md-12">
+                        <asp:label>IFSC Code</asp:label>
+                        <div class="form-group">
+
+                            <input name="step_4_txt_ifsc_code" type="text" id="step_4_txt_ifsc_code" class="form-control" placeholder="Enter IFSC Code">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <asp:label>Branch / Address Of Bank</asp:label>
+                        <div class="form-group">
+
+                            <textarea name="step_4_txt_branch_address" rows="2" cols="20" id="step_4_txt_branch_address" class="form-control" placeholder="Enter Branch / Address Of Bank" style="height:50px;"></textarea>
+                        </div>
+                    </div>
+
+                   
+
+
+                 
+
+
+
+                </div>
+
+           
+
+
+
+               
+                 <input type="button" name="previous" class="previous action-button" value="Previous">
+                <input type="button" name="next" class="next action-button" value="Next">
+            </fieldset>
+            
+                                </div>
+
+
+
+                                <div class="tab-pane fade" id="custom-tabs-three-settings1" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+
+                         <fieldset>
+                <h1 class=" panel panel-heading page-success text-danger">Document Upload</h1>
+                <h3 class="text-success text-center">(STEP 5)</h3>
+
+                <div class="row ">
+                    <div class="col-md-6">
+                        <asp:label>Passport size photo - 2 nos</asp:label>
+                        <div class="form-group">
+                            <input type="file" multiple="multiple" name="step_5_file_photo" id="step_5_file_photo" class="form-control">  
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <asp:label> Aadhar card</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_file_addhar" id="step_5_file_addhar" class="form-control">  
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <asp:label>Pan card</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_file_pancard" id="step_5_file_pancard" class="form-control">  
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <asp:label>Voter ID</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_file_voterid" id="step_5_file_voterid" class="form-control">  
+                            
+                        </div>
+                    </div>
+                   
+                    
+                </div>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <asp:label>Education proof (like, 10th 12th &amp; graduation certificate and marksheet)</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_educationproof" id="step_5_educationproof" class="form-control">  
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <asp:label>Experience letter</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_file_experience_letter" id="step_5_file_experience_letter" class="form-control">  
+                            
+                        </div>
+                    </div>
+
+                        </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <asp:label>NOC letter from last company
+        Etc.</asp:label>
+                        <div class="form-group">
+                            <input type="file" name="step_5_file_nocletter" id="step_5_file_nocletter" class="form-control">  
+                            
+                        </div>
+                    </div>
+                   
+
+                </div>
+                 
+
+
+
+                
+           
+
+
+
+                <input type="button" name="previous" class="previous action-button" value="Previous">
+               <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">
+            </fieldset>
+       
+                                    </div>
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+               <div class="card-footer">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    <!-- Table Forms -->
+
+    <br />
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"> View User Rights</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                    <div class="card-body">
+
+
+                        <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                            <thead>
+
+                                <tr>
+                                    <th>Action</th>
+                                    <th>ID</th>
+                                    <th>Vendor Code</th>
+                                    <th>Comapny Code</th>
+                                    <th>Firm Name</th>
+                                    <th>Contact No</th>
+
+                                    <th>Email Id</th>
+                                    <th>City</th>
+
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+
+
+@*
+                                @foreach (var data in  ViewData["GridData"] as IList<UspCapexSelVendorMasterResult>)
+                                {
+
+                                    <tr>
+
+                                        <td>
+                                            <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/Edit/@data.Id"></a></button><br>
+                                            <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br >
+                                            <button disabled=""  class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file" href="/viewPo/3594"></a></button>
+                                        </td>
+                                        <td>@data.Id</td>
+                                        <td>@data.Vendor_Code</td>
+                                        <td>@data.CompanyCode</td>
+                                        <td>@data.Firm_Name</td>
+                                        <td>@data.Firm_Contact_Number</td>
+
+                                        <td>@data.Firm_Email_Address</td>
+                                        <td>@data.City</td>
+
+
+
+
+
+
+                                    </tr>
+                                }*@
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
+                </form>
+
+
+
+
+
+
+
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- End Table Forms -->
+    <!-- /.content -->
+</div>
+
+@*@Html.Raw(ViewBag.Message)*@
+
+
+@section scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script>
+
+
+
+        $('#texamplabl').DataTable({
+            searching: true,
+            paging: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+
+
+
+
+              
+         //jQuery time
+    (function ($) {
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var left, opacity, scale; //fieldset properties which we will animate
+        var animating; //flag to prevent quick multi-click glitches
+
+        $(".next").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = (now * 50) + "%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'transform': 'scale(' + scale + ')'
+                    });
+                    next_fs.css({
+                        'left': left,
+                        'opacity': opacity
+                    });
+                },
+                duration: 800,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+        });
+
+        $(".previous").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            //de-activate current step on progressbar
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale previous_fs from 80% to 100%
+                    scale = 0.8 + (1 - now) * 0.2;
+                    //2. take current_fs to the right(50%) - from 0%
+                    left = ((1 - now) * 50) + "%";
+                    //3. increase opacity of previous_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'left': left
+                    });
+                    previous_fs.css({
+                        'transform': 'scale(' + scale + ')',
+                        'opacity': opacity
+                    });
+                },
+                duration: 800,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+        });
+
+    })(jQuery);
+
+
+
+
+    </script>
+}
+
+
+
+
+
+

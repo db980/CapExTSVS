@@ -576,7 +576,11 @@ namespace CapExTSVS.Controllers
         }
 
 
-       
+
+        public IActionResult EmployeeRegistration()
+        {
+            return View();
+        }
 
     }
 }

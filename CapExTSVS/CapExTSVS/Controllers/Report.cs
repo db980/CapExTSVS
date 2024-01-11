@@ -18,6 +18,7 @@ using Microsoft.ReportingServices.Interfaces;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using AspNetCore.Reporting;
 using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
 
 namespace CapExTSVS.Controllers
 {
@@ -109,10 +110,14 @@ namespace CapExTSVS.Controllers
                 //return File(result.MainStream, "application/msexcel", "Export.xls");
 
 
-
+                //Console.WriteLine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+                //Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+                //Console.WriteLine(System.Environment.CurrentDirectory);
+                //Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
+                //Console.WriteLine(Environment.CurrentDirectory);
 
                 string reportName = "TestReport";
-                string reportPath = Path.Combine("D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\RDLC\\", "Report1.rdlc"); //or webHostEnvironment.WebRootPath if your report is in wwwroot folder
+                string reportPath = Path.Combine(System.Environment.CurrentDirectory,"RDLC", "Report1.rdlc"); //or webHostEnvironment.WebRootPath if your report is in wwwroot folder
 
                 Stream reportDefinition; // your RDLC from file or resource
                                          //IEnumerable dataSource; // your datasource for the report
