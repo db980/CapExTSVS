@@ -32,15 +32,15 @@ namespace CapExTSVS.Controllers
         public ActionResult Login(Logindata login)
         {
 
-            var data = _dbcontext.UserMasterTemps.Where(a=>a.EmpCode==login.EID && a.Password==login.Password).ToList(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
+            var data = _dbcontext.UserCreate_Stor(login.EID, login.Password,"1", "UserCreateMasterGet").SingleOrDefault(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
 
 
-            if(data.Any())
+            if(data.EmpCode!="")
             {
 
-                HttpContext.Session.SetString("usr", data.SingleOrDefault().EmpCode);
+                HttpContext.Session.SetString("usr", data.EmpCode.ToString());
 
-                user.id = data.SingleOrDefault().EmpCode;
+                user.id = data.EmpCode;
                 //user.Name = data.SingleOrDefault().name;
 
 
@@ -51,10 +51,6 @@ namespace CapExTSVS.Controllers
                 ViewBag.Message = Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
 
             }
-
-
-
-
 
 
             return View("index");

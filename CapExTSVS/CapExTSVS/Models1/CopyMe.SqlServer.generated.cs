@@ -1086,9 +1086,9 @@ namespace DataModels
 	[Table(Schema="dbo", Name="UserMaster_Temp")]
 	public partial class UserMasterTemp
 	{
-		[Column("empCode"),  Nullable] public string EmpCode  { get; set; } // varchar(20)
-		[Column("password"), Nullable] public string Password { get; set; } // varchar(50)
-		[Column("isActive"), Nullable] public string IsActive { get; set; } // varchar(10)
+		[Column("empCode"),  Nullable] public string? EmpCode  { get; set; } // varchar(20)
+		[Column("password"), Nullable] public string? Password { get; set; } // varchar(50)
+		[Column("isActive"), Nullable] public string? IsActive { get; set; } // varchar(10)
 	}
 
 	[Table(Schema="dbo", Name="Vendor_Master")]
@@ -6112,10 +6112,42 @@ namespace DataModels
 			[Column("")] public string Column1 { get; set; }
 		}
 
-		#endregion
-	}
+        #endregion
 
-	public static partial class SqlFunctions
+
+
+
+        public static IEnumerable<UserMasterTemp> UserCreate_Stor(this CapExTSDB dataConnection, string username, string password, string Active, string status)
+        {
+            var parameters = new[]
+            {
+                new DataParameter("@username", username, LinqToDB.DataType.VarChar)
+                {
+                    Size = 10
+                },
+                new DataParameter("@password",     password,     LinqToDB.DataType.NVarChar)
+                {
+                    Size = 10
+                },
+                new DataParameter("@Active",   Active,   LinqToDB.DataType.VarChar)
+                {
+                    Size = 500
+                },
+                new DataParameter("@status",      status,      LinqToDB.DataType.VarChar)
+                {
+                    Size = 100
+                }
+            };
+
+            var ms = dataConnection.MappingSchema;
+
+            return dataConnection.QueryProc<UserMasterTemp>("[dbo].[UserCreate]", parameters);
+
+        }
+
+    }
+
+    public static partial class SqlFunctions
 	{
 		#region CapexFunSelCurrentWith
 
