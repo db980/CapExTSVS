@@ -1091,7 +1091,51 @@ namespace DataModels
 		[Column("isActive"), Nullable] public string? IsActive { get; set; } // varchar(10)
 	}
 
-	[Table(Schema="dbo", Name="Vendor_Master")]
+
+
+   // NEmp_Detail
+
+
+
+         public class NEmp_Detail
+    {
+        public string Name { get; set; }
+        public DateTime DOB { get; set; }
+        public string Gender { get; set; }
+        public string Father_name { get; set; }
+        public string Mother_Name { get; set; }
+        public string Home_address { get; set; }
+        public string Post_code { get; set; }
+        public string Home_tel { get; set; }
+        public string Mobile { get; set; }
+        public string EName { get; set; }
+        public string ERelationship { get; set; }
+        public string EContact_address { get; set; }
+        public string EPost_code { get; set; }
+        public string EHome_tel { get; set; }
+        public string EWorkMobile { get; set; }
+        public string Personalmobile { get; set; }
+        public string ETName { get; set; }
+        public string ETRelationship { get; set; }
+        public string ETHome_tel { get; set; }
+        public string ETWorkMobile { get; set; }
+        public string ETPersonalmobile { get; set; }
+        public string Medicalcondition_drop { get; set; }
+        public string Medicalcondition { get; set; }
+        public string BankName { get; set; }
+        public string AccountNumber { get; set; }
+        public string IFsc_code { get; set; }
+        public string Branch_address { get; set; }
+        public int ID { get; set; }
+    }
+
+
+
+
+
+
+
+    [Table(Schema="dbo", Name="Vendor_Master")]
 	public partial class VendorMaster
 	{
 		[Column(),                                Identity            ] public int       Id                         { get; set; } // int
@@ -6144,6 +6188,216 @@ namespace DataModels
             return dataConnection.QueryProc<UserMasterTemp>("[dbo].[UserCreate]", parameters);
 
         }
+
+
+
+		public static IEnumerable<UserMasterTemp> UserCreateEmployee_Stor(this CapExTSDB dataConnection,
+
+
+
+		   string @Action,
+		   string @Name,
+		   string @DOB,
+		   string @Gender,
+		   string @FatherName,
+		   string @MotherName,
+		   string @HomeAddress,
+		   string @PostCode,
+		   string @HomeTel,
+		   string @Mobile,
+		   string @EName,
+		   string @ERelationship,
+		   string @EContactAddress,
+		   string @EPostCode,
+		   string @EHomeTel,
+		   string @EWorkMobile,
+		   string @PersonalMobile,
+		   string @ETName,
+		   string @ETRelationship,
+		   string @ETHomeTel,
+		   string @ETWorkMobile,
+		   string @ETPersonalMobile,
+		   string @MedicalConditionDrop,
+		   string @MedicalCondition,
+		   string @BankName,
+		   string @AccountNumber,
+		   string @IFSCCode,
+		   string @BranchAddress
+
+
+
+
+
+
+
+
+
+					)
+		{
+			var parameters = new[]
+			{
+				new DataParameter("@Action", @Action, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+
+				  new DataParameter("@Name", @Name, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+
+
+
+				new DataParameter("@DOB", @DOB, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+
+			     new DataParameter("@Gender", @Gender, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@FatherName", @FatherName, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@MotherName", @MotherName, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@HomeAddress", @HomeAddress, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@PostCode", @PostCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@HomeTel", @HomeTel, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@Mobile", @Mobile, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+                 new DataParameter("@EName", @Mobile, LinqToDB.DataType.VarChar)
+                {
+                    Size = 100
+                },
+                 new DataParameter("@ERelationship", @ERelationship, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@EContactAddress", @EContactAddress, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				 new DataParameter("@EPostCode", @EPostCode, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				  new DataParameter("@EHomeTel", @EHomeTel, LinqToDB.DataType.VarChar)
+				{
+					Size = 100
+				},
+				  new DataParameter("@EWorkMobile", @EWorkMobile, LinqToDB.DataType.VarChar)
+								{
+									Size = 100
+								},
+				  new DataParameter("@PersonalMobile", @PersonalMobile, LinqToDB.DataType.VarChar)
+					{
+						Size = 100
+					},
+
+
+
+				 new DataParameter("@ETName", @ETName, LinqToDB.DataType.VarChar)
+				 {
+					 Size = 100
+				 },
+				 new DataParameter("@ETRelationship", @ETRelationship, LinqToDB.DataType.VarChar)
+				 {
+					 Size = 100
+				 },
+				   new DataParameter("@ETHomeTel", @ETHomeTel, LinqToDB.DataType.VarChar)
+				   {
+					   Size = 100
+				   },
+					 new DataParameter("@ETWorkMobile", @ETWorkMobile, LinqToDB.DataType.VarChar)
+					 {
+						 Size = 100
+					 },
+					   new DataParameter("@@ETPersonalMobile", @ETPersonalMobile, LinqToDB.DataType.VarChar)
+					   {
+						   Size = 100
+					   },
+
+						new DataParameter("@ETPersonalMobile", @ETPersonalMobile, LinqToDB.DataType.VarChar)
+						{
+							Size = 100
+						},
+
+
+						 new DataParameter("@MedicalConditionDrop", @MedicalConditionDrop, LinqToDB.DataType.VarChar)
+						 {
+							 Size = 100
+						 },
+
+						  new DataParameter("@MedicalCondition", @MedicalCondition, LinqToDB.DataType.VarChar)
+						  {
+							  Size = 100
+						  },
+
+
+						   new DataParameter("@BankName", @BankName, LinqToDB.DataType.VarChar)
+						   {
+							   Size = 100
+						   },
+
+
+						   new DataParameter("@AccountNumber", @AccountNumber, LinqToDB.DataType.VarChar)
+						   {
+							   Size = 100
+						   },
+
+
+
+
+						   new DataParameter("@IFSCCode", @IFSCCode, LinqToDB.DataType.VarChar)
+						   {
+							   Size = 100
+						   },
+
+							new DataParameter("@BranchAddress", @BranchAddress, LinqToDB.DataType.VarChar)
+							{
+								Size = 100
+							},
+
+			 };
+
+		
+            var ms = dataConnection.MappingSchema;
+
+            return dataConnection.QueryProc<UserMasterTemp>("[dbo].[ManageNEmpDetail]", parameters);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

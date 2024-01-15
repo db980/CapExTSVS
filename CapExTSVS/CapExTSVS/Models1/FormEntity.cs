@@ -169,4 +169,80 @@ namespace CapExTSVS.Models1
         public string BU_Lvl { get; set; }
         public string Approver2 { get; set; }
     }
+
+
+
+
+    public   class EmployeeRegistration
+    {
+ public string step1_txt_name                  { get; set; }
+ public string step1_txt_dob                   { get; set; }
+ public string MeasurementSystem               { get; set; }
+ public string step1_txt_father                { get; set; }
+ public string step1_txt_mother                { get; set; }
+ public string step1_txt_address               { get; set; }
+ public string step1_text_postcode             { get; set; }
+ public string step1_txt_hometel               { get; set; }
+ public string step1_txt_mobilenumber          { get; set; }
+ public string step_2_text_name                { get; set; }
+ public string step_2_txt_relationship         { get; set; }
+ public string step_2_txt_Postcode             { get; set; }
+ public string step_2_address                  { get; set; }
+ public string step_2_txt_tel                  { get; set; }
+ public string step_2_txt_mobile               { get; set; }
+ public string step_2_txt_personalnumber       { get; set; }
+ public string step_3_txt_name                 { get; set; }
+ public string step_3_txt_relationship         { get; set; }
+ public string step_3_txt_tel                  { get; set; }
+ public string step_3_txt_workmobile           { get; set; }
+ public string step_3_txt_personalnumber       { get; set; }
+ public string step_3_drop_medicalcondition    { get; set; }
+ public string step_3_txt_medicalcondition     { get; set; }
+ public string step_4_txt_bankname             { get; set; }
+ public string step_4_txt_accountnumber        { get; set; }
+ public string step_4_txt_ifsc_code            { get; set; }
+ public string step_4_txt_branch_address       { get; set; }
+ public  IFormFile step_5_file_photo               { get; set; }
+ public IFormFile step_5_file_addhar              { get; set; }
+ public IFormFile step_5_file_pancard             { get; set; }
+ public IFormFile step_5_educationproof           { get; set; }
+ public IFormFile step_5_file_experience_letter   { get; set; }
+ public IFormFile step_5_file_nocletter           { get; set; }
+    }
+
+
+    public class NEmp_Detail
+    {
+        public string Name { get; set; }
+        public DateTime DOB { get; set; }
+        public string Gender { get; set; }
+        public string Father_name { get; set; }
+        public string Mother_Name { get; set; }
+        public string Home_address { get; set; }
+        public string Post_code { get; set; }
+        public string Home_tel { get; set; }
+        public string Mobile { get; set; }
+        public string EName { get; set; }
+        public string ERelationship { get; set; }
+        public string EContact_address { get; set; }
+        public string EPost_code { get; set; }
+        public string EHome_tel { get; set; }
+        public string EWorkMobile { get; set; }
+        public string Personalmobile { get; set; }
+        public string ETName { get; set; }
+        public string ETRelationship { get; set; }
+        public string ETHome_tel { get; set; }
+        public string ETWorkMobile { get; set; }
+        public string ETPersonalmobile { get; set; }
+        public string Medicalcondition_drop { get; set; }
+        public string Medicalcondition { get; set; }
+        public string BankName { get; set; }
+        public string AccountNumber { get; set; }
+        public string IFsc_code { get; set; }
+        public string Branch_address { get; set; }
+        public int ID { get; set; }
+    }
+
+
+
 }

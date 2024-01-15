@@ -582,5 +582,63 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
+
+        public IActionResult EmployeeRegistrationSave(EmployeeRegistration data)
+        {
+
+            try
+            {
+
+           
+
+            var sa=_dbcontext.UserCreateEmployee_Stor(
+
+                "INSERT",
+          data.step1_txt_name, 
+          data.step1_txt_dob, 
+          data.MeasurementSystem, 
+          data.step1_txt_father, 
+          data.step1_txt_mother, 
+          data.step1_txt_address, 
+          data.step1_text_postcode, 
+          data.step1_txt_hometel, 
+          data.step1_txt_mobilenumber,
+          data.step_2_text_name, 
+          data.step_2_txt_relationship, 
+          data.step_2_address, 
+          data.step1_text_postcode, 
+          data.step_2_txt_tel, 
+          data.step_3_txt_workmobile, 
+          data.step_3_txt_personalnumber,
+          data.step_3_txt_name, 
+          data.step_3_txt_relationship, 
+          data.step_3_txt_tel, 
+          data.step_3_txt_workmobile, 
+          data.step_3_txt_personalnumber, 
+          data.step_3_drop_medicalcondition, 
+          data.step_3_txt_medicalcondition,
+          data.step_4_txt_bankname, 
+          data.step_4_txt_accountnumber, 
+          data.step_4_txt_ifsc_code,
+          data.step_4_txt_branch_address
+
+                );
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+            return View();
+        }
+
+
+
+        
+
     }
 }
