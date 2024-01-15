@@ -46,7 +46,7 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
-        public IActionResult VendorMappingData(VendorMastercustom vendorMastercustom)
+        public IActionResult VendorMappingData1(VendorMastercustom vendorMastercustom)
         {
 
             if (flag == 0)
@@ -153,7 +153,16 @@ namespace CapExTSVS.Controllers
         }
 
 
-        private void fillgrid(userRights Data)
+        public IActionResult UserRightsDelete(String id)
+        {
+
+            var da1 = id.Split(',');
+            var da = _dbcontext.CapexSelUserRights(da1[1], da1[0]).SingleOrDefault();
+            var d=_dbcontext.CapexDelUserRight(da.EmployeeId,da.RightId,da.EmployeeName);
+            return View("UserRights");
+        }
+
+            private void fillgrid(userRights Data)
         {
 
             ViewData["UserRightGrid"] = _dbcontext.CapexSelUserRights(Data.UserCode, Data.Rights.ToString()).AsQueryable() ;
