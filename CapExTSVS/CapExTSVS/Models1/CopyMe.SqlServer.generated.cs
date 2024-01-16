@@ -1093,40 +1093,43 @@ namespace DataModels
 
 
 
-   // NEmp_Detail
+    // NEmp_Detail
 
 
-
-         public class NEmp_Detail
+    
+    public class NEmp_Detail
     {
-        public string Name { get; set; }
-        public DateTime DOB { get; set; }
-        public string Gender { get; set; }
-        public string Father_name { get; set; }
-        public string Mother_Name { get; set; }
-        public string Home_address { get; set; }
-        public string Post_code { get; set; }
-        public string Home_tel { get; set; }
-        public string Mobile { get; set; }
-        public string EName { get; set; }
-        public string ERelationship { get; set; }
-        public string EContact_address { get; set; }
-        public string EPost_code { get; set; }
-        public string EHome_tel { get; set; }
-        public string EWorkMobile { get; set; }
-        public string Personalmobile { get; set; }
-        public string ETName { get; set; }
-        public string ETRelationship { get; set; }
-        public string ETHome_tel { get; set; }
-        public string ETWorkMobile { get; set; }
-        public string ETPersonalmobile { get; set; }
-        public string Medicalcondition_drop { get; set; }
-        public string Medicalcondition { get; set; }
-        public string BankName { get; set; }
-        public string AccountNumber { get; set; }
-        public string IFsc_code { get; set; }
-        public string Branch_address { get; set; }
-        public int ID { get; set; }
+     public string       Name { get; set; }        
+	public DateTime DOB                    { get; set; }
+	public string Gender				    { get; set; }
+	public string Father_name		    { get; set; }
+	public string Mother_Name		    { get; set; }
+	public string Home_address		    { get; set; }
+	public string Post_code			    { get; set; }
+	public string Home_tel			    { get; set; }
+	public string Mobile				    { get; set; }
+	public string EName				    { get; set; }
+	public string ERelationship		    { get; set; }
+	public string EContact_address	    { get; set; }
+	public string EPost_code			    { get; set; }
+	public string EHome_tel			    { get; set; }
+	public string EWorkMobile		    { get; set; }
+	public string Personalmobile		    { get; set; }
+	public string ETName				    { get; set; }
+	public string ETRelationship		    { get; set; }
+	public string ETHome_tel			    { get; set; }
+	public string ETWorkMobile		    { get; set; }
+	public string ETPersonalmobile	    { get; set; }
+	public string Medicalcondition_drop  { get; set; }
+	public string Medicalcondition	    { get; set; }
+	public string BankName			    { get; set; }
+	public string AccountNumber		    { get; set; }
+	public string IFsc_code			    { get; set; }
+	public string Branch_address		    { get; set; }
+      
+    public string PersonalID { get; set; }
+	public int ID { get; set; }
+
     }
 
 
@@ -6191,7 +6194,7 @@ namespace DataModels
 
 
 
-		public static IEnumerable<UserMasterTemp> UserCreateEmployee_Stor(this CapExTSDB dataConnection,
+		public static IEnumerable<NEmp_Detail> UserCreateEmployee_Stor(this CapExTSDB dataConnection,
 
 
 
@@ -6222,17 +6225,18 @@ namespace DataModels
 		   string @BankName,
 		   string @AccountNumber,
 		   string @IFSCCode,
-		   string @BranchAddress
+		   string @BranchAddress,
+
+
+            string  @ID ,
+			string @PersonalID
 
 
 
 
 
 
-
-
-
-					)
+                    )
 		{
 			var parameters = new[]
 			{
@@ -6328,10 +6332,7 @@ namespace DataModels
 					 {
 						 Size = 100
 					 },
-					   new DataParameter("@@ETPersonalMobile", @ETPersonalMobile, LinqToDB.DataType.VarChar)
-					   {
-						   Size = 100
-					   },
+					  
 
 						new DataParameter("@ETPersonalMobile", @ETPersonalMobile, LinqToDB.DataType.VarChar)
 						{
@@ -6374,12 +6375,31 @@ namespace DataModels
 								Size = 100
 							},
 
-			 };
+
+
+                            
+
+                            new DataParameter("@ID", @ID, LinqToDB.DataType.VarChar)
+                            {
+                                Size = 100
+                            },
+
+                             new DataParameter("@PersonalID", @PersonalID, LinqToDB.DataType.VarChar)
+                            {
+                                Size = 100
+                            },
+
+
+
+
+
+
+             };
 
 		
             var ms = dataConnection.MappingSchema;
 
-            return dataConnection.QueryProc<UserMasterTemp>("[dbo].[ManageNEmpDetail]", parameters);
+            return dataConnection.QueryProc<NEmp_Detail>("[dbo].[ManageNEmpDetail]", parameters);
 
         }
 

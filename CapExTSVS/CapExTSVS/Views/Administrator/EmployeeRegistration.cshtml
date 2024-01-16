@@ -1,6 +1,7 @@
-﻿@using static DataModels.CapExTSDBStoredProcedures;
+﻿@using DataModels;
+@using static DataModels.CapExTSDBStoredProcedures;
 
-@model CapExTSVS.Models1.VendorMastercustom;
+@model CapExTSVS.Models1.EmployeeRegistration;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -222,18 +223,41 @@
                                         <h3 class="text-success text-center">(STEP 1)</h3>
 
                                         <div class="row ">
+
+
+                                                <div class="col-md-12" style="display:none">
+                                                    <asp:label>Employee Code</asp:label>
+                                                    <div class="form-group">
+
+                                                        <input name="ID" value="@(Model != null ? Model.ID : "") " type="text" class="form-control" placeholder="Enter Name" />
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-12">
+                                                    <asp:label>Employee Code</asp:label>
+                                                    <div class="form-group">
+
+                                                        <input name="step1_Empolyee_Code" value="@(Model != null ? Model.step1_Empolyee_Code : "") " type="text" class="form-control" placeholder="Enter Name" />
+                                                    </div>
+                                                </div>
+
+
+
                                             <div class="col-md-12">
                                                 <asp:label>Name</asp:label>
                                                 <div class="form-group">
 
-                                                    <input name="step1_txt_name" type="text" name="step1_txt_name" class="form-control" placeholder="Enter Name">
+                                                        <input name="step1_txt_name" value="@(Model != null ? Model.step1_txt_name : "") " type="text" class="form-control" placeholder="Enter Name" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Date Of Birth</asp:label>
-                                                    <input name="step1_txt_dob" id="step1_txt_dob" class="form-control" type="Date" placeholder="Enter Name">
+                                                   
+                                                        <input name="step1_txt_dob" value="@(Model != null ? Convert.ToDateTime( Model.step1_txt_dob).ToString("dd/mm/yyyy") : "") " id="step1_txt_dob" class="form-control" type="Date" placeholder="Enter Name">
 
                                                 </div>
                                             </div>
@@ -243,10 +267,10 @@
 
                                                 <div class="form-group col-md-3">
 
-                                                    <input id="step1_rdo_gender" type="radio" name="MeasurementSystem" value="step1_rdo_gender"><label for="step1_rdo_gender">Male</label>
+                                                        <input id="step1_rdo_gender" type="radio" name="MeasurementSystem" value="@(Model != null ? Model.MeasurementSystem : "") " ><label for="step1_rdo_gender">Male</label>
                                                 </div>
                                                 <div class="form-group col-md-3">
-                                                    <input id="step1_rdo_Female" type="radio" name="MeasurementSystem" value="step1_rdo_Female"><label for="step1_rdo_Female">Female</label>
+                                                        <input id="step1_rdo_Female" type="radio" name="MeasurementSystem" value="@(Model != null ? Model.MeasurementSystem : "") "><label for="step1_rdo_Female">Female</label>
                                                 </div>
 
 
@@ -262,7 +286,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Father Name</asp:label>
-                                                    <input name="step1_txt_father" id="step1_txt_father" class="form-control" type="text" placeholder="Enter Father Name">
+                                                        <input name="step1_txt_father" id="step1_txt_father" value="@(Model != null ? Model.step1_txt_father : "") " class="form-control" type="text" placeholder="Enter Father Name">
 
                                                 </div>
                                             </div>
@@ -270,7 +294,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Mother Name</asp:label>
-                                                    <input name="step1_txt_mother" id="step1_txt_mother" class="form-control" type="text" placeholder="Enter Mother Name">
+                                                        <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="text" placeholder="Enter Mother Name">
 
                                                 </div>
                                             </div>
@@ -282,7 +306,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label> Home Address</asp:label>
-                                                    <textarea name="step1_txt_address" rows="2" cols="20" id="step1_txt_address" class="form-control" type="text" placeholder="Enter Home Address" style="height:100px;"></textarea>
+                                                        <textarea name="step1_txt_address" rows="2" cols="20" id="step1_txt_address" value="@(Model != null ? Model.step1_txt_address : "") " class="form-control" type="text" placeholder="Enter Home Address" style="height:100px;"></textarea>
 
                                                 </div>
                                             </div>
@@ -290,7 +314,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Post Code</asp:label>
-                                                    <input name="step1_text_postcode" id="step1_text_postcode" class="form-control" type="number" placeholder="Enter Post Code">
+                                                        <input name="step1_text_postcode" id="step1_text_postcode" value="@(Model != null ? Model.step1_text_postcode : "") " class="form-control" type="number" placeholder="Enter Post Code">
 
                                                 </div>
                                             </div>
@@ -304,7 +328,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label> Home Telephone</asp:label>
-                                                    <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" class="form-control" placeholder="Enter Home Telephone">
+                                                        <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" value="@(Model != null ? Model.step1_txt_hometel : "") " class="form-control" placeholder="Enter Home Telephone">
 
                                                 </div>
                                             </div>
@@ -312,7 +336,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Mobile Number</asp:label>
-                                                    <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" class="form-control" type="Number" placeholder="Enter Mobile Number">
+                                                        <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" value="@(Model != null ? Model.step1_txt_mobilenumber : "") " class="form-control" type="Number" placeholder="Enter Mobile Number">
 
                                                 </div>
                                             </div>
@@ -340,14 +364,14 @@
                                                 <asp:label>Name</asp:label>
                                                 <div class="form-group">
 
-                                                    <input name="step_2_text_name" type="text" id="step_2_text_name" class="form-control" placeholder="Enter Name">
+                                                        <input name="step_2_text_name" value="@(Model != null ? Model.step_2_text_name : "") " type="text" id="step_2_text_name" class="form-control" placeholder="Enter Name">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Relationship To Employee</asp:label>
-                                                    <input name="step_2_txt_relationship" type="text" id="step_2_txt_relationship" class="form-control" placeholder="Enter Relationship To Employee">
+                                                        <input name="step_2_txt_relationship" value="@(Model != null ? Model.step_2_txt_relationship : "") " type="text" id="step_2_txt_relationship" class="form-control" placeholder="Enter Relationship To Employee">
 
                                                 </div>
                                             </div>
@@ -356,7 +380,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Post Code</asp:label>
-                                                    <input name="step_2_txt_Postcode" id="step_2_txt_Postcode" class="form-control" type="number" placeholder="Enter Post Code">
+                                                        <input name="step_2_txt_Postcode" value="@(Model != null ? Model.step_2_txt_Postcode : "") " id="step_2_txt_Postcode" class="form-control" type="number" placeholder="Enter Post Code">
 
                                                 </div>
                                             </div>
@@ -374,7 +398,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Contact Address If Different From Above</asp:label>
-                                                    <textarea name="step_2_address" rows="2" cols="20" id="step_2_address" class="form-control" type="text" placeholder="EnterContact Address If Different From Above" style="height:100px;"></textarea>
+                                                        <textarea name="step_2_address" rows="2" cols="20" id="step_2_address" value="@(Model != null ? Model.step_2_address : "") " class="form-control" type="text" placeholder="EnterContact Address If Different From Above" style="height:100px;"></textarea>
 
                                                 </div>
                                             </div>
@@ -382,7 +406,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>  Telephone</asp:label>
-                                                    <input name="step_2_txt_tel" type="number" id="step_2_txt_tel" class="form-control" placeholder="Enter  Telephone">
+                                                        <input name="step_2_txt_tel" type="number" id="step_2_txt_tel" value="@(Model != null ? Model.step_2_txt_tel : "") " class="form-control" placeholder="Enter  Telephone">
 
                                                 </div>
                                             </div>
@@ -398,7 +422,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Work Mobile Number</asp:label>
-                                                    <input name="step_2_txt_mobile" id="step_2_txt_mobile" class="form-control" type="Number" placeholder="Enter Working Mobile Number">
+                                                        <input name="step_2_txt_mobile" id="step_2_txt_mobile" value="@(Model != null ? Model.step_2_txt_mobile : "") " class="form-control" type="Number" placeholder="Enter Working Mobile Number">
 
                                                 </div>
                                             </div>
@@ -407,7 +431,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Personal Number</asp:label>
-                                                    <input name="step_2_txt_personalnumber" id="step_2_txt_personalnumber" class="form-control" type="Number" placeholder="Enter Personal Number">
+                                                        <input name="step_2_txt_personalnumber" id="step_2_txt_personalnumber" value="@(Model != null ? Model.step_2_txt_personalnumber : "") " class="form-control" type="Number" placeholder="Enter Personal Number">
 
                                                 </div>
                                             </div>
@@ -429,14 +453,14 @@
                         <asp:label>Name</asp:label>
                         <div class="form-group">
 
-                            <input name="step_3_txt_name" type="text" id="step_3_txt_name" class="form-control" placeholder="Enter Name">
+                                                        <input name="step_3_txt_name" type="text" value="@(Model != null ? Model.step_3_txt_name : "") " id="step_3_txt_name" class="form-control" placeholder="Enter Name">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <asp:label>Relationship </asp:label>
-                            <input name="step_3_txt_relationship" type="text" id="step_3_txt_relationship" class="form-control" placeholder="Enter Relationship ">
+                                                        <input name="step_3_txt_relationship" value="@(Model != null ? Model.step_3_txt_relationship : "") " type="text" id="step_3_txt_relationship" class="form-control" placeholder="Enter Relationship ">
 
                         </div>
                     </div>
@@ -445,7 +469,7 @@
                   <div class="col-md-6">
                         <div class="form-group">
                             <asp:label>  Telephone</asp:label>
-                            <input name="step_3_txt_tel" type="number" id="step_3_txt_tel" class="form-control" placeholder="Enter  Telephone">
+                                                        <input name="step_3_txt_tel" type="number" value="@(Model != null ? Model.step_3_txt_tel : "") " id="step_3_txt_tel" class="form-control" placeholder="Enter  Telephone">
 
                         </div>
                     </div>
@@ -467,7 +491,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <asp:label>Work Mobile Number</asp:label>
-                            <input name="step_3_txt_workmobile" id="step_3_txt_workmobile" class="form-control" type="Number" placeholder="Enter Working Mobile Number">
+                                                        <input name="step_3_txt_workmobile" id="step_3_txt_workmobile" value="@(Model != null ? Model.step_3_txt_workmobile : "") " class="form-control" type="Number" placeholder="Enter Working Mobile Number">
 
                         </div>
                     </div>
@@ -476,7 +500,7 @@
                      <div class="col-md-6">
                         <div class="form-group">
                             <asp:label>Personal Number</asp:label>
-                            <input name="step_3_txt_personalnumber" id="step_3_txt_personalnumber" class="form-control" type="Number" placeholder="Enter Personal Number">
+                                                        <input name="step_3_txt_personalnumber" id="step_3_txt_personalnumber" value="@(Model != null ? Model.step_3_txt_personalnumber : "") " class="form-control" type="Number" placeholder="Enter Personal Number">
 
                         </div>
                     </div>
@@ -487,7 +511,7 @@
                  <div class="col-md-12">
                         <div class="form-group">
                             <asp:label>Are There Any Medical Condition We Should Know About In The Case Of An Emergency  </asp:label>
-                            <select name="step_3_drop_medicalcondition" id="step_3_drop_medicalcondition">
+                                                    <select name="step_3_drop_medicalcondition" value="@(Model != null ? Model.step_3_drop_medicalcondition : "") " id="step_3_drop_medicalcondition">
 	<option value="--Select--">--Select--</option>
 	<option value="Yes">Yes</option>
 	<option value="No">No</option>
@@ -498,7 +522,7 @@
                         </div>
                     </div>
 
-                <textarea name="step_3_txt_medicalcondition" rows="2" cols="20" id="step_3_txt_medicalcondition" class="form-control" placeholder="Enter Are There Any Medical Condition We Should Know About In The Case Of An Emergency" style="height:50px;"></textarea>
+                                            <textarea name="step_3_txt_medicalcondition" rows="2" cols="20" value="@(Model != null ? Model.step_3_txt_medicalcondition : "") " id="step_3_txt_medicalcondition" class="form-control" placeholder="Enter Are There Any Medical Condition We Should Know About In The Case Of An Emergency" style="height:50px;"></textarea>
 
 
 
@@ -523,7 +547,7 @@
                         <asp:label>Bank Name</asp:label>
                         <div class="form-group">
 
-                            <input name="step_4_txt_bankname" type="text" id="step_4_txt_bankname" class="form-control" placeholder="Enter Bank Name">
+                                                        <input name="step_4_txt_bankname" value="@(Model != null ? Model.step_4_txt_bankname : "") " type="text" id="step_4_txt_bankname" class="form-control" placeholder="Enter Bank Name">
                         </div>
                     </div>
 
@@ -531,7 +555,7 @@
                         <asp:label>Account Number</asp:label>
                         <div class="form-group">
 
-                            <input name="step_4_txt_accountnumber" type="text" id="step_4_txt_accountnumber" class="form-control" placeholder="Enter Account Number">
+                                                        <input name="step_4_txt_accountnumber" value="@(Model != null ? Model.step_4_txt_accountnumber : "") " type="text" id="step_4_txt_accountnumber" class="form-control" placeholder="Enter Account Number">
                         </div>
                     </div>
 
@@ -539,7 +563,7 @@
                         <asp:label>IFSC Code</asp:label>
                         <div class="form-group">
 
-                            <input name="step_4_txt_ifsc_code" type="text" id="step_4_txt_ifsc_code" class="form-control" placeholder="Enter IFSC Code">
+                                                        <input name="step_4_txt_ifsc_code" value="@(Model != null ? Model.step_4_txt_ifsc_code : "") " type="text" id="step_4_txt_ifsc_code" class="form-control" placeholder="Enter IFSC Code">
                         </div>
                     </div>
 
@@ -547,7 +571,7 @@
                         <asp:label>Branch / Address Of Bank</asp:label>
                         <div class="form-group">
 
-                            <textarea name="step_4_txt_branch_address" rows="2" cols="20" id="step_4_txt_branch_address" class="form-control" placeholder="Enter Branch / Address Of Bank" style="height:50px;"></textarea>
+                                                        <textarea name="step_4_txt_branch_address" rows="2" cols="20" value="@(Model != null ? Model.step_4_txt_branch_address : "") " id="step_4_txt_branch_address" class="form-control" placeholder="Enter Branch / Address Of Bank" style="height:50px;"></textarea>
                         </div>
                     </div>
 
@@ -695,7 +719,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form  class="form-horizontal">
                     <div class="card-body">
 
 
@@ -704,14 +728,26 @@
 
                                 <tr>
                                     <th>Action</th>
-                                    <th>ID</th>
-                                    <th>Vendor Code</th>
-                                    <th>Comapny Code</th>
-                                    <th>Firm Name</th>
-                                    <th>Contact No</th>
+                                    <th> ID</th>
+                                    <th> PersonalID</th>
 
-                                    <th>Email Id</th>
-                                    <th>City</th>
+                                   <th> Name</th>
+                                   <th> DOB</th>
+                                    <th> Gender</th>
+                                   <th> Father name</th>
+                                   <th> Mother Name</th>
+                                   <th> Home Address</th>
+                                   <th> Post Code</th>
+                                   <th> Home Tel</th>
+                                   <th> Mobile</th>
+                                  
+                            
+                                   <th> Bank Name</th>
+                                   <th> Account Number</th>
+                                   <th> IFSC  CODE</th>
+                                   <th> Branch Address</th>
+                                  
+                                  
 
 
                                 </tr>
@@ -720,6 +756,46 @@
                             <tbody>
 
 
+
+                                
+                                @if (ViewData["EmployeeRegistrationGrid"] != null)
+                                 {
+                                    @foreach (var data in ViewData["EmployeeRegistrationGrid"] as IList<NEmp_Detail>)
+                                    {
+                                     <tr>
+
+                                    <td>
+
+
+                                                <button class="badge bg-success btn btn-sm"><a class="fa fa-edit" href="/Administrator/EmployeeRegistrationEdit/@data.ID.ToString(),Edit"></a></button><br>
+                                                <button class="badge bg-danger btn btn-sm"><a class="fa fa-trash" href="/Administrator/EmployeeRegistrationEdit/@data.ID.ToString(),DEL"></a></button><br>
+                                           @*     <button class="badge bg-info btn btn-sm"><a target="_self" class="fa fa-file" href="/Administrator/EmployeeRegistrationEdit/@data.ID.ToString()"></a></button>*@
+
+                                     
+
+                                    </td>
+                                    <td> @data.ID</td>
+                                    <td> @data.PersonalID</td>
+                                      
+                                    <td> @data.Name</td>
+                                    <td> @data.DOB</td>
+                                    <td> @data.Gender</td>
+                                    <td> @data.Father_name</td>
+                                    <td> @data.Mother_Name</td>
+                                    <td> @data.Home_address</td>
+                                    <td> @data.Post_code</td>
+                                    <td> @data.Home_tel</td>
+                                    <td> @data.Mobile</td>
+                                    
+                                    <td> @data.BankName</td>
+                                    <td> @data.AccountNumber</td>
+                                    <td> @data.IFsc_code</td>
+                                    <td> @data.Branch_address</td>
+
+                                    </tr>
+                                        
+                                    }
+                                }
 
 @*
                                 @foreach (var data in  ViewData["GridData"] as IList<UspCapexSelVendorMasterResult>)

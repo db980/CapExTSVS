@@ -202,7 +202,10 @@ namespace CapExTSVS.Models1
  public string step_4_txt_accountnumber        { get; set; }
  public string step_4_txt_ifsc_code            { get; set; }
  public string step_4_txt_branch_address       { get; set; }
- public  IFormFile step_5_file_photo               { get; set; }
+        public string ID { get; set; }
+        public string PersonalID { get; set; }
+        public string step1_Empolyee_Code { get; set; }
+  public  IFormFile step_5_file_photo               { get; set; }
  public IFormFile step_5_file_addhar              { get; set; }
  public IFormFile step_5_file_pancard             { get; set; }
  public IFormFile step_5_educationproof           { get; set; }
@@ -211,7 +214,7 @@ namespace CapExTSVS.Models1
     }
 
 
-    public class NEmp_Detail
+    public class NEmp_DetailComm
     {
         public string Name { get; set; }
         public DateTime DOB { get; set; }
@@ -240,9 +243,21 @@ namespace CapExTSVS.Models1
         public string AccountNumber { get; set; }
         public string IFsc_code { get; set; }
         public string Branch_address { get; set; }
+
+
+
+        public string step1_Empolyee_Code { get; set; }
         public int ID { get; set; }
     }
 
+
+
+    public partial class UserMasterTempComm
+    {
+        [Column("empCode"), Nullable] public string? EmpCode { get; set; } // varchar(20)
+        [Column("password"), Nullable] public string? Password { get; set; } // varchar(50)
+        [Column("isActive"), Nullable] public string? IsActive { get; set; } // varchar(10)
+    }
 
 
 }

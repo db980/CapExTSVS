@@ -34,9 +34,20 @@ namespace CapExTSVS.Controllers
 
             var data = _dbcontext.UserCreate_Stor(login.EID, login.Password,"1", "UserCreateMasterGet").SingleOrDefault(); //txtCapexCode.Text.Trim(), ddlStatus.SelectedValue.ToString()
 
-
+            if (data == null)
+            {
+                ViewBag.Message = Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
+                return View("index");
+            }
+           
             if(data.EmpCode!="")
             {
+                if (data.IsActive != "1")
+                {
+                    ViewBag.Message = Notification.Show("Inalid User Not  Active", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
+
+                    return View("index");
+                }
 
                 HttpContext.Session.SetString("usr", data.EmpCode.ToString());
 
@@ -46,6 +57,7 @@ namespace CapExTSVS.Controllers
 
                 return RedirectToAction("inddashboard", "indent");
             }
+           
             else
             {
                 ViewBag.Message = Notification.Show("Inalid User & Password", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);

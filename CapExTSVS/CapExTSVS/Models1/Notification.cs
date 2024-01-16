@@ -64,6 +64,9 @@ namespace toastr.Net
         }
 
 
+
+
+
         public static string PopupSave()
         {
 
@@ -71,6 +74,22 @@ namespace toastr.Net
             var scriptOption = "<script>";
 
             scriptOption += "Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"success\",\r\n  title: \"Data  Saved SuccessFully\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});;";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
+
+
+        public static string PopupSaveCustom(string msg)
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += "Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"success\",\r\n  title: \""+ msg + "\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});;";
             scriptOption += "</script>";
 
             return scriptOption;

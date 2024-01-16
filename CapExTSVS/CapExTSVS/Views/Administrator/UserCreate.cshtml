@@ -1,0 +1,425 @@
+﻿@using static DataModels.CapExTSDBStoredProcedures;
+@model CapExTSVS.Models1.UserMasterTempComm;
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+<style>
+    .multiselect {
+        width: 100%;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+        .selectBox select {
+            width: 100%;
+        }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #mySelectOptions {
+        display: none;
+        border: 0.5px #7c7c7c solid;
+        background-color: #ffffff;
+        max-height: 150px;
+        overflow-y: scroll;
+    }
+
+        #mySelectOptions label {
+            display: block;
+            font-weight: normal;
+            display: block;
+            white-space: nowrap;
+            min-height: 1.2em;
+            background-color: #ffffff00;
+            padding: 0 2.25rem 0 .75rem;
+            /* padding: .375rem 2.25rem .375rem .75rem; */
+        }
+
+            #mySelectOptions label:hover {
+                background-color: #1e90ff;
+            }
+</style>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">View Indent</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    @*  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">View Indent </li>
+                    </ol>*@
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Horizontal Form</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <form action="/Administrator/UserCreateEdit" method="post" class="form-horizontal">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Create User</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+
+
+
+                                <div class="card-body">
+
+
+
+
+
+
+                                    <div class="form-group row">
+
+
+
+
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Code </label>
+
+                                        <div class="col-sm-10">
+
+
+
+
+                                            @*    <div id="myMultiselect" class="multiselect">
+                                            <div id="mySelectLabel" name="CompanyIds" class="selectBox" onclick="toggleCheckboxArea()">
+                                            <select name="CompanyIds" class="form-select">
+
+                                            <option>somevalue</option>
+                                            </select>
+                                            <div class="overSelect"></div>
+                                            </div>
+                                            *@
+
+
+
+                                            <select class="form-control dropdown" id="inputEmail3" value="@(Model != null ?  Model.EmpCode : "") " name="EmpCode" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
+                                                <option Selected="True" Value="0">Select</option>
+                                                @if (ViewData["UserCreateDropdown"] != null)
+                                                {
+                                                    @foreach (var da in ViewData["UserCreateDropdown"] as IList<DataModels.NEmp_Detail>)
+                                                    {
+                                                        <option Value="@da.PersonalID">@da.PersonalID</option>
+
+                                                    }
+                                                }
+                                                @*<option Value="Budgeted">Capex</option>
+                                                <option Value="NonBudgeted">Opex</option>*@
+
+
+                                            </select>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group row">
+
+
+
+
+
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Password </label>
+
+                                    <div class="col-sm-10">
+
+
+
+                                        <input type="password"  name="Password" id="myInput" class="form-control">
+
+
+                                        <input type="checkbox" onclick="myFunction()">Show Password
+
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+
+
+
+
+
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Status </label>
+
+                                    <div class="col-sm-10">
+
+
+
+                                       
+
+                                        <select class="form-control dropdown" value="@(Model != null ?  Model.IsActive : "") " id="inputEmail3" name="IsActive" placeholder="Enter Budget">
+                                            <option Selected="True" Value="0">Select</option>
+
+
+
+                                            <option Value="1">Active</option>
+                                            <option Value="0">Inactive</option>
+
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button type="submit" class="btn btn-default float-right">Cancel</button>
+                            </div>
+                            <!-- /.card-footer -->
+                        </form>
+                    </div>
+            </div><!-- /.container-fluid -->
+    </section>
+
+    </br>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- /.card -->
+                    <br />
+
+
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">View Indent</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style=" overflow:auto;">
+                            <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        @* <th>Action</th>*@
+
+                                        <th>Emp Code</th>
+                                        <th>Password</th>
+                                        <th>Status</th>
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    @if (ViewData["UserCreateGrid"] != null)
+                                    {
+                                        @foreach (var data in ViewData["UserCreateGrid"] as IList<DataModels.UserMasterTemp>)
+                                        {
+                                            <tr>
+
+                                                @* <td></td>*@
+                                                <td>@data.EmpCode </td>
+
+                                                <td>@data.Password</td>
+                                                <td>
+
+                                                    @if (@data.IsActive == "1")
+                                                    {
+                                                        <span class="badge bg-success">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">InActive</span>
+                                                    }
+
+                                                </td>
+
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+
+
+
+
+</div>
+        </div><!-- /.container-fluid -->
+    </section>
+<!-- /.content -->
+</div>
+
+
+<script>
+
+    //$('#exampla').dataTable({
+
+    //});
+
+
+
+
+
+
+    window.onload = (event) => {
+        initMultiselect();
+    };
+
+
+
+
+    function initMultiselect() {
+        checkboxStatusChange();
+
+        document.addEventListener("click", function (evt) {
+            var flyoutElement = document.getElementById('myMultiselect'),
+                targetElement = evt.target; // clicked element
+
+            do {
+                if (targetElement == flyoutElement) {
+                    // This is a click inside. Do nothing, just return.
+                    //console.log('click inside');
+                    return;
+                }
+
+                // Go up the DOM
+                targetElement = targetElement.parentNode;
+            } while (targetElement);
+
+            // This is a click outside.
+            toggleCheckboxArea(true);
+            //console.log('click outside');
+        });
+    }
+
+    function checkboxStatusChange() {
+        var multiselect = document.getElementById("mySelectLabel");
+        var multiselectOption = multiselect.getElementsByTagName('option')[0];
+
+        var values = [];
+        var checkboxes = document.getElementById("mySelectOptions");
+        var checkedCheckboxes = checkboxes.querySelectorAll('input[type=checkbox]:checked');
+
+        for (const item of checkedCheckboxes) {
+            var checkboxValue = item.getAttribute('value');
+            values.push(checkboxValue);
+        }
+
+        var dropdownValue = "Nothing is selected";
+        if (values.length > 0) {
+            dropdownValue = values.join(', ');
+        }
+
+        multiselectOption.innerText = dropdownValue;
+    }
+
+    function toggleCheckboxArea(onlyHide = false) {
+        var checkboxes = document.getElementById("mySelectOptions");
+        var displayValue = checkboxes.style.display;
+
+        if (displayValue != "block") {
+            if (onlyHide == false) {
+                checkboxes.style.display = "block";
+            }
+        } else {
+            checkboxes.style.display = "none";
+        }
+    }
+
+
+
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "\companymappingdropdown",
+        //    success: function (data) {
+        //        console.log(data)
+        //        var $el = $("#mySelectOptions");
+        //        $el.empty(); // remove old options
+        //        //$el.append($("<option></option>")
+        //        //    .attr("value", '').text('Please Select'));
+
+        //        $.each(data, function (value, key) {
+
+        //               $e1.innerHTML '<label for="one"><input type="checkbox" id="' + value.code + '" onchange="checkboxStatusChange()" value="' + value.code + '" /> ' + value.code + '</label>'
+        //            //$el.append($('<label for= "one" > <input type= "checkbox" id = "one" onchange = "checkboxStatusChange()" value = "one" /> First checkbox < /label>')
+        //            //    .attr("value", value.CODE).text(key.DES));
+        //           // console.log($el)
+        //            //$el.append('<label for="one"><input type="checkbox" id="one" onchange="checkboxStatusChange()" value="one" /> First checkbox</label>');
+        //                $("#mySelectOptions").appendChild(tempWrapper.firstChild);
+        //            //var newChild = ' <label for="one"><input type="checkbox" id="one" onchange="checkboxStatusChange()" value="one" /> First checkbox</label>';
+        //            //$el.insertAdjacentHTML('beforeend', newChild);
+
+        //        });
+
+        //    }
+        //})
+</script>
+
+
+
+
