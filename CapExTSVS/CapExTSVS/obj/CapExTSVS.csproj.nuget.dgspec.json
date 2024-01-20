@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\gitproject\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj": {}
+    "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj": {}
   },
   "projects": {
-    "D:\\gitproject\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj": {
+    "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\gitproject\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
+        "projectUniqueName": "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
         "projectName": "CapExTSVS",
-        "projectPath": "D:\\gitproject\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
+        "projectPath": "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\CapExTSVS.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\gitproject\\CapExTSVS\\CapExTSVS\\obj\\",
+        "outputPath": "D:\\testing_@\\Self\\Running\\CapExTSVS\\CapExTSVS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://packagesource": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -123,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

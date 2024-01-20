@@ -65,7 +65,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-label" for="nfa_id">Incent ID:</label>
                                                     <div class="col-sm-6">
-                                                        <input class="form-control" type="text" id="nfa_id" name="nfa_id" required>
+                                                        <input class="form-control" readonly type="text" id="nfa_id" name="nfa_id" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,13 +89,27 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="company">Select Company:</label>
                                                     <div class="col-sm-10">
-                                                        <select id="company" class=" form-control dropdown" name="company" required>
-                                                            <option value="">Select</option>
-                                                            <option value="swetarstates_private">SWETARSTATES PRIVATE</option>
+                                                        <select class="form-control dropdown" id="inputEmail3" name="Comp_code" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
+                                                            <option Selected="True" Value="0">Select</option>
+                                                            @if (ViewData["CapexbindddlCompany"] != null)
+                                                            {
+                                                                @foreach (var da in ViewData["CapexbindddlCompany"] as IList<CapexSelddlResult>)
+                                                                {
+                                                                    <option Value="@da.CODE">@da.DES</option>
+
+                                                                }
+                                                            }
+                                                            @*<option Value="Budge                ted">Ca                pex</option>
+                                                            <option Value="NonBudgeted">Opex</option>*@
+
+
                                                         </select>
                                                     </div>
                                                 </div>
 
+
+
+                                                  
 
 
                                             </div>
@@ -106,8 +120,17 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="department">Select BUI Department:</label>
                                                     <div class="col-sm-12">
-                                                        <select id="department" class=" form-control dropdown" name="department" required>
-                                                            <option value="">Select</option>
+                                                        <select class="form-control dropdown" name="BU" id="BU" placeholder="Enter Budget">
+                                                            <option Selected="True" Value="0">Select</option>
+                                                            @* @foreach (var da in ViewData["CapexBindddlProject"] as IList<UspCapexSelComProjectResult>)
+                                                            {
+                                                            <option Value="@da.IndID">@da.BU</option>
+
+                                                            }*@
+                                                            @*<option Value="Budgeted">Capex</option>
+                                                            <option Value="NonBudgeted">Opex</option>*@
+
+
                                                         </select>
                                                     </div>
 
@@ -117,8 +140,12 @@
                                                     <label class="form-label" for="exp_type">Select Exp Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select id="exp_type" class=" form-control dropdown" name="exp_type" required>
-                                                            <option value="">Select</option>
+                                                        <select class="form-control dropdown" id="inputEmail3"  name="ReqType" placeholder="Enter Budget">
+                                                            <option Selected="True" Value="0">Select</option>
+                                                            <option Value="Budgeted">Capex</option>
+                                                            <option Value="NonBudgeted">Opex</option>
+
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -130,9 +157,14 @@
                                                     <label class="form-label" for="budget">Select Budget:</label>
                                                     <div class="col-sm-12">
 
-                                                        <select id="budget" class=" form-control dropdown" name="budget" required>
-                                                            <option value="">Select</option>
+                                                        <select class="form-control dropdown" id="inputEmail3" name="BudgetType" placeholder="Enter Budget">
+                                                            <option selected >Select</option>
+                                                            <option Value="Budgeted">Budgeted</option>
+                                                            <option Value="NonBudgeted">NonBudgeted</option>
+                                                            <option Value="CFC">CFC</option>
+
                                                         </select>
+
                                                     </div>
 
                                                 </div>
@@ -590,6 +622,36 @@
     $('#exampla').dataTable({
 
     });
+
+
+
+    function Dropdownchange(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlProject\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BU");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.indID).text(key.bu));
+
+
+                });
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
 </script>
 
 

@@ -582,6 +582,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.min.css" rel="
     @Html.Raw(ViewBag.Message2)
     <script>
         $('#exampla').dataTable().clear();
+          $('#exampla2').dataTable().clear();
+            $('#exampla3').dataTable().clear();
         $('#exampla').DataTable({
             
             dom: 'Blftipr'
@@ -592,6 +594,24 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.min.css" rel="
            
         });
 
+         $('#exampla2').DataTable({
+            
+            dom: 'Blftipr'
+            //dom: 'Bfrtip',
+        //buttons: [
+        //    'copy', 'csv', 'excel', 'pdf', 'print'
+        //]
+           
+        });
+         $('#exampla3').DataTable({
+            
+            dom: 'Blftipr'
+            //dom: 'Bfrtip',
+        //buttons: [
+        //    'copy', 'csv', 'excel', 'pdf', 'print'
+        //]
+           
+        });
 
 
 

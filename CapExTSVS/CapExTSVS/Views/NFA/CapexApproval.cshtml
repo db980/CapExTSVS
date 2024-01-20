@@ -56,7 +56,7 @@
                                     <div class="card-body" style=" overflow:auto;">
                                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                                             <thead>
-                                                <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;">
+                                                <tr >
                                                     <th align="center" scope="col">Action</th>
                                                     <th align="center" scope="col">NFA Requisition No</th>
                                                     <th scope="col">Indent ID</th>
@@ -78,29 +78,33 @@
                                             </thead>
                                             <tbody>
 
-                                              @*  foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
-                                                {*@
-                                                    <tr>
+                                            
+                                                @if (ViewData["CapexApprovalGrid"] != null)
+                                                {
+                                                    @foreach (var da in ViewData["CapexApprovalGrid"] as IList<CapexSelPendingforApprovalResult>)
+                                                    {
+                                                        <tr>
 
-                                                        <td>data.IndentID</td>
-                                                        <td> </td>
-                                                        <td>data.Company</td>
-                                                        <td>data.BU_Project_Plan</td>
-                                                        <td>data.LocatioWork</td>
-                                                        <td>data.TypeofWorkDetails</td>
-                                                        <td>data.EnclosureBQQFile</td>
-                                                        <td>data.EnclosureDrawingFile</td>
-                                                        <td>data.BudgetType</td>
-                                                        <td>data.RateProposed</td>
-                                                        <td>data.TAT</td>
-                                                        <td>data.TentativeStartDate</td>
-                                                        <td>data.TentativeCompletionDate</td>
-                                                        <td>data.ProposedContractorName</td>
-                                                        <td>data.VendorExistingLocation</td>
-                                                        <td>data.ContractorDetailsAddressGST</td>
+                                                            <th>@da.RequestNo</th>
+                                                            <th>@da.RequestNo</th>
+                                                            <th>@da.IndentID</th>
+                                                            <th>@da.Assettype</th>
+                                                            <th>@da.OldAssetCode</th>
+                                                            <th>@da.CapexType</th>
+                                                            <th>@da.PName</th>
+                                                            <th>@da.PDescription</th>
+                                                            <th>@da.Purpose</th>
+                                                            <th>@da.EdateCompletion</th>
+                                                            <th>@da.SelectQuotationAmount</th>
+                                                            <th>@da.TotalValueInINR</th>
+                                                            <th>@da.ImportedIndigenous</th>
+                                                            <th>@da.StatusDesc</th>
+                                                            <th>@da.CreatedBy</th>
+                                                            <th>@da.CreateDate</th>
 
-                                                    </tr>
-                                             @*   }*@
+                                                        </tr>
+                                                    }
+                                                }
 
                                             </tbody>
 

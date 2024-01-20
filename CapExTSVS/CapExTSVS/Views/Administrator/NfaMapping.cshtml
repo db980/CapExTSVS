@@ -9,12 +9,534 @@
 }
 
 
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">View Indent</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    @*  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">View Indent </li>
+                    </ol>*@
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title"> View company</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <div class="card-body">
+
+
+                    <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Capex  ID</th>
+                                <th>Capex Code</th>
+
+                                <th>Capex Type</th>
+                                <th>Description </th>
+
+
+                                @*<th>Company</th>*@
+                                <th>Project/Bu</th>
+                                <th>Request Type </th>
+
+                                <th>Budget Type </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+
+                           @* @if (ViewData["CapexbindddlGrid"] != null)
+                            {
+                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
+                                {
+
+
+                                    <tr>
+
+                                        <td>
+                                            <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
+                                            <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                            <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
+                                        </td>
+                                        <td>@da.CTID </td>
+                                        <td>@da.Comp_code </td>
+
+                                        <td>@da.CapexType </td>
+                                        <td>@da.Des </td>*@
+
+                                        @*<td>@da.com daCompany</td>*@
+                                       @* <td>@da.BU </td>
+                                        <td>@da.ReqType </td>
+
+                                        <td>@da.BudgetType  </td>
+
+                                    </tr>
+                                }
+                            }*@
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+            </form>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"> View company</h3>
+                </div>
+
+                </br>
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="card ">
+                          
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form action="/Administrator/UserRightsSearch" method="post" class="form-horizontal">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                       
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Id:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Type:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Amount F:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Amount To:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Dept_1:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Dept_2:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 3:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 4:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 5:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 6:  </label>
+
+                                            <input type="text" class="form-control" name="Data" />
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+
+                                     
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Remark:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- /.card-body -->
+                                    @*<div class="card-footer">
+                                    <button type="submit" class="btn btn-info">Submit</button>
+                                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                    </div>*@
+                                    <!-- /.card-footer -->
+                            </form>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+
+
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                    <div class="card-body">
+
+
+                        <table id="exampla2" class="table  table-bordered table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Capex  ID</th>
+                                    <th>Capex Code</th>
+
+                                    <th>Capex Type</th>
+                                    <th>Description </th>
+
+
+                                    @*<th>Company</th>*@
+                                    <th>Project/Bu</th>
+                                    <th>Request Type </th>
+
+                                    <th>Budget Type </th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+
+                                @* @if (ViewData["CapexbindddlGrid"] != null)
+                                {
+                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
+                                {
+
+
+                                <tr>
+
+                                <td>
+                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
+                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
+                                </td>
+                                <td>@da.CTID </td>
+                                <td>@da.Comp_code </td>
+
+                                <td>@da.CapexType </td>
+                                <td>@da.Des </td>*@
+
+                                @*<td>@da.com daCompany</td>*@
+                                @* <td>@da.BU </td>
+                                <td>@da.ReqType </td>
+
+                                <td>@da.BudgetType  </td>
+
+                                </tr>
+                                }
+                                }*@
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"> View company</h3>
+                </div>
+
+                </br>
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="card ">
+
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form action="/Administrator/UserRightsSearch" method="post" class="form-horizontal">
+                                <div class="card-body">
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Id:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Type:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">EMP ID:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">DEP 1:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">DEP 2:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 3:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 4:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 5:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6 ">
+
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">MD 6:  </label>
+
+                                            <input type="text" class="form-control" name="Data">
+
+
+                                        </div>
+
+                                     
+                                    </div>
+
+
+                                 
+
+                                    <!-- /.card-body -->
+                                    @*<div class="card-footer">
+                                    <button type="submit" class="btn btn-info">Submit</button>
+                                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                    </div>*@
+                                    <!-- /.card-footer -->
+                            </form>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+
+
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                    <div class="card-body">
+
+
+                        <table id="exampla2" class="table  table-bordered table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Capex  ID</th>
+                                    <th>Capex Code</th>
+
+                                    <th>Capex Type</th>
+                                    <th>Description </th>
+
+
+                                    @*<th>Company</th>*@
+                                    <th>Project/Bu</th>
+                                    <th>Request Type </th>
+
+                                    <th>Budget Type </th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+
+                                @* @if (ViewData["CapexbindddlGrid"] != null)
+                                {
+                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
+                                {
+
+
+                                <tr>
+
+                                <td>
+                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
+                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
+                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
+                                </td>
+                                <td>@da.CTID </td>
+                                <td>@da.Comp_code </td>
+
+                                <td>@da.CapexType </td>
+                                <td>@da.Des </td>*@
+
+                                @*<td>@da.com daCompany</td>*@
+                                @* <td>@da.BU </td>
+                                <td>@da.ReqType </td>
+
+                                <td>@da.BudgetType  </td>
+
+                                </tr>
+                                }
+                                }*@
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+</div>
 
 <script>
 
     $('#exampla').dataTable({
 
     });
+    $('#exampla2').dataTable({
+
+    });
+    
 </script>
 
 

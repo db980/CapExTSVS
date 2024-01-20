@@ -81,32 +81,35 @@
                                             </thead>
                                             <tbody>
 
-                                              @*  @foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
-                                                {*@
-                                                    <tr>
+                                                @if (ViewData["CapexSelApprovalHistoryGrid"] != null)
+                                                {
+                                                    @foreach (var da in ViewData["CapexSelApprovalHistoryGrid"] as IList<CapexSelApprovalHistoryResult>)
+                                                    {
+                                                        <tr>
 
-                                                        <td>data.IndentID</td>
-                                                        <td> </td>
-                                                        <td>data.Company</td>
-                                                        <td>data.BU_Project_Plan</td>
-                                                        <td>data.LocatioWork</td>
-                                                        <td>data.TypeofWorkDetails</td>
-                                                        <td>data.EnclosureBQQFile</td>
-                                                        <td>data.EnclosureDrawingFile</td>
-                                                        <td>data.BudgetType</td>
-                                                        <td>data.RateProposed</td>
-                                                        <td>data.TAT</td>
-                                                        <td>data.TentativeStartDate</td>
-                                                        <td>data.TentativeCompletionDate</td>
-                                                        <td>data.ProposedContractorName</td>
-                                                        <td>data.VendorExistingLocation</td>
-                                                        <td>data.ContractorDetailsAddressGST</td>
-                                                        <td>data.OtherRemarks</td>
-                                                        <td>data.CurrentWith</td>
-                                                        <td>data.StatusDesc</td>
-                                                      
-                                                    </tr>
-                                              @*  }*@
+                                                            <td>@da.RequestNo</td>
+                                                            <td>@da.RequestNo</td>
+                                                            <td>@da.IndentID</td>
+                                                            <td>@da.Assettype</td>
+                                                            <td>@da.OldAssetCode</td>
+                                                            <td>@da.CapexType</td>
+                                                            <td>@da.PName</td>
+                                                            <td>@da.PDescription</td>
+                                                            <td>@da.Purpose</td>
+                                                            <td>@da.EdateCompletion</td>
+                                                            <td>@da. PurchaseLocation</td>
+                                                            <td>@da.SelectQuotationAmount</td>
+                                                            <td>@da.TotalValueInINR</td>
+                                                            <td>@da.ImportedIndigenous</td>
+                                                            <td>@da.CurrentWith</td>
+                                                            <td>@da.Status</td>
+                                                            <td>@da.CreatedBy</td>
+                                                            <td>@da.CreateDate</td>
+                                                            <td>@da.ApprovedDate</td>
+                                                                
+                                                        </tr>
+                                                    }
+                                                }
 
                                             </tbody>
 

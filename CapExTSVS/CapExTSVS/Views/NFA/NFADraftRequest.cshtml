@@ -57,8 +57,9 @@
                                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                                             <thead>
                                                 <tr >
-                                                    <th scope="col">Details</th>
                                                     <th scope="col">NFA Requisition No</th>
+                                                    <th scope="col">Details</th>
+                                                    <th scope="col">Export</th>
                                                     <th scope="col">Indent ID</th>
                                                     <th scope="col">Asset Type</th>
                                                     <th scope="col">Old Asset Code</th>
@@ -68,12 +69,10 @@
                                                     <th scope="col">Purpose</th>
                                                     <th scope="col">Expected Date</th>
                                                     <th scope="col">Purchase Location</th>
-                                                    <th align="center" scope="col">Selected Quotation Amount (INR)</th>
-                                                    <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                                    <th scope="col">Quotated Amount (INR)</th>
                                                     <th scope="col">Imported / Indigenous</th>
                                                     <th scope="col">Current With</th>
                                                     <th scope="col">Status</th>
-                                                    <th scope="col">Requested By</th>
                                                     <th scope="col">Requested Date</th>
                                                     <th scope="col">Approved Date</th>
                                                 </tr>
@@ -81,33 +80,36 @@
                                             </thead>
                                             <tbody>
 
-                                               @* @foreach (var data in ViewData["GridBind"] as IList<IndentSelApprovalHistoryResult>)
-                                                {*@
-                                                    <tr>
+                                                @if (ViewData["NFADraftRequestGrid"] != null)
+                                                {
+                                                    @foreach (var da in ViewData["NFADraftRequestGrid"] as IList<CapexSelCapexRequestDetailsResult>)
+                                                    {
+                                                        <tr>
 
-                                                        <td>data.IndentID</td>
-                                                        <td> </td>
-                                                        <td>data.Company</td>
-                                                        <td>data.BU_Project_Plan</td>
-                                                        <td>data.LocatioWork</td>
-                                                        <td>data.TypeofWorkDetails</td>
-                                                        <td>data.EnclosureBQQFile</td>
-                                                        <td>data.EnclosureDrawingFile</td>
-                                                        <td>data.BudgetType</td>
-                                                        <td>data.RateProposed</td>
-                                                        <td>data.TAT</td>
-                                                        <td>data.TentativeStartDate</td>
-                                                        <td>data.TentativeCompletionDate</td>
-                                                        <td>data.ProposedContractorName</td>
-                                                        <td>data.VendorExistingLocation</td>
-                                                        <td>data.ContractorDetailsAddressGST</td>
-                                                        <td>data.OtherRemarks</td>
-                                                        <td>data.CurrentWith</td>
-                                                        <td>data.StatusDesc</td>
-                                                       
-                                                    </tr>
-                                             @*   }
-*@
+                                                            <td>@da.RequestNo</td>
+                                                            <td>@da.RequestNo</td>
+                                                            <td>@da.isprint</td>
+                                                            <td>@da.IndentID</td>
+                                                            <td>@da.Assettype</td>
+                                                            <td>@da.OldAssetCode</td>
+                                                            <td>@da.CapexType</td>
+                                                            <td>@da.PName</td>
+                                                            <td>@da.PDescription</td>
+                                                            <td>@da.Purpose</td>
+                                                            <td>@da.EdateCompletion</td>
+                                                            <td>@da.PurchaseLocation.ToString()</td>
+                                                            <td>@da.SelectQuotationAmount</td>
+                                                            <td>@da.ImportedIndigenous</td>
+                                                            <td>@da.CurrentWith</td>
+                                                            <td>@da.Status</td>
+                                                            <td>@da.CreateDate</td>
+                                                            <td>@da.ApprovedDate</td>
+
+                                                        </tr>
+                                                    }
+
+                                                }
+                                                
                                             </tbody>
 
                                         </table>
