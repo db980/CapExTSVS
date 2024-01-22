@@ -16,6 +16,7 @@ using LinqToDB;
 using static LinqToDB.Common.Configuration;
 using static Azure.Core.HttpHeader;
 using static LinqToDB.Reflection.Methods.LinqToDB;
+using System.Reflection.Emit;
 
 namespace CapExTSVS.Controllers
 {
@@ -475,15 +476,50 @@ namespace CapExTSVS.Controllers
 
 
 
-            public IActionResult NfaMapping()
+         public IActionResult NfaMapping()
         {
+            NFAMappingGrid1();
             return View();
         }
 
-      
+
+        public void NFAMappingGrid1()
+        {
+
+           
+           
+            ViewData["NFAMappingGrid1"]  = _dbcontext.UspCapexCapexTypeMapping("GET_CAPEXTYPE_BY_COMPANY_NAME", "", "", "", "", "","","", "").ToList();
 
 
-          public IActionResult Edit(int id)
+        }
+
+
+        public IActionResult NFAMappingEditSetect(string Id )
+        {
+            NFAMappingGrid1();
+
+            ViewData["UspCapexPayApprovalCatEmpMapping"] = _dbcontext.UspCapexPayApprovalCatEmpMapping("GET_CAPEXPAY_APPROVAL_BY_CAPEXID", Id, "", "", "", "", "", "", "", "", "", "", "", "", true, "").ToList();
+           
+            return View("NfaMapping");
+        }
+
+
+        public IActionResult NFAMappingEditSetect3(string Id)
+        {
+            ViewData["UspCapexPayApprovalCatEmpMapping3"] = _dbcontext.UspCapexPayApprovalCatEmpMapping_2("GET_CAPEXPAY_APPROVAL_EMP_MAPPING_BY_CAPEXID", Id, "", "", "", "", "", "", "", "", "", "", "", "", true, "").ToList();
+
+
+           // ID CapexID EMPCode App_1   App_2 App_3   App_4 App_5   App_6
+
+            return View("NfaMapping");
+
+        }
+
+
+
+
+
+            public IActionResult Edit(int id)
         {
             flag = 1;
             ViewData["GridData"] = bindgrdVendordata();

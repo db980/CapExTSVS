@@ -38,63 +38,49 @@
             <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
                 <div class="card-body">
 
+                        <table id="exampla" class="table  table-bordered table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Select</th>
+                                    <th scope="col">CTID</th>
+                                    <th scope="col">CapexType</th>
+                                    <th scope="col">Comp_code</th>
+                                    <th scope="col">Des</th>
+                                    <th scope="col">BU</th>
+                                    <th scope="col">ReqType</th>
+                                    <th scope="col">BudgetType</th>
+                                </tr>
 
-                    <table id="exampla" class="table  table-bordered table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Action</th>
-                                <th>Capex  ID</th>
-                                <th>Capex Code</th>
+                            </thead>
+                            <tbody>
 
-                                <th>Capex Type</th>
-                                <th>Description </th>
-
-
-                                @*<th>Company</th>*@
-                                <th>Project/Bu</th>
-                                <th>Request Type </th>
-
-                                <th>Budget Type </th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-
-
-                           @* @if (ViewData["CapexbindddlGrid"] != null)
-                            {
-                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
+                                @if (ViewData["NFAMappingGrid1"] != null)
                                 {
+                                    @foreach (var da in ViewData["NFAMappingGrid1"] as IList<UspCapexCapexTypeMappingResult>)
+                                    {
+                                        <tr>
+
+                                            <td scope="col"> <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/NFAMappingEditSetect/@da.CTID"></a></button><br></td>
+                                            <td scope="col">@da.CTID</td>
+                                            <td scope="col">@da.CapexType</td>
+                                            <td scope="col">@da.Comp_code</td>
+                                            <td scope="col">@da.Des</td>
+                                            <td scope="col">@da.BU</td>
+                                            <td scope="col">@da.ReqType</td>
+                                            <td scope="col">@da.BudgetType</td>
 
 
-                                    <tr>
 
-                                        <td>
-                                            <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
-                                            <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
-                                            <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
-                                        </td>
-                                        <td>@da.CTID </td>
-                                        <td>@da.Comp_code </td>
+                                        </tr>
+                                    }
 
-                                        <td>@da.CapexType </td>
-                                        <td>@da.Des </td>*@
-
-                                        @*<td>@da.com daCompany</td>*@
-                                       @* <td>@da.BU </td>
-                                        <td>@da.ReqType </td>
-
-                                        <td>@da.BudgetType  </td>
-
-                                    </tr>
                                 }
-                            }*@
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
 
-                </div>
+                    </div>
                 <!-- /.card-body -->
                 <!-- /.card-footer -->
             </form>
@@ -262,54 +248,76 @@
 
                         <table id="exampla2" class="table  table-bordered table-striped table-responsive">
                             <thead>
+
                                 <tr>
-                                    <th>Action</th>
-                                    <th>Capex  ID</th>
-                                    <th>Capex Code</th>
-
-                                    <th>Capex Type</th>
-                                    <th>Description </th>
-
-
-                                    @*<th>Company</th>*@
-                                    <th>Project/Bu</th>
-                                    <th>Request Type </th>
-
-                                    <th>Budget Type </th>
+                                    <th scope="col">Select</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">CPACID</th>
+                                    <th scope="col">CapexID</th>
+                                    <th scope="col">CapexType</th>
+                                    <th scope="col">AmountForm</th>
+                                    <th scope="col">AmountTo</th>
+                                    <th scope="col">Dept_1</th>
+                                    <th scope="col">Dept_2</th>
+                                    <th scope="col">Fin_3</th>
+                                    <th scope="col">Fin_4</th>
+                                    <th scope="col">Fin_5</th>
+                                    <th scope="col">MD_6</th>
                                 </tr>
+                              
+
+                               @* <tr >
+                                    <th scope="col">Update</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">CapexID</th>
+                                    <th scope="col">EMPCode</th>
+                                    <th scope="col">App_1</th>
+                                    <th scope="col">App_2</th>
+                                    <th scope="col">App_3</th>
+                                    <th scope="col">App_4</th>
+                                    <th scope="col">App_5</th>
+                                    <th scope="col">App_6</th>
+                                </tr>*@
+
+
+      
 
                             </thead>
                             <tbody>
 
 
-                                @* @if (ViewData["CapexbindddlGrid"] != null)
+                                @if (ViewData["UspCapexPayApprovalCatEmpMapping"] != null)
                                 {
-                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
-                                {
+                                    @foreach (var da in ViewData["UspCapexPayApprovalCatEmpMapping"] as IList<UspCapexPayApprovalCatEmpMappingResult>)
+                                    {
+
+                                            <tr>
+                                            <td> <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/NFAMappingEditSetect3/@da.CapexID"></a></button></td>
 
 
-                                <tr>
+                                           
+                                            <td>Update</td>
+                                            <td>@da.CPACID</td>
+                                            <td>@da.CapexID</td>
+                                            <td>@da.CapexType</td>
+                                            <td>@da.AmountForm</td>
+                                            <td>@da.AmountTo</td>
+                                            <td>@da.Dept_1</td>
+                                            <td>@da.Dept_2</td>
+                                            <td>@da.Fin_3</td>
+                                            <td>@da.Fin_4</td>
+                                            <td>@da.Fin_5</td>
+                                            <td>@da.MD_6</td>
+                                            
+                                            
+                                          </tr>
 
-                                <td>
-                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
-                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
-                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
-                                </td>
-                                <td>@da.CTID </td>
-                                <td>@da.Comp_code </td>
 
-                                <td>@da.CapexType </td>
-                                <td>@da.Des </td>*@
-
-                                @*<td>@da.com daCompany</td>*@
-                                @* <td>@da.BU </td>
-                                <td>@da.ReqType </td>
-
-                                <td>@da.BudgetType  </td>
-
-                                </tr>
+                                    }
                                 }
-                                }*@
+
+
+
 
                             </tbody>
 
@@ -444,10 +452,10 @@
                                  
 
                                     <!-- /.card-body -->
-                                    @*<div class="card-footer">
+                                  <div class="card-footer">
                                     <button type="submit" class="btn btn-info">Submit</button>
                                     <button type="submit" class="btn btn-default float-right">Cancel</button>
-                                    </div>*@
+                                    </div>
                                     <!-- /.card-footer -->
                             </form>
                         </div>
@@ -464,54 +472,55 @@
 
                         <table id="exampla2" class="table  table-bordered table-striped table-responsive">
                             <thead>
-                                <tr>
-                                    <th>Action</th>
-                                    <th>Capex  ID</th>
-                                    <th>Capex Code</th>
 
-                                    <th>Capex Type</th>
-                                    <th>Description </th>
+                              
 
 
-                                    @*<th>Company</th>*@
-                                    <th>Project/Bu</th>
-                                    <th>Request Type </th>
-
-                                    <th>Budget Type </th>
+                                <tr >
+                                    <th scope="col">Update</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">CapexID</th>
+                                    <th scope="col">EMPCode</th>
+                                    <th scope="col">App_1</th>
+                                    <th scope="col">App_2</th>
+                                    <th scope="col">App_3</th>
+                                    <th scope="col">App_4</th>
+                                    <th scope="col">App_5</th>
+                                    <th scope="col">App_6</th>
                                 </tr>
+
 
                             </thead>
                             <tbody>
 
-
-                                @* @if (ViewData["CapexbindddlGrid"] != null)
+                                @if (ViewData["UspCapexPayApprovalCatEmpMapping3"] != null)
                                 {
-                                @foreach (var da in ViewData["CapexbindddlGrid"] as IList<UspCapexCapexTypeMappingResult>)
-                                {
+                                    @foreach (var da in ViewData["UspCapexPayApprovalCatEmpMapping3"] as IList<UspCapexPayApprovalCatEmpMappingResult_2>)
+                                    {
+
+                                        <tr>
+                                            <td> <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/NFAMappingEditSetect3/@da.CapexID"></a></button></td>
 
 
-                                <tr>
 
-                                <td>
-                                <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/CapexEditCompany/@da.CTID.ToString()"></a></button><br>
-                                <button disabled="" class="badge bg-danger btn btn-sm" name="3594"><a class="fa fa-trash"></a></button><br>
-                                <button disabled="" class="badge bg-info btn btn-sm" name="3594"><a target="_self" class="fa fa-file"></a></button>
-                                </td>
-                                <td>@da.CTID </td>
-                                <td>@da.Comp_code </td>
+                                            <td>Update</td>
+                                            <td>@da.ID</td>
+                                            <td>@da.CapexID</td>
+                                            <td>@da.EMPCode</td>
+                                            <td>@da.App_1</td>
+                                            <td>@da.App_2</td>
+                                            <td>@da.App_3</td>
+                                            <td>@da.App_4</td>
+                                            <td>@da.App_5</td>
+                                            <td>@da.App_6</td>
+                                           @* <td>@da.Fin_5</td>
+                                            <td>@da.MD_6</td>*@
 
-                                <td>@da.CapexType </td>
-                                <td>@da.Des </td>*@
 
-                                @*<td>@da.com daCompany</td>*@
-                                @* <td>@da.BU </td>
-                                <td>@da.ReqType </td>
-
-                                <td>@da.BudgetType  </td>
-
-                                </tr>
+                                        </tr>
+                                    }
                                 }
-                                }*@
+                              
 
                             </tbody>
 
@@ -538,7 +547,3 @@
     });
     
 </script>
-
-
-
-

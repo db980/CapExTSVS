@@ -5666,7 +5666,79 @@ namespace DataModels
 			return dataConnection.QueryProc<UspCapexPayApprovalCatEmpMappingResult>("[dbo].[USP_CapexPayApprovalCat_EMP_Mapping]", parameters);
 		}
 
-		public partial class UspCapexPayApprovalCatEmpMappingResult
+
+
+        public static IEnumerable<UspCapexPayApprovalCatEmpMappingResult_2> UspCapexPayApprovalCatEmpMapping_2(this CapExTSDB dataConnection, string @Types, string @CapexId, string @ID, string @CPACID, string @EmpCode, string @AmountFrom, string @AmountTO, string @Department_lvl_1, string @Department_lvl_2, string @Finance_lvl_3, string @Finance_lvl_4, string @Finance_lvl_5, string @MD_Lvl_6, string @Remarks, bool? @IsActive, string @CreatedBy)
+        {
+            var parameters = new[]
+            {
+                new DataParameter("@Types",            @Types,            LinqToDB.DataType.NVarChar)
+                {
+                    Size = 200
+                },
+                new DataParameter("@CapexId",          @CapexId,          LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@ID",               @ID,               LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@CPACID",           @CPACID,           LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@EmpCode",          @EmpCode,          LinqToDB.DataType.VarChar)
+                {
+                    Size = 50
+                },
+                new DataParameter("@AmountFrom",       @AmountFrom,       LinqToDB.DataType.VarChar)
+                {
+                    Size = 200
+                },
+                new DataParameter("@AmountTO",         @AmountTO,         LinqToDB.DataType.VarChar)
+                {
+                    Size = 200
+                },
+                new DataParameter("@Department_lvl_1", @Department_lvl_1, LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@Department_lvl_2", @Department_lvl_2, LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@Finance_lvl_3",    @Finance_lvl_3,    LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@Finance_lvl_4",    @Finance_lvl_4,    LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@Finance_lvl_5",    @Finance_lvl_5,    LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@MD_Lvl_6",         @MD_Lvl_6,         LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                },
+                new DataParameter("@Remarks",          @Remarks,          LinqToDB.DataType.VarChar)
+                {
+                    Size = 200
+                },
+                new DataParameter("@IsActive",         @IsActive,         LinqToDB.DataType.Boolean),
+                new DataParameter("@CreatedBy",        @CreatedBy,        LinqToDB.DataType.VarChar)
+                {
+                    Size = 20
+                }
+            };
+
+            return dataConnection.QueryProc<UspCapexPayApprovalCatEmpMappingResult_2>("[dbo].[USP_CapexPayApprovalCat_EMP_Mapping]", parameters);
+        }
+
+        public partial class UspCapexPayApprovalCatEmpMappingResult
 		{
 			public int     CPACID     { get; set; }
 			public int     CapexID    { get; set; }
@@ -5681,11 +5753,43 @@ namespace DataModels
 			public string  MD_6       { get; set; }
 		}
 
-		#endregion
 
-		#region UspDashboard
+        public partial class UspCapexPayApprovalCatEmpMappingResult_2
+        {
 
-		public static IEnumerable<UspDASHBOARDResult> UspDashboard(this CapExTSDB dataConnection, string @UserId)
+
+            public string ID { get; set; }
+            public string CapexID { get; set; }
+
+            public string EMPCode { get; set; }
+
+            public string App_1 { get; set; }
+
+            public string App_2 { get; set; }
+
+            public string App_3 { get; set; }
+
+            public string App_4 { get; set; }
+            public string App_5 { get; set; }
+            public string App_6 { get; set; }
+            //public int CPACID { get; set; }
+            //public int CapexID { get; set; }
+            //public string CapexType { get; set; }
+            //public decimal AmountForm { get; set; }
+            //public decimal AmountTo { get; set; }
+            //public string Dept_1 { get; set; }
+            //public string Dept_2 { get; set; }
+            //public string Fin_3 { get; set; }
+            //public string Fin_4 { get; set; }
+            //public string Fin_5 { get; set; }
+            //public string MD_6 { get; set; }
+        }
+
+        #endregion
+
+        #region UspDashboard
+
+        public static IEnumerable<UspDASHBOARDResult> UspDashboard(this CapExTSDB dataConnection, string @UserId)
 		{
 			var parameters = new []
 			{

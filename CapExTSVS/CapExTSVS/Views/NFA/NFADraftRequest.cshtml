@@ -19,7 +19,7 @@
                     <h1 class="m-0">View Indent</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <ol class="breadcrumb float-sm-right">d
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">View Indent </li>
                     </ol>
@@ -56,54 +56,36 @@
                                     <div class="card-body" style=" overflow:auto;">
                                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                                             <thead>
-                                                <tr >
-                                                    <th scope="col">NFA Requisition No</th>
-                                                    <th scope="col">Details</th>
-                                                    <th scope="col">Export</th>
-                                                    <th scope="col">Indent ID</th>
-                                                    <th scope="col">Asset Type</th>
-                                                    <th scope="col">Old Asset Code</th>
-                                                    <th scope="col">NFA Type</th>
-                                                    <th scope="col">Project Name</th>
-                                                    <th scope="col">Project Description</th>
-                                                    <th scope="col">Purpose</th>
-                                                    <th scope="col">Expected Date</th>
-                                                    <th scope="col">Purchase Location</th>
-                                                    <th scope="col">Quotated Amount (INR)</th>
-                                                    <th scope="col">Imported / Indigenous</th>
-                                                    <th scope="col">Current With</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Requested Date</th>
-                                                    <th scope="col">Approved Date</th>
+                                                <tr>
+                                                    <th scope="col">Select</th>
+                                                    <th scope="col">CTID</th>
+                                                    <th scope="col">CapexType</th>
+                                                    <th scope="col">Comp_code</th>
+                                                    <th scope="col">Des</th>
+                                                    <th scope="col">BU</th>
+                                                    <th scope="col">ReqType</th>
+                                                    <th scope="col">BudgetType</th>
                                                 </tr>
 
                                             </thead>
                                             <tbody>
 
-                                                @if (ViewData["NFADraftRequestGrid"] != null)
+                                                @if (ViewData["NFAMappingGrid1"] != null)
                                                 {
-                                                    @foreach (var da in ViewData["NFADraftRequestGrid"] as IList<CapexSelCapexRequestDetailsResult>)
+                                                    @foreach (var da in ViewData["NFAMappingGrid1"] as IList<UspCapexCapexTypeMappingResult>)
                                                     {
                                                         <tr>
 
-                                                            <td>@da.RequestNo</td>
-                                                            <td>@da.RequestNo</td>
-                                                            <td>@da.isprint</td>
-                                                            <td>@da.IndentID</td>
-                                                            <td>@da.Assettype</td>
-                                                            <td>@da.OldAssetCode</td>
-                                                            <td>@da.CapexType</td>
-                                                            <td>@da.PName</td>
-                                                            <td>@da.PDescription</td>
-                                                            <td>@da.Purpose</td>
-                                                            <td>@da.EdateCompletion</td>
-                                                            <td>@da.PurchaseLocation.ToString()</td>
-                                                            <td>@da.SelectQuotationAmount</td>
-                                                            <td>@da.ImportedIndigenous</td>
-                                                            <td>@da.CurrentWith</td>
-                                                            <td>@da.Status</td>
-                                                            <td>@da.CreateDate</td>
-                                                            <td>@da.ApprovedDate</td>
+                                                            <td scope="col">Select</td>
+                                                            <td scope="col">@da.CTID</td>
+                                                            <td scope="col">@da.CapexType</td>
+                                                            <td scope="col">@da.Comp_code</td>
+                                                            <td scope="col">@da.Des</td>
+                                                            <td scope="col">@da.BU</td>
+                                                            <td scope="col">@da.ReqType</td>
+                                                            <td scope="col">@da.BudgetType</td>
+
+                                                         
 
                                                         </tr>
                                                     }

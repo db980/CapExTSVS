@@ -1,3 +1,11 @@
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.csproj.AssemblyReference.cache
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.GeneratedMSBuildEditorConfig.editorconfig
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.AssemblyInfoInputs.cache
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.AssemblyInfo.cs
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.csproj.CoreCompileInputs.cache
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.MvcApplicationPartsAssemblyInfo.cache
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.RazorAssemblyInfo.cache
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.RazorAssemblyInfo.cs
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\App.config
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\appsettings.Development.json
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\appsettings.json
@@ -135,14 +143,6 @@ D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\runtimes\win\lib\
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.csproj.AssemblyReference.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.GeneratedMSBuildEditorConfig.editorconfig
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.AssemblyInfoInputs.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.AssemblyInfo.cs
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.csproj.CoreCompileInputs.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.MvcApplicationPartsAssemblyInfo.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.RazorAssemblyInfo.cache
-D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.RazorAssemblyInfo.cs
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\staticwebassets\msbuild.CapExTSVS.Microsoft.AspNetCore.StaticWebAssets.props
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\staticwebassets\msbuild.build.CapExTSVS.props
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.CapExTSVS.props
