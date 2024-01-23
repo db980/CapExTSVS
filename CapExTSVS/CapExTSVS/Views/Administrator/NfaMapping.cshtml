@@ -1,6 +1,10 @@
 ﻿@using static DataModels.CapExTSDBStoredProcedures;
 
 
+@model CapExTSVS.Models1.NFAMappingEdit;
+
+
+
 @{
     ViewData["Title"] = "Home Page";
    Layout = "~/Views/Shared/_Layout.cshtml";
@@ -112,7 +116,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Id:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_capexId : "") " name="F_capexId">
 
 
                                         </div>
@@ -121,7 +125,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Capex Type:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_capexType : "") " name="F_capexType">
 
 
                                         </div>
@@ -133,7 +137,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Amount F:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_AccountF : "") " name="F_AccountF">
 
 
                                         </div>
@@ -142,7 +146,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Amount To:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_AccountTo : "") " name="F_AccountTo">
 
 
                                         </div>
@@ -154,7 +158,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Dept_1:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Dep_1 : "") " name="F_Dep_1">
 
 
                                         </div>
@@ -163,7 +167,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Dept_2:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Dep_2 : "") " name="Data">
 
 
                                         </div>
@@ -175,7 +179,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 3:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_3 : "") " name="Data">
 
 
                                         </div>
@@ -184,7 +188,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 4:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_4 : "") " name="Data">
 
 
                                         </div>
@@ -196,7 +200,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 5:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_5 : "") " name="Data">
 
 
                                         </div>
@@ -205,7 +209,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 6:  </label>
 
-                                            <input type="text" class="form-control" name="Data" />
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_6 : "") " name="Data" />
 
 
                                         </div>
@@ -220,7 +224,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Remark:  </label>
 
-                                            <input type="text" class="form-control" name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Remark : "") " name="Data">
 
 
                                         </div>
@@ -503,7 +507,6 @@
 
 
 
-                                            <td>Update</td>
                                             <td>@da.ID</td>
                                             <td>@da.CapexID</td>
                                             <td>@da.EMPCode</td>

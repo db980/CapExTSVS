@@ -172,6 +172,39 @@ namespace CapExTSVS.Models1
 
 
 
+    public partial class NFAMappingEdit
+    {
+       public string  F_capexId { get; set; }
+        public string F_capexType { get; set; }
+        public string F_AccountF { get; set; }
+        public string F_AccountTo { get; set; }
+        public string F_Dep_1 { get; set; }
+        public string F_Dep_2 { get; set; }
+        public string F_Fin_1 { get; set; }
+        public string F_Fin_2 { get; set; }
+        public string F_Fin_3 { get; set; }
+        public string F_Fin_4 { get; set; }
+        public string F_Fin_5 { get; set; }
+        public string F_Fin_6 { get; set; }
+        public string F_Remark { get; set; }
+
+
+
+        public string S_Id { get; set; }
+        public string S_capexId { get; set; }
+        public string s_capexType { get; set; }
+        
+        public string s_App_1 { get; set; }
+        public string s_App_2 { get; set; }
+        public string s_App_3 { get; set; }
+        public string s_App_4 { get; set; }
+        public string s_App_5 { get; set; }
+        public string s_App_6 { get; set; }
+        public string Status { get; set; }
+        public string Form { get; set; }
+    }
+
+
 
     public   class EmployeeRegistration
     {
@@ -257,6 +290,66 @@ namespace CapExTSVS.Models1
         [Column("empCode"), Nullable] public string? EmpCode { get; set; } // varchar(20)
         [Column("password"), Nullable] public string? Password { get; set; } // varchar(50)
         [Column("isActive"), Nullable] public string? IsActive { get; set; } // varchar(10)
+    }
+
+
+
+
+    public partial class CapexmainRequest
+    {
+        public string IndentId { get; set; }
+        public string AssetsType { get; set; }
+        public string Company { get; set; }
+        public string BUI { get; set; }
+        public string EXPType { get; set; }
+        public string Budget { get; set; }
+        public string NFA { get; set; }
+        public string Purpose { get; set; }
+        public string ExpectedDate { get; set; }
+
+
+        public string Description { get; set; }
+
+        public string Uom { get; set; }
+
+        public string Qty { get; set; }
+
+        public string TexRate { get; set; }
+
+
+        public string Imported { get; set; }
+
+        public string Justification { get; set; }
+        public string Benefit { get; set; }
+
+        public string IRRPaybackfile { get; set; }
+        public string IRRPaybackValue { get; set; }
+
+        public string cashoverFlowFile { get; set; }
+
+        public string cashoverFlowValue { get; set; }
+
+
+
+
+    }
+
+
+    public partial class CapexmainRequestItems
+    {
+        public string Description { get; set; }
+
+        public string Uom { get; set; }
+
+        public string Qty { get; set; }
+
+        public string TexRate { get; set; }
+    }
+
+
+    public static class CapexItems<T>
+    {
+        public static List<T> Items1 = new List<T>();
     }
 
 

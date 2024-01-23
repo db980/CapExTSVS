@@ -1,6 +1,9 @@
-﻿@using static DataModels.CapExTSDBStoredProcedures;
+﻿@using CapExTSVS.Models1;
+@using static DataModels.CapExTSDBStoredProcedures;
 
 
+
+@model CapExTSVS.Models1.CapexmainRequest;
 @{
     ViewData["Title"] = "Home Page";
    // Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,8 +40,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-
-
+              
 
                 <section class="content">
                     <div class="container-fluid">
@@ -57,7 +59,7 @@
 
 
 
-                                        <form action="/submit-nfa-requisition" method="post">
+                                        <form action="/NFA/CapexmainRequest2/" method="post">
 
 
                                             <div class="form-group row">
@@ -65,7 +67,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-label" for="nfa_id">Incent ID:</label>
                                                     <div class="col-sm-6">
-                                                        <input class="form-control" readonly type="text" id="nfa_id" name="nfa_id" required>
+                                                        <input class="form-control" readonly type="text" id="nfa_id" name="nfa_id" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,7 +176,7 @@
                                                     <label class="form-label" for="nfa_type">NFA Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <input class="form-control" type="text" id="nfa_type" name="nfa_type" required>
+                                                        <input class="form-control" type="text" id="nfa_type" name="nfa_type" >
 
                                                     </div>
                                                 </div>
@@ -206,6 +208,9 @@
 
                                             <hr />
 
+                                            @*<form action="/Administrator/UserCreateEdit" method="post" class="form-horizontal">*@
+                        
+
                                             <div class="card-header">
                                                 <h3 class="card-title">Fill Item Lines:</h3>
                                             </div>
@@ -216,7 +221,9 @@
                                             </div>
 
 
+                                           
 
+                                          @*  <form action="/submit-nfa-requisition" method="post" id="form2">*@
 
                                             <div class="card">
                                                 <div class="card-body " style="background-color: #f5faff;">
@@ -228,14 +235,14 @@
                                                                value="Search" id="btnsearch" class=" "
                                                                style="float:right">Search</button> -->
                                                             <input formControlName="txtdescription" type="text"
-                                                                   id="txtdescription" class="form-control inputtext ">
+                                                                   name="Description" class="form-control inputtext ">
                                                         </div>
 
                                                         <div class="col-sm-1">
                                                             <label for="inputEmail3"
                                                                    class="control-label pull-left">UOM</label>&nbsp;
                                                             <select formControlName="ddluom"
-                                                                    id="ddluom" class="form-control">
+                                                                    name="Uom" class="form-control">
                                                                 <option value="Nos" [selected]="true">Nos</option>
                                                                 <option value="Pcs">Pcs</option>
                                                                 <option value="Lot">Lot</option>
@@ -256,33 +263,44 @@
                                                             <label for="inputEmail3"
                                                                    class="control-label pull-left">Qty</label>&nbsp;
                                                             <input formControlName="txtqty" type="number"
-                                                                   id="txtqty" class="form-control inputtext">
+                                                                   name="Qty" class="form-control inputtext">
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label for="inputEmail3" class="control-label pull-left">
                                                                 Tax Rate
                                                             </label>&nbsp;
                                                             <input formControlName="txtlistprice" type="number"
-                                                                   id="txtlistprice" class="form-control inputtext">
+                                                                   name="TexRate" class="form-control inputtext">
                                                         </div>
 
                                                         <div class="col-sm-2 " style="float:right">
                                                             <div class="clearfix" style="margin-top: 10px;"></div>
-                                                            <button type="button"
-                                                                    value="ADD" id="btn_add"
-                                                                    class="btn btn-primary pull-Right" (click)="Add_items()">
+                                                            <button type="submit"
+                                                                    value="ADD" name="Status"
+                                                                    class="btn btn-primary pull-Right" >   
                                                                 ADD
                                                             </button>
+                                                           @* onclick="CapexmainRequest2(this.value)"*@
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
 
+                                           @* </form>*@
+
+
+
+
+
 
                                             <div class="clearfix" style="margin-top :15px;">
                                             </div>
-                                            <div class="row">
+
+                                            
+
+
+                                              <div class="row">
                                                 <div class="col-sm-12 ">
                                                     <div class="table-responsive">
                                                         <div class=" card card-body card-warning table_wid">
@@ -301,38 +319,25 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr style="background-color:0;" *ngFor="let person of pOExpenseItems;let a=index">
-                                                                            <td>
-                                                                                <button type="button"
-                                                                                        class="badge bg-danger btn btn-sm" (click)="onDel(person.id)">
-                                                                                    <a class="fa fa-trash"></a>
-                                                                                </button>
-                                                                                <!-- poId -->
-                                                                            </td>
-                                                                            <td style="width:100px;">
-                                                                                <span id="GridView1_lblRowNumber_0">{{a+1}}</span>
-                                                                            </td>
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'desc')" (mouseleave)="mouseLeave(false,person.id,'desc')">
-                                                                                <P id="label_desc{{person.id}}">  {{person.description}} </P>
-                                                                                <textarea calss="form-control" id="desc{{person.id}}" (dblclick)="Tabledatachange(person.id,'desc')" style="display: none;" value="{{person.description}}"> </textarea>
-                                                                            </td>
 
-                                                                            <td>
-                                                                                <P id="label_uom{{person.id}}"> {{person.uom}} </P>
-                                                                                <input type="text" calss="form-control" id="uom{{person.id}}" style="display: none;" value="{{person.uom}}">
-                                                                            </td>
+                                                                        @if (ViewData["Items"] != null)
+                                                                        {
+                                                                            @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
+                                                                            {
+                                                                                <tr >
 
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'qty')" (mouseleave)="mouseLeave(false,person.id,'qty')">
-                                                                                <P id="label_qty{{person.id}}"> {{person.qty}}  </P>
-                                                                                <input type="number" calss="form-control" id="qty{{person.id}}" (dblclick)="Tabledatachange(person.id,'qty')" style="display: none;" value="{{person.qty}}">
-                                                                            </td>
 
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'listPrice')" (mouseleave)="mouseLeave(false,person.id,'listPrice')">
-                                                                                <P id="label_listPrice{{person.id}}">  {{person.listPrice}} </P>
-                                                                                <input type="number" calss="form-control" id="listPrice{{person.id}}" (dblclick)="Tabledatachange(person.id,'listPrice')" style="display: none;" value="{{person.listPrice}}">
-                                                                            </td>
+                                                                                    <td scope="col">Action</td>
+                                                                                    <td scope="col">SrNo</td>
+                                                                                    <td scope="col">@da.Description</td>
 
-                                                                        </tr>
+                                                                                    <td scope="col">@da.Uom</td>
+                                                                                    <td scope="col">@da.Qty</td>
+                                                                                    <td scope="col">@da.TexRate</td>
+
+                                                                                </tr>
+                                                                            }
+                                                                        }
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -363,7 +368,7 @@
                                                     <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" required>
+                                                        <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" >
                                                             <option value="">Select</option>
                                                             <option value="imported">Imported</option>
                                                             <option value="indigenous">Indigenous</option>
@@ -377,7 +382,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <textarea class="form-control" id="justification" name="justification" required></textarea>
+                                                        <textarea class="form-control" id="justification" name="justification" ></textarea>
 
                                                     </div>
                                                 </div>
@@ -393,7 +398,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <input class="form-control" type="text" id="benett" name="benett" required>
+                                                        <input class="form-control" type="text" id="benett" name="benett" >
 
                                                     </div>
                                                 </div>
@@ -407,7 +412,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" required>
+                                                        <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" >
 
                                                     </div>
 
@@ -449,7 +454,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" >
 
 
                                                     </div>
@@ -472,7 +477,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" required>
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" >
 
 
                                                     </div>
@@ -630,6 +635,35 @@
         $.ajax({
             type: "GET",
             url: "\CapexBindddlProject\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BU");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.indID).text(key.bu));
+
+
+                });
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
+
+
+    function CapexmainRequest2(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\CapexmainRequest2\?id=" + value,
             success: function (data) {
                 console.log(data)
                 var $el = $("#BU");

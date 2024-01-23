@@ -1,7 +1,9 @@
 ﻿using CapExTSVS.Models1;
 using DataModels;
 using LinqToDB.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
 using static DataModels.CapExTSDBStoredProcedures;
@@ -13,6 +15,10 @@ namespace CapExTSVS.Controllers
 
         private readonly ILogger<NFAController> _logger;
         public CapExTSDB _dbcontext;
+
+       public static CapexmainRequestItems Items = new CapexmainRequestItems();
+        //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
+        public object ViewState { get; private set; }
 
         public NFAController(ILogger<NFAController> logger)
         {
@@ -65,6 +71,42 @@ namespace CapExTSVS.Controllers
 
             return View();
         }
+
+        public IActionResult CapexmainRequest2(CapexmainRequest data)
+        {
+
+
+
+
+            Items.Description = data.Description;
+            Items.Qty = data.Qty;
+            Items.TexRate = data.TexRate;
+            Items.Uom = data.Uom;
+
+            CapexItems<CapexmainRequestItems>.Items1.Add(Items);
+            //da.Items1.Add(Items);
+
+
+
+            ViewData["Items"] = CapexItems<CapexmainRequestItems>.Items1.ToList();
+
+            return View("CapexmainRequest");
+        }
+
+
+
+        public IActionResult Dropdownchange2(string  ID)
+        {
+            
+
+            return null;
+        }
+
+
+
+
+        
+
         [HttpGet]
         public IList<UspCapexSelComProjectResult> CapexBindddlProject(string id)
         {

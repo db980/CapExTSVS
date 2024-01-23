@@ -506,6 +506,11 @@ namespace CapExTSVS.Controllers
 
         public IActionResult NFAMappingEditSetect3(string Id)
         {
+
+            NFAMappingGrid1();
+            ViewData["UspCapexPayApprovalCatEmpMapping"] = _dbcontext.UspCapexPayApprovalCatEmpMapping("GET_CAPEXPAY_APPROVAL_BY_CAPEXID", Id, "", "", "", "", "", "", "", "", "", "", "", "", true, "").ToList();
+
+
             ViewData["UspCapexPayApprovalCatEmpMapping3"] = _dbcontext.UspCapexPayApprovalCatEmpMapping_2("GET_CAPEXPAY_APPROVAL_EMP_MAPPING_BY_CAPEXID", Id, "", "", "", "", "", "", "", "", "", "", "", "", true, "").ToList();
 
 
