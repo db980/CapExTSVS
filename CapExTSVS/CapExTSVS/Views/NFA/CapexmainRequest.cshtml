@@ -6,7 +6,7 @@
 @model CapExTSVS.Models1.CapexmainRequest;
 @{
     ViewData["Title"] = "Home Page";
-   // Layout = "~/Views/Shared/_Layout.cshtml";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 }
@@ -40,7 +40,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-              
+
 
                 <section class="content">
                     <div class="container-fluid">
@@ -67,7 +67,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-label" for="nfa_id">Incent ID:</label>
                                                     <div class="col-sm-6">
-                                                        <input class="form-control" readonly type="text" id="nfa_id" name="nfa_id" >
+                                                        <input class="form-control" readonly type="text" id="nfa_id" name="nfa_id">
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,7 +91,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="company">Select Company:</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control dropdown" id="inputEmail3" name="Comp_code" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
+                                                        <select class="form-control dropdown" id="ddlViewBy" name="Comp_code" placeholder="Enter Budget" onchange="Dropdownchange(this.value)">
                                                             <option Selected="True" Value="0">Select</option>
                                                             @if (ViewData["CapexbindddlCompany"] != null)
                                                             {
@@ -111,7 +111,7 @@
 
 
 
-                                                  
+
 
 
                                             </div>
@@ -142,7 +142,7 @@
                                                     <label class="form-label" for="exp_type">Select Exp Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select class="form-control dropdown" id="inputEmail3"  name="ReqType" placeholder="Enter Budget">
+                                                        <select class="form-control dropdown" id="inputEmail3" name="ReqType" placeholder="Enter Budget">
                                                             <option Selected="True" Value="0">Select</option>
                                                             <option Value="Budgeted">Capex</option>
                                                             <option Value="NonBudgeted">Opex</option>
@@ -160,7 +160,7 @@
                                                     <div class="col-sm-12">
 
                                                         <select class="form-control dropdown" id="inputEmail3" name="BudgetType" placeholder="Enter Budget">
-                                                            <option selected >Select</option>
+                                                            <option selected>Select</option>
                                                             <option Value="Budgeted">Budgeted</option>
                                                             <option Value="NonBudgeted">NonBudgeted</option>
                                                             <option Value="CFC">CFC</option>
@@ -176,7 +176,7 @@
                                                     <label class="form-label" for="nfa_type">NFA Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <input class="form-control" type="text" id="nfa_type" name="nfa_type" >
+                                                        <input class="form-control" type="text" id="nfa_type" name="nfa_type">
 
                                                     </div>
                                                 </div>
@@ -209,7 +209,7 @@
                                             <hr />
 
                                             @*<form action="/Administrator/UserCreateEdit" method="post" class="form-horizontal">*@
-                        
+
 
                                             <div class="card-header">
                                                 <h3 class="card-title">Fill Item Lines:</h3>
@@ -221,9 +221,9 @@
                                             </div>
 
 
-                                           
 
-                                          @*  <form action="/submit-nfa-requisition" method="post" id="form2">*@
+
+                                            @*  <form action="/submit-nfa-requisition" method="post" id="form2">*@
 
                                             <div class="card">
                                                 <div class="card-body " style="background-color: #f5faff;">
@@ -277,17 +277,17 @@
                                                             <div class="clearfix" style="margin-top: 10px;"></div>
                                                             <button type="submit"
                                                                     value="ADD" name="Status"
-                                                                    class="btn btn-primary pull-Right" >   
+                                                                    class="btn btn-primary pull-Right">
                                                                 ADD
                                                             </button>
-                                                           @* onclick="CapexmainRequest2(this.value)"*@
+                                                            @* onclick="CapexmainRequest2(this.value)"*@
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
 
-                                           @* </form>*@
+                                            @* </form>*@
 
 
 
@@ -297,10 +297,10 @@
                                             <div class="clearfix" style="margin-top :15px;">
                                             </div>
 
-                                            
 
 
-                                              <div class="row">
+
+                                            <div class="row">
                                                 <div class="col-sm-12 ">
                                                     <div class="table-responsive">
                                                         <div class=" card card-body card-warning table_wid">
@@ -324,11 +324,11 @@
                                                                         {
                                                                             @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
                                                                             {
-                                                                                <tr >
+                                                                                <tr>
 
 
                                                                                     <td scope="col">Action</td>
-                                                                                    <td scope="col">SrNo</td>
+                                                                                    <td scope="col">@da.ID</td>
                                                                                     <td scope="col">@da.Description</td>
 
                                                                                     <td scope="col">@da.Uom</td>
@@ -359,8 +359,17 @@
                                                 <h3 class="card-title">Select Quotation</h3>
                                             </div>
 
+
+
+
+
+
                                             <br />
                                             <div class="form-group row">
+
+
+                                                <button type="button" class="btn btn-info btn-lg col-md-6" data-toggle="modal" data-target="#myModal" value="Select Quotation">  <a onclick="CapexBindddlProjectVender()" class="fa fa-file"></a> </button>
+
 
                                                 <div class="col-md-6">
 
@@ -368,7 +377,7 @@
                                                     <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous" >
+                                                        <select id="imported_indigenous" class=" form-control dropdown" name="imported_indigenous">
                                                             <option value="">Select</option>
                                                             <option value="imported">Imported</option>
                                                             <option value="indigenous">Indigenous</option>
@@ -382,7 +391,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <textarea class="form-control" id="justification" name="justification" ></textarea>
+                                                        <textarea class="form-control" id="justification" name="justification"></textarea>
 
                                                     </div>
                                                 </div>
@@ -398,7 +407,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <input class="form-control" type="text" id="benett" name="benett" >
+                                                        <input class="form-control" type="text" id="benett" name="benett">
 
                                                     </div>
                                                 </div>
@@ -412,7 +421,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file" >
+                                                        <input class="form-control" type="file" id="rr_payback_pernod_file" name="rr_payback_pernod_file">
 
                                                     </div>
 
@@ -454,7 +463,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" >
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis">
 
 
                                                     </div>
@@ -477,7 +486,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis" >
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="projected_cash_outflow_fis">
 
 
                                                     </div>
@@ -622,6 +631,139 @@
 </div>
 
 
+
+
+
+
+<div class="modal fade " id="myModal" role="dialog">
+    <div class="modal-dialog " style="margin: 250px;">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+        width: 235%;
+        ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+
+
+                <div class="col-md-6">
+                    <label class="form-label" for="company">Select Vender :</label>
+                    <div class="col-sm-10">
+
+
+                        <select class="form-control dropdown" name="BU" id="VenderDll" placeholder="Enter Budget" onchange="DropdownchangeAddress(this.value)">
+                            <option Selected="True" Value="0">Select</option>
+
+
+
+                        </select>
+
+
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label class="form-label" for="company">Select Vender :</label>
+                    <div class="col-sm-10">
+                        <label id="BUAddress"></label>
+                    </div>
+                </div>
+
+
+
+                </br>
+
+
+
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="table-responsive">
+                            <div class=" card card-body card-warning table_wid" style="overflow:auto">
+                                <div>
+                                    <table id="example" class="table table-striped border-style table-bordered">
+                                        <thead>
+
+                                            <tr >
+                                                <td>Line Item</td>
+                                                <td>Item Name</td>
+                                                <td>UOM</td>
+                                                <td>Quantity</td>
+                                                <td style="width:80px;">Initial Rate</td>
+                                                <td>Initial Amount</td>
+                                                <td style="width:80px;">Final Rate</td>
+                                                <td>Final Amount</td>
+                                                <td>Tax</td>
+                                                <td>Quotation Amount<br>(Tax Inclusive)</td>
+                                                <td>Remarks</td>
+                                            </tr>
+                                        
+                                        
+                                        </thead>
+                                        <tbody>
+
+                                            @if (ViewData["Items"] != null)
+                                            {
+                                                
+                                                @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
+                                                {
+
+
+
+
+                                                <tr >
+                                                        <td>@da.ID</td>
+                                                <td>@da.Description</td>
+                                                <td>@da.Uom</td>
+                                                <td>@da.Qty</td>
+                                                        <td><input type="text" / onchange="CapexBindddlvaluechange(@da.ID+',InitalRate,'+this.value)"></td>
+                                                <td>Initial Amount</td>
+                                                        <td><input type="text" /></td>
+                                                <td>Final Amount</td>
+                                                <td>@da.TexRate</td>
+                                                <td>Quotation Amount<br>(Tax Inclusive)</td>
+                                                        <td><input type="text" /></td>
+                                                     </tr>
+
+
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 <script>
 
     $('#exampla').dataTable({
@@ -686,6 +828,120 @@
 
 
     }
+
+    //function DropdownchangeAddress(value) {
+
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "\CapexBindddlProjectAddress\?id=" + value,
+    //        success: function (data) {
+    //            console.log(data)
+    //            var $el = $("#BUAddress");
+    //            $el.empty(); // remove old options
+    //            $el.append(data)
+
+
+
+
+    //            });
+
+    //        }
+    //    })
+
+    //    //ddlProjectt.DataValueField = "IndID";
+    //    //ddlProjectt.DataTextField = "BU";
+
+
+    //}
+
+
+
+
+
+    function DropdownchangeAddress(value) {
+
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlProjectAddress\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#BUAddress");
+                console.log(data)
+                var $el = $("#BUAddress");
+                $el.empty(); // remove old options
+                $el.append(data)
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
+
+
+
+
+
+    function CapexBindddlProjectVender() {
+        var sa = $("#ddlViewBy").value;
+
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlProjectVender\?id=" + sa,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#VenderDll");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.vendor_Code).text(key.vendor_Name));
+
+
+                });
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
+
+    function CapexBindddlvaluechange(value) {
+        alert(value);
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlValuChange\?id=" + value,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#VenderDll");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.vendor_Code).text(key.vendor_Name));
+
+
+                });
+
+            }
+        })
+
+        //ddlProjectt.DataValueField = "IndID";
+        //ddlProjectt.DataTextField = "BU";
+
+
+    }
+
+
 </script>
 
 

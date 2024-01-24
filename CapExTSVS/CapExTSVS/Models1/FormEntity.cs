@@ -1,4 +1,5 @@
 ﻿using LinqToDB.Mapping;
+using static LinqToDB.Reflection.Methods.LinqToDB.Insert;
 
 namespace CapExTSVS.Models1
 {
@@ -335,7 +336,7 @@ namespace CapExTSVS.Models1
     }
 
 
-    public partial class CapexmainRequestItems
+    public  class CapexmainRequestItems
     {
         public string Description { get; set; }
 
@@ -344,13 +345,84 @@ namespace CapExTSVS.Models1
         public string Qty { get; set; }
 
         public string TexRate { get; set; }
+        public string ID { get; set; }
     }
 
 
-    public static class CapexItems<T>
+    //public class CapexItems<T>
+    //{
+
+    //}
+
+       static class Items<T>
+    {
+         public static List<T> Items1 = null;
+
+       public   static void InsertEmployeeList(T emp)
+        {
+
+            Items1.Add(emp);
+        }
+
+
+        static Items()
+        {
+            Items1 = new List<T>();
+        }
+
+    }
+
+        public  class CapexItems<T> :IEmployeeRepository
+    {
+        
+
+        //public static void InsertEmployeeList(T emp)
+        //{
+        //    Items1.Add(emp);
+        //}
+
+        //public static List<T> SelectEmployeeList1()
+        //{
+        //    return Items1;
+        //}
+
+        public void DeleteEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertEmployee<T1>(T1 emp)
+        {
+            Items<T1>.InsertEmployeeList(emp);
+        }
+
+        public List<T1> SelectAllEmployees<T1>()
+        {
+            return Items<T1>.Items1;
+        }
+
+        public T1 SelectEmployeeById<T1>(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEmployee<T1>(T1 emp)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface IEmployeeRepository
+    {
+        List<T> SelectAllEmployees<T>();
+        T SelectEmployeeById<T>(int id);
+        void InsertEmployee<T>(T emp);
+        void UpdateEmployee<T>(T emp);
+        void DeleteEmployee(int id);
+    }
+
+    public static class Vender<T>
     {
         public static List<T> Items1 = new List<T>();
     }
-
-
 }

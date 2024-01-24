@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using static DataModels.CapExTSDBStoredProcedures;
+using static LinqToDB.Common.Configuration;
 
 namespace CapExTSVS.Controllers
 {
@@ -16,7 +18,11 @@ namespace CapExTSVS.Controllers
         private readonly ILogger<NFAController> _logger;
         public CapExTSDB _dbcontext;
 
-       public static CapexmainRequestItems Items = new CapexmainRequestItems();
+        public static CapexmainRequestItems Items = new CapexmainRequestItems();
+        CapexItems<CapexmainRequestItems> ne = new CapexItems<CapexmainRequestItems>();
+        //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
+
+        static List<CapexmainRequestItems> cty = new List<CapexmainRequestItems>();
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
         public object ViewState { get; private set; }
 
@@ -26,10 +32,11 @@ namespace CapExTSVS.Controllers
             DataConnection.DefaultSettings = new MySettings(null);
             _dbcontext = new DataModels.CapExTSDB();
 
+            
         }
         public IActionResult NFADraftRequest()
         {
-            ViewData["NFADraftRequestGrid"] = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "","", "", "").ToList();
+            ViewData["NFADraftRequestGrid"] = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "", "", "", "").ToList();
 
 
             return View();
@@ -46,8 +53,8 @@ namespace CapExTSVS.Controllers
 
         public IActionResult CapexApprovalHistory()
         {
-            
-                  ViewData["CapexSelApprovalHistoryGrid"] = _dbcontext.CapexSelApprovalHistory(user.id,"","0").ToList();
+
+            ViewData["CapexSelApprovalHistoryGrid"] = _dbcontext.CapexSelApprovalHistory(user.id, "", "0").ToList();
 
             return View();
         }
@@ -56,6 +63,7 @@ namespace CapExTSVS.Controllers
         {
 
             CapexbindddlCompany();
+            //ViewData["Items"] = da.Items1.ToList();
             return View();
         }
 
@@ -63,7 +71,7 @@ namespace CapExTSVS.Controllers
         {
 
 
-            ViewData["CapexApprovalGrid"] = _dbcontext.CapexSelPendingforApproval(user.id).ToList() ;
+            ViewData["CapexApprovalGrid"] = _dbcontext.CapexSelPendingforApproval(user.id).ToList();
 
 
 
@@ -76,28 +84,37 @@ namespace CapExTSVS.Controllers
         {
 
 
+            
 
+             //var count = CapexItems<CapexmainRequestItems>.SelectEmployeeList();
+
+            CapexbindddlCompany();
 
             Items.Description = data.Description;
             Items.Qty = data.Qty;
             Items.TexRate = data.TexRate;
             Items.Uom = data.Uom;
+            // Items.ID = count.ToString();
 
-            CapexItems<CapexmainRequestItems>.Items1.Add(Items);
+            //InsertEmployeeList(Items);
+
+
+            ne.InsertEmployee<CapexmainRequestItems>(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
             //da.Items1.Add(Items);
+            //da.Items1.Add(Items);
+           var da= ne.SelectAllEmployees<CapexmainRequestItems>();
 
 
+           // ViewData["Items"] = da.Items1.ToList();
 
-            ViewData["Items"] = CapexItems<CapexmainRequestItems>.Items1.ToList();
-
-            return View("CapexmainRequest");
+            return  RedirectToAction("CapexmainRequest");
         }
 
 
 
-        public IActionResult Dropdownchange2(string  ID)
+        public IActionResult Dropdownchange2(string ID)
         {
-            
+
 
             return null;
         }
@@ -105,19 +122,55 @@ namespace CapExTSVS.Controllers
 
 
 
-        
+
 
         [HttpGet]
         public IList<UspCapexSelComProjectResult> CapexBindddlProject(string id)
         {
 
             var dt = _dbcontext.UspCapexSelComProject(id).ToList();
+            Vender<SelActiveVendorListResult>.Items1.AddRange(_dbcontext.SelActiveVendorList(id).ToList());
 
-
+           
             //_dbcontext.CapexSelCapexType();
 
 
             return dt.ToList();
+        }
+
+
+
+        [HttpGet]
+        public IList<SelActiveVendorListResult> CapexBindddlProjectVender(string id)
+        {
+           var da = Vender<SelActiveVendorListResult>.Items1.ToList();
+           
+
+            return da;
+
+        }
+
+        [HttpGet]
+        public string CapexBindddlProjectAddress(string id)
+        {
+            var da1 = id.Split('-');
+            var da = _dbcontext.CapexSelVendorAddressDetails(da1[1].Trim()).SingleOrDefault();
+
+
+            return da.Column1;
+
+        }
+
+
+        [HttpGet]
+        public string CapexBindddlValuChange(string id)
+        {
+            var da1 = id.Split(',');
+            //var da = Vender<SelActiveVendorListResult>.Items1.Where();
+
+
+            return null;//da.Column1;
+
         }
 
     }
