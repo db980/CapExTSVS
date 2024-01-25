@@ -6193,11 +6193,30 @@ namespace DataModels
 			public string Reject_Return { get; set; }
 		}
 
-		#endregion
 
-		#region WebApiCapexSelRequestApproverAutomailerrecipients
 
-		public static IEnumerable<WebApiCapexSelRequestApproverAutomailerrecipientsResult> WebApiCapexSelRequestApproverAutomailerrecipients(this CapExTSDB dataConnection, string @RequestNo, string @flag)
+        public partial class CapexShowApproval_RequestForm
+        {
+           
+            public string Approval_1 { get; set; }
+            public string Approval_2 { get; set; }
+            public string Approval_3 { get; set; }
+            public string Approval_4 { get; set; }
+            
+        }
+
+
+
+
+
+            
+
+
+        #endregion
+
+        #region WebApiCapexSelRequestApproverAutomailerrecipients
+
+        public static IEnumerable<WebApiCapexSelRequestApproverAutomailerrecipientsResult> WebApiCapexSelRequestApproverAutomailerrecipients(this CapExTSDB dataConnection, string @RequestNo, string @flag)
 		{
 			var parameters = new []
 			{
@@ -6252,7 +6271,7 @@ namespace DataModels
 
 			return dataConnection.QueryProc(dataReader =>
 				new WebApiCapexUpdateApprovalDetailsResult
-				{
+                {
 					Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
 				},
 				"[dbo].[WebApi_CapexUpdateApprovalDetails]", parameters);
@@ -6510,6 +6529,57 @@ namespace DataModels
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+        #region WebApiCapexUpdateApprovalDetails
+
+        public static IEnumerable<CapexShowApproval_RequestForm> CapexShowApproval_RequestForm1(this CapExTSDB dataConnection, string CapexAmount, string CapexID, string Empcode, string forEMPmaxLimit)
+        {
+            var parameters = new[]
+            {
+                new DataParameter("@CapexAmount", CapexAmount, LinqToDB.DataType.NVarChar)
+                {
+                    Size = 10
+                },
+                new DataParameter("@CapexID",     CapexID,     LinqToDB.DataType.NVarChar)
+                {
+                    Size = 10
+                },
+                 new DataParameter("@Empcode",     Empcode,     LinqToDB.DataType.NVarChar)
+                {
+                    Size = 10
+                },
+                new DataParameter("@forEMPmaxLimit",   forEMPmaxLimit,   LinqToDB.DataType.NVarChar)
+                {
+                    Size = 500
+                }
+                
+            };
+
+            
+
+            var ms = dataConnection.MappingSchema;
+
+            return dataConnection.QueryProc<CapexShowApproval_RequestForm>("[dbo].[CapexShowApproval_RequestForm]", parameters);
+
+
+        }
+
+        //public partial class WebApiCapexUpdateApprovalDetailsResult
+        //{
+        //    [Column("")] public string Column1 { get; set; }
+        //}
+
+        #endregion
 
 
 

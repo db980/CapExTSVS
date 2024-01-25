@@ -3,9 +3,13 @@ using DataModels;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MVC_CRUD_LIST.Repository;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Drawing2D;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using static DataModels.CapExTSDBStoredProcedures;
 using static LinqToDB.Common.Configuration;
@@ -18,13 +22,15 @@ namespace CapExTSVS.Controllers
         private readonly ILogger<NFAController> _logger;
         public CapExTSDB _dbcontext;
 
-        public static CapexmainRequestItems Items = new CapexmainRequestItems();
-        CapexItems<CapexmainRequestItems> ne = new CapexItems<CapexmainRequestItems>();
+        public string Datamatric { get; set; }
+
+        CapexItems ne = new CapexItems();
+        EmployeeRepository rep = new EmployeeRepository();
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
 
         static List<CapexmainRequestItems> cty = new List<CapexmainRequestItems>();
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
-        public object ViewState { get; private set; }
+        
 
         public NFAController(ILogger<NFAController> logger)
         {
@@ -63,7 +69,10 @@ namespace CapExTSVS.Controllers
         {
 
             CapexbindddlCompany();
-            //ViewData["Items"] = da.Items1.ToList();
+            ViewData["Items"] = rep.SelectAllEmployees();
+
+            //var da = DataMatrix(Datamatric);
+            //ViewData["Item2"] = da;
             return View();
         }
 
@@ -84,29 +93,31 @@ namespace CapExTSVS.Controllers
         {
 
 
-            
+             CapexmainRequestItems Items = new CapexmainRequestItems();
 
-             //var count = CapexItems<CapexmainRequestItems>.SelectEmployeeList();
+        var count = rep.SelectAllEmployees().Count()+1;
 
-            CapexbindddlCompany();
+        CapexbindddlCompany();
 
             Items.Description = data.Description;
             Items.Qty = data.Qty;
             Items.TexRate = data.TexRate;
             Items.Uom = data.Uom;
-            // Items.ID = count.ToString();
+             Items.ID = count.ToString();
 
             //InsertEmployeeList(Items);
 
 
-            ne.InsertEmployee<CapexmainRequestItems>(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
+
+
+            rep.InsertEmployee(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
             //da.Items1.Add(Items);
             //da.Items1.Add(Items);
-           var da= ne.SelectAllEmployees<CapexmainRequestItems>();
+           var da= rep.SelectAllEmployees();
 
 
-           // ViewData["Items"] = da.Items1.ToList();
-
+            ViewData["Items"] = da.ToList();
+            
             return  RedirectToAction("CapexmainRequest");
         }
 
@@ -173,5 +184,36 @@ namespace CapExTSVS.Controllers
 
         }
 
-    }
+
+        [HttpGet]
+        public IActionResult  CapexBindddlValuChange1(string id)
+        {
+            Datamatric = id;
+            var da=DataMatrix(id) ;
+            ViewData["Item2"] = da;
+            return View("CapexmainRequest");
+        }
+
+
+        public IList<CapexShowApproval_RequestForm> DataMatrix(string id)
+        {
+            var da= id.Split(",");
+
+            var da2 = _dbcontext.CapexSelCapexType(user.id, da[0].Trim(), da[1].Trim(), da[2].Trim(), da[3].Trim()).ToList();
+            List<CapexShowApproval_RequestForm> da3 = null ;
+            // _dbcontext.
+            if (da2.Any())
+            {
+                da3 = _dbcontext.CapexShowApproval_RequestForm1("0", da2.SingleOrDefault().CTID.ToString(), user.id, "NA").ToList();
+
+            }
+
+
+            ViewData["Item2"]= da3;
+           
+            return da3.ToList();
+
+        }
+
+     }
 }

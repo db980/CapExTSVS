@@ -122,7 +122,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="department">Select BUI Department:</label>
                                                     <div class="col-sm-12">
-                                                        <select class="form-control dropdown" name="BU" id="BU" placeholder="Enter Budget">
+                                                        <select class="form-control dropdown" name="BU" id="BU" placeholder="Enter Budget" >
                                                             <option Selected="True" Value="0">Select</option>
                                                             @* @foreach (var da in ViewData["CapexBindddlProject"] as IList<UspCapexSelComProjectResult>)
                                                             {
@@ -142,10 +142,10 @@
                                                     <label class="form-label" for="exp_type">Select Exp Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select class="form-control dropdown" id="inputEmail3" name="ReqType" placeholder="Enter Budget">
+                                                        <select class="form-control dropdown" id="ReqType"  name="ReqType" placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()">
                                                             <option Selected="True" Value="0">Select</option>
-                                                            <option Value="Budgeted">Capex</option>
-                                                            <option Value="NonBudgeted">Opex</option>
+                                                            <option Value="Capex">Capex</option>
+                                                            <option Value="Opex">Opex</option>
 
 
                                                         </select>
@@ -156,10 +156,10 @@
 
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    <label class="form-label" for="budget">Select Budget:</label>
+                                                    <label class="form-label" for="budget">Select Exp:</label>
                                                     <div class="col-sm-12">
 
-                                                        <select class="form-control dropdown" id="inputEmail3" name="BudgetType" placeholder="Enter Budget">
+                                                        <select class="form-control dropdown" id="Exp" name="BudgetType" placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()">
                                                             <option selected>Select</option>
                                                             <option Value="Budgeted">Budgeted</option>
                                                             <option Value="NonBudgeted">NonBudgeted</option>
@@ -516,49 +516,29 @@
                                                                 <table id="example" class="table table-striped border-style table-bordered">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col">Action</th>
-                                                                            <th scope="col">SrNo</th>
-                                                                            <th scope="col">Description</th>
-
-                                                                            <th scope="col">UOM</th>
-                                                                            <th scope="col">Qty</th>
-                                                                            <th scope="col">Tax Rate</th>
+                                                                            <th>Approval 1</th>
+                                                                            <th>Approval 2</th>
+                                                                            <th>Approval 3</th>
+                                                                            <th>Approval 4</th>
 
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr style="background-color:0;" *ngFor="let person of pOExpenseItems;let a=index">
-                                                                            <td>
-                                                                                <button type="button"
-                                                                                        class="badge bg-danger btn btn-sm" (click)="onDel(person.id)">
-                                                                                    <a class="fa fa-trash"></a>
-                                                                                </button>
-                                                                                <!-- poId -->
-                                                                            </td>
-                                                                            <td style="width:100px;">
-                                                                                <span id="GridView1_lblRowNumber_0">{{a+1}}</span>
-                                                                            </td>
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'desc')" (mouseleave)="mouseLeave(false,person.id,'desc')">
-                                                                                <P id="label_desc{{person.id}}">  {{person.description}} </P>
-                                                                                <textarea calss="form-control" id="desc{{person.id}}" (dblclick)="Tabledatachange(person.id,'desc')" style="display: none;" value="{{person.description}}"> </textarea>
-                                                                            </td>
 
-                                                                            <td>
-                                                                                <P id="label_uom{{person.id}}"> {{person.uom}} </P>
-                                                                                <input type="text" calss="form-control" id="uom{{person.id}}" style="display: none;" value="{{person.uom}}">
-                                                                            </td>
+                                                                        @if (ViewData["Item2"] != null)
+                                                                        {
 
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'qty')" (mouseleave)="mouseLeave(false,person.id,'qty')">
-                                                                                <P id="label_qty{{person.id}}"> {{person.qty}}  </P>
-                                                                                <input type="number" calss="form-control" id="qty{{person.id}}" (dblclick)="Tabledatachange(person.id,'qty')" style="display: none;" value="{{person.qty}}">
-                                                                            </td>
+                                                                            @foreach (var da in ViewData["Item2"] as IList<CapexShowApproval_RequestForm>)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>@da.Approval_1</td>
+                                                                                    <td>@da.Approval_2</td>
+                                                                                    <td>@da.Approval_3</td>
+                                                                                    <td>@da.Approval_4</td>
+                                                                                </tr>
 
-                                                                            <td (mouseenter)="mouseEnter(true,person.id,'listPrice')" (mouseleave)="mouseLeave(false,person.id,'listPrice')">
-                                                                                <P id="label_listPrice{{person.id}}">  {{person.listPrice}} </P>
-                                                                                <input type="number" calss="form-control" id="listPrice{{person.id}}" (dblclick)="Tabledatachange(person.id,'listPrice')" style="display: none;" value="{{person.listPrice}}">
-                                                                            </td>
-
-                                                                        </tr>
+                                                                            }
+                                                                        }
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -643,7 +623,7 @@
         height: auto;
         min-height: 100%;
         border-radius: 0;
-        width: 235%;
+        width: 311%;
         ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -750,7 +730,103 @@
 
 
 
+                <div class="form-group row">
 
+                    <div class="col-md-6">
+                        <label class="form-label" for="department">Upload Files: *</label>
+                        <div class="col-sm-12">
+                           
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="exp_type">Payment Term:</label>
+                        <div class="col-sm-10">
+
+                            <input type="text" class="form-control"/>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="department">Freight :</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="exp_type">Instalation Cost:</label>
+                        <div class="col-sm-10">
+
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="department">Delivery: :</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="exp_type">Remark:</label>
+                        <div class="col-sm-10">
+
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="department"> Terms & Conditions: *</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                       
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group row">
+
+                    <div class="col-md-6">
+                      
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="submit" class="btn btn-default float-left">Cancel</button>
+                    </div>
+
+
+                </div>
+
+
+
+
+               
 
 
             </div>
@@ -935,9 +1011,37 @@
             }
         })
 
-        //ddlProjectt.DataValueField = "IndID";
-        //ddlProjectt.DataTextField = "BU";
+    }
 
+
+
+       function CapexBindddlvaluechangeV2() {
+
+
+       
+
+
+        var da = document.getElementById("ddlViewBy").value + "," + document.getElementById("BU").value + "," + document.getElementById("ReqType").value + "," + document.getElementById("Exp").value;
+        alert(da);
+        $.ajax({
+            type: "GET",
+            url: "\CapexBindddlValuChange1\?id=" + da,
+            success: function (data) {
+                console.log(data)
+                var $el = $("#VenderDll");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", value.vendor_Code).text(key.vendor_Name));
+
+
+                });
+
+            }
+        })
 
     }
 

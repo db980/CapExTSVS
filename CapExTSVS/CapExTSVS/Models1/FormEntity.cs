@@ -346,6 +346,7 @@ namespace CapExTSVS.Models1
 
         public string TexRate { get; set; }
         public string ID { get; set; }
+        public string Datastatus { get; set; }
     }
 
 
@@ -354,11 +355,11 @@ namespace CapExTSVS.Models1
 
     //}
 
-       static class Items<T>
+       static class Items
     {
-         public static List<T> Items1 = null;
+         public static List<CapexmainRequestItems> Items1 = null;
 
-       public   static void InsertEmployeeList(T emp)
+       public   static void InsertEmployeeList(CapexmainRequestItems emp)
         {
 
             Items1.Add(emp);
@@ -367,12 +368,12 @@ namespace CapExTSVS.Models1
 
         static Items()
         {
-            Items1 = new List<T>();
+            Items1 = new List<CapexmainRequestItems>();
         }
 
     }
 
-        public  class CapexItems<T> :IEmployeeRepository
+        public  class CapexItems
     {
         
 
@@ -391,14 +392,14 @@ namespace CapExTSVS.Models1
             throw new NotImplementedException();
         }
 
-        public void InsertEmployee<T1>(T1 emp)
+        public void InsertEmployee(CapexmainRequestItems emp)
         {
-            Items<T1>.InsertEmployeeList(emp);
+            Items.InsertEmployeeList(emp);
         }
 
-        public List<T1> SelectAllEmployees<T1>()
+        public List<CapexmainRequestItems> SelectAllEmployees()
         {
-            return Items<T1>.Items1;
+            return Items.Items1;
         }
 
         public T1 SelectEmployeeById<T1>(int id)
