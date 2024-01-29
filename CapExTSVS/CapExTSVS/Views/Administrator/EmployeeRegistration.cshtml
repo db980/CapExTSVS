@@ -191,42 +191,21 @@
                 <!-- form start -->
 
 
-                <div class="col-12 col-sm-12">
-                    <div class="card card-primary card-outline card-tabs">
-                        <div class="card-header p-0 pt-1 border-bottom-0">
-                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Personal Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Emergency Contact Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Emergency Contact Two</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false">Bank Details</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link " id="custom-tabs-three-settings1-tab" data-toggle="pill" href="#custom-tabs-three-settings1" role="tab" aria-controls="custom-tabs-three-settings1" aria-selected="false">Document Uploading</a>
-                                </li>
-                            </ul>
-                        </div>
+                
                         <div class="card-body">
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                                               
 
                                     <fieldset>
-                                        <h1 class=" panel panel-heading page-success text-danger">Personal Details</h1>
+                                        <h1 class=" panel panel-heading page-success text-danger">Employee  Details</h1>
                                         <h3 class="text-success text-center">(STEP 1)</h3>
 
                                         <div class="row ">
 
 
-                                                <div class="col-md-12" style="display:none">
-                                                    <asp:label>Employee Code</asp:label>
+                                                <div class="col-md-12"  >
+                                                    <asp:label>Employee Code </asp:label>
                                                     <div class="form-group">
 
                                                         <input name="ID" value="@(Model != null ? Model.ID : "") " type="text" class="form-control" placeholder="Enter Name" />
@@ -236,7 +215,7 @@
 
 
                                                 <div class="col-md-12">
-                                                    <asp:label>Employee Code</asp:label>
+                                                    <asp:label>Employee Name </asp:label>
                                                     <div class="form-group">
 
                                                         <input name="step1_Empolyee_Code" value="@(Model != null ? Model.step1_Empolyee_Code : "") " type="text" class="form-control" placeholder="Enter Name" />
@@ -246,7 +225,7 @@
 
 
                                             <div class="col-md-12">
-                                                <asp:label>Name</asp:label>
+                                                <asp:label>Employee Sub group</asp:label>
                                                 <div class="form-group">
 
                                                         <input name="step1_txt_name" value="@(Model != null ? Model.step1_txt_name : "") " type="text" class="form-control" placeholder="Enter Name" />
@@ -255,28 +234,20 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label>Date Of Birth</asp:label>
-                                                   
-                                                        <input name="step1_txt_dob" value="@(Model != null ? Convert.ToDateTime( Model.step1_txt_dob).ToString("dd/mm/yyyy") : "") " id="step1_txt_dob" class="form-control" type="Date" placeholder="Enter Name">
+                                                        <asp:label>Employee Status</asp:label>
 
-                                                </div>
+                                                <select class="form-control dropdown" id="inputEmail3"  placeholder="Enter Budget">
+                                                    <option Selected="True" Value="0">Select</option>
+                                                    <option Value="Active">Active</option>
+                                                    <option Value="InActive">InActive</option>
+
+
+                                                </select>
+                                            </div>
                                             </div>
 
 
-                                            <div class="col-md-6">
-
-                                                <div class="form-group col-md-3">
-
-                                                        <input id="step1_rdo_gender" type="radio" name="MeasurementSystem" value="@(Model != null ? Model.MeasurementSystem : "") " ><label for="step1_rdo_gender">Male</label>
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                        <input id="step1_rdo_Female" type="radio" name="MeasurementSystem" value="@(Model != null ? Model.MeasurementSystem : "") "><label for="step1_rdo_Female">Female</label>
-                                                </div>
-
-
-                                            </div>
-
-
+                                         
 
 
 
@@ -285,16 +256,16 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label>Father Name</asp:label>
-                                                        <input name="step1_txt_father" id="step1_txt_father" value="@(Model != null ? Model.step1_txt_father : "") " class="form-control" type="text" placeholder="Enter Father Name">
+                                                        <asp:label>Department</asp:label>
+                                                        <input name="step1_txt_father" id="step1_txt_father" value="@(Model != null ? Model.step1_txt_father : "") " class="form-control" type="text" >
 
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label>Mother Name</asp:label>
-                                                        <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="text" placeholder="Enter Mother Name">
+                                                    <asp:label>Email Id</asp:label>
+                                                        <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="text" >
 
                                                 </div>
                                             </div>
@@ -305,16 +276,16 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label> Home Address</asp:label>
-                                                        <textarea name="step1_txt_address" rows="2" cols="20" id="step1_txt_address" value="@(Model != null ? Model.step1_txt_address : "") " class="form-control" type="text" placeholder="Enter Home Address" style="height:100px;"></textarea>
+                                                    <asp:label>Contact No</asp:label>
+                                                <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="number" >
 
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label>Post Code</asp:label>
-                                                        <input name="step1_text_postcode" id="step1_text_postcode" value="@(Model != null ? Model.step1_text_postcode : "") " class="form-control" type="number" placeholder="Enter Post Code">
+                                                        <asp:label>VERTICAL</asp:label>
+                                                        <input name="step1_text_postcode" id="step1_text_postcode" value="@(Model != null ? Model.step1_text_postcode : "") " class="form-control" type="text" readonly >
 
                                                 </div>
                                             </div>
@@ -327,16 +298,16 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label> Home Telephone</asp:label>
-                                                        <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" value="@(Model != null ? Model.step1_txt_hometel : "") " class="form-control" placeholder="Enter Home Telephone">
+                                                    <asp:label> HODD</asp:label>
+                                                <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" value="@(Model != null ? Model.step1_txt_hometel : "") " class="form-control"  readonly>
 
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <asp:label>Mobile Number</asp:label>
-                                                        <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" value="@(Model != null ? Model.step1_txt_mobilenumber : "") " class="form-control" type="Number" placeholder="Enter Mobile Number">
+                                                        <asp:label>REPOR</asp:label>
+                                                        <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" value="@(Model != null ? Model.step1_txt_mobilenumber : "") " class="form-control" type="text"  readonly>
 
                                                 </div>
                                             </div>
@@ -353,346 +324,14 @@
 
 
                                 </div>
-                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-
-                                    <fieldset>
-                                        <h1 class=" panel panel-heading page-success text-danger">Emergency Contact Details</h1>
-                                        <h3 class="text-success text-center">(STEP 2)</h3>
-
-                                        <div class="row ">
-                                            <div class="col-md-12">
-                                                <asp:label>Name</asp:label>
-                                                <div class="form-group">
-
-                                                        <input name="step_2_text_name" value="@(Model != null ? Model.step_2_text_name : "") " type="text" id="step_2_text_name" class="form-control" placeholder="Enter Name">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>Relationship To Employee</asp:label>
-                                                        <input name="step_2_txt_relationship" value="@(Model != null ? Model.step_2_txt_relationship : "") " type="text" id="step_2_txt_relationship" class="form-control" placeholder="Enter Relationship To Employee">
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>Post Code</asp:label>
-                                                        <input name="step_2_txt_Postcode" value="@(Model != null ? Model.step_2_txt_Postcode : "") " id="step_2_txt_Postcode" class="form-control" type="number" placeholder="Enter Post Code">
-
-                                                </div>
-                                            </div>
-
-
-
-
-
-                                        </div>
-
-
-
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>Contact Address If Different From Above</asp:label>
-                                                        <textarea name="step_2_address" rows="2" cols="20" id="step_2_address" value="@(Model != null ? Model.step_2_address : "") " class="form-control" type="text" placeholder="EnterContact Address If Different From Above" style="height:100px;"></textarea>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>  Telephone</asp:label>
-                                                        <input name="step_2_txt_tel" type="number" id="step_2_txt_tel" value="@(Model != null ? Model.step_2_txt_tel : "") " class="form-control" placeholder="Enter  Telephone">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-
-
-                                        <div class="row">
-
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>Work Mobile Number</asp:label>
-                                                        <input name="step_2_txt_mobile" id="step_2_txt_mobile" value="@(Model != null ? Model.step_2_txt_mobile : "") " class="form-control" type="Number" placeholder="Enter Working Mobile Number">
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <asp:label>Personal Number</asp:label>
-                                                        <input name="step_2_txt_personalnumber" id="step_2_txt_personalnumber" value="@(Model != null ? Model.step_2_txt_personalnumber : "") " class="form-control" type="Number" placeholder="Enter Personal Number">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    
-                                    </fieldset>
-
-
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
-                                
-                                    <fieldset>
-                <h1 class=" panel panel-heading page-success text-danger">Emergency Contact Two</h1>
-                <h3 class="text-success text-center">(STEP 3)</h3>
-
-                <div class="row ">
-                    <div class="col-md-12">
-                        <asp:label>Name</asp:label>
-                        <div class="form-group">
-
-                                                        <input name="step_3_txt_name" type="text" value="@(Model != null ? Model.step_3_txt_name : "") " id="step_3_txt_name" class="form-control" placeholder="Enter Name">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <asp:label>Relationship </asp:label>
-                                                        <input name="step_3_txt_relationship" value="@(Model != null ? Model.step_3_txt_relationship : "") " type="text" id="step_3_txt_relationship" class="form-control" placeholder="Enter Relationship ">
-
-                        </div>
-                    </div>
-
-
-                  <div class="col-md-6">
-                        <div class="form-group">
-                            <asp:label>  Telephone</asp:label>
-                                                        <input name="step_3_txt_tel" type="number" value="@(Model != null ? Model.step_3_txt_tel : "") " id="step_3_txt_tel" class="form-control" placeholder="Enter  Telephone">
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-           
-
-
-
-
-
-
-                <div class="row">
-                    
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <asp:label>Work Mobile Number</asp:label>
-                                                        <input name="step_3_txt_workmobile" id="step_3_txt_workmobile" value="@(Model != null ? Model.step_3_txt_workmobile : "") " class="form-control" type="Number" placeholder="Enter Working Mobile Number">
-
-                        </div>
-                    </div>
-
-
-                     <div class="col-md-6">
-                        <div class="form-group">
-                            <asp:label>Personal Number</asp:label>
-                                                        <input name="step_3_txt_personalnumber" id="step_3_txt_personalnumber" value="@(Model != null ? Model.step_3_txt_personalnumber : "") " class="form-control" type="Number" placeholder="Enter Personal Number">
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                 <div class="col-md-12">
-                        <div class="form-group">
-                            <asp:label>Are There Any Medical Condition We Should Know About In The Case Of An Emergency  </asp:label>
-                                                    <select name="step_3_drop_medicalcondition" value="@(Model != null ? Model.step_3_drop_medicalcondition : "") " id="step_3_drop_medicalcondition">
-	<option value="--Select--">--Select--</option>
-	<option value="Yes">Yes</option>
-	<option value="No">No</option>
-
-</select>
-                            
-
-                        </div>
-                    </div>
-
-                                            <textarea name="step_3_txt_medicalcondition" rows="2" cols="20" value="@(Model != null ? Model.step_3_txt_medicalcondition : "") " id="step_3_txt_medicalcondition" class="form-control" placeholder="Enter Are There Any Medical Condition We Should Know About In The Case Of An Emergency" style="height:50px;"></textarea>
-
-
-
-
-                @* <input type="button" name="previous" class="previous action-button" value="Previous">
-                <input type="button" name="next" class="next action-button" value="Next">*@
-
-
-               
-            </fieldset>
-            
-                                
-                                
-                                </div>
-                                <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
-                                <fieldset>
-                <h1 class=" panel panel-heading page-success text-danger">Bank Details</h1>
-                <h3 class="text-success text-center">(STEP 4)</h3>
-
-                <div class="row ">
-                    <div class="col-md-12">
-                        <asp:label>Bank Name</asp:label>
-                        <div class="form-group">
-
-                                                        <input name="step_4_txt_bankname" value="@(Model != null ? Model.step_4_txt_bankname : "") " type="text" id="step_4_txt_bankname" class="form-control" placeholder="Enter Bank Name">
-                        </div>
-                    </div>
-
-                     <div class="col-md-12">
-                        <asp:label>Account Number</asp:label>
-                        <div class="form-group">
-
-                                                        <input name="step_4_txt_accountnumber" value="@(Model != null ? Model.step_4_txt_accountnumber : "") " type="text" id="step_4_txt_accountnumber" class="form-control" placeholder="Enter Account Number">
-                        </div>
-                    </div>
-
-                     <div class="col-md-12">
-                        <asp:label>IFSC Code</asp:label>
-                        <div class="form-group">
-
-                                                        <input name="step_4_txt_ifsc_code" value="@(Model != null ? Model.step_4_txt_ifsc_code : "") " type="text" id="step_4_txt_ifsc_code" class="form-control" placeholder="Enter IFSC Code">
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <asp:label>Branch / Address Of Bank</asp:label>
-                        <div class="form-group">
-
-                                                        <textarea name="step_4_txt_branch_address" rows="2" cols="20" value="@(Model != null ? Model.step_4_txt_branch_address : "") " id="step_4_txt_branch_address" class="form-control" placeholder="Enter Branch / Address Of Bank" style="height:50px;"></textarea>
-                        </div>
-                    </div>
-
-                   
-
-
-                 
-
-
-
-                </div>
-
-           
-
-
-
-               
-              @*   <input type="button" name="previous" class="previous action-button" value="Previous">
-                <input type="button" name="next" class="next action-button" value="Next">*@
-            </fieldset>
-            
-                                </div>
-
-
-
-                                <div class="tab-pane fade" id="custom-tabs-three-settings1" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-
-                         <fieldset>
-                <h1 class=" panel panel-heading page-success text-danger">Document Upload</h1>
-                <h3 class="text-success text-center">(STEP 5)</h3>
-
-                <div class="row ">
-                    <div class="col-md-6">
-                        <asp:label>Passport size photo - 2 nos</asp:label>
-                        <div class="form-group">
-                            <input type="file" multiple="multiple" name="step_5_file_photo" id="step_5_file_photo" class="form-control">  
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <asp:label> Aadhar card</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_file_addhar" id="step_5_file_addhar" class="form-control">  
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <asp:label>Pan card</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_file_pancard" id="step_5_file_pancard" class="form-control">  
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <asp:label>Voter ID</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_file_voterid" id="step_5_file_voterid" class="form-control">  
-                            
-                        </div>
-                    </div>
-                   
-                    
-                </div>
-                    <div class="row">
-                    <div class="col-md-6">
-                        <asp:label>Education proof (like, 10th 12th &amp; graduation certificate and marksheet)</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_educationproof" id="step_5_educationproof" class="form-control">  
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <asp:label>Experience letter</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_file_experience_letter" id="step_5_file_experience_letter" class="form-control">  
-                            
-                        </div>
-                    </div>
-
-                        </div>
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <asp:label>NOC letter from last company
-        Etc.</asp:label>
-                        <div class="form-group">
-                            <input type="file" name="step_5_file_nocletter" id="step_5_file_nocletter" class="form-control">  
-                            
-                        </div>
-                    </div>
-                   
-
-                </div>
-                 
-
-
-
-                
-           
-
-
-
-               @* <input type="button" name="previous" class="previous action-button" value="Previous">
-               <input type="submit" name="submit" value="Submit" id="submit" class="btn btn-success">*@
-            </fieldset>
-       
-                                    </div>
-
-
-
+                               
 
 
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                  
+              
 
 
                <div class="card-footer">

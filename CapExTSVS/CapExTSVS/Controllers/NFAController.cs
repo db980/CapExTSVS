@@ -3,6 +3,7 @@ using DataModels;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using MVC_CRUD_LIST.Repository;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using static DataModels.CapExTSDBStoredProcedures;
 using static LinqToDB.Common.Configuration;
+
 
 namespace CapExTSVS.Controllers
 {
@@ -29,8 +31,9 @@ namespace CapExTSVS.Controllers
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
 
         static List<CapexmainRequestItems> cty = new List<CapexmainRequestItems>();
+        List<CapexShowApproval_RequestForm> da3 = null;
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
-        
+
 
         public NFAController(ILogger<NFAController> logger)
         {
@@ -71,6 +74,7 @@ namespace CapExTSVS.Controllers
             CapexbindddlCompany();
             ViewData["Items"] = rep.SelectAllEmployees();
 
+            ViewData["Item2"] = da3;
             //var da = DataMatrix(Datamatric);
             //ViewData["Item2"] = da;
             return View();
@@ -123,6 +127,38 @@ namespace CapExTSVS.Controllers
 
 
 
+        [HttpGet]
+       public List<CapexmainRequestItems> DataList1(string Description, string UOM, string Qty, string TaxRate)
+        {
+
+           
+            CapexmainRequestItems Items = new CapexmainRequestItems();
+            var count = rep.SelectAllEmployees().Count() + 1;
+
+            CapexbindddlCompany();
+
+            Items.Description =Description.ToString();
+            Items.Qty = Qty.ToString();
+            Items.TexRate = TaxRate.ToString();
+            Items.Uom = UOM.ToString();
+            Items.ID = count.ToString();
+
+            //InsertEmployeeList(Items);
+
+
+
+
+            rep.InsertEmployee(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
+                                               //da.Items1.Add(Items);
+                                               //da.Items1.Add(Items);
+            var da = rep.SelectAllEmployees();
+
+
+            ViewData["Items"] = da.ToList();
+            return da;
+        }
+
+
         public IActionResult Dropdownchange2(string ID)
         {
 
@@ -155,7 +191,8 @@ namespace CapExTSVS.Controllers
         public IList<SelActiveVendorListResult> CapexBindddlProjectVender(string id)
         {
            var da = Vender<SelActiveVendorListResult>.Items1.ToList();
-           
+
+            
 
             return da;
 
@@ -186,12 +223,12 @@ namespace CapExTSVS.Controllers
 
 
         [HttpGet]
-        public IActionResult  CapexBindddlValuChange1(string id)
+        public IList<CapexShowApproval_RequestForm> CapexBindddlValuChange1(string id)
         {
             Datamatric = id;
             var da=DataMatrix(id) ;
             ViewData["Item2"] = da;
-            return View("CapexmainRequest");
+            return da;
         }
 
 
@@ -200,7 +237,7 @@ namespace CapExTSVS.Controllers
             var da= id.Split(",");
 
             var da2 = _dbcontext.CapexSelCapexType(user.id, da[0].Trim(), da[1].Trim(), da[2].Trim(), da[3].Trim()).ToList();
-            List<CapexShowApproval_RequestForm> da3 = null ;
+          
             // _dbcontext.
             if (da2.Any())
             {
@@ -209,11 +246,43 @@ namespace CapExTSVS.Controllers
             }
 
 
-            ViewData["Item2"]= da3;
+           
            
             return da3.ToList();
 
         }
 
-     }
+
+
+        [HttpPost]
+        public void Form2(object da)
+        {
+
+        }
+
+
+        [HttpPost]
+        public ActionResult AddFriend(IFormCollection fm)
+        {
+
+
+            
+            //HttpFileCollectionBase files = Request.Files;
+
+            //Write your database insertHttpFileCollectionBase files = Request.Files;   code / activities
+
+            return RedirectToAction("create");
+
+        }
+
+
+        public class FriendModel
+        {
+            public string FriendName { get; set; }
+            public string Phone { get; set; }
+            public string State { get; set; }
+        }
+
+
+    }
 }

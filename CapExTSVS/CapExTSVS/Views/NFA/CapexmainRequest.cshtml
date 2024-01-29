@@ -59,7 +59,7 @@
 
 
 
-                                        <form action="/NFA/CapexmainRequest2/" method="post">
+                                        <form  id="form1" action="/NFA/CapexmainRequest2/" method="post">
 
 
                                             <div class="form-group row">
@@ -235,14 +235,14 @@
                                                                value="Search" id="btnsearch" class=" "
                                                                style="float:right">Search</button> -->
                                                             <input formControlName="txtdescription" type="text"
-                                                                   name="Description" class="form-control inputtext ">
+                                                                   id="Description" name="Description" class="form-control inputtext ">
                                                         </div>
 
                                                         <div class="col-sm-1">
                                                             <label for="inputEmail3"
-                                                                   class="control-label pull-left">UOM</label>&nbsp;
+                                                                class="control-label pull-left">UOM</label>&nbsp;
                                                             <select formControlName="ddluom"
-                                                                    name="Uom" class="form-control">
+                                                                    id="Uom"   name="Uom" class="form-control">
                                                                 <option value="Nos" [selected]="true">Nos</option>
                                                                 <option value="Pcs">Pcs</option>
                                                                 <option value="Lot">Lot</option>
@@ -263,21 +263,21 @@
                                                             <label for="inputEmail3"
                                                                    class="control-label pull-left">Qty</label>&nbsp;
                                                             <input formControlName="txtqty" type="number"
-                                                                   name="Qty" class="form-control inputtext">
+                                                                   id="Qty" name="Qty" class="form-control inputtext">
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label for="inputEmail3" class="control-label pull-left">
                                                                 Tax Rate
                                                             </label>&nbsp;
                                                             <input formControlName="txtlistprice" type="number"
-                                                                   name="TexRate" class="form-control inputtext">
+                                                                   id="TexRate" name="TexRate" class="form-control inputtext">
                                                         </div>
 
                                                         <div class="col-sm-2 " style="float:right">
                                                             <div class="clearfix" style="margin-top: 10px;"></div>
-                                                            <button type="submit"
+                                                            <button type="button"
                                                                     value="ADD" name="Status"
-                                                                    class="btn btn-primary pull-Right">
+                                                                    class="btn btn-primary pull-Right" onclick="DataItemList()">
                                                                 ADD
                                                             </button>
                                                             @* onclick="CapexmainRequest2(this.value)"*@
@@ -305,22 +305,22 @@
                                                     <div class="table-responsive">
                                                         <div class=" card card-body card-warning table_wid">
                                                             <div>
-                                                                <table id="example" class="table table-striped border-style table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">Action</th>
-                                                                            <th scope="col">SrNo</th>
-                                                                            <th scope="col">Description</th>
+                                                                <table id="records_tableData" class="table table-striped border-style table-bordered">
+                                                                   @* <thead>*@
+                                                                      @*  <tr>
+                                                                            <th>Action</th>
+                                                                            <th>SrNo</th>
+                                                                            <th>Description</th>
 
-                                                                            <th scope="col">UOM</th>
-                                                                            <th scope="col">Qty</th>
-                                                                            <th scope="col">Tax Rate</th>
+                                                                            <th>UOM</th>
+                                                                            <th>Qty</th>
+                                                                            <th>Tax Rate</th>
 
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                                        </tr>*@
+                                                                   @* </thead>
+                                                                    <tbody>*@
 
-                                                                        @if (ViewData["Items"] != null)
+                                                                        @*@if (ViewData["Items"] != null)
                                                                         {
                                                                             @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
                                                                             {
@@ -337,8 +337,8 @@
 
                                                                                 </tr>
                                                                             }
-                                                                        }
-                                                                    </tbody>
+                                                                        }*@
+                                                                  @*  </tbody>*@
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -368,7 +368,7 @@
                                             <div class="form-group row">
 
 
-                                                <button type="button" class="btn btn-info btn-lg col-md-6" data-toggle="modal" data-target="#myModal" value="Select Quotation">  <a onclick="CapexBindddlProjectVender()" class="fa fa-file"></a> </button>
+                                                <button type="button" class="btn btn-info btn-lg col-md-6" data-toggle="modal" data-target="#myModal" value="Select Quotation">  <a onclick="CapexBindddlProjectVender();" class="fa fa-file"></a> </button>
 
 
                                                 <div class="col-md-6">
@@ -513,8 +513,8 @@
                                                     <div class="table-responsive">
                                                         <div class=" card card-body card-warning table_wid">
                                                             <div>
-                                                                <table id="example" class="table table-striped border-style table-bordered">
-                                                                    <thead>
+                                                                <table id="records_table" class="table table-striped border-style table-bordered">
+@*                                                                    <thead>*@
                                                                         <tr>
                                                                             <th>Approval 1</th>
                                                                             <th>Approval 2</th>
@@ -522,10 +522,10 @@
                                                                             <th>Approval 4</th>
 
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                                    @*</thead>
+                                                                    <tbody>*@
 
-                                                                        @if (ViewData["Item2"] != null)
+                                                                       @* @if (ViewData["Item2"] != null)
                                                                         {
 
                                                                             @foreach (var da in ViewData["Item2"] as IList<CapexShowApproval_RequestForm>)
@@ -538,7 +538,7 @@
                                                                                 </tr>
 
                                                                             }
-                                                                        }
+                                                                        }*@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -604,6 +604,43 @@
 
 
 
+
+
+
+
+
+                <form id="friendform">
+                    <table>
+                        <tr>
+                            <td>Friend Name</td>
+                            <td><input id="txtFriendName" name="FriendName" type="text" /></td>
+                        </tr>
+
+                        <tr>
+                            <td>Phone</td>
+                            <td><input id="txtPhone" name="Phone" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td><input id="txtState" name="State" type="text" /></td>
+                        </tr>
+
+                    </table>
+                    <input id="btnsubmit" type="button" value="Submit"  onclick="test()"/>
+
+                </form>
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -623,13 +660,15 @@
         height: auto;
         min-height: 100%;
         border-radius: 0;
-        width: 311%;
+        width: 370%;
         ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
             </div>
-            <div class="modal-body">
+
+            <form id="Form2"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
 
 
                 <div class="col-md-6">
@@ -670,8 +709,8 @@
                         <div class="table-responsive">
                             <div class=" card card-body card-warning table_wid" style="overflow:auto">
                                 <div>
-                                    <table id="example" class="table table-striped border-style table-bordered">
-                                        <thead>
+                                        <table id="records_table2" class="table table-striped border-style table-bordered">
+                                       @* <thead>
 
                                             <tr >
                                                 <td>Line Item</td>
@@ -718,7 +757,7 @@
 
                                                 }
                                             }
-                                        </tbody>
+                                        </tbody>*@
                                     </table>
                                 </div>
                             </div>
@@ -735,7 +774,8 @@
                     <div class="col-md-6">
                         <label class="form-label" for="department">Upload Files: *</label>
                         <div class="col-sm-12">
-                           
+                                <input class="form-control" type="file" id="F3_UplodeFile" name="F3_UplodeFile">
+
                         </div>
 
                     </div>
@@ -744,7 +784,7 @@
                         <label class="form-label" for="exp_type">Payment Term:</label>
                         <div class="col-sm-10">
 
-                            <input type="text" class="form-control"/>
+                                <input type="text" name="F3_PaymentTerms" class="form-control" />
                         </div>
                     </div>
 
@@ -756,7 +796,7 @@
                     <div class="col-md-6">
                         <label class="form-label" for="department">Freight :</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                                <input type="text" name="F3_Freight" class="form-control" />
                         </div>
 
                     </div>
@@ -765,7 +805,7 @@
                         <label class="form-label" for="exp_type">Instalation Cost:</label>
                         <div class="col-sm-10">
 
-                            <input type="text" class="form-control" />
+                                <input type="text" name="F3_InstalationCost" class="form-control" />
                         </div>
                     </div>
 
@@ -778,7 +818,7 @@
                     <div class="col-md-6">
                         <label class="form-label" for="department">Delivery: :</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                                <input type="text" name="F3_Delivery" class="form-control" />
                         </div>
 
                     </div>
@@ -787,7 +827,7 @@
                         <label class="form-label" for="exp_type">Remark:</label>
                         <div class="col-sm-10">
 
-                            <input type="text" class="form-control" />
+                                <input type="text" name="F3_Remarks"  class="form-control" />
                         </div>
                     </div>
 
@@ -799,7 +839,7 @@
                     <div class="col-md-6">
                         <label class="form-label" for="department"> Terms & Conditions: *</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                            <input type="text" name="F3_TermCondition" class="form-control" />
                         </div>
 
                     </div>
@@ -815,8 +855,8 @@
                 <div class="form-group row">
 
                     <div class="col-md-6">
-                      
-                        <button type="submit" class="btn btn-info">Submit</button>
+
+                            <button type="submit" class="btn btn-info" onclick="Form3()" >Submit</button>
                         <button type="submit" class="btn btn-default float-left">Cancel</button>
                     </div>
 
@@ -833,9 +873,19 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+
+            </form>
         </div>
 
     </div>
+</div>
+
+
+
+
+<div class="upload-container">
+    <button id="btn-upload">Send File</button>
+    <input type="file" id="file-uploader" />
 </div>
 
 
@@ -1027,23 +1077,196 @@
             type: "GET",
             url: "\CapexBindddlValuChange1\?id=" + da,
             success: function (data) {
+                //console.log(data)
+                //var $el = $("#VenderDll");
+                //$el.empty(); // remove old options
+                //$el.append($("<option></option>")
+                //    .attr("value", '').text('Please Select'));
                 console.log(data)
-                var $el = $("#VenderDll");
-                $el.empty(); // remove old options
-                $el.append($("<option></option>")
-                    .attr("value", '').text('Please Select'));
+                var c = [];
 
-                $.each(data, function (value, key) {
-                    $el.append($("<option></option>")
-                        .attr("value", value.vendor_Code).text(key.vendor_Name));
-
-
+                c.push("<tr><th>" + "Approval 1" + "</th>");
+                c.push("<th>" + "Approval 2" + "</th>");
+                c.push("<th>" + "Approval 3" + "</th></tr>");
+                $.each(data, function (i, item) {
+                    c.push("<tr><td>" + item.approval_1 + "</td>");
+                    c.push("<td>" + item.approval_2 + "</td>");
+                    c.push("<td>" + item.approval_3 + "</td></tr>");
                 });
+
+        //          var $tr = $('<tr>').append(
+        //    $('<td>').text(item.approval_1),
+        //    $('<td>').text(item.approval_2),
+        //    $('<td>').text(item.approval_3)
+        //).appendTo('#records_table');
+
+                $('#records_table').html(c.join(""));
 
             }
         })
 
     }
+
+
+
+
+
+//    $("#Form2").submit(function (e) {
+//        alert("hcjh");
+// /*   e.preventDefault();*/ // avoid to execute the actual submit of the form.
+
+//    var form = $(this);
+   
+//    $.ajax({
+//            url: "/Form2",
+//            type: "POST",
+//            dataType: 'json',
+//            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+//            data: form.serialize(), // serializes the form's elements.
+//        success: function(data)
+//        {
+//          alert(data); // show response from the php script.
+//        }
+//    });
+    
+//});
+
+
+
+  function Form3() {
+
+
+
+
+
+        var formData = new FormData(); //We need to create form. Beause we are sending a file here!
+        var file = document.getElementById("F3_UplodeFile").files[0]; //file
+
+      
+        formData.append("file", file); 
+        console.log(file);
+
+        alert(file);
+        //Added file to our form
+       // console.log(file);
+        $.ajax({
+            type: "POST",
+            url: '/NFA/AddFriend', //Name of action and controller
+            data: file,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                //this event is unneccesary. You can use it for a loader. Triggers before sending data.
+                $("#btn-upload").text("Uploading");
+            },
+            success: function () {
+                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
+                //Success doesnt mean file saved on server. It means only post succeed.
+                $("#btn-upload").text('Hey, Its uploaded!');
+            }
+        });
+
+       
+
+  };
+
+
+
+
+    function DataItemList() {
+
+
+        alert(document.getElementById("Description").value);
+
+        var Description= document.getElementById("Description").value; 
+        var UOM = document.getElementById("Uom").value;
+        var Qty = document.getElementById("Qty").value;
+        var TaxRate = document.getElementById("TexRate").value;
+
+
+          
+        alert("call");
+
+        $.ajax({
+            type: "GET",
+            url: '/NFA/DataList1', //Name of action and controller
+            data: { Description: Description, UOM: UOM, Qty: Qty, TaxRate: TaxRate },
+            dataType: 'json',
+           contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                console.log(data)
+                var c = [];
+                 var d = [];
+
+                c.push("<tr><th>" + " Action" + "</th>");
+                c.push("<th>" + " Sr No" + "</th>");
+                c.push("<th>" + "Description" + "</th>");
+                c.push("<th>" + "UOM " + "</th>");
+                 c.push("<th>" + "Qty " + "</th>");
+                  c.push("<th>" + "Tax Rate " + "</th></tr>");
+                $.each(data, function (i, item) {
+
+                      c.push("<tr><td>" + item.id + "</td>");
+                    c.push("<td>" + item.id + "</td>");
+                    c.push("<td>" + item.description + "</td>");
+                    c.push("<td>" + item.uom + "</td>");
+                    c.push("<td>" + item.qty + "</td>");
+                    c.push("<td>" + item.texRate + "</td></tr>");
+                });
+
+
+                
+
+
+                d.push('<tr>');
+                d.push('<th>Line Item </th>');
+                d.push('<th> Item Name </th>');
+                d.push('<th> UOM </th>');
+                d.push('<th> Quantity </th>');
+                d.push('<th> Initial Rate </th>');
+                d.push('<th> Initial Amount </th>');
+                d.push('<th> Final Rate </th>');
+                d.push(' <th> Final Amount </th>');
+                d.push('<th> Tax </th>');
+                d.push('<th> Quotation Amount<br>(Tax Inclusive) </th>');
+                d.push('<th> Remarks </th>');
+                d.push('</tr>');
+
+
+                $.each(data, function (i, item) {
+
+                  
+
+                    d.push("<tr>");
+                    d.push("<td>" + item.id + " </td>");
+                    d.push("<td>" + item.description + "</td>");
+                    d.push("<td> " + item.uom + " </td>");
+                    d.push("<td> " + item.qty + " </td>");
+                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange('+item.id+', "",  this.value)" /> </td>');//edit
+                    d.push("<td> Initial Amount </td>");
+                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange(' + item.id + ', "", this.value)" /> </td>');//edit
+                    d.push(" <td> Final Amount </td>");
+                    d.push("<td> " + item.texRate + " </td>");
+                    d.push("<td> Quotation Amount<br>(Tax Inclusive) </td>");
+                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange(' + item.id + ', "", this.value)" /> </td>');//edit
+                    d.push("</tr>");
+                });
+                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
+                //Success doesnt mean file saved on server. It means only post succeed.
+                $('#records_tableData').html(c.join(""));
+               
+
+
+                $('#records_table2').html(d.join(""));
+            }
+        });
+
+
+
+    };
+
 
 
 </script>

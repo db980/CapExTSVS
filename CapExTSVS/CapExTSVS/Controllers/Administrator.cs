@@ -643,9 +643,17 @@ namespace CapExTSVS.Controllers
         {
             ViewData["EmployeeRegistrationGrid"] = _dbcontext.UserCreateEmployee_Stor(
 
-                 "SELECTFull", "", "", "", "", "", "",
-                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                 "", "", "", "", "", ""
+                 "SELECTFull", "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
 
                   ).ToList();
         }
@@ -664,9 +672,17 @@ namespace CapExTSVS.Controllers
                 EmployeeRegistration data = new EmployeeRegistration();
                 var  fet = _dbcontext.UserCreateEmployee_Stor(
 
-                 "SELECT", "", "", "", "", "", "",
-                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                 "", "", "", "", da[0], ""
+                 "SELECT", "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
 
                   ).SingleOrDefault();
 
@@ -682,35 +698,35 @@ namespace CapExTSVS.Controllers
 
 
 
-           data.step1_txt_name = fet.Name;
-                data.step1_txt_dob = fet.DOB.ToString();
-                data.MeasurementSystem = fet.Gender;
-                data.step1_txt_father = fet.Father_name;
-                data.step1_txt_mother = fet.Mother_Name;
-                data.step1_txt_address = fet.Home_address;
-                data.step1_text_postcode = fet.Post_code;
-                data.step1_txt_hometel = fet.Home_tel;
-                data.step1_txt_mobilenumber = fet.Mobile;
-                data.step_2_text_name = fet.EName;
-                data.step_2_txt_relationship = fet.ERelationship;
-                data.step_2_address = fet.EContact_address;
-                data.step1_text_postcode = fet.EPost_code;
-                data.step_2_txt_tel = fet.ETHome_tel;
-                data.step_3_txt_workmobile = fet.EWorkMobile;
-                data.step_3_txt_personalnumber = fet.ETPersonalmobile;
-                data.step_3_txt_name = fet.ETName;
-                data.step_3_txt_relationship = fet.ETRelationship;
-                data.step_3_txt_tel = fet.ETHome_tel;
-                data.step_3_txt_workmobile = fet.ETWorkMobile;
-                data.step_3_txt_personalnumber = fet.ETPersonalmobile;
-                data.step_3_drop_medicalcondition = fet.Medicalcondition_drop;
-                data.step_3_txt_medicalcondition = fet.Medicalcondition;
-                data.step_4_txt_bankname = fet.BankName;
-                data.step_4_txt_accountnumber = fet.AccountNumber;
-                data.step_4_txt_ifsc_code = fet.IFsc_code;
-                data.step_4_txt_branch_address = fet.Branch_address;
-                data.ID = fet.ID.ToString();
-                data.step1_Empolyee_Code = fet.PersonalID;
+           //data.step1_txt_name = fet.Name;
+           //     data.step1_txt_dob = fet.DOB.ToString();
+           //     data.MeasurementSystem = fet.Gender;
+           //     data.step1_txt_father = fet.Father_name;
+           //     data.step1_txt_mother = fet.Mother_Name;
+           //     data.step1_txt_address = fet.Home_address;
+           //     data.step1_text_postcode = fet.Post_code;
+           //     data.step1_txt_hometel = fet.Home_tel;
+           //     data.step1_txt_mobilenumber = fet.Mobile;
+           //     data.step_2_text_name = fet.EName;
+           //     data.step_2_txt_relationship = fet.ERelationship;
+           //     data.step_2_address = fet.EContact_address;
+           //     data.step1_text_postcode = fet.EPost_code;
+           //     data.step_2_txt_tel = fet.ETHome_tel;
+           //     data.step_3_txt_workmobile = fet.EWorkMobile;
+           //     data.step_3_txt_personalnumber = fet.ETPersonalmobile;
+           //     data.step_3_txt_name = fet.ETName;
+           //     data.step_3_txt_relationship = fet.ETRelationship;
+           //     data.step_3_txt_tel = fet.ETHome_tel;
+           //     data.step_3_txt_workmobile = fet.ETWorkMobile;
+           //     data.step_3_txt_personalnumber = fet.ETPersonalmobile;
+           //     data.step_3_drop_medicalcondition = fet.Medicalcondition_drop;
+           //     data.step_3_txt_medicalcondition = fet.Medicalcondition;
+           //     data.step_4_txt_bankname = fet.BankName;
+           //     data.step_4_txt_accountnumber = fet.AccountNumber;
+           //     data.step_4_txt_ifsc_code = fet.IFsc_code;
+           //     data.step_4_txt_branch_address = fet.Branch_address;
+           //     data.ID = fet.ID.ToString();
+           //     data.step1_Empolyee_Code = fet.PersonalID;
 
 
 
@@ -728,9 +744,17 @@ namespace CapExTSVS.Controllers
 
                 var fet = _dbcontext.UserCreateEmployee_Stor(
 
-                 "DELETE", "", "", "", "", "", "",
-                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                 "", "", "", "", da[0], ""
+                 "DELETE", "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
 
                   ).ToList();
 
@@ -770,35 +794,17 @@ namespace CapExTSVS.Controllers
                  var sa=_dbcontext.UserCreateEmployee_Stor(
 
                 "INSERT",
-                  data.step1_txt_name, 
-                  data.step1_txt_dob.ToString(), 
-                  data.MeasurementSystem, 
-                  data.step1_txt_father, 
-                  data.step1_txt_mother, 
-                  data.step1_txt_address, 
-                  data.step1_text_postcode, 
-                  data.step1_txt_hometel, 
-                  data.step1_txt_mobilenumber,
-                  data.step_2_text_name, 
-                  data.step_2_txt_relationship, 
-                  data.step_2_address, 
-                  data.step1_text_postcode, 
-                  data.step_2_txt_tel, 
-                  data.step_3_txt_workmobile, 
-                  data.step_3_txt_personalnumber,
-                  data.step_3_txt_name, 
-                  data.step_3_txt_relationship, 
-                  data.step_3_txt_tel, 
-                  data.step_3_txt_workmobile, 
-                  data.step_3_txt_personalnumber, 
-                  data.step_3_drop_medicalcondition, 
-                  data.step_3_txt_medicalcondition,
-                  data.step_4_txt_bankname, 
-                  data.step_4_txt_accountnumber, 
-                  data.step_4_txt_ifsc_code,
-                  data.step_4_txt_branch_address,
-                  data.ID,
-                  data.step1_Empolyee_Code
+                  "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
 
                 );
 
@@ -813,36 +819,19 @@ namespace CapExTSVS.Controllers
                     var sa = _dbcontext.UserCreateEmployee_Stor(
 
                  "UPDATE",
-                 data.step1_txt_name,
-                 data.step1_txt_dob.ToString(),
-                 data.MeasurementSystem,
-                 data.step1_txt_father,
-                 data.step1_txt_mother,
-                 data.step1_txt_address,
-                 data.step1_text_postcode,
-                 data.step1_txt_hometel,
-                 data.step1_txt_mobilenumber,
-                 data.step_2_text_name,
-                 data.step_2_txt_relationship,
-                 data.step_2_address,
-                 data.step1_text_postcode,
-                 data.step_2_txt_tel,
-                 data.step_3_txt_workmobile,
-                 data.step_3_txt_personalnumber,
-                 data.step_3_txt_name,
-                 data.step_3_txt_relationship,
-                 data.step_3_txt_tel,
-                 data.step_3_txt_workmobile,
-                 data.step_3_txt_personalnumber,
-                 data.step_3_drop_medicalcondition,
-                 data.step_3_txt_medicalcondition,
-                 data.step_4_txt_bankname,
-                 data.step_4_txt_accountnumber,
-                 data.step_4_txt_ifsc_code,
-                 data.step_4_txt_branch_address,
-                 data.ID,
-                 data.step1_Empolyee_Code
-
+                  
+   "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
+ 
                );
 
                     ViewBag.Message2 =Notification.PopupUpdate();
@@ -888,9 +877,17 @@ namespace CapExTSVS.Controllers
         {
             ViewData["UserCreateDropdown"] = _dbcontext.UserCreateEmployee_Stor(
 
-                "SELECTFull", "", "", "", "", "", "",
-                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "", "", "", "", ""
+                "SELECTFull", "@EmployeeName",
+   "@EmployeeSubgroup",
+   "@EmployeeStatus",
+   "@Department",
+   "@EmailId",
+   "@contactno",
+   "@VERTICAL",
+   "@HODD",
+   "@REPOR",
+   "@PersonalID",
+   "@id"
 
                  ).ToList();
         }

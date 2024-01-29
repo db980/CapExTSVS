@@ -209,42 +209,24 @@ namespace CapExTSVS.Models1
 
     public   class EmployeeRegistration
     {
- public string step1_txt_name                  { get; set; }
- public string step1_txt_dob                   { get; set; }
- public string MeasurementSystem               { get; set; }
- public string step1_txt_father                { get; set; }
- public string step1_txt_mother                { get; set; }
- public string step1_txt_address               { get; set; }
- public string step1_text_postcode             { get; set; }
- public string step1_txt_hometel               { get; set; }
- public string step1_txt_mobilenumber          { get; set; }
- public string step_2_text_name                { get; set; }
- public string step_2_txt_relationship         { get; set; }
- public string step_2_txt_Postcode             { get; set; }
- public string step_2_address                  { get; set; }
- public string step_2_txt_tel                  { get; set; }
- public string step_2_txt_mobile               { get; set; }
- public string step_2_txt_personalnumber       { get; set; }
- public string step_3_txt_name                 { get; set; }
- public string step_3_txt_relationship         { get; set; }
- public string step_3_txt_tel                  { get; set; }
- public string step_3_txt_workmobile           { get; set; }
- public string step_3_txt_personalnumber       { get; set; }
- public string step_3_drop_medicalcondition    { get; set; }
- public string step_3_txt_medicalcondition     { get; set; }
- public string step_4_txt_bankname             { get; set; }
- public string step_4_txt_accountnumber        { get; set; }
- public string step_4_txt_ifsc_code            { get; set; }
- public string step_4_txt_branch_address       { get; set; }
+ public string PersonalID { get; set; }
+ public string EmployeeName                   { get; set; }
+ public string EmployeeSubgroup               { get; set; }
+ public string EmployeeStatus { get; set; }
+ public string Department { get; set; }
+ public string contactno { get; set; }
+ public string VERTICAL { get; set; }
+ public string HODD { get; set; }
+ public string REPOR { get; set; }
+
         public string ID { get; set; }
-        public string PersonalID { get; set; }
-        public string step1_Empolyee_Code { get; set; }
-  public  IFormFile step_5_file_photo               { get; set; }
- public IFormFile step_5_file_addhar              { get; set; }
- public IFormFile step_5_file_pancard             { get; set; }
- public IFormFile step_5_educationproof           { get; set; }
- public IFormFile step_5_file_experience_letter   { get; set; }
- public IFormFile step_5_file_nocletter           { get; set; }
+
+
+
+
+
+
+
     }
 
 
@@ -282,6 +264,41 @@ namespace CapExTSVS.Models1
 
         public string step1_Empolyee_Code { get; set; }
         public int ID { get; set; }
+    }
+
+
+
+
+
+
+
+    public class NFAFormData
+    { 
+        public string F_assetstype { get; set; }
+        public string F_company { get; set; }
+        public string F_BUIdep { get; set; }
+        public string F_ExpType { get; set; }
+        public string F_Budget { get; set; }
+        public string F_NFAType { get; set; }
+        public string F_indentid { get; set; }
+        public string F_Purpose { get; set; }
+        public string F_ExpectedDate { get; set; }
+        public string F2_Justification { get; set; }
+        public string F2_Imported { get; set; }
+        public string F2_Benefit { get; set; }
+        public string F2_IrrFile { get; set; }
+        public string F2_IrrValue { get; set; }
+        public string F2_CashOverFlowFile { get; set; }
+        public string F2_CashOverFlowValue { get; set; }
+        public string F3_selectVender { get; set; }
+        public IFormFile F3_UplodeFile { get; set; }
+        public string F3_PaymentTerms { get; set; }
+        public string F3_Freight { get; set; }
+        public string F3_InstalationCost { get; set; }
+        public string F3_Delivery { get; set; }
+        public string F3_Remarks { get; set; }
+        public string F3_TermCondition { get; set; }
+
     }
 
 
