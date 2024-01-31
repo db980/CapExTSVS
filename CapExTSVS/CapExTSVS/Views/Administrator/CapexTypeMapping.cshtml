@@ -39,7 +39,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form action="/Administrator/CapexSaveCompany" method="post" class="form-horizontal">
                     <div class="card-body">
 
                         <div class="form-group row">
@@ -225,7 +225,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form  method="post" class="form-horizontal">
                     <div class="card-body">
 
 
@@ -304,10 +304,12 @@
     });
 
     function Dropdownchange(value) {
+        alert(value)
 
         $.ajax({
             type: "GET",
-            url: "\CapexBindddlProject\?id=" + value,
+            url: "/Administrator/CapexBindddlProject",
+            data: { id: String(value) },
             success: function (data) {
                 console.log(data)
                 var $el = $("#BU");

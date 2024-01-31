@@ -210,8 +210,9 @@ namespace CapExTSVS.Models1
     public   class EmployeeRegistration
     {
  public string PersonalID { get; set; }
- public string EmployeeName                   { get; set; }
- public string EmployeeSubgroup               { get; set; }
+ public string EmployeeName { get; set; }
+ public string EmployeeSubgroup { get; set; }
+ public string EmailId { get; set; }
  public string EmployeeStatus { get; set; }
  public string Department { get; set; }
  public string contactno { get; set; }

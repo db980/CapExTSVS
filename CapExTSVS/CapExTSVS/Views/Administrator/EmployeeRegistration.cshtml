@@ -204,7 +204,7 @@
                                         <div class="row ">
 
 
-                                                <div class="col-md-12"  >
+                                                <div class="col-md-12"  style="display:none" >
                                                     <asp:label>Employee Code </asp:label>
                                                     <div class="form-group">
 
@@ -213,12 +213,21 @@
                                                 </div>
 
 
+                                        <div class="col-md-12" >
+                                            <asp:label>Employee Code </asp:label>
+                                            <div class="form-group">
+
+                                                <input name="PersonalID" value="@(Model != null ? Model.PersonalID : "") " type="text" class="form-control" placeholder="Enter Name" />
+                                            </div>
+                                        </div>
+
+
 
                                                 <div class="col-md-12">
                                                     <asp:label>Employee Name </asp:label>
                                                     <div class="form-group">
 
-                                                        <input name="step1_Empolyee_Code" value="@(Model != null ? Model.step1_Empolyee_Code : "") " type="text" class="form-control" placeholder="Enter Name" />
+                                                <input name="EmployeeName" value="@(Model != null ? Model.EmployeeName : "") " type="text" class="form-control" placeholder="Enter Name" />
                                                     </div>
                                                 </div>
 
@@ -228,7 +237,7 @@
                                                 <asp:label>Employee Sub group</asp:label>
                                                 <div class="form-group">
 
-                                                        <input name="step1_txt_name" value="@(Model != null ? Model.step1_txt_name : "") " type="text" class="form-control" placeholder="Enter Name" />
+                                                <input name="EmployeeSubgroup" value="@(Model != null ? Model.EmployeeSubgroup : "") " type="text" class="form-control" placeholder="Enter Name" />
                                                 </div>
                                             </div>
 
@@ -236,7 +245,7 @@
                                                 <div class="form-group">
                                                         <asp:label>Employee Status</asp:label>
 
-                                                <select class="form-control dropdown" id="inputEmail3"  placeholder="Enter Budget">
+                                                <select class="form-control dropdown" id="inputEmail3" name="EmployeeStatus" placeholder="Enter Budget">
                                                     <option Selected="True" Value="0">Select</option>
                                                     <option Value="Active">Active</option>
                                                     <option Value="InActive">InActive</option>
@@ -257,7 +266,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                         <asp:label>Department</asp:label>
-                                                        <input name="step1_txt_father" id="step1_txt_father" value="@(Model != null ? Model.step1_txt_father : "") " class="form-control" type="text" >
+                                                <input name="Department" id="step1_txt_father" value="@(Model != null ? Model.Department : "") " class="form-control" type="text">
 
                                                 </div>
                                             </div>
@@ -265,7 +274,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Email Id</asp:label>
-                                                        <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="text" >
+                                                <input name="EmailId" id="step1_txt_mother" value="@(Model != null ? Model.EmailId : "") " class="form-control" type="text">
 
                                                 </div>
                                             </div>
@@ -277,29 +286,29 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label>Contact No</asp:label>
-                                                <input name="step1_txt_mother" id="step1_txt_mother" value="@(Model != null ? Model.step1_txt_mother : "") " class="form-control" type="number" >
+                                                <input name="contactno" id="step1_txt_mother" value="@(Model != null ? Model.contactno : "") " class="form-control" type="number">
 
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                         @*   <div class="col-md-6">
                                                 <div class="form-group">
                                                         <asp:label>VERTICAL</asp:label>
-                                                        <input name="step1_text_postcode" id="step1_text_postcode" value="@(Model != null ? Model.step1_text_postcode : "") " class="form-control" type="text" readonly >
+                                                        <input name="step1_text_postcode" id="step1_text_postcode" value="@(Model != null ? Model.VERTICAL : "") " class="form-control" type="text" readonly >
 
                                                 </div>
-                                            </div>
+                                            </div>*@
 
                                         </div>
 
 
 
 
-                                        <div class="row">
+                                       @* <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <asp:label> HODD</asp:label>
-                                                <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" value="@(Model != null ? Model.step1_txt_hometel : "") " class="form-control"  readonly>
+                                                <input name="step1_txt_hometel" type="number" id="step1_txt_hometel" value="@(Model != null ? Model.HODD : "") " class="form-control"  readonly>
 
                                                 </div>
                                             </div>
@@ -307,12 +316,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                         <asp:label>REPOR</asp:label>
-                                                        <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" value="@(Model != null ? Model.step1_txt_mobilenumber : "") " class="form-control" type="text"  readonly>
+                                                        <input name="step1_txt_mobilenumber" id="step1_txt_mobilenumber" value="@(Model != null ? Model.REPOR : "") " class="form-control" type="text"  readonly>
 
                                                 </div>
                                             </div>
 
-                                        </div>
+                                        </div>*@
 
 
 
@@ -370,23 +379,21 @@
                                     <th> ID</th>
                                     <th> PersonalID</th>
 
-                                   <th> Name</th>
-                                   <th> DOB</th>
-                                    <th> Gender</th>
-                                   <th> Father name</th>
-                                   <th> Mother Name</th>
-                                   <th> Home Address</th>
-                                   <th> Post Code</th>
-                                   <th> Home Tel</th>
-                                   <th> Mobile</th>
+                                    <th> EmployeeName</th>
+                                    <th> EmployeeSubgroup</th>
+                                    <th> EmailId</th>
+                                    <th> EmployeeStatus</th>
+                                    <th> Department</th>
+                                    <th> contactno</th>
+                                    <th> VERTICAL</th>
+                                    <th> HODD</th>
+                                    <th> REPOR</th>
                                   
                             
-                                   <th> Bank Name</th>
-                                   <th> Account Number</th>
-                                   <th> IFSC  CODE</th>
-                                   <th> Branch Address</th>
                                   
                                   
+                                  
+
 
 
                                 </tr>
@@ -415,21 +422,16 @@
                                     </td>
                                     <td> @data.ID</td>
                                     <td> @data.PersonalID</td>
-                                      
-                                    <td> @data.Name</td>
-                                    <td> @data.DOB</td>
-                                    <td> @data.Gender</td>
-                                    <td> @data.Father_name</td>
-                                    <td> @data.Mother_Name</td>
-                                    <td> @data.Home_address</td>
-                                    <td> @data.Post_code</td>
-                                    <td> @data.Home_tel</td>
-                                    <td> @data.Mobile</td>
-                                    
-                                    <td> @data.BankName</td>
-                                    <td> @data.AccountNumber</td>
-                                    <td> @data.IFsc_code</td>
-                                    <td> @data.Branch_address</td>
+
+                                            <td> @data.EmployeeName</td>
+                                            <td>@data.EmployeeSubgroup</td>
+                                            <td>@data.EmailId</td>
+                                            <td>@data.EmployeeStatus</td>
+                                            <td>@data.Department</td>
+                                            <td>@data.contactno</td>
+                                            <td>@data.VERTICAL</td>
+                                            <td>@data.HODD</td>
+                                            <td>@data.REPOR</td>
 
                                     </tr>
                                         

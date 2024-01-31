@@ -48,7 +48,7 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
-        public IActionResult VendorMappingData1(VendorMastercustom vendorMastercustom)
+        public IActionResult VendorMappingData(VendorMastercustom vendorMastercustom)
         {
 
             if (flag == 0)
@@ -161,6 +161,9 @@ namespace CapExTSVS.Controllers
             var da1 = id.Split(',');
             var da = _dbcontext.CapexSelUserRights(da1[1], da1[0]).SingleOrDefault();
             var d=_dbcontext.CapexDelUserRight(da.EmployeeId,da.RightId,da.EmployeeName);
+            UserRightsBind();
+
+            ViewBag.Message2 = Notification.PopupSaveCustom("Data Delete SuccessFully");
             return View("UserRights");
         }
 
@@ -321,14 +324,16 @@ namespace CapExTSVS.Controllers
 
   
 
-         public void CapexSaveCompany(UspCapexCapexTypeMappingResultComm data)
+        public IActionResult CapexSaveCompany(UspCapexCapexTypeMappingResultComm data)
         {
+            CapexbindddlGrid();
+            CapexbindddlCompany();
 
             var data1 = _dbcontext.UspCapexCapexTypeMapping("INSERT_UPDATE", data.CTID.ToString(), data.CapexType, data.Des,
                                                 data.Comp_code.ToString(),data.BU,
                                                data.ReqType,data.BudgetType, user.id);
-
-
+            ViewBag.Message2 = Notification.PopupSaveCustom("Data Create/Update Successfully");
+            return View("CapexTypeMapping");
         }
 
 
@@ -644,16 +649,16 @@ namespace CapExTSVS.Controllers
             ViewData["EmployeeRegistrationGrid"] = _dbcontext.UserCreateEmployee_Stor(
 
                  "SELECTFull", "@EmployeeName",
-   "@EmployeeSubgroup",
-   "@EmployeeStatus",
-   "@Department",
-   "@EmailId",
-   "@contactno",
-   "@VERTICAL",
-   "@HODD",
-   "@REPOR",
-   "@PersonalID",
-   "@id"
+                 "@EmployeeSubgroup",
+                 "@EmployeeStatus",
+                 "@Department",
+                 "@EmailId",
+                 "@contactno",
+                 "@VERTICAL",
+                 "@HODD",
+                 "@REPOR",
+                 "@PersonalID",
+                 "@id"
 
                   ).ToList();
         }
@@ -670,19 +675,19 @@ namespace CapExTSVS.Controllers
             if (da[1]=="Edit")
             {
                 EmployeeRegistration data = new EmployeeRegistration();
-                var  fet = _dbcontext.UserCreateEmployee_Stor(
+                var fet = _dbcontext.UserCreateEmployee_Stor(
 
                  "SELECT", "@EmployeeName",
-   "@EmployeeSubgroup",
-   "@EmployeeStatus",
-   "@Department",
-   "@EmailId",
-   "@contactno",
-   "@VERTICAL",
-   "@HODD",
-   "@REPOR",
-   "@PersonalID",
-   "@id"
+                   "@EmployeeSubgroup",
+                   "@EmployeeStatus",
+                   "@Department",
+                   "@EmailId",
+                   "@contactno",
+                   "@VERTICAL",
+                   "@HODD",
+                   "@REPOR",
+                   "@PersonalID",
+                   da[0].ToString()
 
                   ).SingleOrDefault();
 
@@ -690,6 +695,19 @@ namespace CapExTSVS.Controllers
 
 
 
+                data.PersonalID = fet.PersonalID;
+                data.EmployeeName = fet.EmployeeName;
+                data.EmployeeSubgroup = fet.EmployeeSubgroup;
+                data.EmailId = fet.EmailId;
+                data.EmployeeStatus = fet.EmployeeStatus;
+                data.Department = fet.Department;
+                data.contactno = fet.contactno;
+                data.VERTICAL = fet.VERTICAL;
+                data.HODD = fet.HODD;
+                data.REPOR = fet.REPOR;
+
+
+                data.ID = fet.ID;
 
 
 
@@ -697,42 +715,7 @@ namespace CapExTSVS.Controllers
 
 
 
-
-           //data.step1_txt_name = fet.Name;
-           //     data.step1_txt_dob = fet.DOB.ToString();
-           //     data.MeasurementSystem = fet.Gender;
-           //     data.step1_txt_father = fet.Father_name;
-           //     data.step1_txt_mother = fet.Mother_Name;
-           //     data.step1_txt_address = fet.Home_address;
-           //     data.step1_text_postcode = fet.Post_code;
-           //     data.step1_txt_hometel = fet.Home_tel;
-           //     data.step1_txt_mobilenumber = fet.Mobile;
-           //     data.step_2_text_name = fet.EName;
-           //     data.step_2_txt_relationship = fet.ERelationship;
-           //     data.step_2_address = fet.EContact_address;
-           //     data.step1_text_postcode = fet.EPost_code;
-           //     data.step_2_txt_tel = fet.ETHome_tel;
-           //     data.step_3_txt_workmobile = fet.EWorkMobile;
-           //     data.step_3_txt_personalnumber = fet.ETPersonalmobile;
-           //     data.step_3_txt_name = fet.ETName;
-           //     data.step_3_txt_relationship = fet.ETRelationship;
-           //     data.step_3_txt_tel = fet.ETHome_tel;
-           //     data.step_3_txt_workmobile = fet.ETWorkMobile;
-           //     data.step_3_txt_personalnumber = fet.ETPersonalmobile;
-           //     data.step_3_drop_medicalcondition = fet.Medicalcondition_drop;
-           //     data.step_3_txt_medicalcondition = fet.Medicalcondition;
-           //     data.step_4_txt_bankname = fet.BankName;
-           //     data.step_4_txt_accountnumber = fet.AccountNumber;
-           //     data.step_4_txt_ifsc_code = fet.IFsc_code;
-           //     data.step_4_txt_branch_address = fet.Branch_address;
-           //     data.ID = fet.ID.ToString();
-           //     data.step1_Empolyee_Code = fet.PersonalID;
-
-
-
-
-
-                EmployeeRegistrationGridLoad();
+        EmployeeRegistrationGridLoad();
                 return View("EmployeeRegistration", data);
 
             }
@@ -745,16 +728,16 @@ namespace CapExTSVS.Controllers
                 var fet = _dbcontext.UserCreateEmployee_Stor(
 
                  "DELETE", "@EmployeeName",
-   "@EmployeeSubgroup",
-   "@EmployeeStatus",
-   "@Department",
-   "@EmailId",
-   "@contactno",
-   "@VERTICAL",
-   "@HODD",
-   "@REPOR",
-   "@PersonalID",
-   "@id"
+               "@EmployeeSubgroup",
+               "@EmployeeStatus",
+               "@Department",
+               "@EmailId",
+               "@contactno",
+               "@VERTICAL",
+               "@HODD",
+               "@REPOR",
+               "@PersonalID",
+               da[0].ToString()
 
                   ).ToList();
 
@@ -793,18 +776,18 @@ namespace CapExTSVS.Controllers
 
                  var sa=_dbcontext.UserCreateEmployee_Stor(
 
-                "INSERT",
-                  "@EmployeeName",
-   "@EmployeeSubgroup",
-   "@EmployeeStatus",
-   "@Department",
-   "@EmailId",
-   "@contactno",
-   "@VERTICAL",
-   "@HODD",
-   "@REPOR",
-   "@PersonalID",
-   "@id"
+                        "INSERT",
+                          data.EmployeeName,
+          data.EmployeeSubgroup,
+          data.EmployeeStatus,
+          data.Department,
+          data.EmailId,
+          data.contactno,
+          data.PersonalID,
+          data.PersonalID,
+          data.PersonalID,
+          data.PersonalID,
+          ""
 
                 );
 
@@ -819,19 +802,18 @@ namespace CapExTSVS.Controllers
                     var sa = _dbcontext.UserCreateEmployee_Stor(
 
                  "UPDATE",
-                  
-   "@EmployeeName",
-   "@EmployeeSubgroup",
-   "@EmployeeStatus",
-   "@Department",
-   "@EmailId",
-   "@contactno",
-   "@VERTICAL",
-   "@HODD",
-   "@REPOR",
-   "@PersonalID",
-   "@id"
- 
+
+              data.EmployeeName,
+              data.EmployeeSubgroup,
+              data.EmployeeStatus,
+              data.Department,
+              data.EmailId,
+              data.contactno,
+              data.VERTICAL,
+              data.PersonalID,
+              data.PersonalID,
+              data.PersonalID,
+              data.ID.ToString()
                );
 
                     ViewBag.Message2 =Notification.PopupUpdate();

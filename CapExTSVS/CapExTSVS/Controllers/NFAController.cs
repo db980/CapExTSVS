@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using MoreLinq;
 using MVC_CRUD_LIST.Repository;
 using System.Collections.Generic;
 using System.Data;
@@ -205,7 +206,7 @@ namespace CapExTSVS.Controllers
             var da = _dbcontext.CapexSelVendorAddressDetails(da1[1].Trim()).SingleOrDefault();
 
 
-            return da.Column1;
+            return da.Column1 != null ? da.Column1:"" ;
 
         }
 
@@ -264,12 +265,71 @@ namespace CapExTSVS.Controllers
         [HttpPost]
         public ActionResult AddFriend(IFormCollection fm)
         {
+            DataTable DT = new DataTable();
+            DataTable DTV = new DataTable();
+
+
+            var Comp_code = fm["Comp_code"].ToString()+ "/" + fm["BU"].ToString().Split(",")[0]+ "/" + fm["ReqType"].ToString()+"/"+ fm["BudgetType"].ToString() ;
+          
+           
+
+            DT.Columns.Add("ItemName");
+            DT.Columns.Add("PlantCode");
+            DT.Columns.Add("Categories");
+            DT.Columns.Add("UOM");
+            DT.Columns.Add("Quantity");
+            DT.Columns.Add("TaxRate");
+
+
+            DTV.Columns.Add("LineItem");
+            DTV.Columns.Add("ItemName");
+            DTV.Columns.Add("UOM");
+            DTV.Columns.Add("Quantity");
+            DTV.Columns.Add("InitialRate");
+            DTV.Columns.Add("InitialAmount");
+            DTV.Columns.Add("FinalRate");
+            DTV.Columns.Add("FinalAmount");
+            DTV.Columns.Add("TaxRate");
+            DTV.Columns.Add("FinalAmountWithTax");
+            DTV.Columns.Add("Remarks");
+
+
+            var Data = rep.SelectAllEmployees().ToList();
+            foreach(var da in Data)
+            {
+                DT.Rows.Add( da.Description, "1010", Comp_code, da.Uom,da.Qty,da.TexRate);
+            }
+
+
+
+
+
+
 
 
             
+
+
             //HttpFileCollectionBase files = Request.Files;
 
             //Write your database insertHttpFileCollectionBase files = Request.Files;   code / activities
+
+
+            //_dbcontext.CapexFAddAttachment(null,"", user.id, fm["BU"].ToString().Split(",")[1],
+            //                    0,.ToString(), , ,,,
+            //                    "", );
+
+            _dbcontext.CapexFAddAttachment("", "", user.id, "FileType",
+                100, fm["F3_TermCondition"].ToString(), fm["F3_PaymentTerms"].ToString(), fm["F3_Delivery"].ToString(), fm["F3_Freight"].ToString(), fm["F3_InstalationCost"].ToString(),
+                fm["Remark"].ToString(), DTV);
+
+
+            //string outs = ba.Capex_insert_draft("New","", drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "",
+            //                                   txt_purpose.Text.Trim(), txt_compdate.Text.Trim(), "", DT, "0", rbtnSelectQuote.SelectedValue.ToString(), drp_ImportedIndigenous.SelectedValue.ToString(),
+            //                                   txt_jst.Text.Trim(), Session["usr"].ToString(), ViewState["GuidValue"].ToString(), ViewState["ReqID"].ToString(), pass, "", "", "", "", " ",
+            //                                   txtIndentID.Text.Trim(), txtBenefit.Text.Trim(), IRRPaybackV, CashOutflowV, txtPaybackPeriodValue.Text.Trim(), txtProjectedCashOutflowValue.Text.Trim(), CFCAmount);
+
+
 
             return RedirectToAction("create");
 
@@ -281,6 +341,21 @@ namespace CapExTSVS.Controllers
             public string FriendName { get; set; }
             public string Phone { get; set; }
             public string State { get; set; }
+        }
+
+
+        [HttpGet]
+        public ActionResult ChangeData(string id)
+        {
+
+
+
+            //HttpFileCollectionBase files = Request.Files;
+
+            //Write your database insertHttpFileCollectionBase files = Request.Files;   code / activities
+           
+            return RedirectToAction("create");
+
         }
 
 

@@ -1139,27 +1139,25 @@
 
 
 
-        var formData = new FormData(); //We need to create form. Beause we are sending a file here!
-        var file = document.getElementById("F3_UplodeFile").files[0]; //file
-
-      
-        formData.append("file", file); 
-        console.log(file);
-
-        alert(file);
+       // var formData = new FormData(); //We need to create form. Beause we are sending a file here!
+        //var file = document.getElementById("F3_UplodeFile").files[0]; //file
+        //var frm = $('#Form2');
+        //var frm2 = $('#form1');
+    
+        //frm.append(frm2);
         //Added file to our form
        // console.log(file);
         $.ajax({
             type: "POST",
             url: '/NFA/AddFriend', //Name of action and controller
-            data: file,
+            data: $('#form1, #Form2').serialize(),// frm.serialize(),
             dataType: 'json',
-            contentType: false,
-            processData: false,
-            beforeSend: function () {
-                //this event is unneccesary. You can use it for a loader. Triggers before sending data.
-                $("#btn-upload").text("Uploading");
-            },
+            //contentType: "Content-Type: multipart/form-data;",
+            //processData: false,
+            //beforeSend: function () {
+            //    //this event is unneccesary. You can use it for a loader. Triggers before sending data.
+            //    $("#btn-upload").text("Uploading");
+            //},
             success: function () {
                 //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
                 //Success doesnt mean file saved on server. It means only post succeed.
@@ -1237,20 +1235,20 @@
 
                 $.each(data, function (i, item) {
 
-                  
+                   
 
                     d.push("<tr>");
                     d.push("<td>" + item.id + " </td>");
                     d.push("<td>" + item.description + "</td>");
                     d.push("<td> " + item.uom + " </td>");
                     d.push("<td> " + item.qty + " </td>");
-                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange('+item.id+', "",  this.value)" /> </td>');//edit
-                    d.push("<td> Initial Amount </td>");
-                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange(' + item.id + ', "", this.value)" /> </td>');//edit
-                    d.push(" <td> Final Amount </td>");
+                    d.push("<td> <input type='text' name='InitRate' calss='form-Control'  onchange='ChangeData(" + item.id + ")'/> </td>");//edit
+                    d.push("<td> 213 </td>");
+                    d.push("<td> <input type='text' name='FinalRate' calss='form-Control'  onchange='ChangeData(" + item.id + ")'/> </td>");//edit
+                    d.push(" <td> 213 </td>");
                     d.push("<td> " + item.texRate + " </td>");
-                    d.push("<td> Quotation Amount<br>(Tax Inclusive) </td>");
-                    d.push('<td> <input type="text"  onchange="CapexBindddlvaluechange(' + item.id + ', "", this.value)" /> </td>');//edit
+                    d.push("<td> 23<br>(Tax Inclusive) </td>");
+                    d.push("<td> <input type='text' calss='form-Control'  name='Remark' onchange='ChangeData(" + item.id + ")'/> </td>");//edit
                     d.push("</tr>");
                 });
                 //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
@@ -1268,6 +1266,35 @@
     };
 
 
+
+
+
+    function ChangeData( id ) 
+    {
+
+        alert("hello");
+//We need to create form. Beause we are sending a file here!
+       
+        //Added file to our form
+        // console.log(file);
+        $.ajax({
+            type: "GET",
+            url: '/NFA/ChangeData',
+            data: { id: id },
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+           
+            success: function () {
+                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
+                //Success doesnt mean file saved on server. It means only post succeed.
+                $("#btn-upload").text('Hey, Its uploaded!');
+            }
+        });
+
+        
+    }
+
+    
 
 </script>
 

@@ -1099,37 +1099,52 @@ namespace DataModels
 
     public class NEmp_Detail
     {
-        public string Name { get; set; }
-        public DateTime DOB { get; set; }
-        public string Gender { get; set; }
-        public string Father_name { get; set; }
-        public string Mother_Name { get; set; }
-        public string Home_address { get; set; }
-        public string Post_code { get; set; }
-        public string Home_tel { get; set; }
-        public string Mobile { get; set; }
-        public string EName { get; set; }
-        public string ERelationship { get; set; }
-        public string EContact_address { get; set; }
-        public string EPost_code { get; set; }
-        public string EHome_tel { get; set; }
-        public string EWorkMobile { get; set; }
-        public string Personalmobile { get; set; }
-        public string ETName { get; set; }
-        public string ETRelationship { get; set; }
-        public string ETHome_tel { get; set; }
-        public string ETWorkMobile { get; set; }
-        public string ETPersonalmobile { get; set; }
-        public string Medicalcondition_drop { get; set; }
-        public string Medicalcondition { get; set; }
-        public string BankName { get; set; }
-        public string AccountNumber { get; set; }
-        public string IFsc_code { get; set; }
-        public string Branch_address { get; set; }
+        //public string Name { get; set; }
+        //public DateTime DOB { get; set; }
+        //public string Gender { get; set; }
+        //public string Father_name { get; set; }
+        //public string Mother_Name { get; set; }
+        //public string Home_address { get; set; }
+        //public string Post_code { get; set; }
+        //public string Home_tel { get; set; }
+        //public string Mobile { get; set; }
+        //public string EName { get; set; }
+        //public string ERelationship { get; set; }
+        //public string EContact_address { get; set; }
+        //public string EPost_code { get; set; }
+        //public string EHome_tel { get; set; }
+        //public string EWorkMobile { get; set; }
+        //public string Personalmobile { get; set; }
+        //public string ETName { get; set; }
+        //public string ETRelationship { get; set; }
+        //public string ETHome_tel { get; set; }
+        //public string ETWorkMobile { get; set; }
+        //public string ETPersonalmobile { get; set; }
+        //public string Medicalcondition_drop { get; set; }
+        //public string Medicalcondition { get; set; }
+        //public string BankName { get; set; }
+        //public string AccountNumber { get; set; }
+        //public string IFsc_code { get; set; }
+        //public string Branch_address { get; set; }
+
+        //public string PersonalID { get; set; }
+        //public int ID { get; set; }
+
+
+
 
         public string PersonalID { get; set; }
-        public int ID { get; set; }
+        public string EmployeeName { get; set; }
+        public string EmployeeSubgroup { get; set; }
+        public string EmailId { get; set; }
+        public string EmployeeStatus { get; set; }
+        public string Department { get; set; }
+        public string contactno { get; set; }
+        public string VERTICAL { get; set; }
+        public string HODD { get; set; }
+        public string REPOR { get; set; }
 
+        public string ID { get; set; }
     }
 
 
