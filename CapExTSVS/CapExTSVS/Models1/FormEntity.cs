@@ -341,10 +341,10 @@ namespace CapExTSVS.Models1
         public string Justification { get; set; }
         public string Benefit { get; set; }
 
-        public string IRRPaybackfile { get; set; }
+        public IFormFile IRRPaybackfile { get; set; }
         public string IRRPaybackValue { get; set; }
 
-        public string cashoverFlowFile { get; set; }
+        public IFormFile cashoverFlowFile { get; set; }
 
         public string cashoverFlowValue { get; set; }
 

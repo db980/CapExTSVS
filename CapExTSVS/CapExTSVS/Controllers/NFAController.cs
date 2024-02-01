@@ -3,18 +3,24 @@ using DataModels;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
+using Microsoft.Web.Helpers;
 using MoreLinq;
 using MVC_CRUD_LIST.Repository;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.IO.Pipelines;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
+using toastr.Net;
 using static DataModels.CapExTSDBStoredProcedures;
-using static LinqToDB.Common.Configuration;
+
 
 
 namespace CapExTSVS.Controllers
@@ -108,28 +114,29 @@ namespace CapExTSVS.Controllers
             Items.Qty = data.Qty;
             Items.TexRate = data.TexRate;
             Items.Uom = data.Uom;
-             Items.ID = count.ToString();
+            Items.ID = count.ToString();
 
             //InsertEmployeeList(Items);
+            uploadfile(data.IRRPaybackfile,"NFA");
+            uploadfile(data.cashoverFlowFile,"NFA");
 
+            //_dbcontext.CapexUSPCapexmasterModified( string @Assettype, string @OldAssetCode, string @Budgeted, string @PName,
+            //    string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime ? @EdateCompletion, 
+            //    string @PurchaseLocation, DataTable @dtLineItem, decimal ? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous,
+            //    string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag, string @DrawingList, string @IndentID, 
+            //    string @Benefit, string @IRRPaybackPeriod, string @ProjectedCashOutflow, string @IRRPaybackPeriodValue, string @ProjectedCashOutflowValue, 
+            //    decimal ? @CFCAmount)
 
-
-
+            //    CapexUSPCapexmaster_draft
             rep.InsertEmployee(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
             //da.Items1.Add(Items);
             //da.Items1.Add(Items);
            var da= rep.SelectAllEmployees();
-
-
             ViewData["Items"] = da.ToList();
-            
             return  RedirectToAction("CapexmainRequest");
         }
-
-
-
         [HttpGet]
-       public List<CapexmainRequestItems> DataList1(string Description, string UOM, string Qty, string TaxRate)
+        public List<CapexmainRequestItems> DataList1(string Description, string UOM, string Qty, string TaxRate)
         {
 
            
@@ -262,23 +269,42 @@ namespace CapExTSVS.Controllers
         }
 
 
+
+
+
+    
+
+
         [HttpPost]
         public ActionResult AddFriend(IFormCollection fm)
         {
+
+
+            try
+            {
+
+            
+           
+
+
             DataTable DT = new DataTable();
             DataTable DTV = new DataTable();
 
 
             var Comp_code = fm["Comp_code"].ToString()+ "/" + fm["BU"].ToString().Split(",")[0]+ "/" + fm["ReqType"].ToString()+"/"+ fm["BudgetType"].ToString() ;
-          
-           
 
-            DT.Columns.Add("ItemName");
+
+                DT.Columns.Add("ID");
+                DT.Columns.Add("ItemName");
             DT.Columns.Add("PlantCode");
             DT.Columns.Add("Categories");
             DT.Columns.Add("UOM");
             DT.Columns.Add("Quantity");
             DT.Columns.Add("TaxRate");
+
+
+
+                
 
 
             DTV.Columns.Add("LineItem");
@@ -295,9 +321,13 @@ namespace CapExTSVS.Controllers
 
 
             var Data = rep.SelectAllEmployees().ToList();
-            foreach(var da in Data)
+            foreach(var da1 in Data)
             {
-                DT.Rows.Add( da.Description, "1010", Comp_code, da.Uom,da.Qty,da.TexRate);
+                DT.Rows.Add(da1.ID,da1.Description, "1010", Comp_code, da1.Uom,da1.Qty,da1.TexRate);
+            }
+            foreach (var da2 in Data)
+            {
+                DTV.Rows.Add(da2.ID , da2.Description, da2.Uom,da2.Qty,"0","0","0","0",  da2.TexRate,"0","test");
             }
 
 
@@ -305,33 +335,32 @@ namespace CapExTSVS.Controllers
 
 
 
+               var daAtt= _dbcontext.CapexAttachedTransFileId().SingleOrDefault().Column1;
 
 
-            
-
-
-            //HttpFileCollectionBase files = Request.Files;
-
-            //Write your database insertHttpFileCollectionBase files = Request.Files;   code / activities
-
-
-            //_dbcontext.CapexFAddAttachment(null,"", user.id, fm["BU"].ToString().Split(",")[1],
-            //                    0,.ToString(), , ,,,
-            //                    "", );
-
-            _dbcontext.CapexFAddAttachment("", "", user.id, "FileType",
+            _dbcontext.CapexFAddAttachment("", daAtt.ToString(), user.id, "FileType",
                 100, fm["F3_TermCondition"].ToString(), fm["F3_PaymentTerms"].ToString(), fm["F3_Delivery"].ToString(), fm["F3_Freight"].ToString(), fm["F3_InstalationCost"].ToString(),
                 fm["Remark"].ToString(), DTV);
 
 
-            //string outs = ba.Capex_insert_draft("New","", drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "",
+            //string outs = _dbcontext.CapexUSPCapexmasterDraft("New", "", drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "",
             //                                   txt_purpose.Text.Trim(), txt_compdate.Text.Trim(), "", DT, "0", rbtnSelectQuote.SelectedValue.ToString(), drp_ImportedIndigenous.SelectedValue.ToString(),
             //                                   txt_jst.Text.Trim(), Session["usr"].ToString(), ViewState["GuidValue"].ToString(), ViewState["ReqID"].ToString(), pass, "", "", "", "", " ",
             //                                   txtIndentID.Text.Trim(), txtBenefit.Text.Trim(), IRRPaybackV, CashOutflowV, txtPaybackPeriodValue.Text.Trim(), txtProjectedCashOutflowValue.Text.Trim(), CFCAmount);
 
+          var da=  _dbcontext.CapexUSPCapexmasterDraft("New", "OldAssetCode", "Budgeted", "PName", "PDescription", "CapitalExpenseAsset", "@Purpose", Convert.ToDateTime(fm["exced_daw_of_corelation"].ToString().Split(",")[1]), "@PurchaseLocation", DT,  0, "@SelectQuote", "@ImportedIndigenous",
+                "@VendorJustification", "@CreatedBy", daAtt.ToString(), "New", "@DrawingList", "", "@Benefit", "@IRRPaybackPeriod", "@ProjectedCashOutflow", "@IRRPaybackPeriodValue", "@ProjectedCashOutflowValue", 0);
 
 
-            return RedirectToAction("create");
+                ViewBag.Message2 = Notification.PopupSaveCustom("Qutation Create SuccessFully");
+                return RedirectToAction("create");
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message2 = Notification.PopupCustomeError("Qutation Failed");
+                return Json("fail");
+            }
 
         }
 
@@ -357,6 +386,89 @@ namespace CapExTSVS.Controllers
             return RedirectToAction("create");
 
         }
+
+
+        [HttpPost]
+        public  string UploadFile(IFormFile id)
+        {
+            // do something here
+            return null;
+        }
+
+
+
+        private  string uploadfile(IFormFile fileup, string SubFolder)
+        {
+            string loc = "";
+            try
+            {
+                if (fileup.Length > 0)
+                {
+
+                    string fn = System.IO.Path.GetFileName(fileup.FileName).Replace(".", DateTime.Now.ToString("ddMMyyyyhhmmss") + ".").Replace(" ", "");
+                    String SaveLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);//Server.MapPath("").ToString().Substring(0, Server.MapPath("").ToString().Length - 0) + "\\uploadFiles\\NFA\\" + fn;
+
+                    try
+                    {
+
+
+
+
+                       
+
+                        string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "UploadsFiles");
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path).CreateSubdirectory(SubFolder);
+                            
+                        }
+
+
+
+
+
+                        //var fileName = ContentDispositionHeaderValue
+                        //       .Parse(fileup.ContentDisposition)
+                        //       .FileName.ToString().Replace(".", DateTime.Now.ToString("ddMMyyyyhhmmss") + ".").Replace(" ", "")
+                        //       .Trim('"');
+
+                        //var filePath = _hostingEnvironment.WebRootPath + "\\wwwroot\\" + fileName;
+                        // filePath.SaveAsAsync(fileup);
+                        //using (var stream = new MemoryStream())
+                        //{
+                        //    fileup.CopyTo(stream);
+
+                        //}
+
+                       
+                        using (FileStream fileStream = new FileStream(Path.Combine(path ,SubFolder), FileMode.OpenOrCreate,FileAccess.ReadWrite))
+                        {
+                            
+
+                              var memoryStream = new MemoryStream();
+                             fileStream.CopyToAsync(memoryStream);
+                            memoryStream.CopyTo(fileStream);
+
+                           
+                            //fileup.CopyToAsync(fileStream);
+
+
+                        }
+                        //fileStream.Close();
+
+
+                        loc = fn;
+                    }
+                    catch
+                    {
+                        //Response.Write("Error: " & Exc.Message);
+                    }
+                }
+            }
+            catch { }
+            return loc;
+        }
+
 
 
     }

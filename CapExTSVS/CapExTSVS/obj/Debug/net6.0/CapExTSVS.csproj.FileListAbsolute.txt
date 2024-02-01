@@ -160,3 +160,12 @@ D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\refint\CapExTSVS.
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.pdb
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\CapExTSVS.genruntimeconfig.cache
 D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\obj\Debug\net6.0\ref\CapExTSVS.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\System.Web.Razor.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\Microsoft.Web.Helpers.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\WebMatrix.Data.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\WebMatrix.WebData.dll
+D:\testing_@\Self\Running\CapExTSVS\CapExTSVS\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

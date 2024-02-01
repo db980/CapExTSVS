@@ -10,6 +10,7 @@
 	  <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
 	  <PackageReference Include="linq2db" Version="4.1.0" />
     <PackageReference Include="linq2db.SqlServer" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
 

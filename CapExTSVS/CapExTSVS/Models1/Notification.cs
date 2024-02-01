@@ -113,6 +113,22 @@ namespace toastr.Net
 
         }
 
+
+
+        public static string PopupCustomeError(string a)
+        {
+
+            var da = "";
+            var scriptOption = "<script>";
+
+            scriptOption += " Swal.fire({\r\n  position: \"top-end\",\r\n  icon: \"error\",\r\n  title: \""+ a + "\",\r\n  showConfirmButton: false,\r\n  timer: 4000\r\n});";
+            scriptOption += "</script>";
+
+            return scriptOption;
+
+
+
+        }
         public static string PopupUpdate()
         {
 
