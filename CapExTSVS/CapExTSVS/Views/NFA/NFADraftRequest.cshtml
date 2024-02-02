@@ -1,6 +1,6 @@
 ﻿@using static DataModels.CapExTSDBStoredProcedures;
 
-
+@model CapexSelCapexRequestDetailsResult;
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +19,8 @@
                     <h1 class="m-0">View Indent</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">d
+                    <ol class="breadcrumb float-sm-right">
+                        d
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">View Indent </li>
                     </ol>
@@ -38,8 +39,6 @@
                 <!-- /.card-header -->
                 <!-- form start -->
 
-
-
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -57,41 +56,76 @@
                                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Select</th>
-                                                    <th scope="col">CTID</th>
-                                                    <th scope="col">CapexType</th>
-                                                    <th scope="col">Comp_code</th>
-                                                    <th scope="col">Des</th>
-                                                    <th scope="col">BU</th>
-                                                    <th scope="col">ReqType</th>
-                                                    <th scope="col">BudgetType</th>
+                                                    <th scope="col">Action</th>
+                                                    <th scope="col">NFA Requisition No</th>
+                                                    <th scope="col">Indent ID</th>
+                                                    <th scope="col">Asset Type</th>
+                                                    <th scope="col">Old Asset Code</th>
+                                                    <th scope="col">NFA Type</th>
+                                                    <th scope="col">Project Name</th>
+                                                    <th scope="col">Project Description</th>
+                                                    <th scope="col">Purpose</th>
+                                                    <th scope="col">Expected Date</th>
+                                                    <th scope="col">Purchase Location</th>
+                                                    <th align="center" scope="col">Selected Quotation Amount (INR)</th>
+                                                    <th align="center" scope="col">Max Quotated Amount (INR)</th>
+                                                    <th scope="col">Imported / Indigenous</th>
+                                                    <th scope="col">Current With</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Requested By</th>
+                                                    <th scope="col">Requested Date</th>
+                                                    <th scope="col">Approved Date</th>
                                                 </tr>
 
                                             </thead>
                                             <tbody>
 
-                                                @if (ViewData["NFAMappingGrid1"] != null)
+                                                @if (ViewData["NFADraftRequestGrid"] != null)
                                                 {
-                                                    @foreach (var da in ViewData["NFAMappingGrid1"] as IList<UspCapexCapexTypeMappingResult>)
+                                                    @foreach (var da in ViewData["NFADraftRequestGrid"] as IList<CapexSelCapexRequestDetailsResult>)
                                                     {
                                                         <tr>
 
-                                                            <td scope="col">Select</td>
-                                                            <td scope="col">@da.CTID</td>
-                                                            <td scope="col">@da.CapexType</td>
-                                                            <td scope="col">@da.Comp_code</td>
-                                                            <td scope="col">@da.Des</td>
-                                                            <td scope="col">@da.BU</td>
-                                                            <td scope="col">@da.ReqType</td>
-                                                            <td scope="col">@da.BudgetType</td>
+                                                            <td>
 
-                                                         
+                                                                <button class="badge bg-success btn btn-sm" data-toggle="modal" data-target="#myModal">
+                                                                    <a class="fa fa-file" href="/Report/NfaReportExport/@da.RequestNo.ToString()"></a>
+
+                                                                </button><br>
+                                                                <button class="badge   btn-warning">
+                                                                    @Html.ActionLink("", "CapexmainRequestEdit", "NFA",new {EID=@da.RequestNo},new { @class="fa fa-edit " })
+                                                                </button><br>
+                                                                <button class="badge bg-danger btn btn-sm"><a class="fa fa-download" href="/Report/NfaReportExport/@da.RequestNo.ToString()"></a></button><br>
+
+
+
+
+
+
+                                                            </td>
+                                                            <td>@da.RequestNo</td>
+                                                            <td>@da.IndentID</td>
+                                                            <td>@da.Assettype</td>
+                                                            <td>@da.OldAssetCode</td>
+                                                            <td>@da.CapexType</td>
+                                                            <td>@da.PName</td>
+                                                            <td>@da.PDescription</td>
+                                                            <td>@da.Purpose</td>
+                                                            <td>@da.EdateCompletion</td>
+                                                            <td>@da. PurchaseLocation</td>
+                                                            <td>@da.SelectQuotationAmount</td>
+                                                            <td>@da.TotalValueInINR</td>
+                                                            <td>@da.ImportedIndigenous</td>
+                                                            <td>@da.CurrentWith</td>
+                                                            <td>@da.Status</td>
+                                                            <td>@da.CreatedBy</td>
+                                                            <td>@da.CreateDate</td>
+                                                            <td>@da.ApprovedDate</td>
 
                                                         </tr>
                                                     }
-
                                                 }
-                                                
+
                                             </tbody>
 
                                         </table>
@@ -110,11 +144,434 @@
 
 
 
-
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+</div>
+
+
+
+
+<div class="modal fade " id="myModal" role="dialog">
+    <div class="modal-dialog " style="margin: 250px;">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+        width: 370%;
+        ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <table style="font-size: 17px; text-align: left; width: 100%">
+                <tbody>
+                    <tr style="font-size: large; color: #231f20; font-style: italic; text-decoration: underline; background-color: white; text-align: left; width: 100%">
+                        <td colspan="2">
+                            <center>
+                                NFA Requisition No.<span id="ContentPlaceHolder1_lblCapexID" style="font-weight:bold;">@(Model != null ? Model.RequestNo.ToString() : "")</span>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 260px">
+                            Asset Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblAssetType">@(Model != null ? Model.Assettype : "")</span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Company
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblCompany">@(Model != null ? Model.CapexType.ToString().Split("/")[0] : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            BU
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblBU">@(Model != null ? Model.CapexType.ToString().Split("/")[1] : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Exp Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblExpType">@(Model != null ? Model.CapexType.ToString().Split("/")[2] : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Budget Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblBudgetType">@(Model != null ? Model.CapexType.ToString().Split("/")[3] : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            NFA Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblCapexType">@(Model != null ? Model.CapexType.ToString() : "")</span>
+                        </td>
+                    </tr>
+                    <tr id="ContentPlaceHolder1_trnonbudget_pname">
+                        <td>
+                            Work/Item Name
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_pname">@(Model != null ? Model.PName.ToString() : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr id="ContentPlaceHolder1_trnonbudget_pdesc">
+                        <td>
+                            Work/Item Name Description
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_pdesc">@(Model != null ? Model.PDescription.ToString() : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Purpose
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_purpose">@(Model != null ? Model.Purpose.ToString() : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Expected Date of Completion
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_compdate" onkeypress="return nouserinput(event)">@(Model != null ? Model.EdateCompletion.ToString() : "")</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Requested By
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblRequester"></span>
+                        </td>
+                    </tr>
+                    <tr style="visibility: hidden">
+                        <td>
+                            Purchase Location
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_drp_location">@(Model != null ? Model.PurchaseLocation.ToString() : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="left">
+
+                            <table cellspacing="0" cellpadding="0" rules="all" class="txt" border="1" id="ContentPlaceHolder1_dglocal" style="color:#333333;font-weight:normal;width:100%;border-collapse:collapse;">
+                                <tbody>
+                                    <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;height:5px;">
+                                        <td align="center">Line Item</td>
+                                        <td align="center">Item Name</td>
+                                        <td align="center">location</td>
+                                        <td align="center">NFA Nature</td>
+                                        <td align="center">UOM</td>
+                                        <td align="center">Quantity</td>
+                                        <td align="center">Tax</td>
+                                        <td align="center">Remarks</td>
+                                    </tr>
+                                    <tr style="background-color:#EFF3FB;font-size:8pt;font-weight:bold;">
+                                        <td align="left">
+                                            <input name="ctl00$ContentPlaceHolder1$dglocal$ctl02$lblLineItem" type="text" value="1" readonly="readonly" id="ContentPlaceHolder1_dglocal_lblLineItem_0" style="background-color:Transparent;border-style:None;font-size:X-Small;width:50px;">
+                                        </td>
+                                        <td align="left">
+                                            <span id="ContentPlaceHolder1_dglocal_lbltxtItemName_0" style="font-size:X-Small;">324</span>
+                                        </td>
+                                        <td align="left">
+                                            <span id="ContentPlaceHolder1_dglocal_lbllocation_0" style="font-size:X-Small;">Gurgaon (1010)</span>
+                                        </td>
+                                        <td align="left">
+                                            <span id="ContentPlaceHolder1_dglocal_lblcapexnature_0" style="font-size:X-Small;">BAXY/IT/Capex/Budgeted</span>
+                                        </td>
+                                        <td align="left">
+                                            <span id="ContentPlaceHolder1_dglocal_lblUOM_0" style="font-size:X-Small;">2343</span>
+                                        </td>
+                                        <td align="right">
+                                            <span id="ContentPlaceHolder1_dglocal_lbltxtQuantity_0" style="font-size:X-Small;">324.00</span>
+                                        </td>
+                                        <td align="right">
+                                            <span id="ContentPlaceHolder1_dglocal_lbltxtTax_0" style="font-size:X-Small;">34.00</span>
+                                        </td>
+                                        <td align="left">
+                                            <span id="ContentPlaceHolder1_dglocal_lblRemarks_0" style="font-size:X-Small;"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Max Quotation Amount (₹)</td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblTotalCapex"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div>
+                                <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grddata" style="background-color:White;font-family:Cambria;font-size:10pt;text-decoration:none;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:9pt;font-weight:bold;height:12px;width:200px;">
+                                            <th scope="col">Download Quotation</th>
+                                            <th scope="col">Vendor Code</th>
+                                            <th scope="col">Vendor Name</th>
+                                            <th scope="col">QuotationAmount</th>
+                                        </tr>
+                                        <tr align="left" style="background-color:#EFF3FB;font-size:10pt;height:10px;">
+                                            <td><a href="upload/document817670.pdf" target="_blank">document817670.pdf</a></td>
+                                            <td>V1007 </td>
+                                            <td>I.T.Solutions India Private Limited </td>
+                                            <td>140667.84</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 24%">
+                            Selected Quotation
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_rbtnSelectQuote">V1007  (INR-: 140667.84)</span>
+                        </td>
+
+                        <td style="width: 24%">
+                            Payment Terms
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblPaymentTerms"> </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            T&amp;C With Selected Quotation
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblTnC">32432</span>
+                        </td>
+                        <td style="width: 24%">
+                            Delivery
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblDelivery">0</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Imported / Indigenous
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_drp_ImportedIndigenous">Imported</span>
+
+                        </td>
+                        <td style="width: 24%">
+                            Freight
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblFreightt">0</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Justification
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_jst">3243</span>
+                        </td>
+                        <td style="width: 24%">
+                            Installation Cost
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblInstallationCost">0</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            Benefit
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txtBenefit" textmode="MultiLine" rows="2" columns="50">3243</span>
+                        </td>
+                        <td style="width: 24%">
+                            Remarks
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblRemarks"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            IRR/Payback Period
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Projected Cash Outflow
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <span style="font-size: 10pt; color: red;">Approval Matrix</span>
+                            <div>
+                                <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grdApproval" style="background-color:White;font-family:Cambria;text-decoration:none;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:9pt;font-weight:bold;height:5px;">
+                                            <th scope="col">_</th>
+                                            <th scope="col">Level_1</th>
+                                            <th scope="col">Level_2</th>
+                                            <th scope="col">Level_3</th>
+                                            <th scope="col">Level_4</th>
+                                            <th scope="col">Level_5</th>
+                                            <th scope="col">Level_6</th>
+                                            <th scope="col">Reject/Return</th>
+                                        </tr>
+                                        <tr align="left" style="background-color:#EFF3FB;font-size:8pt;height:5px;">
+                                            <td>Approver</td>
+                                            <td>&nbsp;</td>
+                                            <td>CHANDER DEEP KHANDUJA</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr align="left" style="background-color:#EFF3FB;font-size:8pt;height:5px;">
+                                            <td>Approved Date</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr align="left" style="background-color:#EFF3FB;font-size:8pt;height:5px;">
+                                            <td>Remarks</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="4">
+                            <div id="ContentPlaceHolder1_pnlAttachment" style="overflow:scroll;">
+
+                                <table style="vertical-align: top; text-align: left; width: 100%; border-top-width: 1px; border-left-width: 1px; border-left-color: #000000; border-bottom-width: 1px; border-bottom-color: #000000; border-top-color: #000000; border-right-width: 1px; border-right-color: #000000;">
+
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4"><span style="font-size: 10pt; color: red;">Comments Section:</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 10%">
+                                                Comment
+                                            </td>
+                                            <td style="width: 25%">
+                                                <textarea name="ctl00$ContentPlaceHolder1$txtAttachmentDiscription" rows="2" cols="50" id="ContentPlaceHolder1_txtAttachmentDiscription"></textarea>
+                                            </td>
+                                            <td style="float: left; width: 20%;">
+                                                File
+                                            </td>
+                                            <td style="float: left;">
+                                                <input type="file" name="ctl00$ContentPlaceHolder1$upldFile" id="ContentPlaceHolder1_upldFile">
+                                            </td>
+                                            <td style="float: left;">
+                                                <input type="submit" name="ctl00$ContentPlaceHolder1$btnUploadFile" value="Post &nbsp;" id="ContentPlaceHolder1_btnUploadFile">
+                                                <span id="ContentPlaceHolder1_msglblFile" style="color:Red;font-weight:bold;">Send Successfully</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <table cellspacing="0" cellpadding="3" rules="all" border="1" id="ContentPlaceHolder1_dg1" style="color:#333333;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr class="DataGridFixedHeader" style="color:White;background-color:#231F20;font-weight:bold;text-decoration:none;height:10px;">
+                                            <td>Comment</td>
+                                            <td align="center">File</td>
+                                            <td>Posted By</td>
+                                            <td>Posted Date</td>
+                                        </tr>
+                                        <tr style="background-color:#EFF3FB;font-size:10pt;">
+                                            <td valign="top">534543</td>
+                                            <td valign="top">
+                                                <center>
+                                                    <a href="ConversationFiles/103163127913_103163.pdf" id="ContentPlaceHolder1_dg1_lblAgreement_0" target="_blank">Download</a>
+                                                </center>
+                                            </td>
+                                            <td valign="top">&nbsp;</td>
+                                            <td valign="top">02-Feb-2024 02:02:02 PM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
 </div>
 
 

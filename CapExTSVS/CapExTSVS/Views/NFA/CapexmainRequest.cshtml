@@ -67,7 +67,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-label" for="nfa_id">Incent ID:</label>
                                                     <div class="col-sm-6">
-                                                        <input class="form-control" readonly type="text" id="nfa_id" name="IndentId ">
+                                                        <input class="form-control" readonly type="text" id="nfa_id" value="@(Model != null ? Model.IndentId : "") " name="IndentId ">
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                                                             <input type="radio" name="AssetsType" value="" />Select
                                                         </label>
                                                         <label>
-                                                            <input type="radio" name="AssetsType" value="new" checked="checked" />new
+                                                            <input type="radio" name="AssetsType" value="new"  />new
                                                         </label>
                                                         <label>
                                                             <input type="radio" name="AssetsType" value="expansion" />Expansion
@@ -91,7 +91,8 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="company">Select Company:</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control dropdown" id="ddlViewBy" name="Company" placeholder="Enter Budget" onchange="Dropdownchange(this.value)" required>
+                                                        <select class="form-control dropdown" id="ddlViewBy" name="Company" value="@(Model != null ? Model.Company : "") " placeholder="Enter Budget" onchange="Dropdownchange(this.value)" required>
+                                                            <option Selected="True" Value="0">Select</option>
                                                             <option Selected="True" Value="0">Select</option>
                                                             @if (ViewData["CapexbindddlCompany"] != null)
                                                             {
@@ -122,7 +123,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="department">Select BUI Department:</label>
                                                     <div class="col-sm-12">
-                                                        <select class="form-control dropdown" name="BUI" id="BU" placeholder="Enter Budget" required>
+                                                        <select class="form-control dropdown" name="BUI" id="BU" value="@(Model != null ? Model.BUI : "") " placeholder="Enter Budget" required>
                                                             <option Selected="True" Value="0">Select</option>
                                                             @* @foreach (var da in ViewData["CapexBindddlProject"] as IList<UspCapexSelComProjectResult>)
                                                             {
@@ -142,7 +143,7 @@
                                                     <label class="form-label" for="exp_type">Select Exp Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select class="form-control dropdown" id="ReqType" name="EXPType" placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()" required>
+                                                        <select class="form-control dropdown" id="ReqType" name="EXPType" value="@(Model != null ? Model.EXPType : "") " placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()" required>
                                                             <option Selected="True" Value="0">Select</option>
                                                             <option Value="Capex">Capex</option>
                                                             <option Value="Opex">Opex</option>
@@ -159,7 +160,7 @@
                                                     <label class="form-label" for="budget">Select Exp:</label>
                                                     <div class="col-sm-12">
 
-                                                        <select class="form-control dropdown" id="Exp" name="Budget" placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()" required>
+                                                        <select class="form-control dropdown" id="Exp" name="Budget" value="@(Model != null ? Model.Budget : "") " placeholder="Enter Budget" onchange="CapexBindddlvaluechangeV2()" required>
                                                             <option selected>Select</option>
                                                             <option Value="Budgeted">Budgeted</option>
                                                             <option Value="NonBudgeted">NonBudgeted</option>
@@ -176,7 +177,7 @@
                                                     <label class="form-label" for="nfa_type">NFA Type:</label>
                                                     <div class="col-sm-10">
 
-                                                        <input class="form-control" type="text" id="nfa_type" name="NFA" required>
+                                                        <input class="form-control" type="text" id="nfa_type" name="NFA" value="@(Model != null ? Model.NFA : "") " required>
 
                                                     </div>
                                                 </div>
@@ -191,7 +192,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="exced_daw_of_corelation">Purpose </label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" type="text" id="exced_daw_of_corelation" name="Purpose"></textarea>
+                                                        <textarea class="form-control" type="text" id="exced_daw_of_corelation" value="@(Model != null ? Model.Purpose : "") " name="Purpose"></textarea>
 
                                                     </div>
                                                 </div>
@@ -199,7 +200,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
                                                     <div class="col-sm-10">
-                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required>
+                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" value="@(Model != null ? Model.ExpectedDate : "") " name="ExpectedDate" required>
 
                                                     </div>
                                                 </div>
@@ -376,7 +377,7 @@
                                                     <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select id="imported_indigenous" class=" form-control dropdown" name="Imported" required>
+                                                        <select id="imported_indigenous" class=" form-control dropdown" name="Imported" value="@(Model != null ? Model.Imported : "") " required>
                                                             <option value="">Select</option>
                                                             <option value="imported">Imported</option>
                                                             <option value="indigenous">Indigenous</option>
@@ -390,7 +391,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <textarea class="form-control" id="justification" name="Justification" ></textarea>
+                                                        <textarea class="form-control" id="justification" value="@(Model != null ? Model.Justification : "") " name="Justification" ></textarea>
 
                                                     </div>
                                                 </div>
@@ -406,7 +407,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <input class="form-control" type="text" id="benett" name="Benefit">
+                                                        <input class="form-control" type="text" id="benett" value="@(Model != null ? Model.Benefit : "") " name="Benefit">
 
                                                     </div>
                                                 </div>
@@ -447,7 +448,7 @@
                                                     <div class="col-sm-10">
 
 
-                                                        <input class="form-control" type="text" id="rri_fza_ck_period_value" name="IRRPaybackValue" required>
+                                                        <input class="form-control" type="text" id="rri_fza_ck_period_value" value="@(Model != null ? Model.IRRPaybackValue : "") " name="IRRPaybackValue" required>
 
                                                     </div>
 
@@ -462,7 +463,7 @@
 
 
 
-                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis" name="cashoverFlowFile" required>
+                                                        <input class="form-control" type="file" id="projected_cash_outflow_fis"  name="cashoverFlowFile" required>
 
 
                                                     </div>
@@ -485,7 +486,7 @@
 
 
 
-                                                        <input class="form-control" type="text" id="projected_cash_outflow_fis" name="cashoverFlowValue" required>
+                                                        <input class="form-control" type="text" id="projected_cash_outflow_fis" value="@(Model != null ? Model.cashoverFlowValue : "") " name="cashoverFlowValue" required>
 
 
                                                     </div>
@@ -569,8 +570,14 @@
 
 
                                             <div class="card-footer">
-                                                <button type="submit" class="btn btn-info">Submit</button>
-                                                <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                                <div class="col-sm-6 ">
+                                                <button type="submit" class="btn btn-info" name="BTNStatus" value="Submit">Submit</button>
+
+                                                </div >
+                                                <div class="col-sm-6 ">
+                                                
+                                                <button type="submit" class="btn btn-primary " name="BTNStatus" value="Draft">Save Draft</button>
+                                                    </div>
                                             </div>
 
 
@@ -583,7 +590,7 @@
 
 
 
-
+                                      @*  @Html.ActionLink("Button Name", "CapexmainRequest2", "NFA",new { UID = "Testing" },new { @class="btn btn-primary " })*@
 
 
 
@@ -851,17 +858,28 @@
 
 <script>
 
+
+
+    $(document).ready(function () {
+        function myfunction(e) {
+            alert('Hello Test' + e);
+        }
+
+    @Html.Raw(ViewBag.js)
+        });
+
+
     $('#exampla').dataTable({
 
     });
 
-
+    @Html.Raw( ViewBag.DynamicScripts )
 
     function Dropdownchange(value) {
 
         $.ajax({
             type: "GET",
-            url: "\CapexBindddlProject\?id=" + value,
+            url: "/NFA/CapexBindddlProject/?id=" + value,
             success: function (data) {
                 console.log(data)
                 var $el = $("#BU");
@@ -1131,24 +1149,17 @@
 
 
 
-    function DataItemList() {
+    function DataItemListEdit() {
 
 
-        alert(document.getElementById("Description").value);
-
-        var Description= document.getElementById("Description").value; 
-        var UOM = document.getElementById("Uom").value;
-        var Qty = document.getElementById("Qty").value;
-        var TaxRate = document.getElementById("TexRate").value;
-
-
+        
           
         alert("call");
 
         $.ajax({
             type: "GET",
-            url: '/NFA/DataList1', //Name of action and controller
-            data: { Description: Description, UOM: UOM, Qty: Qty, TaxRate: TaxRate },
+            url: '/NFA/DataItemListEdit', //Name of action and controller
+            
             dataType: 'json',
            contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -1214,6 +1225,103 @@
                 //Success doesnt mean file saved on server. It means only post succeed.
                 $('#records_tableData').html(c.join(""));
                
+
+
+                $('#records_table2').html(d.join(""));
+            }
+        });
+
+
+
+    };
+
+
+
+
+
+    function DataItemList() {
+
+
+        alert(document.getElementById("Description").value);
+
+        var Description = document.getElementById("Description").value;
+        var UOM = document.getElementById("Uom").value;
+        var Qty = document.getElementById("Qty").value;
+        var TaxRate = document.getElementById("TexRate").value;
+
+
+
+        alert("call");
+
+        $.ajax({
+            type: "GET",
+            url: '/NFA/DataList1', //Name of action and controller
+            data: { Description: Description, UOM: UOM, Qty: Qty, TaxRate: TaxRate },
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                console.log(data)
+                var c = [];
+                var d = [];
+
+                c.push("<tr><th>" + " Action" + "</th>");
+                c.push("<th>" + " Sr No" + "</th>");
+                c.push("<th>" + "Description" + "</th>");
+                c.push("<th>" + "UOM " + "</th>");
+                c.push("<th>" + "Qty " + "</th>");
+                c.push("<th>" + "Tax Rate " + "</th></tr>");
+                $.each(data, function (i, item) {
+
+                    c.push("<tr><td>" + item.id + "</td>");
+                    c.push("<td>" + item.id + "</td>");
+                    c.push("<td>" + item.description + "</td>");
+                    c.push("<td>" + item.uom + "</td>");
+                    c.push("<td>" + item.qty + "</td>");
+                    c.push("<td>" + item.texRate + "</td></tr>");
+                });
+
+
+
+
+
+                d.push('<tr>');
+                d.push('<th>Line Item </th>');
+                d.push('<th> Item Name </th>');
+                d.push('<th> UOM </th>');
+                d.push('<th> Quantity </th>');
+                d.push('<th> Initial Rate </th>');
+                d.push('<th> Initial Amount </th>');
+                d.push('<th> Final Rate </th>');
+                d.push(' <th> Final Amount </th>');
+                d.push('<th> Tax </th>');
+                d.push('<th> Quotation Amount<br>(Tax Inclusive) </th>');
+                d.push('<th> Remarks </th>');
+                d.push('</tr>');
+
+
+                $.each(data, function (i, item) {
+
+
+
+                    d.push("<tr>");
+                    d.push("<td>" + item.id + " </td>");
+                    d.push("<td>" + item.description + "</td>");
+                    d.push("<td> " + item.uom + " </td>");
+                    d.push("<td> " + item.qty + " </td>");
+                    d.push("<td> <input type='text' name='InitRate' calss='form-Control'  onchange='ChangeData(" + item.id + ")'/> </td>");//edit
+                    d.push("<td> 213 </td>");
+                    d.push("<td> <input type='text' name='FinalRate' calss='form-Control'  onchange='ChangeData(" + item.id + ")'/> </td>");//edit
+                    d.push(" <td> 213 </td>");
+                    d.push("<td> " + item.texRate + " </td>");
+                    d.push("<td> 23<br>(Tax Inclusive) </td>");
+                    d.push("<td> <input type='text' calss='form-Control'  name='Remark' onchange='ChangeData(" + item.id + ")'/> </td>");//edit
+                    d.push("</tr>");
+                });
+                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
+                //Success doesnt mean file saved on server. It means only post succeed.
+                $('#records_tableData').html(c.join(""));
+
 
 
                 $('#records_table2').html(d.join(""));

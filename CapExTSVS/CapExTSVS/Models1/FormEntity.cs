@@ -349,6 +349,12 @@ namespace CapExTSVS.Models1
         public string cashoverFlowValue { get; set; }
 
 
+        public string UID { get; set; }
+
+        public string EID { get; set; }
+
+
+        public string BTNStatus { get; set; }
 
 
     }
@@ -365,6 +371,8 @@ namespace CapExTSVS.Models1
         public string TexRate { get; set; }
         public string ID { get; set; }
         public string Datastatus { get; set; }
+
+
     }
 
 
@@ -443,5 +451,37 @@ namespace CapExTSVS.Models1
     public static class Vender<T>
     {
         public static List<T> Items1 = new List<T>();
+    }
+
+
+
+
+    public partial class CapexSelCapexRequestDetailsResultComm
+    {
+        public int RequestNo { get; set; }
+        public int? IndentID { get; set; }
+        public string Assettype { get; set; }
+        public string OldAssetCode { get; set; }
+        public string CapexType { get; set; }
+        public string PName { get; set; }
+        public string PDescription { get; set; }
+        public string Purpose { get; set; }
+        public string EdateCompletion { get; set; }
+        public char PurchaseLocation { get; set; }
+        public decimal? TotalValueInINR { get; set; }
+        public decimal? SelectQuotationAmount { get; set; }
+        public string SelectQuote { get; set; }
+        public string ImportedIndigenous { get; set; }
+        public string VendorJustification { get; set; }
+        public string CurrentWith { get; set; }
+        public int? StatusID { get; set; }
+        public string Status { get; set; }
+        public string CreateDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public string isprint { get; set; }
+        public string ApprovedDate { get; set; }
+        public string CWIPCreatedDate { get; set; }
     }
 }

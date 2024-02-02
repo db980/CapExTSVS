@@ -1,5 +1,6 @@
 ﻿using CapExTSVS.Models1;
 using DataModels;
+using Humanizer;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using Microsoft.Web.Helpers;
 using MoreLinq;
+using MoreLinq.Extensions;
 using MVC_CRUD_LIST.Repository;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +19,7 @@ using System.IO;
 using System.IO.Pipelines;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using toastr.Net;
 using static DataModels.CapExTSDBStoredProcedures;
@@ -40,7 +43,7 @@ namespace CapExTSVS.Controllers
         static List<CapexmainRequestItems> cty = new List<CapexmainRequestItems>();
         List<CapexShowApproval_RequestForm> da3 = null;
         //CapexItems<CapexmainRequestItems> da = new CapexItems<CapexmainRequestItems>();
-
+        string Flag;
 
         public NFAController(ILogger<NFAController> logger)
         {
@@ -48,14 +51,29 @@ namespace CapExTSVS.Controllers
             DataConnection.DefaultSettings = new MySettings(null);
             _dbcontext = new DataModels.CapExTSDB();
 
-            
+
         }
+
         public IActionResult NFADraftRequest()
         {
+
+            var Da = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "", "", "", "").ToList();
+            ViewData["NFADraftRequestGrid"] = Da;
+            //            exec Capex_SelCapexRequestDetails @CreatedBy = N'40000046',@RequestNo = N'',@Status = N'0',@CWIPCODE = N''
+            //,@INTERNALORDERNO = N'',@location = N'0',@CompCode = N'',@BU = N''
+            return View();
+        }
+
+        public IActionResult NFADraftRequestModel(string data)
+        {
+            CapexSelCapexRequestDetailsResultComm a;
+
+            var Da = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "", "", "", "").Where(a => a.RequestNo == Convert.ToInt32(data)).SingleOrDefault();
+
+
             ViewData["NFADraftRequestGrid"] = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "", "", "", "").ToList();
 
-
-            return View();
+            return View("NFADraftRequest", Da);
         }
 
 
@@ -100,52 +118,220 @@ namespace CapExTSVS.Controllers
             return View();
         }
 
+        public IActionResult CapexmainRequestEdit(CapexmainRequest data)
+        {
+            if (data.EID != null && data.EID != "") ///update Query
+            {
+
+
+                var daFiles = _dbcontext.CapexSelReturnCapexFiles(data.EID).ToList();
+                var daDetail = _dbcontext.CapexSelReturnCapexDetails(data.EID, user.id).SingleOrDefault();
+
+                var daItems = _dbcontext.CapexSelReturnCapexItems(data.EID).ToList();
+
+                CapexbindddlCompany();
+
+                rep = new EmployeeRepository();
+
+                CapexmainRequestItems Items = new CapexmainRequestItems();
+                var count = rep.SelectAllEmployees().Count() + 1;
+
+                int a = 1;
+
+
+                foreach (var Items1 in daItems)
+                {
+                    Items.Description = Items1.ItemName.ToString();
+                    Items.Qty = Items1.Quantity.ToString();
+                    Items.TexRate = Items1.TaxRate.ToString();
+                    Items.Uom = Items1.UOM.ToString();
+                    Items.ID = a.ToString();
+                    a++;
+                }
+
+                rep.InsertEmployee(Items);         
+                var da = rep.SelectAllEmployees();
+
+
+                ViewData["Items"] = da.ToList();
+
+
+
+
+                data.IndentId = daDetail.IndentID.ToString();
+                data.AssetsType = daDetail.Assettype;
+                data.Company = daDetail.CTDes.ToString().Split('/')[0];
+                data.BUI = daDetail.CTDes.ToString().Split('/')[1];
+                data.EXPType = daDetail.CTDes.ToString().Split('/')[2];
+                data.Budget = daDetail.CTDes.ToString().Split('/')[3];
+                data.NFA = daDetail.CTDes;
+                data.Purpose = daDetail.Purpose;
+                data.ExpectedDate = daDetail.EdateCompletion;
+                data.Description = daDetail.PDescription.ToString();
+                data.Imported = daDetail.ImportedIndigenous;
+                data.Justification = daDetail.VendorJustification;
+                data.Benefit = daDetail.Benefit;
+                data.IRRPaybackValue = daDetail.IRRPaybackPeriodValue;
+                data.cashoverFlowValue = daDetail.ProjectedCashOutflowValue;
+
+               
+
+
+                ViewBag.js = string.Format("DataItemListEdit();");
+            }
+
+            return View("CapexmainRequest", data);
+
+        }
+
         public IActionResult CapexmainRequest2(CapexmainRequest data)
         {
 
+            try
+            {
 
-             CapexmainRequestItems Items = new CapexmainRequestItems();
 
-        var count = rep.SelectAllEmployees().Count()+1;
 
-        CapexbindddlCompany();
+                DataTable DT = new DataTable();
+                DataTable DTV = new DataTable();
 
-            Items.Description = data.Description;
-            Items.Qty = data.Qty;
-            Items.TexRate = data.TexRate;
-            Items.Uom = data.Uom;
-            Items.ID = count.ToString();
 
-            //InsertEmployeeList(Items);
-            uploadfile(data.IRRPaybackfile,"NFA");
-            uploadfile(data.cashoverFlowFile,"NFA");
+                var Comp_code = data.Company + "/" + data.BUI.ToString().Split(",")[0] + "/" + data.EXPType.ToString() + "/" + data.Budget.ToString();
 
-            //_dbcontext.CapexUSPCapexmasterModified( string @Assettype, string @OldAssetCode, string @Budgeted, string @PName,
-            //    string @PDescription, string @CapitalExpenseAsset, string @Purpose, DateTime ? @EdateCompletion, 
-            //    string @PurchaseLocation, DataTable @dtLineItem, decimal ? @TotalValueInINR, string @SelectQuote, string @ImportedIndigenous,
-            //    string @VendorJustification, string @CreatedBy, string @FileGuidValue, string @flag, string @DrawingList, string @IndentID, 
-            //    string @Benefit, string @IRRPaybackPeriod, string @ProjectedCashOutflow, string @IRRPaybackPeriodValue, string @ProjectedCashOutflowValue, 
-            //    decimal ? @CFCAmount)
 
-            //    CapexUSPCapexmaster_draft
-            rep.InsertEmployee(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
-            //da.Items1.Add(Items);
-            //da.Items1.Add(Items);
-           var da= rep.SelectAllEmployees();
-            ViewData["Items"] = da.ToList();
-            return  RedirectToAction("CapexmainRequest");
+                DT.Columns.Add("ID");
+                DT.Columns.Add("ItemName");
+                DT.Columns.Add("PlantCode");
+                DT.Columns.Add("Categories");
+                DT.Columns.Add("UOM");
+                DT.Columns.Add("Quantity");
+                DT.Columns.Add("TaxRate");
+
+
+
+
+
+
+
+                var Data = rep.SelectAllEmployees().ToList();
+                foreach (var da1 in Data)
+                {
+                    DT.Rows.Add(da1.ID, da1.Description, "1010", Comp_code, da1.Uom, da1.Qty, da1.TexRate);
+                }
+
+
+                //InsertEmployeeList(Items);
+                var IRRPaybackfile = uploadfile(data.IRRPaybackfile, "NFA", "IRRPaybackfile");
+                var cashoverFlowFile = uploadfile(data.cashoverFlowFile, "NFA", "cashoverFlowFile");
+                var daAtt = _dbcontext.CapexAttachedTransFileId().SingleOrDefault().Column1;
+
+
+                CapexmainRequestItems Items = new CapexmainRequestItems();
+
+                var count = rep.SelectAllEmployees().Count() + 1;
+
+                CapexbindddlCompany();
+
+                Items.Description = data.Description;
+                Items.Qty = data.Qty;
+                Items.TexRate = data.TexRate;
+                Items.Uom = data.Uom;
+                Items.ID = count.ToString();
+
+
+
+
+
+
+                if (data.BTNStatus == "Draft")
+                {
+                    if (Flag != null && Flag != "")
+                    {
+                        var da12 = _dbcontext.CapexUSPCapexmasterDraft("New", "@OldAssetCode", data.Budget, data.Description,
+                       data.Description, "@CapitalExpenseAsset", data.EXPType, Convert.ToDateTime(data.ExpectedDate),
+                        "@PurchaseLocation", DT, 0, "@SelectQuote", "@ImportedIndigenous",
+                   data.Justification, user.id, daAtt.ToString(), "New", "@DrawingList", data.IndentId,
+                       data.Benefit, IRRPaybackfile, cashoverFlowFile, data.IRRPaybackValue, data.cashoverFlowValue,
+                        0);
+
+
+                        Notification.PopupSaveCustom("Data Create SuccessFully " + "NFA ID : " + da12.SingleOrDefault().Column1 + " drafted Successfully");
+
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+
+                }
+                else if (data.BTNStatus == "Save")
+                {
+                    if (Flag != null && Flag != "")
+                    {
+                        var da12 = _dbcontext.CapexUSPCapexmasterModified("New", "@OldAssetCode", data.Budget, data.Description,
+                       data.Description, "@CapitalExpenseAsset", data.EXPType, Convert.ToDateTime(data.ExpectedDate),
+                        "@PurchaseLocation", DT, 0, "@SelectQuote", "@ImportedIndigenous",
+                   data.Justification, user.id, daAtt.ToString(), "New", "@DrawingList", data.IndentId,
+                       data.Benefit, IRRPaybackfile, cashoverFlowFile, data.IRRPaybackValue, data.cashoverFlowValue,
+                        0);
+                        data.UID = da12.SingleOrDefault().Column1;
+                        Flag = da12.SingleOrDefault().Column1.ToString();
+
+                        Notification.PopupSaveCustom("Data Create SuccessFully " + "NFA ID : " + da12.SingleOrDefault().Column1 + " drafted Successfully");
+                    }
+                    else
+                    {
+
+                        var dataCapex = _dbcontext.CapexMasters.Where(a => a.RequestNo == Convert.ToInt32(Flag)).SingleOrDefault();
+                        var da12 = _dbcontext.CapexUSPCapexmasterModified("New", "@OldAssetCode", data.Budget, data.Description,
+                      data.Description, "@CapitalExpenseAsset", data.EXPType, Convert.ToDateTime(data.ExpectedDate),
+                       "@PurchaseLocation", DT, 0, "@SelectQuote", "@ImportedIndigenous",
+                  data.Justification, user.id, daAtt.ToString(), "New", "@DrawingList", data.IndentId,
+                      data.Benefit, IRRPaybackfile, cashoverFlowFile, data.IRRPaybackValue, data.cashoverFlowValue,
+                       0);
+                        data.UID = da12.SingleOrDefault().Column1;
+                        Flag = da12.SingleOrDefault().Column1.ToString();
+                        Notification.PopupSaveCustom("Data Update SuccessFully " + "NFA ID : " + da12.SingleOrDefault().Column1 + " drafted Successfully");
+                    }
+                }
+
+
+                rep.InsertEmployee(Items);         //CapexItems<CapexmainRequestItems>.SelectEmployeeList();
+                                                   //da.Items1.Add(Items);
+                                                   //da.Items1.Add(Items);
+                var da = rep.SelectAllEmployees();
+                ViewData["Items"] = da.ToList();
+                return RedirectToAction("CapexmainRequest", data);
+
+            }
+            catch (Exception)
+            {
+                Notification.PopupCustomeError("Data Fail ");
+                return RedirectToAction("CapexmainRequest", data);
+            }
         }
+
+
+
+
+
+
+
+
         [HttpGet]
         public List<CapexmainRequestItems> DataList1(string Description, string UOM, string Qty, string TaxRate)
         {
 
-           
+
             CapexmainRequestItems Items = new CapexmainRequestItems();
             var count = rep.SelectAllEmployees().Count() + 1;
 
             CapexbindddlCompany();
 
-            Items.Description =Description.ToString();
+            Items.Description = Description.ToString();
             Items.Qty = Qty.ToString();
             Items.TexRate = TaxRate.ToString();
             Items.Uom = UOM.ToString();
@@ -167,7 +353,22 @@ namespace CapExTSVS.Controllers
         }
 
 
-        public IActionResult Dropdownchange2(string ID)
+        [HttpGet]
+        public List<CapexmainRequestItems> DataItemListEdit(string Description, string UOM, string Qty, string TaxRate)
+        {
+
+            //da.Items1.Add(Items);
+            var da = rep.SelectAllEmployees();
+
+
+            ViewData["Items"] = da.ToList();
+            return da;
+        }
+
+
+
+
+            public IActionResult Dropdownchange2(string ID)
         {
 
 
@@ -186,7 +387,7 @@ namespace CapExTSVS.Controllers
             var dt = _dbcontext.UspCapexSelComProject(id).ToList();
             Vender<SelActiveVendorListResult>.Items1.AddRange(_dbcontext.SelActiveVendorList(id).ToList());
 
-           
+
             //_dbcontext.CapexSelCapexType();
 
 
@@ -198,9 +399,9 @@ namespace CapExTSVS.Controllers
         [HttpGet]
         public IList<SelActiveVendorListResult> CapexBindddlProjectVender(string id)
         {
-           var da = Vender<SelActiveVendorListResult>.Items1.ToList();
+            var da = Vender<SelActiveVendorListResult>.Items1.ToList();
 
-            
+
 
             return da;
 
@@ -213,7 +414,7 @@ namespace CapExTSVS.Controllers
             var da = _dbcontext.CapexSelVendorAddressDetails(da1[1].Trim()).SingleOrDefault();
 
 
-            return da.Column1 != null ? da.Column1:"" ;
+            return da.Column1 != null ? da.Column1 : "";
 
         }
 
@@ -234,7 +435,7 @@ namespace CapExTSVS.Controllers
         public IList<CapexShowApproval_RequestForm> CapexBindddlValuChange1(string id)
         {
             Datamatric = id;
-            var da=DataMatrix(id) ;
+            var da = DataMatrix(id);
             ViewData["Item2"] = da;
             return da;
         }
@@ -242,10 +443,10 @@ namespace CapExTSVS.Controllers
 
         public IList<CapexShowApproval_RequestForm> DataMatrix(string id)
         {
-            var da= id.Split(",");
+            var da = id.Split(",");
 
             var da2 = _dbcontext.CapexSelCapexType(user.id, da[0].Trim(), da[1].Trim(), da[2].Trim(), da[3].Trim()).ToList();
-          
+
             // _dbcontext.
             if (da2.Any())
             {
@@ -254,8 +455,8 @@ namespace CapExTSVS.Controllers
             }
 
 
-           
-           
+
+
             return da3.ToList();
 
         }
@@ -272,7 +473,7 @@ namespace CapExTSVS.Controllers
 
 
 
-    
+
 
 
         [HttpPost]
@@ -283,73 +484,73 @@ namespace CapExTSVS.Controllers
             try
             {
 
-            
-           
 
 
-            DataTable DT = new DataTable();
-            DataTable DTV = new DataTable();
 
 
-            var Comp_code = fm["Comp_code"].ToString()+ "/" + fm["BU"].ToString().Split(",")[0]+ "/" + fm["ReqType"].ToString()+"/"+ fm["BudgetType"].ToString() ;
+                DataTable DT = new DataTable();
+                DataTable DTV = new DataTable();
+
+
+                var Comp_code = fm["Comp_code"].ToString() + "/" + fm["BU"].ToString().Split(",")[0] + "/" + fm["ReqType"].ToString() + "/" + fm["BudgetType"].ToString();
 
 
                 DT.Columns.Add("ID");
                 DT.Columns.Add("ItemName");
-            DT.Columns.Add("PlantCode");
-            DT.Columns.Add("Categories");
-            DT.Columns.Add("UOM");
-            DT.Columns.Add("Quantity");
-            DT.Columns.Add("TaxRate");
-
-
-
-                
-
-
-            DTV.Columns.Add("LineItem");
-            DTV.Columns.Add("ItemName");
-            DTV.Columns.Add("UOM");
-            DTV.Columns.Add("Quantity");
-            DTV.Columns.Add("InitialRate");
-            DTV.Columns.Add("InitialAmount");
-            DTV.Columns.Add("FinalRate");
-            DTV.Columns.Add("FinalAmount");
-            DTV.Columns.Add("TaxRate");
-            DTV.Columns.Add("FinalAmountWithTax");
-            DTV.Columns.Add("Remarks");
-
-
-            var Data = rep.SelectAllEmployees().ToList();
-            foreach(var da1 in Data)
-            {
-                DT.Rows.Add(da1.ID,da1.Description, "1010", Comp_code, da1.Uom,da1.Qty,da1.TexRate);
-            }
-            foreach (var da2 in Data)
-            {
-                DTV.Rows.Add(da2.ID , da2.Description, da2.Uom,da2.Qty,"0","0","0","0",  da2.TexRate,"0","test");
-            }
+                DT.Columns.Add("PlantCode");
+                DT.Columns.Add("Categories");
+                DT.Columns.Add("UOM");
+                DT.Columns.Add("Quantity");
+                DT.Columns.Add("TaxRate");
 
 
 
 
 
 
-               var daAtt= _dbcontext.CapexAttachedTransFileId().SingleOrDefault().Column1;
+                DTV.Columns.Add("LineItem");
+                DTV.Columns.Add("ItemName");
+                DTV.Columns.Add("UOM");
+                DTV.Columns.Add("Quantity");
+                DTV.Columns.Add("InitialRate");
+                DTV.Columns.Add("InitialAmount");
+                DTV.Columns.Add("FinalRate");
+                DTV.Columns.Add("FinalAmount");
+                DTV.Columns.Add("TaxRate");
+                DTV.Columns.Add("FinalAmountWithTax");
+                DTV.Columns.Add("Remarks");
 
 
-            _dbcontext.CapexFAddAttachment("", daAtt.ToString(), user.id, "FileType",
-                100, fm["F3_TermCondition"].ToString(), fm["F3_PaymentTerms"].ToString(), fm["F3_Delivery"].ToString(), fm["F3_Freight"].ToString(), fm["F3_InstalationCost"].ToString(),
-                fm["Remark"].ToString(), DTV);
+                var Data = rep.SelectAllEmployees().ToList();
+                foreach (var da1 in Data)
+                {
+                    DT.Rows.Add(da1.ID, da1.Description, "1010", Comp_code, da1.Uom, da1.Qty, da1.TexRate);
+                }
+                foreach (var da2 in Data)
+                {
+                    DTV.Rows.Add(da2.ID, da2.Description, da2.Uom, da2.Qty, "0", "0", "0", "0", da2.TexRate, "0", "test");
+                }
 
 
-            //string outs = _dbcontext.CapexUSPCapexmasterDraft("New", "", drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "",
-            //                                   txt_purpose.Text.Trim(), txt_compdate.Text.Trim(), "", DT, "0", rbtnSelectQuote.SelectedValue.ToString(), drp_ImportedIndigenous.SelectedValue.ToString(),
-            //                                   txt_jst.Text.Trim(), Session["usr"].ToString(), ViewState["GuidValue"].ToString(), ViewState["ReqID"].ToString(), pass, "", "", "", "", " ",
-            //                                   txtIndentID.Text.Trim(), txtBenefit.Text.Trim(), IRRPaybackV, CashOutflowV, txtPaybackPeriodValue.Text.Trim(), txtProjectedCashOutflowValue.Text.Trim(), CFCAmount);
 
-          var da=  _dbcontext.CapexUSPCapexmasterDraft("New", "OldAssetCode", "Budgeted", "PName", "PDescription", "CapitalExpenseAsset", "@Purpose", Convert.ToDateTime(fm["exced_daw_of_corelation"].ToString().Split(",")[1]), "@PurchaseLocation", DT,  0, "@SelectQuote", "@ImportedIndigenous",
-                "@VendorJustification", "@CreatedBy", daAtt.ToString(), "New", "@DrawingList", "", "@Benefit", "@IRRPaybackPeriod", "@ProjectedCashOutflow", "@IRRPaybackPeriodValue", "@ProjectedCashOutflowValue", 0);
+
+
+
+                var daAtt = _dbcontext.CapexAttachedTransFileId().SingleOrDefault().Column1;
+
+
+                _dbcontext.CapexFAddAttachment("", daAtt.ToString(), user.id, "FileType",
+                    100, fm["F3_TermCondition"].ToString(), fm["F3_PaymentTerms"].ToString(), fm["F3_Delivery"].ToString(), fm["F3_Freight"].ToString(), fm["F3_InstalationCost"].ToString(),
+                    fm["Remark"].ToString(), DTV);
+
+
+                //string outs = _dbcontext.CapexUSPCapexmasterDraft("New", "", drp_budget.SelectedValue.ToString(), txt_pname.Text.Trim(), txt_pdesc.Text.Trim(), "",
+                //                                   txt_purpose.Text.Trim(), txt_compdate.Text.Trim(), "", DT, "0", rbtnSelectQuote.SelectedValue.ToString(), drp_ImportedIndigenous.SelectedValue.ToString(),
+                //                                   txt_jst.Text.Trim(), Session["usr"].ToString(), ViewState["GuidValue"].ToString(), ViewState["ReqID"].ToString(), pass, "", "", "", "", " ",
+                //                                   txtIndentID.Text.Trim(), txtBenefit.Text.Trim(), IRRPaybackV, CashOutflowV, txtPaybackPeriodValue.Text.Trim(), txtProjectedCashOutflowValue.Text.Trim(), CFCAmount);
+
+                var da = _dbcontext.CapexUSPCapexmasterDraft("New", "OldAssetCode", "Budgeted", "PName", "PDescription", "CapitalExpenseAsset", "@Purpose", Convert.ToDateTime(fm["exced_daw_of_corelation"].ToString().Split(",")[1]), "@PurchaseLocation", DT, 0, "@SelectQuote", "@ImportedIndigenous",
+                      "@VendorJustification", "@CreatedBy", daAtt.ToString(), "New", "@DrawingList", "", "@Benefit", "@IRRPaybackPeriod", "@ProjectedCashOutflow", "@IRRPaybackPeriodValue", "@ProjectedCashOutflowValue", 0);
 
 
                 ViewBag.Message2 = Notification.PopupSaveCustom("Qutation Create SuccessFully");
@@ -382,14 +583,14 @@ namespace CapExTSVS.Controllers
             //HttpFileCollectionBase files = Request.Files;
 
             //Write your database insertHttpFileCollectionBase files = Request.Files;   code / activities
-           
+
             return RedirectToAction("create");
 
         }
 
 
         [HttpPost]
-        public  string UploadFile(IFormFile id)
+        public string UploadFile(IFormFile id)
         {
             // do something here
             return null;
@@ -397,7 +598,7 @@ namespace CapExTSVS.Controllers
 
 
 
-        private  string uploadfile(IFormFile fileup, string SubFolder)
+        private string uploadfile(IFormFile fileup, string SubFolder, string fileType)
         {
             string loc = "";
             try
@@ -414,50 +615,30 @@ namespace CapExTSVS.Controllers
 
 
 
-                       
 
-                        string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "UploadsFiles");
+
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
+
+                        //create folder if not exist
                         if (!Directory.Exists(path))
-                        {
                             Directory.CreateDirectory(path).CreateSubdirectory(SubFolder);
-                            
-                        }
 
+                        //get file extension
+                        FileInfo fileInfo = new FileInfo(fileup.FileName);
+                        string fileName = fileup.FileName.Replace(fileup.FileName, fileType + DateTime.Now.ToString("ddMMyyyyhhmmss")) + fileInfo.Extension.ToString();
 
+                        string fileNameWithPath = Path.Combine(path, fileName);
 
-
-
-                        //var fileName = ContentDispositionHeaderValue
-                        //       .Parse(fileup.ContentDisposition)
-                        //       .FileName.ToString().Replace(".", DateTime.Now.ToString("ddMMyyyyhhmmss") + ".").Replace(" ", "")
-                        //       .Trim('"');
-
-                        //var filePath = _hostingEnvironment.WebRootPath + "\\wwwroot\\" + fileName;
-                        // filePath.SaveAsAsync(fileup);
-                        //using (var stream = new MemoryStream())
-                        //{
-                        //    fileup.CopyTo(stream);
-
-                        //}
-
-                       
-                        using (FileStream fileStream = new FileStream(Path.Combine(path ,SubFolder), FileMode.OpenOrCreate,FileAccess.ReadWrite))
+                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
                         {
-                            
-
-                              var memoryStream = new MemoryStream();
-                             fileStream.CopyToAsync(memoryStream);
-                            memoryStream.CopyTo(fileStream);
-
-                           
-                            //fileup.CopyToAsync(fileStream);
-
-
+                            fileup.CopyTo(stream);
                         }
-                        //fileStream.Close();
 
 
-                        loc = fn;
+
+
+
+                        loc = fileName;
                     }
                     catch
                     {
