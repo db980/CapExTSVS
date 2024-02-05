@@ -376,12 +376,21 @@ namespace CapExTSVS.Models1
     }
 
 
-    //public class CapexItems<T>
-    //{
+    public class DraftFileUplode
+    {
+        public IFormFile File { get; set; }
+        public string Remarks { get; set; }
 
-    //}
+        public string Status { get; set; }
+    }
 
-       static class Items
+
+        //public class CapexItems<T>
+        //{
+
+        //}
+
+        static class Items
     {
          public static List<CapexmainRequestItems> Items1 = null;
 

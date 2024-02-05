@@ -19,12 +19,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">View Indent</h1>
+                   @* <h1 class="m-0">View Indent</h1>*@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">View Indent </li>
+                       @* <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">View Indent </li>*@
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,7 +36,7 @@
         <div class="container-fluid">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Horizontal Form</h3>
+                    <h3 class="card-title">NFA Registration</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -52,7 +52,7 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">View Indent</h3>
+                                        <h3 class="card-title">NFA Registration</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -63,6 +63,14 @@
 
 
                                             <div class="form-group row">
+
+
+                                                 <div class="col-md-12" style="display:none">
+                                                  
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" readonly type="text" id="EID" name="EID" >
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-md-12">
                                                     <label class="form-label" for="nfa_id">Incent ID:</label>
@@ -77,14 +85,66 @@
                                                     <label class="form-label" for="type">Asset Type *</label>
                                                     <div class="col-sm-12">
                                                         <label>
-                                                            <input type="radio" name="AssetsType" value="" />Select
+@*                                                            @(Model.AssetsType.ToUpper()=="" && Model.AssetsType.ToUpper()==null ? "true" : "false") 
+                                                             @(Model.AssetsType.ToUpper()=="new".ToUpper() && Model.AssetsType.ToUpper()!=null ? "True" : "False")
+                                                            @(Model.AssetsType.ToUpper() == "Expansion".ToUpper() && Model.AssetsType.ToUpper() != null ? "True" : "False")
+                                                            @(Model.AssetsType.ToUpper())*@
+
+                                                            @if(Model!=null)
+                                                            {
+                                                                
+                                                           
+                                                            @if(Model.AssetsType=="")
+                                                            {
+                                                                <input type="radio" name="AssetsType" checked value="Select" />
+                                                                <p class="d-md-inline">Select</p>
+                                                            }else 
+                                                            {
+                                                                  <input type="radio" name="AssetsType" value="Select" />
+                                                                  <p class="d-md-inline">Select</p> 
+                                                                    
+                                                            }
+
+                                                            }
+                                                          
+
+                                                            
                                                         </label>
                                                         <label>
-                                                            <input type="radio" name="AssetsType" value="new"  />new
-                                                        </label>
+                                                            @if (Model != null)
+                                                            {
+                                                                @if (Model.AssetsType.ToUpper() == "NEW")
+                                                                {
+                                                                    <input type="radio" checked name="AssetsType" value="new" /> <p class="d-md-inline">New</p>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="radio"  name="AssetsType" value="new" /><p class="d-md-inline">New</p>
+
+                                                                }
+                                                            }
+                                                            @* <input type="radio" checked="@(Model.AssetsType.ToUpper()=="NEW".ToUpper()  ? "true" : "false")" name="AssetsType" value="new" />new
+                                               *@         </label>
                                                         <label>
-                                                            <input type="radio" name="AssetsType" value="expansion" />Expansion
-                                                        </label>
+                                                            @if (Model != null)
+                                                            {
+                                                                @if (Model.AssetsType.ToUpper() == "EXPANSION")
+                                                                {
+                                                                    <input type="radio" checked  name="AssetsType" value="expansion" />
+                                                                    <p class="d-md-inline">expansion</p>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="radio"  name="AssetsType" value="expansion" />
+                                                                    <p class="d-md-inline">expansion</p>
+
+
+                                                                }
+                                                            }
+                                                            @*  <input type="radio" checked="@(Model.AssetsType.ToUpper()=="EXPANSION".ToUpper() ? "true" : "false")" name="AssetsType" value="expansion" />Expansion
+                                                 *@       </label>
 
                                                     </div>
                                                 </div>
@@ -123,8 +183,8 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="department">Select BUI Department:</label>
                                                     <div class="col-sm-12">
-                                                        <select class="form-control dropdown" name="BUI" id="BU" value="@(Model != null ? Model.BUI : "") " placeholder="Enter Budget" required>
-                                                            <option Selected="True" Value="0">Select</option>
+                                                        <select class="form-control dropdown" name="BUI" id="BU" value="@(Model != null ? Model.BUI.Trim() : "") " placeholder="Enter Budget" required>
+                                                            @*<option Selected="True" Value="0">Select</option>*@
                                                             @* @foreach (var da in ViewData["CapexBindddlProject"] as IList<UspCapexSelComProjectResult>)
                                                             {
                                                             <option Value="@da.IndID">@da.BU</option>
@@ -200,7 +260,9 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
                                                     <div class="col-sm-10">
-                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" value="@(Model != null ? Model.ExpectedDate : "") " name="ExpectedDate" required>
+
+                                                        <input class="form-control" type="text" id="exced_daw_of_corelation" name="ExpectedDate" value="@(Model != null ? Model.ExpectedDate: "") " required>
+                                                     @*   <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required /> @Model.ExpectedDate.ToString("dd/MM/yyyy") ;*@
 
                                                     </div>
                                                 </div>
@@ -377,10 +439,10 @@
                                                     <label class="form-label" for="imported_indigenous">Imported/Insigenous:</label>
                                                     <div class="col-sm-10">
 
-                                                        <select id="imported_indigenous" class=" form-control dropdown" name="Imported" value="@(Model != null ? Model.Imported : "") " required>
+                                                        <select id="imported_indigenous" class=" form-control dropdown" name="Imported" value="@(Model != null ? Model.Imported : "")" required>
                                                             <option value="">Select</option>
-                                                            <option value="imported">Imported</option>
-                                                            <option value="indigenous">Indigenous</option>
+                                                            <option value="Imported">Imported</option>
+                                                            <option value="Indigenous">Indigenous</option>
                                                         </select>
 
                                                     </div>
@@ -884,16 +946,26 @@
                 console.log(data)
                 var $el = $("#BU");
                 $el.empty(); // remove old options
-                $el.append($("<option></option>")
-                    .attr("value", '').text('Please Select'));
+                //$el.append($("<option></option>")
+                //    .attr("value", '').text('Please Select'));
 
                 $.each(data, function (value, key) {
                     $el.append($("<option></option>")
-                        .attr("value", value.indID).text(key.bu));
+                            .attr("value", key.bu).text(key.bu));
 
 
                 });
 
+
+                    var myParam = location.search.split('EID=')[1];
+                    alert(myParam);
+                    if (myParam != undefined) {
+                        var nfa_type = document.getElementById("nfa_type").value;
+                        const myArray = nfa_type.split("/");
+                        //var Description = document.getElementById("Description").value;
+                        $('#BU').val(myArray[1].trim());
+                        alert(nfa_type);
+                    }
             }
         })
 
@@ -913,15 +985,24 @@
                 console.log(data)
                 var $el = $("#BU");
                 $el.empty(); // remove old options
-                $el.append($("<option></option>")
-                    .attr("value", '').text('Please Select'));
+                //$el.append($("<option></option>")
+                //    .attr("value", '').text('Please Select'));
 
                 $.each(data, function (value, key) {
                     $el.append($("<option></option>")
-                        .attr("value", value.indID).text(key.bu));
+                        .attr("value", key.bu).text(key.bu));//value.indID
 
 
                 });
+
+                var myParam = location.search.split('EID=')[1];
+                alert(myParam);
+                if(myParam!=undefined)
+                {
+
+                    
+                    
+                }
 
             }
         })
@@ -1049,10 +1130,13 @@
 
 
         var da = document.getElementById("ddlViewBy").value + "," + document.getElementById("BU").value + "," + document.getElementById("ReqType").value + "," + document.getElementById("Exp").value;
+
+        var da1 = document.getElementById("nfa_type").value
+        
         alert(da);
         $.ajax({
             type: "GET",
-            url: "\CapexBindddlValuChange1\?id=" + da,
+            url: "\CapexBindddlValuChange1\?id=" + da1,
             success: function (data) {
                 //console.log(data)
                 //var $el = $("#VenderDll");
@@ -1361,9 +1445,40 @@
         
     }
 
-    
+      function EditDropDown(ID1,ID2,ID3  ) {
 
+          alert(ID2+"h");
+        const myArray = ID1.split("/");
+          $('#ddlViewBy').val(myArray[0]);
+        var el = document.getElementById('ddlViewBy');
+        el.onchange();
 
+        var myParam = location.search.split('EID=')[1];
+        
+        alert(myParam);
+        $('#EID').val(myParam);
+       $('#imported_indigenous').val(ID2.trim());
+        
+         $('#ReqType').val(myArray[2]);
+         
+          $('#Exp').val(myArray[3]);
+        CapexBindddlvaluechangeV2();
+        $('#nfa_type').val(myArray.replace(",", "/"));
+        
+        var el = document.getElementById('ReqType');
+        el.onchange();
+
+        EditDropDown2(ID1);
+
+   
+      }
+
+       function EditDropDown2(ID1  ) {
+        const myArray = ID1.split("/");
+            setTimeout('', 10000);
+            alert(myArray+"call");
+        $('#BU').val(myArray[1].trim());
+       }
     function uploadcsvfile() {
         var myfile = document.getElementById("myfile");
         var formData = new FormData();
@@ -1400,6 +1515,10 @@
             }
         })
     }
+
+
+
+
 
 </script>
 
