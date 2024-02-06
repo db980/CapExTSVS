@@ -97,9 +97,16 @@
                                                                 </button>
 
                                                                 <br>
-                                                                <button class="badge   btn-warning">
+                                                                @if (@da.Status == "Draft")
+                                                                {
+                                                                    
+                                                                
+                                                                <button class="badge   btn-warning" >
                                                                     @Html.ActionLink("", "CapexmainRequestEdit", "NFA",new {EID=@da.RequestNo},new { @class="fa fa-edit " })
-                                                                </button><br>
+                                                                    </button>
+
+                                                                }
+                                                                <br>
                                                                 <button class="badge bg-danger btn btn-sm"><a class="fa fa-download" href="/Report/NfaReportExport/@da.RequestNo.ToString()"></a></button><br>
 
 

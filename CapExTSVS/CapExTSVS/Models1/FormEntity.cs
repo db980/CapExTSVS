@@ -324,10 +324,15 @@ namespace CapExTSVS.Models1
         public string Budget { get; set; }
         public string NFA { get; set; }
         public string Purpose { get; set; }
-        public string ExpectedDate { get; set; }
+        public DateTime ExpectedDate { get; set; }
 
 
         public string Description { get; set; }
+        public string DescriptionProject { get; set; }
+
+
+
+        public string Name { get; set; }
 
         public string Uom { get; set; }
 

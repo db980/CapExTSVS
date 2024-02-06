@@ -90,6 +90,18 @@
                                                             @(Model.AssetsType.ToUpper() == "Expansion".ToUpper() && Model.AssetsType.ToUpper() != null ? "True" : "False")
                                                             @(Model.AssetsType.ToUpper())*@
 
+
+                                                              @if(Model==null)
+                                                            {
+                                                                <input type="radio" name="AssetsType" value="Select" />
+                                                                  <p class="d-md-inline">Select</p>
+                                                                <input type="radio" name="AssetsType" checked value="new" />
+
+                                                                <p class="d-md-inline">New</p>
+                                                                 <input type="radio"  name="AssetsType" value="expansion" />
+                                                                    <p class="d-md-inline">expansion</p>
+                                                            }
+
                                                             @if(Model!=null)
                                                             {
                                                                 
@@ -261,7 +273,33 @@
                                                     <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
                                                     <div class="col-sm-10">
 
-                                                        <input class="form-control" type="text" id="exced_daw_of_corelation" name="ExpectedDate" value="@(Model != null ? Model.ExpectedDate: "") " required>
+                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" value="@(Model != null ? Model.ExpectedDate: "") " required>
+                                                     @*   <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required /> @Model.ExpectedDate.ToString("dd/MM/yyyy") ;*@
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                               <div class="form-group row">
+
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="exced_daw_of_corelation">Project Name </label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" type="text" id="Name" dirname="Name" value="@(Model != null ? Model.Name: "") " name="Description" required>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="exced_daw_of_corelation">Project Description</label>
+                                                    <div class="col-sm-10">
+
+                                                        <input class="form-control" type="text" id="DescriptionProject" name="DescriptionProject" name="ExpectedDate" value="@(Model != null ? Model.DescriptionProject: "") " required>
                                                      @*   <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required /> @Model.ExpectedDate.ToString("dd/MM/yyyy") ;*@
 
                                                     </div>
@@ -890,7 +928,7 @@
 
                     <div class="col-md-6">
 
-                            <button type="submit" class="btn btn-info" onclick="Form3()" >Submit</button>
+                            <button type="button" class="btn btn-info" onclick="Form3()" >Submit</button>
                         <button type="submit" class="btn btn-default float-left">Cancel</button>
                     </div>
 
@@ -960,11 +998,14 @@
                     var myParam = location.search.split('EID=')[1];
                     alert(myParam);
                     if (myParam != undefined) {
+                         
                         var nfa_type = document.getElementById("nfa_type").value;
-                        const myArray = nfa_type.split("/");
-                        //var Description = document.getElementById("Description").value;
-                        $('#BU').val(myArray[1].trim());
-                        alert(nfa_type);
+                       
+                        const myArray = nfa_type.split(",");
+                        
+                        $("#BU").val(myArray[1]);
+                        //$("#nfa_type").val(myArray[0]+"/"+myArray[1]+"/"+myArray[2]+"/"+myArray[3]);
+                       
                     }
             }
         })
@@ -980,9 +1021,9 @@
 
         $.ajax({
             type: "GET",
-            url: "\CapexmainRequest2\?id=" + value,
+            url: "\CapexmainRequest2\?NFA=" + value,
             success: function (data) {
-                console.log(data)
+               
                 var $el = $("#BU");
                 $el.empty(); // remove old options
                 //$el.append($("<option></option>")
@@ -995,14 +1036,7 @@
 
                 });
 
-                var myParam = location.search.split('EID=')[1];
-                alert(myParam);
-                if(myParam!=undefined)
-                {
-
-                    
-                    
-                }
+              
 
             }
         })
@@ -1125,15 +1159,16 @@
 
        function CapexBindddlvaluechangeV2() {
 
+        var da = document.getElementById("ddlViewBy").value.trim() + "/" + document.getElementById("BU").value.trim() + "/" + document.getElementById("ReqType").value.trim() + "/" + document.getElementById("Exp").value.trim();
 
+         //$("#nfa_type").value =
+
+         // $('#nfa_type').val( da);
        
-
-
-        var da = document.getElementById("ddlViewBy").value + "," + document.getElementById("BU").value + "," + document.getElementById("ReqType").value + "," + document.getElementById("Exp").value;
-
         var da1 = document.getElementById("nfa_type").value
-        
-        alert(da);
+        //var f=da1.split()
+        // $('#BU').val( );
+        //alert(da);
         $.ajax({
             type: "GET",
             url: "\CapexBindddlValuChange1\?id=" + da1,
@@ -1193,21 +1228,14 @@
 //});
 
 
+     function EID(data ) 
+     {
+          $('#EID').val(data);
+     }
+
 
   function Form3() {
 
-
-
-
-
-       // var formData = new FormData(); //We need to create form. Beause we are sending a file here!
-        //var file = document.getElementById("F3_UplodeFile").files[0]; //file
-        //var frm = $('#Form2');
-        //var frm2 = $('#form1');
-    
-        //frm.append(frm2);
-        //Added file to our form
-       // console.log(file);
         $.ajax({
             type: "POST",
             url: '/NFA/AddFriend', //Name of action and controller
@@ -1219,10 +1247,33 @@
             //    //this event is unneccesary. You can use it for a loader. Triggers before sending data.
             //    $("#btn-upload").text("Uploading");
             //},
-            success: function () {
+            success: function (data) {
+
+                
+
+                $("#EID").val(data);
                 //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
                 //Success doesnt mean file saved on server. It means only post succeed.
-                $("#btn-upload").text('Hey, Its uploaded!');
+               // $("#btn-upload").text('Hey, Its uploaded!');
+            }
+        });
+
+
+
+
+
+        var formData = new FormData();
+        formData.append('file', $('#F3_UplodeFile')[0].files[0]);
+
+        $.ajax({
+            url: '/NFA/AddFileUplode',
+            type: 'POST',
+            data: formData,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,  // tell jQuery not to set contentType
+            success: function (data) {
+                console.log(data);
+                alert(data);
             }
         });
 
@@ -1236,9 +1287,6 @@
     function DataItemListEdit() {
 
 
-        
-          
-        alert("call");
 
         $.ajax({
             type: "GET",
@@ -1447,11 +1495,12 @@
 
       function EditDropDown(ID1,ID2,ID3  ) {
 
-          alert(ID2+"h");
+          
         const myArray = ID1.split("/");
           $('#ddlViewBy').val(myArray[0]);
-        var el = document.getElementById('ddlViewBy');
-        el.onchange();
+
+        //CapexmainRequest2(myArray);
+        Dropdownchange(myArray[0]);
 
         var myParam = location.search.split('EID=')[1];
         
@@ -1459,25 +1508,31 @@
         $('#EID').val(myParam);
        $('#imported_indigenous').val(ID2.trim());
         
-         $('#ReqType').val(myArray[2]);
+         $('#ReqType').val(myArray[2].trim());
          
           $('#Exp').val(myArray[3]);
-        CapexBindddlvaluechangeV2();
-        $('#nfa_type').val(myArray.replace(",", "/"));
+        //CapexBindddlvaluechangeV2();
         
-        var el = document.getElementById('ReqType');
+            setTimeout('', 10000);
+            var el = document.getElementById('ddlViewBy');
         el.onchange();
+             var el = document.getElementById('ReqType');
+        el.onchange();
+        alert(myArray[1]);
+        //$('#BU').val(myArray[1].trim());
+        document.getElementById('BU').value = myArray[1].trim()
+         $('#nfa_type').val(myArray);
+        
 
-        EditDropDown2(ID1);
+        //EditDropDown2(ID1);
 
    
       }
 
        function EditDropDown2(ID1  ) {
         const myArray = ID1.split("/");
-            setTimeout('', 10000);
-            alert(myArray+"call");
-        $('#BU').val(myArray[1].trim());
+        
+        
        }
     function uploadcsvfile() {
         var myfile = document.getElementById("myfile");
