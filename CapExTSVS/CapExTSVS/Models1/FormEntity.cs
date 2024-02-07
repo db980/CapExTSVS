@@ -1,4 +1,5 @@
 ﻿using LinqToDB.Mapping;
+using System.ComponentModel.DataAnnotations;
 using static LinqToDB.Reflection.Methods.LinqToDB.Insert;
 
 namespace CapExTSVS.Models1
@@ -87,6 +88,9 @@ namespace CapExTSVS.Models1
         public static string id { get; set; }
         public static string Name { get; set; }
 
+
+
+        public static IList<userRights> userRights { get; set; }
     }
 
 
@@ -324,6 +328,8 @@ namespace CapExTSVS.Models1
         public string Budget { get; set; }
         public string NFA { get; set; }
         public string Purpose { get; set; }
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [System.ComponentModel.DataAnnotations.DataType(DataType.Date)]
         public DateTime ExpectedDate { get; set; }
 
 

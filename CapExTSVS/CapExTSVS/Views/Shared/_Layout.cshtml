@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using CapExTSVS.Models1;
+@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor Accessor
 
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
 
-
+    @*<meta http-equiv="refresh" content="5;URL=@">*@
     
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -261,7 +262,7 @@
                              with font-awesome or any other icon font library -->
 
 
-                        <li class="nav-item">
+                        <li class="nav-item " >
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
@@ -466,6 +467,10 @@
 
                 </nav>
 
+
+
+
+
                     <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -574,13 +579,27 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.min.css" rel="
     
 
     @await RenderSectionAsync("scripts", required: false)
+    
+    
+    
 
-
-
+    
 
 
     @Html.Raw(ViewBag.Message2)
     <script>
+
+        function de()
+        {
+            window.location.href = '@Url.Action("login","login")';
+        }
+        @if (@user.id == null &&  @Accessor.HttpContext.Session.GetString("usr") != "")
+        {
+            @Html.Raw("de();");
+       
+        }
+
+
         $('#exampla').dataTable().clear();
           $('#exampla2').dataTable().clear();
             $('#exampla3').dataTable().clear();

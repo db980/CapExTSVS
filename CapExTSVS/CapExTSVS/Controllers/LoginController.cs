@@ -42,7 +42,7 @@ namespace CapExTSVS.Controllers
            
             if(data.EmpCode!="")
             {
-                if (data.IsActive != "1")
+                if (data.IsActive != "1" )
                 {
                     ViewBag.Message = Notification.Show("Inalid User Not  Active", position: Position.TopRight, type: ToastType.Error, timeOut: 7000);
 
@@ -52,6 +52,7 @@ namespace CapExTSVS.Controllers
                 HttpContext.Session.SetString("usr", data.EmpCode.ToString());
 
                 user.id = data.EmpCode;
+
                 //user.Name = data.SingleOrDefault().name;
 
 

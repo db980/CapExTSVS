@@ -272,8 +272,9 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="exced_daw_of_corelation">Expected Date of Completion *</label>
                                                     <div class="col-sm-10">
-
-                                                        <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" value="@(Model != null ? Model.ExpectedDate: "") " required>
+                                                        @Html.EditorFor(model => model.ExpectedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                      @*  @Html.TextBoxFor(model => model.ExpectedDate, new { @class = "datepicker form-control"})*@
+                                                        @*<input class="form-control" type="date" id="ExpectedDate" name="ExpectedDate" value="@(Model != null ? Model.ExpectedDate.ToString("dd/MM/yyyy"): "")" required>*@
                                                      @*   <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required /> @Model.ExpectedDate.ToString("dd/MM/yyyy") ;*@
 
                                                     </div>
@@ -299,7 +300,7 @@
                                                     <label class="form-label" for="exced_daw_of_corelation">Project Description</label>
                                                     <div class="col-sm-10">
 
-                                                        <input class="form-control" type="text" id="DescriptionProject" name="DescriptionProject" name="ExpectedDate" value="@(Model != null ? Model.DescriptionProject: "") " required>
+                                                        <input class="form-control" type="text" id="DescriptionProject" name="DescriptionProject" name="DescriptionProject" value="@(Model != null ? Model.DescriptionProject: "") " required>
                                                      @*   <input class="form-control" type="date" id="exced_daw_of_corelation" name="ExpectedDate" required /> @Model.ExpectedDate.ToString("dd/MM/yyyy") ;*@
 
                                                     </div>
@@ -1001,9 +1002,12 @@
                          
                         var nfa_type = document.getElementById("nfa_type").value;
                        
-                        const myArray = nfa_type.split(",");
-                        
+                        const myArray = nfa_type.split("/") //.split("/");
+                        alert(myArray[1]);
                         $("#BU").val(myArray[1]);
+                        //var d = nfa_type.replace(",", "/");
+                        //alert(d);
+                        //document.getElementById("nfa_type").value = d;
                         //$("#nfa_type").val(myArray[0]+"/"+myArray[1]+"/"+myArray[2]+"/"+myArray[3]);
                        
                     }
@@ -1047,30 +1051,7 @@
 
     }
 
-    //function DropdownchangeAddress(value) {
-
-    //    $.ajax({
-    //        type: "GET",
-    //        url: "\CapexBindddlProjectAddress\?id=" + value,
-    //        success: function (data) {
-    //            console.log(data)
-    //            var $el = $("#BUAddress");
-    //            $el.empty(); // remove old options
-    //            $el.append(data)
-
-
-
-
-    //            });
-
-    //        }
-    //    })
-
-    //    //ddlProjectt.DataValueField = "IndID";
-    //    //ddlProjectt.DataTextField = "BU";
-
-
-    //}
+   
 
 
 
@@ -1163,7 +1144,7 @@
 
          //$("#nfa_type").value =
 
-         // $('#nfa_type').val( da);
+          $('#nfa_type').val( da);
        
         var da1 = document.getElementById("nfa_type").value
         //var f=da1.split()
@@ -1190,11 +1171,7 @@
                     c.push("<td>" + item.approval_3 + "</td></tr>");
                 });
 
-        //          var $tr = $('<tr>').append(
-        //    $('<td>').text(item.approval_1),
-        //    $('<td>').text(item.approval_2),
-        //    $('<td>').text(item.approval_3)
-        //).appendTo('#records_table');
+     
 
                 $('#records_table').html(c.join(""));
 
@@ -1203,29 +1180,6 @@
 
     }
 
-
-
-
-
-//    $("#Form2").submit(function (e) {
-//        alert("hcjh");
-// /*   e.preventDefault();*/ // avoid to execute the actual submit of the form.
-
-//    var form = $(this);
-   
-//    $.ajax({
-//            url: "/Form2",
-//            type: "POST",
-//            dataType: 'json',
-//            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-//            data: form.serialize(), // serializes the form's elements.
-//        success: function(data)
-//        {
-//          alert(data); // show response from the php script.
-//        }
-//    });
-    
-//});
 
 
      function EID(data ) 
@@ -1241,20 +1195,13 @@
             url: '/NFA/AddFriend', //Name of action and controller
             data: $('#form1, #Form2').serialize(),// frm.serialize(),
             dataType: 'json',
-            //contentType: "Content-Type: multipart/form-data;",
-            //processData: false,
-            //beforeSend: function () {
-            //    //this event is unneccesary. You can use it for a loader. Triggers before sending data.
-            //    $("#btn-upload").text("Uploading");
-            //},
+           
             success: function (data) {
 
                 
 
                 $("#EID").val(data);
-                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
-                //Success doesnt mean file saved on server. It means only post succeed.
-               // $("#btn-upload").text('Hey, Its uploaded!');
+               
             }
         });
 
@@ -1382,9 +1329,6 @@
         var TaxRate = document.getElementById("TexRate").value;
 
 
-
-        alert("call");
-
         $.ajax({
             type: "GET",
             url: '/NFA/DataList1', //Name of action and controller
@@ -1471,11 +1415,6 @@
     function ChangeData( id ) 
     {
 
-        alert("hello");
-//We need to create form. Beause we are sending a file here!
-       
-        //Added file to our form
-        // console.log(file);
         $.ajax({
             type: "GET",
             url: '/NFA/ChangeData',
@@ -1499,7 +1438,6 @@
         const myArray = ID1.split("/");
           $('#ddlViewBy').val(myArray[0]);
 
-        //CapexmainRequest2(myArray);
         Dropdownchange(myArray[0]);
 
         var myParam = location.search.split('EID=')[1];
@@ -1518,13 +1456,10 @@
         el.onchange();
              var el = document.getElementById('ReqType');
         el.onchange();
-        alert(myArray[1]);
-        //$('#BU').val(myArray[1].trim());
-        document.getElementById('BU').value = myArray[1].trim()
-         $('#nfa_type').val(myArray);
+     
+        document.getElementById('BU').value = myArray[1]
+        // $('#nfa_type').val(myArray);
         
-
-        //EditDropDown2(ID1);
 
    
       }
@@ -1544,15 +1479,6 @@
             }
         }
 
-
-
-        //var input = document.getElementById(inputId);
-        //var files = input.files;
-        //var formData = new FormData();
-
-        //for (var i = 0; i !== files.length; i++) {
-        //    formData.append("files", files[i]);
-        //}
 
         var _url = '@Url.Action("UploadFile", "NFA")';
         $.ajax({
