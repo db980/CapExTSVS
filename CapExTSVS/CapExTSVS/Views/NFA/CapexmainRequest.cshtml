@@ -407,39 +407,7 @@
                                                         <div class=" card card-body card-warning table_wid">
                                                             <div>
                                                                 <table id="records_tableData" class="table table-striped border-style table-bordered">
-                                                                   @* <thead>*@
-                                                                      @*  <tr>
-                                                                            <th>Action</th>
-                                                                            <th>SrNo</th>
-                                                                            <th>Description</th>
-
-                                                                            <th>UOM</th>
-                                                                            <th>Qty</th>
-                                                                            <th>Tax Rate</th>
-
-                                                                        </tr>*@
-                                                                   @* </thead>
-                                                                    <tbody>*@
-
-                                                                        @*@if (ViewData["Items"] != null)
-                                                                        {
-                                                                            @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
-                                                                            {
-                                                                                <tr>
-
-
-                                                                                    <td scope="col">Action</td>
-                                                                                    <td scope="col">@da.ID</td>
-                                                                                    <td scope="col">@da.Description</td>
-
-                                                                                    <td scope="col">@da.Uom</td>
-                                                                                    <td scope="col">@da.Qty</td>
-                                                                                    <td scope="col">@da.TexRate</td>
-
-                                                                                </tr>
-                                                                            }
-                                                                        }*@
-                                                                  @*  </tbody>*@
+                                                                  
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -783,54 +751,7 @@
                             <div class=" card card-body card-warning table_wid" style="overflow:auto">
                                 <div>
                                         <table id="records_table2" class="table table-striped border-style table-bordered">
-                                       @* <thead>
-
-                                            <tr >
-                                                <td>Line Item</td>
-                                                <td>Item Name</td>
-                                                <td>UOM</td>
-                                                <td>Quantity</td>
-                                                <td style="width:80px;">Initial Rate</td>
-                                                <td>Initial Amount</td>
-                                                <td style="width:80px;">Final Rate</td>
-                                                <td>Final Amount</td>
-                                                <td>Tax</td>
-                                                <td>Quotation Amount<br>(Tax Inclusive)</td>
-                                                <td>Remarks</td>
-                                            </tr>
-                                        
-                                        
-                                        </thead>
-                                        <tbody>
-
-                                            @if (ViewData["Items"] != null)
-                                            {
-                                                
-                                                @foreach (var da in ViewData["Items"] as IList<CapexmainRequestItems>)
-                                                {
-
-
-
-
-                                                <tr >
-                                                        <td>@da.ID</td>
-                                                <td>@da.Description</td>
-                                                <td>@da.Uom</td>
-                                                <td>@da.Qty</td>
-                                                        <td><input type="text" / onchange="CapexBindddlvaluechange(@da.ID+',InitalRate,'+this.value)"></td>
-                                                <td>Initial Amount</td>
-                                                        <td><input type="text" /></td>
-                                                <td>Final Amount</td>
-                                                <td>@da.TexRate</td>
-                                                <td>Quotation Amount<br>(Tax Inclusive)</td>
-                                                        <td><input type="text" /></td>
-                                                     </tr>
-
-
-
-                                                }
-                                            }
-                                        </tbody>*@
+                                      
                                     </table>
                                 </div>
                             </div>
@@ -936,12 +857,6 @@
 
                 </div>
 
-
-
-
-               
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -985,9 +900,7 @@
                 console.log(data)
                 var $el = $("#BU");
                 $el.empty(); // remove old options
-                //$el.append($("<option></option>")
-                //    .attr("value", '').text('Please Select'));
-
+                
                 $.each(data, function (value, key) {
                     $el.append($("<option></option>")
                             .attr("value", key.bu).text(key.bu));
@@ -1001,22 +914,14 @@
                     if (myParam != undefined) {
                          
                         var nfa_type = document.getElementById("nfa_type").value;
-                       
+                       alert(nfa_type);
                         const myArray = nfa_type.split("/") //.split("/");
                         alert(myArray[1]);
                         $("#BU").val(myArray[1]);
-                        //var d = nfa_type.replace(",", "/");
-                        //alert(d);
-                        //document.getElementById("nfa_type").value = d;
-                        //$("#nfa_type").val(myArray[0]+"/"+myArray[1]+"/"+myArray[2]+"/"+myArray[3]);
-                       
+                        
                     }
             }
         })
-
-        //ddlProjectt.DataValueField = "IndID";
-        //ddlProjectt.DataTextField = "BU";
-
 
     }
 
@@ -1045,10 +950,6 @@
             }
         })
 
-        //ddlProjectt.DataValueField = "IndID";
-        //ddlProjectt.DataTextField = "BU";
-
-
     }
 
    
@@ -1072,10 +973,6 @@
 
             }
         })
-
-        //ddlProjectt.DataValueField = "IndID";
-        //ddlProjectt.DataTextField = "BU";
-
 
     }
 
@@ -1105,9 +1002,6 @@
 
             }
         })
-
-        //ddlProjectt.DataValueField = "IndID";
-        //ddlProjectt.DataTextField = "BU";
 
 
     }
@@ -1142,24 +1036,15 @@
 
         var da = document.getElementById("ddlViewBy").value.trim() + "/" + document.getElementById("BU").value.trim() + "/" + document.getElementById("ReqType").value.trim() + "/" + document.getElementById("Exp").value.trim();
 
-         //$("#nfa_type").value =
-
           $('#nfa_type').val( da);
        
         var da1 = document.getElementById("nfa_type").value
-        //var f=da1.split()
-        // $('#BU').val( );
-        //alert(da);
+ 
         $.ajax({
             type: "GET",
             url: "\CapexBindddlValuChange1\?id=" + da1,
             success: function (data) {
-                //console.log(data)
-                //var $el = $("#VenderDll");
-                //$el.empty(); // remove old options
-                //$el.append($("<option></option>")
-                //    .attr("value", '').text('Please Select'));
-                console.log(data)
+                
                 var c = [];
 
                 c.push("<tr><th>" + "Approval 1" + "</th>");
@@ -1170,8 +1055,6 @@
                     c.push("<td>" + item.approval_2 + "</td>");
                     c.push("<td>" + item.approval_3 + "</td></tr>");
                 });
-
-     
 
                 $('#records_table').html(c.join(""));
 
@@ -1198,15 +1081,10 @@
            
             success: function (data) {
 
-                
-
                 $("#EID").val(data);
                
             }
         });
-
-
-
 
 
         var formData = new FormData();
@@ -1217,14 +1095,12 @@
             type: 'POST',
             data: formData,
             processData: false,  // tell jQuery not to process the data
-            contentType: false,  // tell jQuery not to set contentType
+            contentType: false, // tell jQuery not to set contentType
             success: function (data) {
-                console.log(data);
-                alert(data);
+               
             }
         });
 
-       
 
   };
 
@@ -1232,8 +1108,6 @@
 
 
     function DataItemListEdit() {
-
-
 
         $.ajax({
             type: "GET",
@@ -1262,9 +1136,6 @@
                     c.push("<td>" + item.qty + "</td>");
                     c.push("<td>" + item.texRate + "</td></tr>");
                 });
-
-
-                
 
 
                 d.push('<tr>');
@@ -1303,14 +1174,10 @@
                 //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
                 //Success doesnt mean file saved on server. It means only post succeed.
                 $('#records_tableData').html(c.join(""));
-               
-
-
+             
                 $('#records_table2').html(d.join(""));
             }
         });
-
-
 
     };
 
@@ -1358,9 +1225,6 @@
                 });
 
 
-
-
-
                 d.push('<tr>');
                 d.push('<th>Line Item </th>');
                 d.push('<th> Item Name </th>');
@@ -1377,8 +1241,6 @@
 
 
                 $.each(data, function (i, item) {
-
-
 
                     d.push("<tr>");
                     d.push("<td>" + item.id + " </td>");
@@ -1398,13 +1260,9 @@
                 //Success doesnt mean file saved on server. It means only post succeed.
                 $('#records_tableData').html(c.join(""));
 
-
-
                 $('#records_table2').html(d.join(""));
             }
         });
-
-
 
     };
 
@@ -1458,10 +1316,8 @@
         el.onchange();
      
         document.getElementById('BU').value = myArray[1]
-        // $('#nfa_type').val(myArray);
+         $('#nfa_type').val(myArray);
         
-
-   
       }
 
        function EditDropDown2(ID1  ) {
@@ -1496,10 +1352,6 @@
             }
         })
     }
-
-
-
-
 
 </script>
 

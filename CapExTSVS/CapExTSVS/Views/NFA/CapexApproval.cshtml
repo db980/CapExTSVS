@@ -21,13 +21,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">View Indent</h1>
+                    @*<h1 class="m-0">View Indent</h1>*@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                   @* <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">View Indent </li>
-                    </ol>
+                    </ol>*@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Horizontal Form</h3>
+                    <h3 class="card-title">Capex Approval</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -55,7 +55,7 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">View Indent</h3>
+                                        <h3 class="card-title">View  Capex Approval</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body" style=" overflow:auto;">
@@ -97,7 +97,7 @@
                                                                 <button class="badge bg-success btn btn-sm" id="btnEdit" data-toggle="modal" data-target="#myModal" style="display:none">
                                                                 </button>
                                                                 @*  <a class="fa fa-file" href="/NFA/NFADraftRequest/"></a>*@
-                                                                <button class="badge   btn-success" style="color:red">
+                                                                <button class="badge btn btn-outline-success  " style="color:red">
                                                                     @Html.ActionLink("", "NFADraftRequestApproval", "NFA",new {Data=@da.RequestNo},new { @class="fa fa-eye " })
                                                                 </button>
 
@@ -198,7 +198,7 @@
                                 {
                                     @(
                                         daData != null ? (daData12.Assettype != null ? daData12.Assettype : "")  : ""
-                                        )
+                                    )
                                 }
                             </span>
                         </td>
@@ -265,7 +265,7 @@
                                 @(
                                     daData != null ? (daData12.PDescription != null ? daData12.PDescription : "")   : ""
                                     )
-                                }
+                                
                             </span>
                         </td>
                     </tr>
@@ -314,7 +314,7 @@
 
                             <table cellspacing="0" cellpadding="0" rules="all" class="table  table-bordered " border="1" id="ContentPlaceHolder1_dglocal" style="color:#333333;font-weight:normal;width:100%;border-collapse:collapse;">
                                 <tbody>
-                                    <tr style="color:White;background-color:#231F20;font-size:8pt;font-weight:bold;height:5px;">
+                                    <tr style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:5px;">
                                         <td align="center">Line Item</td>
                                         <td align="center">Item Name</td>
                                         <td align="center">location</td>
@@ -362,7 +362,7 @@
                             <div>
                                 <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grddata" class="table  table-bordered " style="background-color:White;font-family:Cambria;font-size:10pt;text-decoration:none;width:100%;border-collapse:collapse;">
                                     <tbody>
-                                        <tr align="left" style="color:White;background-color:#231F20;font-size:9pt;font-weight:bold;height:12px;width:200px;">
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:12px;width:200px;">
                                             <th scope="col">Download Quotation</th>
                                             <th scope="col">Vendor Code</th>
                                             <th scope="col">Vendor Name</th>
@@ -376,7 +376,7 @@
 
                                             @foreach (var da in ViewData["CapexSelApprovalCapexQuoteDetails"] as IList<CapexSelApprovalCapexQuoteDetailsResult>)
                                             {
-                                                <tr align="left" style="background-color:#EFF3FB;font-size:10pt;height:10px;">
+                                                <tr align="left" style="background-color:#EFF3FB;font-size:20px;height:10px;">
                                                     <td><a href="upload/document817670.pdf" target="_blank">@da.FileName</a></td>
                                                     <td>@da.VendorCode </td>
                                                     <td>@da.VendorName </td>
@@ -489,7 +489,7 @@
                             <div>
                                 <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grdApproval" class="table  table-bordered " style="background-color:White;font-family:Cambria;text-decoration:none;width:100%;border-collapse:collapse;">
                                     <tbody>
-                                        <tr align="left" style="color:White;background-color:#231F20;font-size:9pt;font-weight:bold;height:5px;">
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:5px;">
                                             <th scope="col">_</th>
                                             <th scope="col">Level_1</th>
                                             <th scope="col">Level_2</th>
@@ -507,7 +507,7 @@
 
                                             @foreach (var da in ViewData["CapexFunSelApprovalMaterixNameByReq"] as IList<CapexFunSelApprovalMaterixNameByReqResult>)
                                             {
-                                                <tr align="left" style="background-color:#EFF3FB;font-size:8pt;height:5px;">
+                                                <tr align="left" style="background-color:#EFF3FB;font-size:20px">
                                                     <td>@da._</td>
                                                     <td>@da.Level_1</td>
                                                     <td>@da.Level_2</td>
@@ -531,7 +531,7 @@
                     <tr>
                         <td colspan="4">
                             <div id="ContentPlaceHolder1_pnlAttachment" style="overflow:scroll;">
-                                <form action="/NFA/DraftFileUplode" method="post" enctype="multipart/form-data">
+                                <form action="/NFA/DraftFileUplodeApproval" method="post" enctype="multipart/form-data">
 
                                     <table class="table  table-bordered " style="vertical-align: top; text-align: left; width: 100%; border-top-width: 1px; border-left-width: 1px; border-left-color: #000000; border-bottom-width: 1px; border-bottom-color: #000000; border-top-color: #000000; border-right-width: 1px; border-right-color: #000000;">
 
@@ -551,16 +551,65 @@
                                                 </td>*@
                                                 <td style="float: left;">
                                                     <input type="file" name="File" id="ContentPlaceHolder1_upldFile">
-                                                    <input type="text" name="Status" style="display:none" value="@(daData!=null?daData.RequestNo:"")">
+                                                    <input type="text" name="Status" value="@(daData!=null?daData.RequestNo:"")" style="font-weight:bold;width:82px; display:none"> 
                                                 </td>
                                                 <td style="float: left;">
                                                     <input type="submit" class="btn btn-info" value="Post &nbsp;" id="ContentPlaceHolder1_btnUploadFile">
-                                                    @* <span id="ContentPlaceHolder1_msglblFile" style="color:Red;font-weight:bold;">Send Successfully</span>*@
+                                                    @* <span id="ContentPlaceHolder1_msglblFile" style="color:Red;font-weight:bold;">Send Successfully</span>*@  
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </form>
+
+                                <form action="/NFA/DraftFileUplodeApproval" method="post" enctype="multipart/form-data">
+
+
+
+                                    <table class="table  table-bordered table-striped">
+
+
+                                        <thead>
+                                            <td>
+                                             NFA  Approval 
+                                             </td>
+                                        </thead>
+
+                                        <tbody>
+                                            
+                                            
+                                            <tr>
+
+                                                 <td style="width: 10%">
+                                                    Remark
+                                                </td>
+
+                                                <td colspan="2">
+                                                    
+                                                    <center>
+                                                        <input name="RemarkApproved" type="text" id="ContentPlaceHolder1_txt_Remarks" style="width:450px;">
+                                                    </center>
+                                                </td>
+
+
+                                                <td colspan="2">
+                                                    <br>
+                                                    <center>
+                                                        <input type="text" name="Status" style="display:none" value="@(daData!=null?daData.RequestNo:"")" > 
+
+                                                        <input type="submit" name="ApprovalStatus" value="Approve" onclick="return confirm('Are you sure you want approve');" id="ContentPlaceHolder1_btn_Approve" style="font-weight:bold;width:82px;">
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <input type="submit" name="ApprovalStatus" value="Return" onclick="return confirm('Are you sure you want return');" id="ContentPlaceHolder1_btn_Return" style="font-weight:bold;width:82px;">
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <input type="submit" name="ApprovalStatus" value="Reject" onclick="return confirm('Are you sure you want reject');" id="ContentPlaceHolder1_btn_Reject" style="font-weight:bold;width:82px;">
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    </form>
+
 
                                 <table cellspacing="0" cellpadding="3" rules="all" border="1" class="table  table-bordered " id="ContentPlaceHolder1_dg1" style="color:#333333;width:100%;border-collapse:collapse;">
                                     <tbody>

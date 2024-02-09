@@ -39,7 +39,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+            <form class="form-horizontal">
                 <div class="card-body">
 
                         <table id="exampla" class="table  table-bordered table-striped table-responsive">
@@ -167,7 +167,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Dept_2:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Dep_2 : "") " name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Dep_2 : "") " name="F_Dep_2">
 
 
                                         </div>
@@ -179,7 +179,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 3:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_3 : "") " name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_3 : "") " name="F_Fin_3">
 
 
                                         </div>
@@ -188,7 +188,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 4:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_4 : "") " name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_4 : "") " name="F_Fin_4">
 
 
                                         </div>
@@ -200,7 +200,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 5:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_5 : "") " name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_5 : "") " name="F_Fin_5">
 
 
                                         </div>
@@ -209,7 +209,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Fin 6:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_6 : "") " name="Data" />
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Fin_6 : "") " name="F_Fin_6" />
 
 
                                         </div>
@@ -224,7 +224,7 @@
 
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Remark:  </label>
 
-                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Remark : "") " name="Data">
+                                            <input type="text" class="form-control" value="@(Model != null ? Model.F_Remark : "") " name="F_Remark">
 
 
                                         </div>
@@ -246,7 +246,7 @@
 
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form  class="form-horizontal">
                     <div class="card-body">
 
 
@@ -296,7 +296,10 @@
                                     {
 
                                             <tr>
-                                            <td> <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/NFAMappingEditSetect3/@da.CapexID"></a></button></td>
+                                            <td> <button class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" href="/Administrator/NFAMappingEditSetect3/@da.CapexID"></a></button>
+
+                                                <button type="button" class="badge bg-success btn btn-sm" name="3594"><a class="fa fa-edit" onclick="FistForm(@da.CPACID)"></a></button>
+                                            </td>
 
 
                                            
@@ -470,7 +473,7 @@
 
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/INDENT/CreateIndent" method="post" class="form-horizontal">
+                <form class="form-horizontal">
                     <div class="card-body">
 
 
@@ -542,11 +545,36 @@
 
 <script>
 
+  
+
+
+
+    function FistForm(id) {
+        alert("hello");
+
+        $.ajax({
+            type: "GET",
+            url: '/Administrator/NFAMappingFistFormUpdate',
+            data: { id: id },
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+
+            success: function () {
+                //this event unneccesary too. I prefer to use it for showing a dialog to tell user "Hey, It's uploaded!"
+                //Success doesnt mean file saved on server. It means only post succeed.
+                $("#btn-upload").text('Hey, Its uploaded!');
+            }
+        });
+
+
+    }
+
     $('#exampla').dataTable({
 
     });
     $('#exampla2').dataTable({
 
     });
-    
+
+        
 </script>

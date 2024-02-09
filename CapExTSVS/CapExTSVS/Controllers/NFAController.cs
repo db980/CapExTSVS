@@ -68,7 +68,31 @@ namespace CapExTSVS.Controllers
             return RedirectToAction("NFADraftRequest", new { data = data.Status.ToString() });
         }
 
-            public IActionResult NFADraftRequest(string data)
+
+        public IActionResult DraftFileUplodeApproval(DraftFileUplode data)
+        {
+            if(data.ApprovalStatus.ToString()!=null)
+            {
+
+                //exec CapexUpdateApprovalDetails @RequestNo = N'106168',@Empid = N'40000046',@Remarks = N'sdsda',@flag = N'Approve'
+
+
+                    var da = _dbcontext.CapexUpdateApprovalDetails(data.Status, user.id,data.RemarkApproved,data.ApprovalStatus);
+
+            }
+            else
+            {
+                var da = _dbcontext.SaveConversationPost(uploadfile(data.File, "NFA", "ConversationPost"), Convert.ToInt32(data.Status.ToString()), data.Remarks.ToString(), user.id);
+
+            }
+
+
+
+
+            return RedirectToAction("NFADraftRequestApproval", new { data = data.Status.ToString() });
+        }
+
+        public IActionResult NFADraftRequest(string data)
         {
 
             if(data!=null)
@@ -141,6 +165,50 @@ namespace CapExTSVS.Controllers
             else
             {
                 var Da = _dbcontext.CapexSelCapexRequestDetails(user.id, "", "0", "", "", "", "", "").ToList();
+                ViewData["NFADraftRequestGrid"] = Da;
+            }
+            //            exec Capex_SelCapexRequestDetails @CreatedBy = N'40000046',@RequestNo = N'',@Status = N'0',@CWIPCODE = N''
+            //,@INTERNALORDERNO = N'',@location = N'0',@CompCode = N'',@BU = N''
+            return View();
+        }
+
+
+
+       
+
+
+        public IActionResult NFADraftRequestApprovalHistory(string data)
+        {
+
+            if (data != null)
+            {
+
+                CapexSelCapexRequestDetailsResultComm a;
+
+                var Da = _dbcontext.CapexSelPendingforApproval(user.id).Where(a => a.RequestNo == Convert.ToInt32(data)).SingleOrDefault();
+
+
+
+                ViewData["CapexSelCapexRequestDetails"] = Da;
+                ViewData["CapexApprovalGrid"] = _dbcontext.CapexSelPendingforApproval(user.id).ToList();
+
+                ViewData["CapexSelApprovalCapexDetails"] = _dbcontext.CapexSelApprovalCapexDetails(data).SingleOrDefault();
+                ViewData["CapexSelApprovalCapexLineDetails"] = _dbcontext.CapexSelApprovalCapexLineDetails(data).ToList();
+                ViewData["CapexSelApprovalCapexQuoteDetails"] = _dbcontext.CapexSelApprovalCapexQuoteDetails(data).ToList();
+                ViewData["CapexFunSelApprovalMaterixNameByReq"] = _dbcontext.CapexFunSelApprovalMaterixNameByReq(data).ToList();
+                ViewData["getConversationDetails"] = _dbcontext.GetConversationDetails(data).ToList();
+                ViewData["CapexSelApprovalHistoryGrid"] = _dbcontext.CapexSelApprovalHistory(user.id, "", "0").ToList();
+                ViewBag.js = string.Format("call();");
+                return View("CapexApprovalHistory", Da);
+
+
+
+
+                //return View("NFADraftRequest");
+            }
+            else
+            {
+                var Da = ViewData["CapexSelApprovalHistoryGrid"] = _dbcontext.CapexSelApprovalHistory(user.id, "", "0").ToList();
                 ViewData["NFADraftRequestGrid"] = Da;
             }
             //            exec Capex_SelCapexRequestDetails @CreatedBy = N'40000046',@RequestNo = N'',@Status = N'0',@CWIPCODE = N''

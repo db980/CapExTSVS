@@ -5,6 +5,9 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+      var daData = ViewData["CapexSelApprovalCapexDetails"] != null ? ViewData["CapexSelApprovalCapexDetails"] as CapexSelApprovalCapexDetailsResult : null;
+    var daData12 = ViewData["CapexSelApprovalCapexDetails"] != null ? ViewData["CapexSelApprovalCapexDetails"] as CapexSelApprovalCapexDetailsResult : null;
+
 
 }
 
@@ -19,10 +22,10 @@
                     <h1 class="m-0">View Indent</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    @*<ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">View Indent </li>
-                    </ol>
+                    </ol>*@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -33,7 +36,7 @@
         <div class="container-fluid">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Horizontal Form</h3>
+                    <h3 class="card-title">NFA Approval History </h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -50,7 +53,7 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">View Indent</h3>
+                                        <h3 class="card-title">View NFA History </h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body" style=" overflow:auto;">
@@ -87,7 +90,11 @@
                                                     {
                                                         <tr>
 
-                                                            <td>@da.RequestNo</td>
+                                                            <td>
+                                                                <button class="badge  btn btn-outline-success " style="color:red">
+                                                                    @Html.ActionLink("", "NFADraftRequestApprovalHistory", "NFA",new {Data=@da.RequestNo},new { @class="fa fa-eye " })
+                                                                </button>
+                                                            </td>
                                                             <td>@da.RequestNo</td>
                                                             <td>@da.IndentID</td>
                                                             <td>@da.Assettype</td>
@@ -137,11 +144,526 @@
 </div>
 
 
+<div class="modal fade " id="myModal" role="dialog">
+
+
+
+    <div class="modal-dialog " style="margin: 250px;">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+        width: 370%;
+
+        ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <table style="font-size: 17px; text-align: left; width: 100%">
+                <tbody>
+                    <tr style="font-size: large; color: #231f20; font-style: italic; text-decoration: underline; background-color: white; text-align: left; width: 100%">
+                        <td colspan="2">
+                            <center>
+                                NFA Requisition No.<span id="ContentPlaceHolder1_lblCapexID" style="font-weight:bold;">    @(daData != null ? daData.RequestNo.ToString() : "")</span>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 260px">
+                            Asset Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblAssetType">
+                                @if (daData != null)
+                                {
+                                    @(
+                                        daData != null ? (daData12.Assettype != null ? daData12.Assettype : "")  : ""
+                                    )
+                                }
+                            </span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Company
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblCompany"> @(daData != null ? daData.CTDes.ToString().Split("/")[0] : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            BU
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblBU"> @(daData != null ? daData.CTDes.ToString().Split("/")[1] : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Exp Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblExpType"> @(daData != null ? daData.CTDes.ToString().Split("/")[2] : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Budget Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblBudgetType"> @(daData != null ? daData.CTDes.ToString().Split("/")[3] : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            NFA Type
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblCapexType"> @(daData != null ? (daData12.CapexType != null ? daData12.CapexType : "") : "")</span>
+                        </td>
+                    </tr>
+                    <tr id="ContentPlaceHolder1_trnonbudget_pname">
+                        <td>
+                            Work/Item Name
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_pname">  @(daData != null ? (daData12.PName != null ? daData12.PName : "")  : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr id="ContentPlaceHolder1_trnonbudget_pdesc">
+                        <td>
+                            Work/Item Name Description
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_pdesc">
+                                @(
+                                    daData != null ? (daData12.PDescription != null ? daData12.PDescription : "")   : ""
+                                    )
+                                
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="vertical-align: text-top;">
+                            Purpose
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_purpose"> @(daData != null ? (daData12.Purpose != null ? daData12.Purpose : "")  : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Expected Date of Completion
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_compdate" onkeypress="return nouserinput(event)"> @(daData != null ? (daData12.EdateCompletion != null ? daData12.EdateCompletion : "")  : "")</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Requested By
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblRequester"></span>
+                        </td>
+                    </tr>
+                    <tr style="visibility: hidden">
+                        <td>
+                            Purchase Location
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_drp_location"> @(daData != null ? (daData12.PurchaseLocation != null ? daData12.PurchaseLocation : "") : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="left">
+
+                            <table cellspacing="0" cellpadding="0" rules="all" class="table  table-bordered " border="1" id="ContentPlaceHolder1_dglocal" style="color:#333333;font-weight:normal;width:100%;border-collapse:collapse;">
+                                <tbody>
+                                    <tr style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:5px;">
+                                        <td align="center">Line Item</td>
+                                        <td align="center">Item Name</td>
+                                        <td align="center">location</td>
+                                        <td align="center">NFA Nature</td>
+                                        <td align="center">UOM</td>
+                                        <td align="center">Quantity</td>
+                                        <td align="center">Tax</td>
+                                        <td align="center">Remarks</td>
+                                    </tr>
+
+                                    @if (ViewData["CapexSelApprovalCapexLineDetails"] != null)
+                                    {
+
+
+
+                                        @foreach (var da in ViewData["CapexSelApprovalCapexLineDetails"] as IList<CapexSelApprovalCapexLineDetailsResult>)
+                                        {
+                                            <tr>
+                                                <td align="center">@da.LineItem</td>
+                                                <td align="center">@da.ItemName</td>
+                                                <td align="center">@da.LocationCode </td>
+                                                <td align="center">@da.CapexNature </td>
+                                                <td align="center">@da.UOM </td>
+                                                <td align="center"> @da.Quantity</td>
+                                                <td align="center"> @da.Tax </td>
+                                                <td align="center">@da.Remarks</td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Max Quotation Amount (₹)</td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblTotalCapex"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div>
+                                <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grddata" class="table  table-bordered " style="background-color:White;font-family:Cambria;font-size:10pt;text-decoration:none;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:12px;width:200px;">
+                                            <th scope="col">Download Quotation</th>
+                                            <th scope="col">Vendor Code</th>
+                                            <th scope="col">Vendor Name</th>
+                                            <th scope="col">QuotationAmount</th>
+                                        </tr>
+
+                                        @if (ViewData["CapexSelApprovalCapexQuoteDetails"] != null)
+                                        {
+
+
+
+                                            @foreach (var da in ViewData["CapexSelApprovalCapexQuoteDetails"] as IList<CapexSelApprovalCapexQuoteDetailsResult>)
+                                            {
+                                                <tr align="left" style="background-color:#EFF3FB;font-size:20px;height:10px;">
+                                                    <td><a href="upload/document817670.pdf" target="_blank">@da.FileName</a></td>
+                                                    <td>@da.VendorCode </td>
+                                                    <td>@da.VendorName </td>
+                                                    <td>@da.QuotationAmount</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 24%">
+                            Selected Quotation
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_rbtnSelectQuote">V1007  (INR-: 140667.84)</span>
+                        </td>
+
+                        <td style="width: 24%">
+                            Payment Terms
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblPaymentTerms">
+                                @(daData12 != null ? (daData12.PaymentTerm != null ? daData12.PaymentTerm:"") : "") </ span >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            T&amp;C With Selected Quotation
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblTnC"> @(daData12 != null ? (daData12.TnC != null ? daData12.TnC : "")   : "")</span>
+                        </td>
+                        <td style="width: 24%">
+                            Delivery
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblDelivery">@(daData12 != null ? (daData12.Delivery != null ? daData12.Delivery : "")  : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Imported / Indigenous
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_drp_ImportedIndigenous">@(daData12 != null ?  (daData12.ImportedIndigenous != null ? daData12.ImportedIndigenous : "")   : "")</span>
+
+                        </td>
+                        <td style="width: 24%">
+                            Freight
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblFreightt">@(daData12 != null ? (daData12.Fright != null ? daData12.Fright : "") : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Justification
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txt_jst">@(daData12 != null ? (daData12.VendorJustification != null ? daData12.VendorJustification : "") : "")</span>
+                        </td>
+                        <td style="width: 24%">
+                            Installation Cost
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblInstallationCost">@(daData12 != null ? (daData12.InstallationCost != null ? daData12.InstallationCost : "")  : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            Benefit
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_txtBenefit" textmode="MultiLine" rows="2" columns="50">@(daData12 != null ? (daData12.Benefit != null ? daData12.Benefit : "")  : "")</span>
+                        </td>
+                        <td style="width: 24%">
+                            Remarks
+                        </td>
+                        <td style="width: 24%">
+                            <span id="ContentPlaceHolder1_lblRemarks">@(daData12 != null ? (daData12.Remarks != null ? daData12.Remarks : "")   : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            IRR/Payback Period
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblRemarks">@(daData12 != null ? (daData12.isIRRPaybackPeriod != null ? daData12.isIRRPaybackPeriod : "")   : "")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Projected Cash Outflow
+                        </td>
+                        <td>
+                            <span id="ContentPlaceHolder1_lblRemarks">@(daData12 != null ? (daData12.ProjectedCashOutflow != null ? daData12.ProjectedCashOutflow : "")  : "")</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4">
+                            <span style="font-size: 10pt; color: red;">Approval Matrix</span>
+                            <div>
+                                <table cellspacing="0" cellpadding="0" rules="all" border="1" id="ContentPlaceHolder1_grdApproval" class="table  table-bordered " style="background-color:White;font-family:Cambria;text-decoration:none;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr align="left" style="color:White;background-color:#231F20;font-size:20px;font-weight:bold;height:5px;">
+                                            <th scope="col">_</th>
+                                            <th scope="col">Level_1</th>
+                                            <th scope="col">Level_2</th>
+                                            <th scope="col">Level_3</th>
+                                            <th scope="col">Level_4</th>
+                                            <th scope="col">Level_5</th>
+                                            <th scope="col">Level_6</th>
+                                            <th scope="col">Reject/Return</th>
+                                        </tr>
+
+                                        @if (ViewData["CapexFunSelApprovalMaterixNameByReq"] != null)
+                                        {
+
+
+
+                                            @foreach (var da in ViewData["CapexFunSelApprovalMaterixNameByReq"] as IList<CapexFunSelApprovalMaterixNameByReqResult>)
+                                            {
+                                                <tr align="left" style="background-color:#EFF3FB;font-size:20px;height:5px;">
+                                                    <td>@da._</td>
+                                                    <td>@da.Level_1</td>
+                                                    <td>@da.Level_2</td>
+                                                    <td>@da.Level_3</td>
+                                                    <td>@da.Level_4</td>
+                                                    <td>@da.Level_5</td>
+                                                    <td>@da.Level_6</td>
+                                                    <td>@da.Reject_Return</td>
+                                                </tr>
+                                            }
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="4">
+                            <div id="ContentPlaceHolder1_pnlAttachment" style="overflow:scroll;">
+                                <form action="/NFA/DraftFileUplodeApproval" method="post" enctype="multipart/form-data">
+
+                                    <table class="table  table-bordered " style="vertical-align: top; text-align: left; width: 100%; border-top-width: 1px; border-left-width: 1px; border-left-color: #000000; border-bottom-width: 1px; border-bottom-color: #000000; border-top-color: #000000; border-right-width: 1px; border-right-color: #000000;">
+
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="4"><span style="font-size: 10pt; color: red;">Comments Section:</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 10%">
+                                                    Comment
+                                                </td>
+                                                <td style="width: 25%">
+                                                    <textarea name="Remarks" rows="2" cols="50"></textarea>
+                                                </td>
+                                                @*<td style="float: left; width: 20%;">
+                                                File
+                                                </td>*@
+                                                <td style="float: left;">
+                                                    <input type="file" name="File" id="ContentPlaceHolder1_upldFile">
+                                                    <input type="text" name="Status" style="display:none" value="@(daData!=null?daData.RequestNo:"")">
+                                                </td>
+                                                <td style="float: left;">
+                                                    <input type="submit" class="btn btn-info" value="Post &nbsp;" id="ContentPlaceHolder1_btnUploadFile">
+                                                    @* <span id="ContentPlaceHolder1_msglblFile" style="color:Red;font-weight:bold;">Send Successfully</span>*@
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+
+                               @* <form action="/NFA/DraftFileUplodeApproval" method="post" enctype="multipart/form-data">
+
+
+
+                                    <table class="table  table-bordered table-striped">
+
+
+                                        <thead>
+                                            <td>
+                                             NFA  Approval 
+                                             </td>
+                                        </thead>
+
+                                        <tbody>
+                                            
+                                            
+                                            <tr>
+
+                                                 <td style="width: 10%">
+                                                    Remark
+                                                </td>
+
+                                                <td colspan="2">
+                                                    
+                                                    <center>
+                                                        <input name="RemarkApproved" type="text" id="ContentPlaceHolder1_txt_Remarks" style="width:450px;">
+                                                    </center>
+                                                </td>
+
+
+                                                <td colspan="2">
+                                                    <br>
+                                                    <center>
+                                                        <input type="submit" name="ApprovalStatus" value="Approve" onclick="return confirm('Are you sure you want approve');" id="ContentPlaceHolder1_btn_Approve" style="font-weight:bold;width:82px;">
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <input type="submit" name="ApprovalStatus" value="Return" onclick="return confirm('Are you sure you want return');" id="ContentPlaceHolder1_btn_Return" style="font-weight:bold;width:82px;">
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <input type="submit" name="ApprovalStatus" value="Reject" onclick="return confirm('Are you sure you want reject');" id="ContentPlaceHolder1_btn_Reject" style="font-weight:bold;width:82px;">
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    </form>
+*@
+
+                                <table cellspacing="0" cellpadding="3" rules="all" border="1" class="table  table-bordered " id="ContentPlaceHolder1_dg1" style="color:#333333;width:100%;border-collapse:collapse;">
+                                    <tbody>
+                                        <tr class="DataGridFixedHeader" style="color:White;background-color:#231F20;font-weight:bold;text-decoration:none;height:10px;">
+                                            <td>Comment</td>
+                                            <td align="center">File</td>
+                                            <td>Posted By</td>
+                                            <td>Posted Date</td>
+                                        </tr>
+
+                                        @if (ViewData["getConversationDetails"] != null)
+                                        {
+
+
+
+                                            @foreach (var da in ViewData["getConversationDetails"] as IList<GetConversationDetailsResult>)
+                                            {
+                                                <tr style="background-color:#EFF3FB;font-size:10pt;">
+                                                    <td valign="top">@da.Remarks</td>
+                                                    <td valign="top">
+                                                        <center>
+                                                            <a href="ConversationFiles/103163127913_103163.pdf" id="ContentPlaceHolder1_dg1_lblAgreement_0" target="_blank">@da.FileName</a>
+                                                        </center>
+                                                    </td>
+                                                    <td valign="top">@da.PostedBy</td>
+                                                    <td valign="top">@da.PostedDate</td>
+                                                </tr>
+
+                                            }
+
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
 <script>
 
-    $('#exampla').dataTable({
+    $(document).ready(function () {
 
-    });
+
+    @Html.Raw(ViewBag.js)
+                    });
+
+
+    function call() {
+        alert("call");
+        $('#btnEdit').on('click', '.btn-success', function (e) {
+
+            $('#myModal').modal('show');
+        });
+        $('#myModal').modal('show');
+        var el = document.getElementById('btnEdit');
+        el.onclick();
+    }
+
+    @Html.Raw( ViewBag.DynamicScripts )
 </script>
 
 

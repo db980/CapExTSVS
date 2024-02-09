@@ -393,6 +393,8 @@ namespace CapExTSVS.Models1
         public string Remarks { get; set; }
 
         public string Status { get; set; }
+        public string RemarkApproved { get; set; }
+        public string ApprovalStatus { get; set; }
     }
 
 

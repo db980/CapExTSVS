@@ -526,10 +526,21 @@ namespace CapExTSVS.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult NFAMappingFistFormUpdate(string Id)
+        {
+
+            //NFAMappingGrid1();
+           var da= _dbcontext.CapexTypeMasters.Where(a => a.CTID == Convert.ToInt32(Id)).ToList();
+           
+
+            return  Json( da);
+
+        }
 
 
 
-            public IActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             flag = 1;
             ViewData["GridData"] = bindgrdVendordata();
